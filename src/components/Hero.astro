@@ -1,0 +1,66 @@
+<section class="hero relative isolate min-h-screen">
+	<img
+		src="https://images.unsplash.com/photo-1589385680218-7e2f8fca0bd3?auto=format&fit=crop&w=2400&q=80"
+		alt="Vista del Volcán Arenal en La Fortuna, Costa Rica"
+		class="hero-bg absolute inset-0 h-full w-full object-cover"
+		loading="eager"
+		fetchpriority="high"
+	/>
+
+	<div class="hero-overlay absolute inset-0"></div>
+	<div class="hero-vignette absolute inset-0"></div>
+	<div class="hero-grain absolute inset-0"></div>
+
+	<div class="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-6 py-16 text-center sm:px-10">
+		<p class="hero-kicker hero-anim mb-6">Bienvenidos a</p>
+		<h1 class="hero-title hero-anim mb-8">LA FORTUNA<br />DOWNTOWN</h1>
+		<p class="hero-tagline hero-anim mb-10">¡En el corazón de las experiencias!</p>
+
+		<div class="hero-actions hero-anim flex flex-col items-center justify-center gap-4 sm:flex-row">
+			<a href="#explorar" class="hero-btn hero-btn-primary">Explorar</a>
+			<a href="#reservas" class="hero-btn hero-btn-outline">Ver disponibilidad</a>
+		</div>
+	</div>
+
+	<div class="hero-status hero-anim absolute bottom-6 left-6 z-10 hidden items-center gap-3 sm:flex">
+		<div class="h-11 w-px bg-white/35"></div>
+		<div>
+			<p class="hero-status-label">Estado del volcán</p>
+			<p class="hero-status-value">Despejado · 24°C</p>
+		</div>
+	</div>
+
+	<a
+		href="#contacto"
+		aria-label="Abrir contacto"
+		class="hero-fab hero-anim absolute bottom-6 right-6 z-10 grid h-12 w-12 place-items-center rounded-full"
+	>
+		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5">
+			<rect x="3.75" y="5.75" width="16.5" height="12.5" rx="2"></rect>
+			<path d="M3.75 9.5h16.5"></path>
+		</svg>
+	</a>
+</section>
+
+<script>
+	import { gsap } from "gsap";
+
+	const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+	if (!shouldReduceMotion) {
+		gsap.set(".hero-anim", { opacity: 0, y: 24 });
+		gsap.to(".hero-bg", {
+			scale: 1.05,
+			duration: 9,
+			ease: "power1.out"
+		});
+		gsap.to(".hero-anim", {
+			opacity: 1,
+			y: 0,
+			duration: 1,
+			ease: "power3.out",
+			stagger: 0.12,
+			delay: 0.2
+		});
+	}
+</script>

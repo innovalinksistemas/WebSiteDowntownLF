@@ -1,0 +1,63 @@
+---
+const rooms = [
+	{
+		title: "Sunset Ocean View",
+		description:
+			"Habitaciones luminosas con ambiente relajado y vistas abiertas para disfrutar atardeceres inolvidables.",
+		image:
+			"https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1400&q=80",
+		href: "#reservas"
+	},
+	{
+		title: "Family Pool View",
+		description:
+			"Espacios amplios para familias, decorados en estilo tropical elegante y balcón con vista a la piscina.",
+		image:
+			"https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1400&q=80",
+		href: "#reservas"
+	},
+	{
+		title: "Tropicana Pool View",
+		description:
+			"Ubicadas en una zona tranquila del hotel, ideales para una estancia de descanso con atmósfera privada.",
+		image:
+			"https://images.unsplash.com/photo-1595576508898-0ad5c879a061?auto=format&fit=crop&w=1400&q=80",
+		href: "#reservas"
+	},
+	{
+		title: "Boulevard View King Bed",
+		description:
+			"Diseño contemporáneo con cama king, balcón privado y una experiencia confortable en cada detalle.",
+		image:
+			"https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&w=1400&q=80",
+		href: "#reservas"
+	}
+];
+---
+
+<section id="habitaciones" class="rooms-section">
+	<div class="rooms-inner">
+		<div class="rooms-header">
+			<span class="rooms-line" aria-hidden="true"></span>
+			<h2 class="rooms-title">Habitaciones</h2>
+		</div>
+
+		<div class="rooms-grid">
+			{
+				rooms.map((room) => (
+					<article class="room-card">
+						<a href={room.href} class="room-image-link" aria-label={`Ver ${room.title}`}>
+							<img src={room.image} alt={room.title} loading="lazy" decoding="async" />
+						</a>
+						<div class="room-card-body">
+							<h3 class="room-card-title">{room.title}</h3>
+							<p class="room-card-description">{room.description}</p>
+							<a href={room.href} class="room-read-link">Read more</a>
+							<a href={room.href} class="room-book-btn">Book now</a>
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>

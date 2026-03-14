@@ -1,0 +1,140 @@
+---
+import logoBlanco from "../assets/logoBlancoDowntown.png";
+import logoNegro from "../assets/logonegro.png";
+
+const linksLeft = [
+	{ label: "Habitaciones", href: "#habitaciones" },
+	{ label: "Gastronomía", href: "#gastronomia" },
+	{ label: "Bienestar", href: "#bienestar" }
+];
+
+const linksRight = [
+	{ label: "Experiencias", href: "#experiencias" },
+	{ label: "Galería", href: "#galeria" }
+];
+---
+
+<header class="site-header" data-header>
+	<div class="site-header-desktop">
+		<nav class="header-links" aria-label="Secciones principales">
+			{
+				linksLeft.map((link) => (
+					<a href={link.href} class="header-link">
+						{link.label}
+					</a>
+				))
+			}
+		</nav>
+
+		<a href="/" class="header-brand" aria-label="Inicio La Fortuna Downtown">
+			<img
+				src={logoBlanco.src}
+				alt="La Fortuna Downtown"
+				class="header-logo-image header-logo-image--light"
+				loading="eager"
+			/>
+			<img
+				src={logoNegro.src}
+				alt="La Fortuna Downtown"
+				class="header-logo-image header-logo-image--dark"
+				loading="eager"
+			/>
+		</a>
+
+		<nav class="header-links header-links-right" aria-label="Contenido y reserva">
+			{
+				linksRight.map((link) => (
+					<a href={link.href} class="header-link">
+						{link.label}
+					</a>
+				))
+			}
+			<a href="#reservar" class="header-reserve-btn">Reservar</a>
+		</nav>
+	</div>
+
+	<div class="site-header-mobile">
+		<a href="/" class="header-brand" aria-label="Inicio La Fortuna Downtown">
+			<img
+				src={logoBlanco.src}
+				alt="La Fortuna Downtown"
+				class="header-logo-image header-logo-image--light"
+				loading="eager"
+			/>
+			<img
+				src={logoNegro.src}
+				alt="La Fortuna Downtown"
+				class="header-logo-image header-logo-image--dark"
+				loading="eager"
+			/>
+		</a>
+		<button
+			type="button"
+			class="mobile-menu-toggle"
+			data-menu-toggle
+			aria-expanded="false"
+			aria-controls="mobile-navigation"
+			aria-label="Abrir menú principal"
+		>
+			<span>Menú</span>
+		</button>
+	</div>
+
+	<div id="mobile-navigation" class="site-mobile-menu" data-menu-panel>
+		<nav class="site-mobile-nav" aria-label="Menú móvil">
+			{
+				linksLeft.map((link) => (
+					<a href={link.href} class="site-mobile-link" data-menu-close>
+						{link.label}
+					</a>
+				))
+			}
+			{
+				linksRight.map((link) => (
+					<a href={link.href} class="site-mobile-link" data-menu-close>
+						{link.label}
+					</a>
+				))
+			}
+			<a href="#reservar" class="site-mobile-link site-mobile-link-reserve" data-menu-close>Reservar</a>
+		</nav>
+	</div>
+</header>
+
+<script>
+	const header = document.querySelector("[data-header]");
+	if (header) {
+		const toggle = header.querySelector("[data-menu-toggle]");
+		const closeTargets = header.querySelectorAll("[data-menu-close]");
+		const updateHeaderState = () => {
+			const shouldSolid = window.scrollY > 24 || header.classList.contains("menu-open");
+			header.classList.toggle("is-scrolled", shouldSolid);
+		};
+
+		const setOpen = (open) => {
+			header.classList.toggle("menu-open", open);
+			document.body.classList.toggle("menu-open", open);
+			if (toggle) {
+				toggle.setAttribute("aria-expanded", String(open));
+			}
+			updateHeaderState();
+		};
+
+		toggle?.addEventListener("click", () => {
+			setOpen(!header.classList.contains("menu-open"));
+		});
+
+		closeTargets.forEach((target) => {
+			target.addEventListener("click", () => setOpen(false));
+		});
+
+		window.addEventListener("resize", () => {
+			if (window.innerWidth >= 1024) {
+				setOpen(false);
+			}
+		});
+
+		window.addEventListener("scroll", updateHeaderState, { passive: true });
+		updateHeaderState();
+	}
+</script>

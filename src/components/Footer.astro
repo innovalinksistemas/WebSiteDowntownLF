@@ -1,0 +1,134 @@
+---
+const quickLinks = [
+	{ label: "Hotels", href: "#habitaciones" },
+	{ label: "Dining", href: "#gastronomia" },
+	{ label: "Wellness", href: "#bienestar" },
+	{ label: "Timeless Weddings", href: "#ofertas" },
+	{ label: "Event Venues", href: "#ofertas" },
+	{ label: "Taj Magazine", href: "#ofertas" },
+	{ label: "Sitemap", href: "#ofertas" },
+	{ label: "HSBC Taj Credit Card", href: "#ofertas" },
+	{ label: "About Taj", href: "#explorar" },
+	{ label: "Holidays", href: "#ofertas" },
+	{ label: "Offers", href: "#ofertas" },
+	{ label: "Gifting", href: "#ofertas" },
+	{ label: "NeuPass", href: "#ofertas" },
+	{ label: "Epicure", href: "#ofertas" },
+	{ label: "Taj Blog", href: "#ofertas" }
+];
+
+const brands = [
+	"TAJ",
+	"CLARIDGE'S COLLECTION",
+	"BRIJ",
+	"ATMANTAN",
+	"SELEQTIONS",
+	"CLARKS",
+	"GATEWAY",
+	"VIVANTA",
+	"GINGER",
+	"TREE OF LIFE",
+	"AMA STAYS & TRAILS",
+	"QMIN",
+	"TAJ SATS"
+];
+
+const legalLinks = [
+	{ label: "Corporate", href: "#ofertas" },
+	{ label: "Pressroom", href: "#ofertas" },
+	{ label: "Work With Us", href: "#ofertas" },
+	{ label: "Terms of Service", href: "#ofertas" },
+	{ label: "Best Rate Guarantee FAQ", href: "#ofertas" },
+	{ label: "Accessibility", href: "#ofertas" },
+	{ label: "Investor Relations", href: "#ofertas" },
+	{ label: "Partners", href: "#ofertas" },
+	{ label: "Privacy Policy", href: "#ofertas" },
+	{ label: "Cookies Policy", href: "#ofertas" }
+];
+---
+
+<section id="contacto" class="site-footer-section">
+	<div class="site-footer-inner">
+		<footer class="offers-footer" aria-label="Footer principal">
+			<div class="offers-footer-main">
+				<div class="offers-footer-subscribe">
+					<p class="offers-footer-brand">LFD</p>
+					<p class="offers-footer-label">Subscribe for latest updates</p>
+					<form class="offers-footer-form" action="#" method="post">
+						<label for="footer-email" class="sr-only">Correo electr&oacute;nico</label>
+						<input
+							id="footer-email"
+							name="email"
+							type="email"
+							placeholder="Enter your email Address"
+							autocomplete="email"
+							required
+						/>
+						<button type="submit">Subscribe</button>
+					</form>
+
+					<div class="offers-footer-contact-grid">
+						<div>
+							<p class="offers-footer-label">For bookings contact</p>
+							<a href="tel:+50624791111">+506 2479-1111</a>
+						</div>
+						<div>
+							<p class="offers-footer-label">Reservations</p>
+							<a href="mailto:reservaciones@lafortunadowntown.com"
+								>reservaciones@lafortunadowntown.com</a
+							>
+						</div>
+					</div>
+				</div>
+
+				<div class="offers-footer-links-wrap">
+					<p class="offers-footer-label">Quick links</p>
+					<ul class="offers-footer-links">
+						{
+							quickLinks.map((link) => (
+								<li>
+									<a href={link.href}>{link.label}</a>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+
+				<div class="offers-footer-social">
+					<p class="offers-footer-label">Connect with us</p>
+					<div class="offers-footer-social-links">
+						<a href="#" aria-label="Facebook">f</a>
+						<a href="#" aria-label="X">x</a>
+						<a href="#" aria-label="Instagram">ig</a>
+						<a href="#" aria-label="YouTube">yt</a>
+						<a href="#" aria-label="LinkedIn">in</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="offers-footer-brands">
+				<p>Our Brands</p>
+				<ul>
+					{
+						brands.map((brand) => (
+							<li>{brand}</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<div class="offers-footer-bottom">
+				<p>&copy; 2026 La Fortuna Downtown. All Rights Reserved.</p>
+				<ul>
+					{
+						legalLinks.map((link) => (
+							<li>
+								<a href={link.href}>{link.label}</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</footer>
+	</div>
+</section>

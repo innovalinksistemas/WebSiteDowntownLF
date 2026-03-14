@@ -1,0 +1,56 @@
+---
+const offers = [
+	{
+		title: "Suite Escape - Member Only",
+		description: "Desayuno artesanal, upgrade sujeto a disponibilidad y late checkout.",
+		image:
+			"https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1600&q=80",
+		href: "#reservas"
+	},
+	{
+		title: "Arenal Adventure Package",
+		description: "Hospedaje + tour al volcán + acceso a aguas termales naturales.",
+		image:
+			"https://images.unsplash.com/photo-1685618016404-f1df7d0f6d5b?auto=format&fit=crop&w=1600&q=80",
+		href: "#reservas"
+	},
+	{
+		title: "Wellness & Slow Living",
+		description: "Masaje relajante y experiencia de spa boutique en pareja.",
+		image:
+			"https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?auto=format&fit=crop&w=1600&q=80",
+		href: "#reservas"
+	}
+];
+---
+
+<section id="ofertas" class="latest-offers-section">
+	<div class="latest-offers-inner">
+		<div class="latest-offers-header">
+			<div class="latest-offers-title-wrap">
+				<span class="latest-offers-line" aria-hidden="true"></span>
+				<h2 class="latest-offers-title">Últimas ofertas</h2>
+			</div>
+			<p class="latest-offers-copy">
+				Descubre planes pensados para escapadas románticas, aventura y descanso premium en La Fortuna.
+			</p>
+		</div>
+
+		<div class="latest-offers-grid">
+			{
+				offers.map((offer) => (
+					<article class="offer-card">
+						<a href={offer.href} class="offer-media-link" aria-label={`Ver oferta ${offer.title}`}>
+							<img src={offer.image} alt={offer.title} loading="lazy" decoding="async" />
+						</a>
+						<div class="offer-card-body">
+							<h3 class="offer-card-title">{offer.title}</h3>
+							<p class="offer-card-desc">{offer.description}</p>
+							<a href={offer.href} class="offer-card-link">More</a>
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>

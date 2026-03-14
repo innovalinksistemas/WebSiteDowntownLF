@@ -1,0 +1,23 @@
+---
+import "../styles/global.css";
+import AboutUs from "../components/AboutUs.astro";
+import Amenities from "../components/Amenities.astro";
+import Footer from "../components/Footer.astro";
+import Hero from "../components/Hero.astro";
+import LatestOffers from "../components/LatestOffers.astro";
+import Layout from "../layouts/Layout.astro";
+import Restaurants from "../components/Restaurants.astro";
+import Rooms from "../components/Rooms.astro";
+---
+
+<Layout title="La Fortuna Downtown | Hotel Boutique">
+	<main class="relative min-h-screen overflow-hidden text-stone-100">
+		<Hero />
+		<AboutUs />
+		<Rooms />
+		<Amenities />
+		<Restaurants />
+		<LatestOffers />
+		<Footer />
+	</main>
+</Layout>
