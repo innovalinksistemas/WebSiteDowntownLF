@@ -3,138 +3,279 @@ import logoBlanco from "../assets/logoBlancoDowntown.png";
 import logoNegro from "../assets/logonegro.png";
 
 const linksLeft = [
-	{ label: "Habitaciones", href: "#habitaciones" },
-	{ label: "Gastronomía", href: "#gastronomia" },
-	{ label: "Bienestar", href: "#bienestar" }
+  { label: "Habitaciones", href: "#habitaciones" },
+  { label: "Experiencias", href: "#tours-top" },
+  { label: "Bienestar",    href: "#bienestar" },
 ];
 
 const linksRight = [
-	{ label: "Experiencias", href: "#experiencias" },
-	{ label: "Galería", href: "#galeria" }
+  { label: "Gastronomía", href: "#gastronomia" },
+  { label: "Galería",     href: "#explorar" },
+  { label: "FAQ",         href: "/faq" },
 ];
 ---
 
 <header class="site-header" data-header>
-	<div class="site-header-desktop">
-		<nav class="header-links" aria-label="Secciones principales">
-			{
-				linksLeft.map((link) => (
-					<a href={link.href} class="header-link">
-						{link.label}
-					</a>
-				))
-			}
-		</nav>
 
-		<a href="/" class="header-brand" aria-label="Inicio La Fortuna Downtown">
-			<img
-				src={logoBlanco.src}
-				alt="La Fortuna Downtown"
-				class="header-logo-image header-logo-image--light"
-				loading="eager"
-			/>
-			<img
-				src={logoNegro.src}
-				alt="La Fortuna Downtown"
-				class="header-logo-image header-logo-image--dark"
-				loading="eager"
-			/>
-		</a>
+  <!-- ═══════════════════════════════════════
+       DESKTOP
+  ═══════════════════════════════════════ -->
+  <div class="site-header-desktop">
 
-		<nav class="header-links header-links-right" aria-label="Contenido y reserva">
-			{
-				linksRight.map((link) => (
-					<a href={link.href} class="header-link">
-						{link.label}
-					</a>
-				))
-			}
-			<a href="#reservar" class="header-reserve-btn">Reservar</a>
-		</nav>
-	</div>
+    <nav class="header-links" aria-label="Secciones principales">
+      {linksLeft.map((l) => (
+        <a href={l.href} class="header-link">{l.label}</a>
+      ))}
+    </nav>
 
-	<div class="site-header-mobile">
-		<a href="/" class="header-brand" aria-label="Inicio La Fortuna Downtown">
-			<img
-				src={logoBlanco.src}
-				alt="La Fortuna Downtown"
-				class="header-logo-image header-logo-image--light"
-				loading="eager"
-			/>
-			<img
-				src={logoNegro.src}
-				alt="La Fortuna Downtown"
-				class="header-logo-image header-logo-image--dark"
-				loading="eager"
-			/>
-		</a>
-		<button
-			type="button"
-			class="mobile-menu-toggle"
-			data-menu-toggle
-			aria-expanded="false"
-			aria-controls="mobile-navigation"
-			aria-label="Abrir menú principal"
-		>
-			<span>Menú</span>
-		</button>
-	</div>
+    <!-- Logo: ambas versiones siempre en DOM, visibilidad por CSS -->
+    <a href="/" class="header-brand" aria-label="La Fortuna Downtown – Inicio">
+      <img
+        src={logoBlanco.src}
+        alt="La Fortuna Downtown"
+        class="header-logo header-logo--light"
+        loading="eager"
+        width="160"
+        height="64"
+      />
+      <img
+        src={logoNegro.src}
+        alt="La Fortuna Downtown"
+        class="header-logo header-logo--dark"
+        loading="eager"
+        width="160"
+        height="64"
+        aria-hidden="true"
+      />
+    </a>
 
-	<div id="mobile-navigation" class="site-mobile-menu" data-menu-panel>
-		<nav class="site-mobile-nav" aria-label="Menú móvil">
-			{
-				linksLeft.map((link) => (
-					<a href={link.href} class="site-mobile-link" data-menu-close>
-						{link.label}
-					</a>
-				))
-			}
-			{
-				linksRight.map((link) => (
-					<a href={link.href} class="site-mobile-link" data-menu-close>
-						{link.label}
-					</a>
-				))
-			}
-			<a href="#reservar" class="site-mobile-link site-mobile-link-reserve" data-menu-close>Reservar</a>
-		</nav>
-	</div>
+    <nav class="header-links header-links--right" aria-label="Contenido adicional">
+      {linksRight.map((l) => (
+        <a href={l.href} class="header-link">{l.label}</a>
+      ))}
+
+      <!-- CTA con prueba social -->
+      <div class="header-cta-wrap">
+        <p class="header-social-proof" aria-label="Calificación 4.9 en Booking">
+          <span class="header-star" aria-hidden="true">★</span>
+          4.9 · Centro La Fortuna
+        </p>
+        <a href="#habitaciones" class="header-reserve-btn">
+          Reservar ahora
+        </a>
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       MOBILE — barra superior
+  ═══════════════════════════════════════ -->
+  <div class="site-header-mobile">
+
+    <a href="/" class="header-brand" aria-label="La Fortuna Downtown – Inicio">
+      <img
+        src={logoBlanco.src}
+        alt="La Fortuna Downtown"
+        class="header-logo header-logo--light"
+        loading="eager"
+        width="120"
+        height="48"
+      />
+      <img
+        src={logoNegro.src}
+        alt="La Fortuna Downtown"
+        class="header-logo header-logo--dark"
+        loading="eager"
+        width="120"
+        height="48"
+        aria-hidden="true"
+      />
+    </a>
+
+    <button
+      type="button"
+      class="mobile-menu-toggle"
+      data-menu-toggle
+      aria-expanded="false"
+      aria-controls="mobile-navigation"
+      aria-label="Abrir menú principal"
+    >
+      <!-- Ícono hamburger → X animado en CSS -->
+      <span class="toggle-bars" aria-hidden="true">
+        <span class="toggle-bar toggle-bar--1"></span>
+        <span class="toggle-bar toggle-bar--2"></span>
+        <span class="toggle-bar toggle-bar--3"></span>
+      </span>
+      <span class="sr-only">Menú</span>
+    </button>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       PANEL MÓVIL — controlled by JS class
+       NOTE: NO usar `hidden`, usamos .is-visible
+  ═══════════════════════════════════════ -->
+  <nav
+    id="mobile-navigation"
+    class="site-mobile-menu"
+    data-menu-panel
+    aria-label="Menú móvil"
+    aria-hidden="true"
+  >
+    <div class="site-mobile-nav">
+      {[...linksLeft, ...linksRight].map((l) => (
+        <a href={l.href} class="site-mobile-link" data-menu-close>{l.label}</a>
+      ))}
+
+      <!-- CTA dentro del panel -->
+      <div class="site-mobile-cta">
+        <p class="site-mobile-social-proof">
+          <span aria-hidden="true">★</span> 4.9 · Booking.com
+        </p>
+        <a
+          href="#habitaciones"
+          class="site-mobile-reserve"
+          data-menu-close
+        >
+          Reservar ahora
+        </a>
+      </div>
+    </div>
+  </nav>
+
 </header>
 
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCRIPT — IIFE aislado, sin dependencias externas
+═══════════════════════════════════════════════════════════════ -->
 <script>
-	const header = document.querySelector("[data-header]");
-	if (header) {
-		const toggle = header.querySelector("[data-menu-toggle]");
-		const closeTargets = header.querySelectorAll("[data-menu-close]");
-		const updateHeaderState = () => {
-			const shouldSolid = window.scrollY > 24 || header.classList.contains("menu-open");
-			header.classList.toggle("is-scrolled", shouldSolid);
-		};
+(() => {
+  /* ─── Referencias ─────────────────────────────────────────── */
+  const header = document.querySelector<HTMLElement>("[data-header]");
+  if (!header) return;
 
-		const setOpen = (open) => {
-			header.classList.toggle("menu-open", open);
-			document.body.classList.toggle("menu-open", open);
-			if (toggle) {
-				toggle.setAttribute("aria-expanded", String(open));
-			}
-			updateHeaderState();
-		};
+  const toggle    = header.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const panel     = header.querySelector<HTMLElement>("[data-menu-panel]");
+  const closeEls  = header.querySelectorAll<HTMLElement>("[data-menu-close]");
 
-		toggle?.addEventListener("click", () => {
-			setOpen(!header.classList.contains("menu-open"));
-		});
+  /* ─── Scroll offset — recalculado solo en resize ───────────── */
+  let headerOffsetCache = 0;
 
-		closeTargets.forEach((target) => {
-			target.addEventListener("click", () => setOpen(false));
-		});
+  const recalcOffset = () => {
+    const bar =
+      window.innerWidth >= 1024
+        ? header.querySelector<HTMLElement>(".site-header-desktop")
+        : header.querySelector<HTMLElement>(".site-header-mobile");
+    headerOffsetCache = (bar?.offsetHeight ?? 64) + 18;
+  };
 
-		window.addEventListener("resize", () => {
-			if (window.innerWidth >= 1024) {
-				setOpen(false);
-			}
-		});
+  /* ─── Estado visual: transparente ↔ sólido ─────────────────── */
+  const updateState = () => {
+    const isOpen = header.classList.contains("menu-open");
+    const solid  = window.scrollY > 24 || isOpen;
+    header.classList.toggle("is-scrolled", solid);
+  };
 
-		window.addEventListener("scroll", updateHeaderState, { passive: true });
-		updateHeaderState();
-	}
+  /* ─── Abrir / cerrar panel móvil ───────────────────────────── */
+  const setOpen = (open: boolean) => {
+    header.classList.toggle("menu-open", open);
+    document.body.classList.toggle("menu-open", open);
+
+    // Visibilidad: clase en lugar de `hidden` → respeta transición CSS
+    panel?.classList.toggle("is-visible", open);
+    panel?.setAttribute("aria-hidden", String(!open));
+
+    if (toggle) {
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute(
+        "aria-label",
+        open ? "Cerrar menú principal" : "Abrir menú principal"
+      );
+    }
+
+    // Focus trap mínimo: al abrir, foco al primer link del panel
+    if (open && panel) {
+      const first = panel.querySelector<HTMLElement>("a, button");
+      first?.focus();
+    }
+
+    updateState();
+  };
+
+  /* ─── Focus trap: Tab / Shift+Tab dentro del panel ─────────── */
+  panel?.addEventListener("keydown", (e: KeyboardEvent) => {
+    if (e.key !== "Tab") return;
+    const focusable = Array.from(
+      panel.querySelectorAll<HTMLElement>("a[href], button:not([disabled])")
+    );
+    if (!focusable.length) return;
+
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+
+  // Cerrar con Escape
+  document.addEventListener("keydown", (e: KeyboardEvent) => {
+    if (e.key === "Escape" && header.classList.contains("menu-open")) {
+      setOpen(false);
+      toggle?.focus();
+    }
+  });
+
+  /* ─── Scroll suave con offset ───────────────────────────────── */
+  const scrollTo = (id: string): boolean => {
+    const target = document.querySelector<HTMLElement>(id);
+    if (!target) return false;
+
+    const top     = target.getBoundingClientRect().top + window.scrollY - headerOffsetCache;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    window.scrollTo({ top: Math.max(top, 0), behavior: reduced ? "auto" : "smooth" });
+    window.history.replaceState(null, "", id);
+    return true;
+  };
+
+  /* ─── Eventos ───────────────────────────────────────────────── */
+  toggle?.addEventListener("click", () =>
+    setOpen(!header.classList.contains("menu-open"))
+  );
+
+  closeEls.forEach((el) => el.addEventListener("click", () => setOpen(false)));
+
+  header.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
+    a.addEventListener("click", (e) => {
+      const href = a.getAttribute("href");
+      if (!href || href === "#") return;
+      if (scrollTo(href)) {
+        e.preventDefault();
+        setOpen(false);
+      }
+    });
+  });
+
+  /* ─── Resize — debounced ────────────────────────────────────── */
+  let resizeTimer: ReturnType<typeof setTimeout>;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      recalcOffset();
+      if (window.innerWidth >= 1024) setOpen(false);
+    }, 100);
+  });
+
+  /* ─── Init ──────────────────────────────────────────────────── */
+  window.addEventListener("scroll", updateState, { passive: true });
+  recalcOffset();
+  updateState();
+})();
 </script>

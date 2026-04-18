@@ -1,49 +1,19 @@
 ---
-const quickLinks = [
-	{ label: "Hotels", href: "#habitaciones" },
-	{ label: "Dining", href: "#gastronomia" },
-	{ label: "Wellness", href: "#bienestar" },
-	{ label: "Timeless Weddings", href: "#ofertas" },
-	{ label: "Event Venues", href: "#ofertas" },
-	{ label: "Taj Magazine", href: "#ofertas" },
-	{ label: "Sitemap", href: "#ofertas" },
-	{ label: "HSBC Taj Credit Card", href: "#ofertas" },
-	{ label: "About Taj", href: "#explorar" },
-	{ label: "Holidays", href: "#ofertas" },
-	{ label: "Offers", href: "#ofertas" },
-	{ label: "Gifting", href: "#ofertas" },
-	{ label: "NeuPass", href: "#ofertas" },
-	{ label: "Epicure", href: "#ofertas" },
-	{ label: "Taj Blog", href: "#ofertas" }
-];
+import logoBlanco from "../assets/logoBlancoDowntown.png";
 
-const brands = [
-	"TAJ",
-	"CLARIDGE'S COLLECTION",
-	"BRIJ",
-	"ATMANTAN",
-	"SELEQTIONS",
-	"CLARKS",
-	"GATEWAY",
-	"VIVANTA",
-	"GINGER",
-	"TREE OF LIFE",
-	"AMA STAYS & TRAILS",
-	"QMIN",
-	"TAJ SATS"
+const quickLinks = [
+	{ label: "Habitaciones", href: "#habitaciones" },
+	{ label: "Experiencias", href: "#experiencias" },
+	{ label: "Bienestar", href: "#bienestar" },
+	{ label: "Gastronomia", href: "#gastronomia" },
+	{ label: "Ofertas", href: "#ofertas" },
+	{ label: "Tours", href: "#tours-top" }
 ];
 
 const legalLinks = [
-	{ label: "Corporate", href: "#ofertas" },
-	{ label: "Pressroom", href: "#ofertas" },
-	{ label: "Work With Us", href: "#ofertas" },
-	{ label: "Terms of Service", href: "#ofertas" },
-	{ label: "Best Rate Guarantee FAQ", href: "#ofertas" },
-	{ label: "Accessibility", href: "#ofertas" },
-	{ label: "Investor Relations", href: "#ofertas" },
-	{ label: "Partners", href: "#ofertas" },
-	{ label: "Privacy Policy", href: "#ofertas" },
-	{ label: "Cookies Policy", href: "#ofertas" }
+	{ label: "Politica de privacidad", href: "#contacto" },
+	{ label: "Terminos y condiciones", href: "#contacto" },
+	{ label: "Contacto", href: "#contacto" }
 ];
 ---
 
@@ -52,28 +22,33 @@ const legalLinks = [
 		<footer class="offers-footer" aria-label="Footer principal">
 			<div class="offers-footer-main">
 				<div class="offers-footer-subscribe">
-					<p class="offers-footer-brand">LFD</p>
-					<p class="offers-footer-label">Subscribe for latest updates</p>
+					<a href="/" class="offers-footer-logo" aria-label="Inicio La Fortuna Downtown">
+						<img src={logoBlanco.src} alt="La Fortuna Downtown" loading="lazy" />
+					</a>
+					<p class="offers-footer-label">Hotel boutique en el corazon de La Fortuna</p>
+					<p class="offers-footer-copy">
+						Disfruta una estadia elegante entre aventura, descanso y la energia natural del Arenal.
+					</p>
 					<form class="offers-footer-form" action="#" method="post">
-						<label for="footer-email" class="sr-only">Correo electr&oacute;nico</label>
+						<label for="footer-email" class="sr-only">Correo electronico</label>
 						<input
 							id="footer-email"
 							name="email"
 							type="email"
-							placeholder="Enter your email Address"
+							placeholder="Tu correo electronico"
 							autocomplete="email"
 							required
 						/>
-						<button type="submit">Subscribe</button>
+						<button type="submit">Suscribirse</button>
 					</form>
 
 					<div class="offers-footer-contact-grid">
 						<div>
-							<p class="offers-footer-label">For bookings contact</p>
+							<p class="offers-footer-label">Reservaciones</p>
 							<a href="tel:+50624791111">+506 2479-1111</a>
 						</div>
 						<div>
-							<p class="offers-footer-label">Reservations</p>
+							<p class="offers-footer-label">Correo</p>
 							<a href="mailto:reservaciones@lafortunadowntown.com"
 								>reservaciones@lafortunadowntown.com</a
 							>
@@ -82,7 +57,7 @@ const legalLinks = [
 				</div>
 
 				<div class="offers-footer-links-wrap">
-					<p class="offers-footer-label">Quick links</p>
+					<p class="offers-footer-label">Explora</p>
 					<ul class="offers-footer-links">
 						{
 							quickLinks.map((link) => (
@@ -95,7 +70,11 @@ const legalLinks = [
 				</div>
 
 				<div class="offers-footer-social">
-					<p class="offers-footer-label">Connect with us</p>
+					<p class="offers-footer-label">Visitanos</p>
+					<p class="offers-footer-social-copy">
+						Avenida Central, La Fortuna, San Carlos, Costa Rica.
+					</p>
+					<p class="offers-footer-label">Redes</p>
 					<div class="offers-footer-social-links">
 						<a href="#" aria-label="Facebook">f</a>
 						<a href="#" aria-label="X">x</a>
@@ -106,19 +85,8 @@ const legalLinks = [
 				</div>
 			</div>
 
-			<div class="offers-footer-brands">
-				<p>Our Brands</p>
-				<ul>
-					{
-						brands.map((brand) => (
-							<li>{brand}</li>
-						))
-					}
-				</ul>
-			</div>
-
 			<div class="offers-footer-bottom">
-				<p>&copy; 2026 La Fortuna Downtown. All Rights Reserved.</p>
+				<p>&copy; 2026 La Fortuna Downtown. Todos los derechos reservados.</p>
 				<ul>
 					{
 						legalLinks.map((link) => (

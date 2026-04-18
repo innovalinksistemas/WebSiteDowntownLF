@@ -1,0 +1,309 @@
+---
+const testimonials = [
+	{
+		id: 1,
+		quote: "Una experiencia inolvidable. La vista del volcán desde la suite es simplemente impresionante.",
+		author: "Marcus S.",
+		location: "London",
+		rating: 5
+	},
+	{
+		id: 2,
+		quote: "El equipo local fue excepcional ayudándonos a planificar nuestra aventura. Recomendamos totalmente.",
+		author: "Sarah J.",
+		location: "New York",
+		rating: 5
+	},
+	{
+		id: 3,
+		quote: "La gastronomía en María Bonita fue el broche de oro. Cada plato fue una obra de arte.",
+		author: "Philippe D.",
+		location: "Paris",
+		rating: 5
+	}
+];
+---
+
+<section class="testimonials-section">
+	<div class="testimonials-inner">
+		<h2 class="testimonials-title">Voces de la Selva</h2>
+
+		<div class="testimonials-dots" aria-hidden="true">
+			<span class="dot"></span>
+			<span class="dot"></span>
+			<span class="dot"></span>
+			<span class="dot"></span>
+			<span class="dot"></span>
+		</div>
+
+		<div class="testimonials-container">
+			<button 
+				class="testimonials-nav testimonials-nav-prev" 
+				data-testimonial-prev
+				aria-label="Testimonio anterior"
+			>
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<polyline points="15 18 9 12 15 6"></polyline>
+				</svg>
+			</button>
+
+			<div class="testimonials-track" data-testimonial-track>
+				{testimonials.map((testimonial) => (
+					<div class="testimonial-card">
+						<div class="testimonial-quote">
+							<p>"{testimonial.quote}"</p>
+						</div>
+						<div class="testimonial-meta">
+							<p class="testimonial-author">{testimonial.author}</p>
+							<p class="testimonial-location">{testimonial.location}</p>
+						</div>
+					</div>
+				))}
+			</div>
+
+			<button 
+				class="testimonials-nav testimonials-nav-next" 
+				data-testimonial-next
+				aria-label="Próximo testimonio"
+			>
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<polyline points="9 18 15 12 9 6"></polyline>
+				</svg>
+			</button>
+		</div>
+
+		<div class="testimonials-pagination" role="tablist" aria-label="Testimonios">
+			{testimonials.map((_, index) => (
+				<button 
+					class={`pagination-dot ${index === 0 ? 'active' : ''}`}
+					data-slide={index}
+					role="tab"
+					aria-label={`Ir al testimonio ${index + 1}`}
+					aria-selected={index === 0}
+				></button>
+			))}
+		</div>
+	</div>
+</section>
+
+<script>
+	let currentSlide = 0;
+	const track = document.querySelector('[data-testimonial-track]');
+	const cards = document.querySelectorAll('.testimonial-card');
+	const prevBtn = document.querySelector('[data-testimonial-prev]');
+	const nextBtn = document.querySelector('[data-testimonial-next]');
+	const paginationDots = document.querySelectorAll('.pagination-dot');
+
+	const totalSlides = cards.length;
+
+	const updateSlide = (index) => {
+		currentSlide = (index + totalSlides) % totalSlides;
+		
+		if (track) {
+			track.style.transform = `translateX(-${currentSlide * 100}%)`;
+		}
+
+		paginationDots.forEach((dot, i) => {
+			const isActive = i === currentSlide;
+			dot.classList.toggle('active', isActive);
+			dot.setAttribute('aria-selected', String(isActive));
+		});
+	};
+
+	prevBtn?.addEventListener('click', () => {
+		updateSlide(currentSlide - 1);
+	});
+
+	nextBtn?.addEventListener('click', () => {
+		updateSlide(currentSlide + 1);
+	});
+
+	paginationDots.forEach((dot) => {
+		dot.addEventListener('click', () => {
+			const index = Number(dot.getAttribute('data-slide'));
+			updateSlide(index);
+		});
+	});
+
+	// Auto-advance testimonials every 8 seconds
+	setInterval(() => {
+		updateSlide(currentSlide + 1);
+	}, 8000);
+</script>
+
+<style>
+	.testimonials-section {
+		position: relative;
+		padding: clamp(4.2rem, 9vw, 7.8rem) 1.2rem clamp(4rem, 8vw, 6.4rem);
+		background: linear-gradient(180deg, #ece7de 0%, #e5e0d8 100%);
+		color: #2d2a26;
+	}
+
+	.testimonials-inner {
+		max-width: 86rem;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.testimonials-title {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(2rem, 4.6vw, 4rem);
+		line-height: 0.96;
+		letter-spacing: 0.01em;
+		text-wrap: balance;
+	}
+
+	.testimonials-dots {
+		display: flex;
+		justify-content: center;
+		gap: clamp(0.3rem, 0.6vw, 0.5rem);
+		margin: clamp(1.2rem, 2vw, 1.6rem) 0;
+	}
+
+	.dot {
+		display: inline-block;
+		width: clamp(0.25rem, 0.4vw, 0.35rem);
+		height: clamp(0.25rem, 0.4vw, 0.35rem);
+		background: #ab8840;
+		border-radius: 50%;
+		opacity: 0.5;
+	}
+
+	.dot:nth-child(3) {
+		opacity: 1;
+	}
+
+	.testimonials-container {
+		position: relative;
+		margin: clamp(2.4rem, 4vw, 3.8rem) auto 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: clamp(1.2rem, 2vw, 2rem);
+		max-width: 64rem;
+	}
+
+	.testimonials-track {
+		flex: 1;
+		overflow: hidden;
+		display: flex;
+		transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.testimonial-card {
+		flex: 0 0 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		min-height: 200px;
+		padding: clamp(1.2rem, 2vw, 2rem);
+	}
+
+	.testimonial-quote p {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.4rem, 2.2vw, 2rem);
+		line-height: 1.35;
+		font-style: italic;
+		color: #2d2a26;
+		text-wrap: balance;
+	}
+
+	.testimonial-meta {
+		margin-top: clamp(1.4rem, 2vw, 1.8rem);
+	}
+
+	.testimonial-author {
+		margin: 0;
+		font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+		font-weight: 600;
+		color: #2d2a26;
+	}
+
+	.testimonial-location {
+		margin: 0.3rem 0 0;
+		font-size: clamp(0.85rem, 0.95vw, 1rem);
+		color: rgba(45, 42, 38, 0.65);
+	}
+
+	.testimonials-nav {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: clamp(2.6rem, 4vw, 3.2rem);
+		height: clamp(2.6rem, 4vw, 3.2rem);
+		background: rgba(255, 255, 255, 0.7);
+		border: 1px solid rgba(45, 42, 38, 0.16);
+		border-radius: 50%;
+		color: #2d2a26;
+		cursor: pointer;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		flex-shrink: 0;
+	}
+
+	.testimonials-nav:hover {
+		background: rgba(255, 255, 255, 0.9);
+		border-color: #ab8840;
+		color: #ab8840;
+		transform: scale(1.05);
+	}
+
+	.testimonials-nav svg {
+		width: 1.2em;
+		height: 1.2em;
+		stroke-width: 2.5;
+	}
+
+	.testimonials-pagination {
+		display: flex;
+		justify-content: center;
+		gap: clamp(0.5rem, 1vw, 0.8rem);
+		margin-top: clamp(1.8rem, 2.5vw, 2.2rem);
+	}
+
+	.pagination-dot {
+		width: clamp(0.5rem, 0.8vw, 0.7rem);
+		height: clamp(0.5rem, 0.8vw, 0.7rem);
+		background: rgba(45, 42, 38, 0.2);
+		border: none;
+		border-radius: 50%;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.pagination-dot.active {
+		background: #ab8840;
+		width: clamp(1.2rem, 1.8vw, 1.6rem);
+		border-radius: 0.25em;
+	}
+
+	.pagination-dot:hover:not(.active) {
+		background: rgba(45, 42, 38, 0.35);
+	}
+
+	@media (max-width: 640px) {
+		.testimonials-container {
+			gap: 0.8rem;
+		}
+
+		.testimonials-nav {
+			width: 2.4rem;
+			height: 2.4rem;
+		}
+
+		.testimonial-card {
+			min-height: 160px;
+			padding: 1rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.testimonials-track,
+		.testimonials-nav,
+		.pagination-dot {
+			transition: none;
+		}
+	}
+</style>

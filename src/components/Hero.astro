@@ -1,66 +1,297 @@
-<section class="hero relative isolate min-h-screen">
-	<img
-		src="https://images.unsplash.com/photo-1589385680218-7e2f8fca0bd3?auto=format&fit=crop&w=2400&q=80"
-		alt="Vista del Volcán Arenal en La Fortuna, Costa Rica"
-		class="hero-bg absolute inset-0 h-full w-full object-cover"
-		loading="eager"
-		fetchpriority="high"
-	/>
+---
+/**
+ * Hero.astro
+ * ─────────────────────────────────────────────────────────────
+ * PRIORIDAD: Conversión → reservas directas
+ * AUDIENCIA:  Turistas internacionales (aventura / naturaleza)
+ * MEDIA:      Imagen estática + Ken Burns HOY
+ *             Arquitectura lista para video cuando esté disponible
+ *
+ * Para activar video cuando esté listo:
+ *   1. Coloca los archivos en /public/video/hero.mp4 y hero.webm
+ *   2. Cambia VIDEO_READY = true
+ *   3. El video se carga como segunda capa; la imagen sigue como poster
+ * ─────────────────────────────────────────────────────────────
+ */
 
-	<div class="hero-overlay absolute inset-0"></div>
-	<div class="hero-vignette absolute inset-0"></div>
-	<div class="hero-grain absolute inset-0"></div>
+const VIDEO_READY = false; // ← cambiar a true cuando haya video profesional
 
-	<div class="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-6 py-16 text-center sm:px-10">
-		<p class="hero-kicker hero-anim mb-6">Bienvenidos a</p>
-		<h1 class="hero-title hero-anim mb-8">LA FORTUNA<br />DOWNTOWN</h1>
-		<p class="hero-tagline hero-anim mb-10">¡En el corazón de las experiencias!</p>
+// Urgencia dinámica — en producción conectar con disponibilidad real
+const ROOMS_LEFT = 3;
+const CHECKIN_LABEL = "Disponible esta noche";
+---
 
-		<div class="hero-actions hero-anim flex flex-col items-center justify-center gap-4 sm:flex-row">
-			<a href="#explorar" class="hero-btn hero-btn-primary">Explorar</a>
-			<a href="#reservas" class="hero-btn hero-btn-outline">Ver disponibilidad</a>
-		</div>
-	</div>
+<section
+  class="hero relative isolate min-h-screen overflow-hidden"
+  aria-label="La Fortuna Downtown Hotel — Hero"
+>
 
-	<div class="hero-status hero-anim absolute bottom-6 left-6 z-10 hidden items-center gap-3 sm:flex">
-		<div class="h-11 w-px bg-white/35"></div>
-		<div>
-			<p class="hero-status-label">Estado del volcán</p>
-			<p class="hero-status-value">Despejado · 24°C</p>
-		</div>
-	</div>
+  <!-- ═══════════════════════════════════════════════════
+       CAPA 1: Imagen de fondo (Ken Burns con GSAP)
+       Reemplazar src por imagen real del hotel en WebP
+       Usar srcset para responsive (400/800/1600/2400w)
+  ═══════════════════════════════════════════════════ -->
+  <picture>
+    <source
+      type="image/webp"
+      srcset="
+        /images/hero-400.webp   400w,
+        /images/hero-800.webp   800w,
+        /images/hero-1600.webp 1600w,
+        /images/hero-2400.webp 2400w
+      "
+      sizes="100vw"
+    />
+    <!-- Fallback JPG / placeholder Unsplash mientras no haya foto propia -->
+    <img
+      src="https://images.unsplash.com/photo-1589385680218-7e2f8fca0bd3?auto=format&fit=crop&w=2400&q=80"
+      alt="Vista del Volcán Arenal al amanecer desde La Fortuna Downtown Hotel, Costa Rica"
+      class="hero-bg absolute inset-0 h-full w-full object-cover"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      width="2400"
+      height="1600"
+    />
+  </picture>
 
-	<a
-		href="#contacto"
-		aria-label="Abrir contacto"
-		class="hero-fab hero-anim absolute bottom-6 right-6 z-10 grid h-12 w-12 place-items-center rounded-full"
-	>
-		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5">
-			<rect x="3.75" y="5.75" width="16.5" height="12.5" rx="2"></rect>
-			<path d="M3.75 9.5h16.5"></path>
-		</svg>
-	</a>
+  <!-- ═══════════════════════════════════════════════════
+       CAPA 2: Video de fondo (se activa con VIDEO_READY)
+       Requisitos del video:
+         · Duración loop: 20–30 s
+         · Resolución: 1920×1080 mínimo
+         · Peso máximo: 8 MB (VP9/WebM) + 12 MB (H.264/MP4)
+         · Sin audio (muted es obligatorio para autoplay)
+         · Evitar texto o elementos UI en el video
+  ═══════════════════════════════════════════════════ -->
+  {VIDEO_READY && (
+    <video
+      class="hero-video absolute inset-0 h-full w-full object-cover"
+      autoplay
+      muted
+      loop
+      playsinline
+      disablepictureinpicture
+      preload="none"
+      aria-hidden="true"
+      poster="https://images.unsplash.com/photo-1589385680218-7e2f8fca0bd3?auto=format&fit=crop&w=2400&q=80"
+    >
+      <source src="/video/hero.webm" type="video/webm" />
+      <source src="/video/hero.mp4"  type="video/mp4" />
+    </video>
+  )}
+
+  <!-- ═══════════════════════════════════════════════════
+       CAPAS DE COMPOSICIÓN
+  ═══════════════════════════════════════════════════ -->
+  <div class="hero-overlay absolute inset-0" aria-hidden="true"></div>
+  <div class="hero-vignette absolute inset-0" aria-hidden="true"></div>
+  <div class="hero-grain absolute inset-0" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════════════
+       CONTENIDO PRINCIPAL
+       Jerarquía de neuromarketing:
+         1. Kicker   → ancla geográfica concreta (imagen mental)
+         2. H1       → nombre de marca + promesa de ubicación
+         3. Tagline  → beneficio emocional (no genérico)
+         4. Trust    → prueba social + urgencia (FOMO)
+         5. CTAs     → primario (reserva) + secundario (explorar)
+  ═══════════════════════════════════════════════════ -->
+  <div class="relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col justify-center px-6 py-24 text-center sm:px-10">
+
+    <!-- 1. Kicker — imagen mental concreta, NO genérica -->
+    <p class="hero-kicker hero-anim mb-4">
+      En el corazón de las experiencias
+    </p>
+
+    <!-- 2. H1 — marca + propuesta de valor de ubicación -->
+    <h1 class="hero-title hero-anim mb-6">
+      LA FORTUNA<br />DOWNTOWN
+    </h1>
+
+    <!-- 3. Tagline — beneficio emocional específico -->
+    <p class="hero-tagline hero-anim mb-8">
+      UNA EXPERIENCIA ÚNICA DE HOSPEDAJE EN LA FORTUNA
+    </p>
+
+    <!-- 4. Trust bar — prueba social + escasez (FOMO) -->
+    <div class="hero-trust hero-anim mb-10" aria-label="Calificaciones y disponibilidad">
+      <div class="hero-trust-inner">
+
+        <!-- Rating Booking -->
+        <div class="hero-trust-item">
+          <span class="hero-trust-score">9.2</span>
+          <span class="hero-trust-label">Booking.com</span>
+        </div>
+
+        <div class="hero-trust-divider" aria-hidden="true"></div>
+
+        <!-- Rating TripAdvisor -->
+        <div class="hero-trust-item">
+          <span class="hero-trust-score">★ 4.8</span>
+          <span class="hero-trust-label">TripAdvisor</span>
+        </div>
+
+        <div class="hero-trust-divider" aria-hidden="true"></div>
+
+        <!-- Urgencia — escasez real -->
+        <div class="hero-trust-item">
+          <span class="hero-trust-score hero-trust-urgent">
+            <span class="hero-urgency-dot" aria-hidden="true"></span>
+            {ROOMS_LEFT} habitaciones disponibles
+          </span>
+          <span class="hero-trust-label">{CHECKIN_LABEL}</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 5. CTAs — primario directo a reserva, secundario a explorar -->
+    <div class="hero-actions hero-anim flex flex-col items-center justify-center gap-3 sm:flex-row">
+
+      <!-- CTA Primario: máxima fricción removida, acción clara -->
+      <a
+        href="#habitaciones"
+        class="hero-btn hero-btn-primary"
+        aria-label="Ver habitaciones disponibles y reservar"
+      >
+        Reserva tu estancia
+      </a>
+
+      <!-- CTA Secundario: para usuarios en fase de consideración -->
+      <a
+        href="#explorar"
+        class="hero-btn hero-btn-outline"
+        aria-label="Explorar el hotel y sus experiencias"
+      >
+        Descubre el hotel
+      </a>
+
+    </div>
+
+    <!-- Micro-copy de confianza bajo los CTAs (reduce ansiedad de compra) -->
+    <p class="hero-microcopy hero-anim mt-4">
+      Mejor precio garantizado · Cancelación gratuita · Sin gastos ocultos
+    </p>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       ESTADO DEL VOLCÁN — prueba social ambiental
+       Ancla la experiencia geográfica en tiempo real
+       En producción: conectar con API meteorológica o CMS
+  ═══════════════════════════════════════════════════ -->
+  <div
+    class="hero-status hero-anim absolute bottom-8 left-6 z-10 hidden items-center gap-3 sm:flex"
+    aria-label="Condiciones actuales en La Fortuna"
+  >
+    <div class="hero-status-line" aria-hidden="true"></div>
+    <div>
+      <p class="hero-status-label">Arenal Volcano</p>
+      <p class="hero-status-value">
+        <span class="hero-live-dot" aria-hidden="true"></span>
+        Clear skies · 24°C
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       FAB — Contacto / WhatsApp
+       Reemplazar href por wa.me/+506XXXXXXXX para WhatsApp
+  ═══════════════════════════════════════════════════ -->
+  <a
+    href="#contacto"
+    aria-label="Contactar al hotel"
+    class="hero-fab hero-anim absolute bottom-8 right-6 z-10 grid h-14 w-14 place-items-center rounded-full"
+  >
+    <!-- WhatsApp icon — reemplazar por ícono de WhatsApp cuando se use ese canal -->
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5" aria-hidden="true">
+      <rect x="3.75" y="5.75" width="16.5" height="12.5" rx="2"></rect>
+      <path d="M3.75 9.5h16.5"></path>
+    </svg>
+    <span class="sr-only">Contactar al hotel</span>
+  </a>
+
+  <!-- Scroll indicator — invita a continuar explorando -->
+  <div class="hero-scroll-indicator hero-anim absolute bottom-8 left-1/2 z-10 -translate-x-1/2 hidden flex-col items-center gap-1 sm:flex" aria-hidden="true">
+    <span class="hero-scroll-label">Scroll</span>
+    <span class="hero-scroll-arrow"></span>
+  </div>
+
 </section>
 
+
 <script>
-	import { gsap } from "gsap";
+  import { gsap } from "gsap";
 
-	const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-	if (!shouldReduceMotion) {
-		gsap.set(".hero-anim", { opacity: 0, y: 24 });
-		gsap.to(".hero-bg", {
-			scale: 1.05,
-			duration: 9,
-			ease: "power1.out"
-		});
-		gsap.to(".hero-anim", {
-			opacity: 1,
-			y: 0,
-			duration: 1,
-			ease: "power3.out",
-			stagger: 0.12,
-			delay: 0.2
-		});
-	}
+  /* ─── Animación de entrada ───────────────────────────── */
+  if (!reduced) {
+    // Estado inicial: todo invisible y desplazado
+    gsap.set(".hero-anim", { opacity: 0, y: 28 });
+
+    // Ken Burns mejorado: escala + deriva leve → más cinematográfico
+    gsap.to(".hero-bg", {
+      scale: 1.08,
+      x: "-2%",
+      y: "-1%",
+      duration: 14,
+      ease: "none", // lineal = más cinematográfico para parallax lento
+    });
+
+    // Entrada escalonada del contenido
+    gsap.to(".hero-anim", {
+      opacity: 1,
+      y: 0,
+      duration: 1.1,
+      ease: "power3.out",
+      stagger: 0.14,
+      delay: 0.15,
+    });
+  } else {
+    // Sin animación: mostrar todo inmediatamente
+    gsap.set(".hero-anim", { opacity: 1, y: 0 });
+  }
+
+  /* ─── Video: esperar carga antes de mostrar ──────────── */
+  const video = document.querySelector<HTMLVideoElement>(".hero-video");
+  if (video) {
+    // El video arranca con opacidad 0 y se revela suavemente
+    // cuando tiene suficientes datos para reproducir sin interrupciones
+    video.style.opacity = "0";
+    video.addEventListener("canplaythrough", () => {
+      gsap.to(video, { opacity: 1, duration: 1.2, ease: "power2.inOut" });
+    }, { once: true });
+
+    // Fallback: si después de 4s no cargó, mantener la imagen
+    setTimeout(() => {
+      if (video.readyState < 3) {
+        video.remove(); // imagen de fondo queda visible
+      }
+    }, 4000);
+  }
+
+  /* ─── Urgency dot: parpadeo de "en vivo" ────────────── */
+  if (!reduced) {
+    gsap.to(".hero-urgency-dot, .hero-live-dot", {
+      opacity: 0.3,
+      duration: 0.9,
+      ease: "power1.inOut",
+      yoyo: true,
+      repeat: -1,
+    });
+  }
+
+  /* ─── Scroll indicator: bounce suave ────────────────── */
+  if (!reduced) {
+    gsap.to(".hero-scroll-arrow", {
+      y: 5,
+      duration: 0.8,
+      ease: "power1.inOut",
+      yoyo: true,
+      repeat: -1,
+      delay: 2,
+    });
+  }
 </script>

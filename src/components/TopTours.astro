@@ -1,0 +1,56 @@
+---
+const tours = [
+	{
+		title: "Mística del Volcán Arenal",
+		description: "Caminata guiada con vistas panorámicas y experiencia en cascadas volcánicas.",
+		image: "https://images.unsplash.com/photo-1486906973101-4ae7a0b2f92a?auto=format&fit=crop&w=1400&q=80",
+		href: "#reservas"
+	},
+	{
+		title: "Catarata Río Fortuna",
+		description: "Senderismo tranquilo a través de la selva hasta una cascada icónica.",
+		image: "https://images.unsplash.com/photo-1500048993953-d8f4ce11f258?auto=format&fit=crop&w=1400&q=80",
+		href: "#reservas"
+	},
+	{
+		title: "Aguas termales de medianoche",
+		description: "Relax nocturno en pozas naturales con cena temática incluida.",
+		image: "https://images.unsplash.com/photo-1505224521669-a800ad085bf4?auto=format&fit=crop&w=1400&q=80",
+		href: "#reservas"
+	},
+	{
+		title: "Puentes colgantes de Bosel",
+		description: "Tour de aventura con canopy y vistas sobre el dosel del bosque.",
+		image: "https://images.unsplash.com/photo-1593642532973-d31b6557fa68?auto=format&fit=crop&w=1400&q=80",
+		href: "#reservas"
+	}
+];
+---
+
+<section id="tours-top" class="top-tours-section">
+	<div class="top-tours-inner">
+		<div class="top-tours-header">
+			<span class="top-tours-line" aria-hidden="true"></span>
+			<h2 class="top-tours-title">Tours top</h2>
+		</div>
+
+		<p class="top-tours-copy">
+			Vive las mejores experiencias de La Fortuna: aventura, naturaleza y bienestar en un solo paseo.
+		</p>
+
+		<div class="top-tours-grid">
+			{tours.map((tour) => (
+				<article class="tour-card">
+					<a href={tour.href} class="tour-media-link" aria-label={`Ver tour ${tour.title}`}>
+						<img src={tour.image} alt={tour.title} loading="lazy" decoding="async" />
+					</a>
+					<div class="tour-card-body">
+						<h3 class="tour-card-title">{tour.title}</h3>
+						<p class="tour-card-description">{tour.description}</p>
+						<a href={tour.href} class="tour-read-link">Ver detalles</a>
+					</div>
+				</article>
+			))}
+		</div>
+	</div>
+</section>

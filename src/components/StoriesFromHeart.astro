@@ -1,0 +1,256 @@
+---
+const stories = [
+	{
+		id: 1,
+		title: "Top 3 hidden hot springs in La Fortuna",
+		description: "Descubre las aguas termales más exclusivas de la región, lejos de las multitudes.",
+		image: "https://images.unsplash.com/photo-1580738965095-1b5b1d204a23?auto=format&fit=crop&w=800&q=80",
+		href: "#reservas",
+		category: "Experiencias"
+	},
+	{
+		id: 2,
+		title: "Sustainable travel: Our commitment to Costa Rica",
+		description: "Conoce cómo trabajamos para preservar la belleza natural de nuestro destino.",
+		image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
+		href: "#reservas",
+		category: "Sostenibilidad"
+	},
+	{
+		id: 3,
+		title: "A guide to local flavors: What to eat at María Bonita",
+		description: "Explora la gastronomía costarricense a través de nuestro menú signature.",
+		image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80",
+		href: "#reservas",
+		category: "Gastronomía"
+	}
+];
+---
+
+<section class="stories-section">
+	<div class="stories-inner">
+		<p class="stories-kicker">Historias desde el Corazón</p>
+
+		<div class="stories-title-wrap">
+			<span class="stories-line" aria-hidden="true"></span>
+			<h2 class="stories-title">Tips, guías y el alma de San Carlos</h2>
+			<span class="stories-line" aria-hidden="true"></span>
+		</div>
+
+		<div class="stories-grid">
+			{stories.map((story) => (
+				<article class="story-card">
+					<a href={story.href} class="story-image-wrapper" aria-label={`Leer ${story.title}`}>
+						<img 
+							src={story.image} 
+							alt={story.title} 
+							loading="lazy" 
+							decoding="async"
+							class="story-image"
+						/>
+						<div class="story-overlay"></div>
+					</a>
+					<div class="story-content">
+						<p class="story-category">{story.category}</p>
+						<h3 class="story-title">{story.title}</h3>
+						<p class="story-description">{story.description}</p>
+						<a href={story.href} class="story-link">
+							<span>Leer más</span>
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+								<line x1="5" y1="12" x2="19" y2="12"></line>
+								<polyline points="12 5 19 12 12 19"></polyline>
+							</svg>
+						</a>
+					</div>
+				</article>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.stories-section {
+		position: relative;
+		padding: clamp(4.2rem, 9vw, 7.8rem) 1.2rem clamp(4rem, 8vw, 6.4rem);
+		background: linear-gradient(180deg, #f0ece6 0%, #ece7de 100%);
+		color: #2d2a26;
+	}
+
+	.stories-inner {
+		max-width: 86rem;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.stories-kicker {
+		font-family: var(--font-display);
+		font-size: clamp(1.2rem, 2.4vw, 1.9rem);
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		margin: 0;
+		color: #ab8840;
+	}
+
+	.stories-title-wrap {
+		margin: clamp(1.3rem, 2.4vw, 2.2rem) auto 0;
+		display: grid;
+		grid-template-columns: 1fr auto 1fr;
+		align-items: center;
+		gap: clamp(0.8rem, 2vw, 2.2rem);
+		max-width: 74rem;
+	}
+
+	.stories-line {
+		height: 1px;
+		background: rgba(45, 42, 38, 0.56);
+	}
+
+	.stories-title {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(2rem, 4.6vw, 4rem);
+		line-height: 0.96;
+		letter-spacing: 0.01em;
+		text-wrap: balance;
+	}
+
+	.stories-grid {
+		margin: clamp(2.8rem, 4.5vw, 4.2rem) auto 0;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: clamp(1.6rem, 2.5vw, 2.2rem);
+		max-width: 100%;
+	}
+
+	.story-card {
+		display: flex;
+		flex-direction: column;
+		background: #fff;
+		border-radius: clamp(0.4rem, 0.6vw, 0.6rem);
+		overflow: hidden;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		height: 100%;
+	}
+
+	.story-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+	}
+
+	.story-image-wrapper {
+		position: relative;
+		display: block;
+		width: 100%;
+		aspect-ratio: 1;
+		overflow: hidden;
+		background: #e5e1d9;
+	}
+
+	.story-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.story-card:hover .story-image {
+		transform: scale(1.05);
+	}
+
+	.story-overlay {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0);
+		transition: background 0.3s ease;
+	}
+
+	.story-card:hover .story-overlay {
+		background: rgba(0, 0, 0, 0.1);
+	}
+
+	.story-content {
+		display: flex;
+		flex-direction: column;
+		padding: clamp(1.4rem, 2vw, 1.8rem);
+		flex: 1;
+	}
+
+	.story-category {
+		margin: 0 0 0.6rem;
+		font-size: clamp(0.75rem, 0.9vw, 0.85rem);
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: #ab8840;
+	}
+
+	.story-title {
+		margin: 0 0 clamp(0.6rem, 1vw, 0.8rem);
+		font-family: var(--font-display);
+		font-size: clamp(1.1rem, 1.4vw, 1.3rem);
+		line-height: 1.25;
+		color: #2d2a26;
+		text-align: left;
+	}
+
+	.story-description {
+		margin: 0 0 auto;
+		font-size: clamp(0.85rem, 0.95vw, 1rem);
+		line-height: 1.45;
+		color: rgba(45, 42, 38, 0.75);
+		text-align: left;
+	}
+
+	.story-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin-top: clamp(1rem, 1.5vw, 1.2rem);
+		color: #ab8840;
+		text-decoration: none;
+		font-weight: 600;
+		font-size: clamp(0.85rem, 0.95vw, 1rem);
+		transition: all 0.2s ease;
+		width: fit-content;
+	}
+
+	.story-link:hover {
+		gap: 0.75rem;
+		color: #8f6b1f;
+	}
+
+	.story-link svg {
+		width: 1.2em;
+		height: 1.2em;
+		transition: transform 0.2s ease;
+	}
+
+	.story-link:hover svg {
+		transform: translateX(2px);
+	}
+
+	@media (max-width: 640px) {
+		.stories-title-wrap {
+			grid-template-columns: auto;
+		}
+
+		.stories-line {
+			display: none;
+		}
+
+		.stories-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.story-card,
+		.story-image,
+		.story-overlay,
+		.story-link,
+		.story-link svg {
+			transition: none;
+		}
+	}
+</style>

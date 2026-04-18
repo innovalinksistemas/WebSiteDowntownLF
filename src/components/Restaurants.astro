@@ -1,102 +1,121 @@
 ---
 const restaurants = [
-	{
-		name: "Arenal Brasa",
-		description:
-			"Cocina de fuego lento con cortes premium, ingredientes locales y una propuesta contemporánea de autor.",
-		image:
-			"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=2000&q=80",
-		href: "#reservas"
-	},
-	{
-		name: "Luna Azul Bistro",
-		description:
-			"Ambiente íntimo con menú internacional, maridajes tropicales y servicio cálido en cada detalle.",
-		image:
-			"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2000&q=80",
-		href: "#reservas"
-	},
-	{
-		name: "Jardín del Chef",
-		description:
-			"Sabores frescos de la huerta local, opciones saludables y una experiencia culinaria relajada al aire libre.",
-		image:
-			"https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=2000&q=80",
-		href: "#reservas"
-	},
-	{
-		name: "Volcán Rooftop Bar",
-		description:
-			"Coctelería de autor, tapas para compartir y vistas únicas del atardecer sobre La Fortuna.",
-		image:
-			"https://images.unsplash.com/photo-1560053608-13721e0d69e8?auto=format&fit=crop&w=2000&q=80",
-		href: "#reservas"
-	}
+  {
+    name: "María Bonita Steak House",
+    description:
+      "disfruta de cortes de carne premium cocinados a la perfección en brasas de carbón natural, flambé en mesa con postres, cafés y mixología, catas de vino y wine tastings guiados por expertos. Sumérgete en una experiencia sensorial única en el corazón de La Fortuna, donde el fuego, las brasas y el sabor se combinan con un ambiente vibrante y un servicio excepcional. Te garantizamos calidad y una auténtica experiencia PURA VIDA!",
+    image:
+      "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=2000&q=80",
+    href: "#reservas",
+  },
+  {
+    name: "Selva Negra Cocktail &  Wine Bar",
+    description:
+      "Ambiente íntimo con menú internacional, maridajes tropicales y servicio cálido en cada detalle.",
+    image:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2000&q=80",
+    href: "#reservas",
+  },
+  {
+    name: "Pinto e Gallo Desayunos",
+    description:
+      "Sabores frescos de la huerta local, opciones saludables y una experiencia culinaria relajada al aire libre.",
+    image:
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=2000&q=80",
+    href: "#reservas",
+  },
+  {
+    name: "Volcán Rooftop Bar",
+    description:
+      "Coctelería de autor, tapas para compartir y vistas únicas del atardecer sobre La Fortuna.",
+    image:
+      "https://images.unsplash.com/photo-1560053608-13721e0d69e8?auto=format&fit=crop&w=2000&q=80",
+    href: "#reservas",
+  },
 ];
 ---
 
 <section id="gastronomia" class="restaurants-section">
-	<div class="restaurants-inner">
-		<div class="restaurants-head">
-			<div class="restaurants-title-wrap">
-				<span class="restaurants-line" aria-hidden="true"></span>
-				<h2 class="restaurants-title">Nuestras Experiencias Gastronómicas</h2>
-			</div>
-			<p class="restaurants-copy">
-				Descubre espacios culinarios con identidad propia, donde los sabores de Costa Rica se
-				fusionan con técnicas contemporáneas para crear momentos memorables.
-			</p>
-		</div>
+  <div class="restaurants-inner">
+    <div class="restaurants-head">
+      <div class="restaurants-title-wrap">
+        <span class="restaurants-line" aria-hidden="true"></span>
+        <h2 class="restaurants-title">Nuestras Experiencias Gastronómicas</h2>
+      </div>
+      <p class="restaurants-copy">
+        Descubre espacios culinarios con identidad propia, donde los sabores de
+        Costa Rica se fusionan con técnicas contemporáneas para crear momentos
+        memorables.
+      </p>
+    </div>
 
-		<div class="restaurants-carousel" data-rest-carousel>
-			<button type="button" class="restaurants-nav restaurants-nav-prev" data-rest-prev aria-label="Anterior">
-				<span aria-hidden="true">‹</span>
-			</button>
+    <div class="restaurants-carousel" data-rest-carousel>
+      <button
+        type="button"
+        class="restaurants-nav restaurants-nav-prev"
+        data-rest-prev
+        aria-label="Anterior"
+      >
+        <span aria-hidden="true">‹</span>
+      </button>
 
-			<div class="restaurants-track" data-rest-track>
-				{
-					restaurants.map((restaurant) => (
-						<article class="restaurant-card">
-							<a href={restaurant.href} class="restaurant-image-link" aria-label={`Ver ${restaurant.name}`}>
-								<img src={restaurant.image} alt={restaurant.name} loading="lazy" decoding="async" />
-							</a>
-							<div class="restaurant-card-body">
-								<h3 class="restaurant-name">{restaurant.name}</h3>
-								<p class="restaurant-description">{restaurant.description}</p>
-								<a href={restaurant.href} class="restaurant-link">Ver más</a>
-							</div>
-						</article>
-					))
-				}
-			</div>
+      <div class="restaurants-track" data-rest-track>
+        {
+          restaurants.map((restaurant) => (
+            <article class="restaurant-card">
+              <a
+                href={restaurant.href}
+                class="restaurant-image-link"
+                aria-label={`Ver ${restaurant.name}`}
+              >
+                <img
+                  src={restaurant.image}
+                  alt={restaurant.name}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+              <div class="restaurant-card-body">
+                <h3 class="restaurant-name">{restaurant.name}</h3>
+                <p class="restaurant-description">{restaurant.description}</p>
+                <a href={restaurant.href} class="restaurant-link">
+                  Ver más
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
 
-			<button
-				type="button"
-				class="restaurants-nav restaurants-nav-next"
-				data-rest-next
-				aria-label="Siguiente"
-			>
-				<span aria-hidden="true">›</span>
-			</button>
-		</div>
-	</div>
+      <button
+        type="button"
+        class="restaurants-nav restaurants-nav-next"
+        data-rest-next
+        aria-label="Siguiente"
+      >
+        <span aria-hidden="true">›</span>
+      </button>
+    </div>
+  </div>
 </section>
 
 <script>
-	const carousel = document.querySelector("[data-rest-carousel]");
-	if (carousel) {
-		const track = carousel.querySelector("[data-rest-track]");
-		const prev = carousel.querySelector("[data-rest-prev]");
-		const next = carousel.querySelector("[data-rest-next]");
+  const carousel = document.querySelector("[data-rest-carousel]");
+  if (carousel) {
+    const track = carousel.querySelector("[data-rest-track]");
+    const prev = carousel.querySelector("[data-rest-prev]");
+    const next = carousel.querySelector("[data-rest-next]");
 
-		const scrollByCard = (direction) => {
-			if (!track) return;
-			const firstCard = track.querySelector(".restaurant-card");
-			const distance = firstCard ? firstCard.getBoundingClientRect().width + 20 : 420;
-			track.scrollBy({ left: direction * distance, behavior: "smooth" });
-		};
+    const scrollByCard = (direction) => {
+      if (!track) return;
+      const firstCard = track.querySelector(".restaurant-card");
+      const distance = firstCard
+        ? firstCard.getBoundingClientRect().width + 20
+        : 420;
+      track.scrollBy({ left: direction * distance, behavior: "smooth" });
+    };
 
-		prev?.addEventListener("click", () => scrollByCard(-1));
-		next?.addEventListener("click", () => scrollByCard(1));
-	}
+    prev?.addEventListener("click", () => scrollByCard(-1));
+    next?.addEventListener("click", () => scrollByCard(1));
+  }
 </script>
