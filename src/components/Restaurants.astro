@@ -1,25 +1,44 @@
 ---
+/**
+ * Restaurants.astro — Sección Gastronomía
+ * ─────────────────────────────────────────────────────────────
+ * Diseño: carousel editorial de pantalla completa.
+ * Cada card muestra imagen grande + cuerpo de texto limpio.
+ *
+ * CAMBIOS vs versión anterior:
+ * · Flechas reubicadas: debajo del header, NO sobre las imágenes
+ * · Primera card siempre visible completa (sin scroll-padding roto)
+ * · Descripción de María Bonita recortada — copy más efectivo
+ * · Progreso visual: dots sincronizados con el scroll del track
+ * · GSAP: entrada del header + reveal de cards al hacer scroll
+ * · Hover en imágenes gestionado por GSAP
+ * ─────────────────────────────────────────────────────────────
+ */
+
 const restaurants = [
   {
     name: "María Bonita Steak House",
     description:
-      "disfruta de cortes de carne premium cocinados a la perfección en brasas de carbón natural, flambé en mesa con postres, cafés y mixología, catas de vino y wine tastings guiados por expertos. Sumérgete en una experiencia sensorial única en el corazón de La Fortuna, donde el fuego, las brasas y el sabor se combinan con un ambiente vibrante y un servicio excepcional. Te garantizamos calidad y una auténtica experiencia PURA VIDA!",
+      "Cortes premium en brasas de carbón, flambé en mesa, mixología de autor y catas de vino guiadas. Una experiencia sensorial completa en el corazón de La Fortuna.",
+    tag: "Brasas & Vino",
     image:
       "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=2000&q=80",
     href: "#reservas",
   },
   {
-    name: "Selva Negra Cocktail &  Wine Bar",
+    name: "Selva Negra Cocktail & Wine Bar",
     description:
       "Ambiente íntimo con menú internacional, maridajes tropicales y servicio cálido en cada detalle.",
+    tag: "Coctelería & Vinos",
     image:
       "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2000&q=80",
     href: "#reservas",
   },
   {
-    name: "Pinto e Gallo Desayunos",
+    name: "Pinto e Gallo",
     description:
       "Sabores frescos de la huerta local, opciones saludables y una experiencia culinaria relajada al aire libre.",
+    tag: "Desayunos & Brunch",
     image:
       "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=2000&q=80",
     href: "#reservas",
@@ -27,7 +46,8 @@ const restaurants = [
   {
     name: "Volcán Rooftop Bar",
     description:
-      "Coctelería de autor, tapas para compartir y vistas únicas del atardecer sobre La Fortuna.",
+      "Coctelería de autor, tapas para compartir y vistas únicas del atardecer sobre el Volcán Arenal.",
+    tag: "Rooftop & Tapas",
     image:
       "https://images.unsplash.com/photo-1560053608-13721e0d69e8?auto=format&fit=crop&w=2000&q=80",
     href: "#reservas",
@@ -35,87 +55,259 @@ const restaurants = [
 ];
 ---
 
-<section id="gastronomia" class="restaurants-section">
-  <div class="restaurants-inner">
-    <div class="restaurants-head">
-      <div class="restaurants-title-wrap">
-        <span class="restaurants-line" aria-hidden="true"></span>
-        <h2 class="restaurants-title">Nuestras Experiencias Gastronómicas</h2>
+<section id="gastronomia" class="rest-section">
+  <div class="rest-inner">
+
+    <!-- ── Header ───────────────────────────────────────────── -->
+    <div class="rest-head">
+      <div class="rest-head-left">
+        <div class="rest-title-wrap">
+          <span class="rest-line rest-head-anim" aria-hidden="true"></span>
+          <h2 class="rest-title rest-head-anim">
+            Nuestras Experiencias<br />Gastronómicas
+          </h2>
+        </div>
       </div>
-      <p class="restaurants-copy">
-        Descubre espacios culinarios con identidad propia, donde los sabores de
-        Costa Rica se fusionan con técnicas contemporáneas para crear momentos
-        memorables.
-      </p>
+
+      <div class="rest-head-right">
+        <p class="rest-copy rest-head-anim">
+          Descubre espacios culinarios con identidad propia, donde los sabores
+          de Costa Rica se fusionan con técnicas contemporáneas para crear
+          momentos memorables.
+        </p>
+
+        <!-- Flechas bajo el copy — no sobre las imágenes -->
+        <div class="rest-controls rest-head-anim" aria-label="Controles del carousel">
+          <button
+            type="button"
+            class="rest-btn rest-btn-prev"
+            data-rest-prev
+            aria-label="Restaurante anterior"
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M11 3.5L5.5 9L11 14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <!-- Dots de progreso -->
+          <div class="rest-dots" role="tablist" aria-label="Navegación de restaurantes">
+            {restaurants.map((_, i) => (
+              <button
+                type="button"
+                class={`rest-dot${i === 0 ? " rest-dot--active" : ""}`}
+                data-rest-dot={i}
+                role="tab"
+                aria-selected={i === 0 ? "true" : "false"}
+                aria-label={`Restaurante ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            class="rest-btn rest-btn-next"
+            data-rest-next
+            aria-label="Restaurante siguiente"
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M7 3.5L12.5 9L7 14.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div class="restaurants-carousel" data-rest-carousel>
-      <button
-        type="button"
-        class="restaurants-nav restaurants-nav-prev"
-        data-rest-prev
-        aria-label="Anterior"
-      >
-        <span aria-hidden="true">‹</span>
-      </button>
+    <!-- ── Carousel ─────────────────────────────────────────── -->
+    <div class="rest-carousel" data-rest-carousel>
+      <div class="rest-track" data-rest-track>
+        {restaurants.map((r, i) => (
+          <article
+            class="rest-card"
+            data-rest-index={i}
+            aria-label={r.name}
+          >
+            <!-- Imagen -->
+            <a href={r.href} class="rest-img-link" aria-label={`Ver ${r.name}`} tabindex="-1">
+              <img
+                src={r.image}
+                alt={r.name}
+                loading="lazy"
+                decoding="async"
+                width="2000"
+                height="1333"
+              />
+              <!-- Tag flotante sobre imagen -->
+              <span class="rest-tag">{r.tag}</span>
+            </a>
 
-      <div class="restaurants-track" data-rest-track>
-        {
-          restaurants.map((restaurant) => (
-            <article class="restaurant-card">
-              <a
-                href={restaurant.href}
-                class="restaurant-image-link"
-                aria-label={`Ver ${restaurant.name}`}
-              >
-                <img
-                  src={restaurant.image}
-                  alt={restaurant.name}
-                  loading="lazy"
-                  decoding="async"
-                />
+            <!-- Cuerpo -->
+            <div class="rest-card-body">
+              <h3 class="rest-name">{r.name}</h3>
+              <p class="rest-desc">{r.description}</p>
+              <a href={r.href} class="rest-link">
+                Ver menú
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
               </a>
-              <div class="restaurant-card-body">
-                <h3 class="restaurant-name">{restaurant.name}</h3>
-                <p class="restaurant-description">{restaurant.description}</p>
-                <a href={restaurant.href} class="restaurant-link">
-                  Ver más
-                </a>
-              </div>
-            </article>
-          ))
-        }
+            </div>
+          </article>
+        ))}
       </div>
-
-      <button
-        type="button"
-        class="restaurants-nav restaurants-nav-next"
-        data-rest-next
-        aria-label="Siguiente"
-      >
-        <span aria-hidden="true">›</span>
-      </button>
     </div>
+
   </div>
 </section>
 
 <script>
-  const carousel = document.querySelector("[data-rest-carousel]");
-  if (carousel) {
-    const track = carousel.querySelector("[data-rest-track]");
-    const prev = carousel.querySelector("[data-rest-prev]");
-    const next = carousel.querySelector("[data-rest-next]");
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-    const scrollByCard = (direction) => {
-      if (!track) return;
-      const firstCard = track.querySelector(".restaurant-card");
-      const distance = firstCard
-        ? firstCard.getBoundingClientRect().width + 20
-        : 420;
-      track.scrollBy({ left: direction * distance, behavior: "smooth" });
-    };
+gsap.registerPlugin(ScrollTrigger);
 
-    prev?.addEventListener("click", () => scrollByCard(-1));
-    next?.addEventListener("click", () => scrollByCard(1));
-  }
+const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ── Referencias ─────────────────────────────────────────── */
+const section   = document.querySelector<HTMLElement>("#gastronomia");
+const track     = document.querySelector<HTMLElement>("[data-rest-track]");
+const prevBtn   = document.querySelector<HTMLButtonElement>("[data-rest-prev]");
+const nextBtn   = document.querySelector<HTMLButtonElement>("[data-rest-next]");
+const dots      = document.querySelectorAll<HTMLButtonElement>("[data-rest-dot]");
+const cards     = document.querySelectorAll<HTMLElement>(".rest-card");
+
+if (!track || !section) throw new Error("Restaurants: elementos no encontrados");
+
+/* ══════════════════════════════════════════════════════════
+   CAROUSEL — navegación con teclado, botones y dots
+══════════════════════════════════════════════════════════ */
+
+let currentIndex = 0;
+const total = cards.length;
+
+const getCardWidth = (): number => {
+  const card = track.querySelector<HTMLElement>(".rest-card");
+  if (!card) return 480;
+  const gap = parseFloat(getComputedStyle(track).gap) || 20;
+  return card.offsetWidth + gap;
+};
+
+const scrollToIndex = (index: number, smooth = true) => {
+  currentIndex = Math.max(0, Math.min(index, total - 1));
+  track.scrollTo({
+    left: getCardWidth() * currentIndex,
+    behavior: smooth ? "smooth" : "instant",
+  });
+  updateDots();
+  updateArrows();
+};
+
+const updateDots = () => {
+  dots.forEach((dot, i) => {
+    const active = i === currentIndex;
+    dot.classList.toggle("rest-dot--active", active);
+    dot.setAttribute("aria-selected", String(active));
+  });
+};
+
+const updateArrows = () => {
+  if (prevBtn) prevBtn.disabled = currentIndex === 0;
+  if (nextBtn) nextBtn.disabled = currentIndex === total - 1;
+};
+
+/* Sincronizar dots con scroll nativo (arrastre en mobile) */
+let scrollTimer: ReturnType<typeof setTimeout>;
+track.addEventListener("scroll", () => {
+  clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(() => {
+    const cardW = getCardWidth();
+    const newIndex = Math.round(track.scrollLeft / cardW);
+    if (newIndex !== currentIndex) {
+      currentIndex = newIndex;
+      updateDots();
+      updateArrows();
+    }
+  }, 80);
+}, { passive: true });
+
+prevBtn?.addEventListener("click", () => scrollToIndex(currentIndex - 1));
+nextBtn?.addEventListener("click", () => scrollToIndex(currentIndex + 1));
+
+dots.forEach((dot) => {
+  dot.addEventListener("click", () => {
+    scrollToIndex(Number(dot.dataset.restDot));
+  });
+});
+
+/* Teclado: ← → cuando el foco está dentro de la sección */
+section.addEventListener("keydown", (e: KeyboardEvent) => {
+  if (e.key === "ArrowLeft")  { e.preventDefault(); scrollToIndex(currentIndex - 1); }
+  if (e.key === "ArrowRight") { e.preventDefault(); scrollToIndex(currentIndex + 1); }
+});
+
+/* Init */
+updateDots();
+updateArrows();
+
+/* ══════════════════════════════════════════════════════════
+   GSAP — animaciones de entrada
+══════════════════════════════════════════════════════════ */
+if (!reduced) {
+
+  /* 1. Header: línea se expande, título y copy entran escalonados */
+  const headerElems = gsap.utils.toArray<HTMLElement>(".rest-head-anim");
+
+  gsap.set(headerElems[0], { scaleX: 0, transformOrigin: "left center" }); // línea
+  gsap.set(headerElems.slice(1), { opacity: 0, y: 22 });                   // título, copy, controles
+
+  ScrollTrigger.create({
+    trigger: "#gastronomia",
+    start: "top 80%",
+    once: true,
+    onEnter: () => {
+      const tl = gsap.timeline();
+      tl.to(headerElems[0], { scaleX: 1, duration: 0.65, ease: "power3.out" })
+        .to(headerElems.slice(1), {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          stagger: 0.12,
+        }, "-=0.3");
+    },
+  });
+
+  /* 2. Cards: reveal con clipPath al entrar en viewport */
+  gsap.set(cards, { opacity: 0, y: 36 });
+
+  ScrollTrigger.create({
+    trigger: ".rest-track",
+    start: "top 82%",
+    once: true,
+    onEnter: () => {
+      gsap.to(cards, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        stagger: { amount: 0.4, from: "start" },
+      });
+    },
+  });
+
+  /* 3. Hover en imagen: zoom suave gestionado por GSAP */
+  cards.forEach((card) => {
+    const img = card.querySelector<HTMLElement>(".rest-img-link img");
+    if (!img) return;
+    card.addEventListener("mouseenter", () => {
+      gsap.to(img, { scale: 1.05, duration: 0.55, ease: "power2.out" });
+    });
+    card.addEventListener("mouseleave", () => {
+      gsap.to(img, { scale: 1, duration: 0.55, ease: "power2.out" });
+    });
+  });
+
+} else {
+  gsap.set(".rest-head-anim", { opacity: 1, y: 0, scaleX: 1 });
+  gsap.set(cards, { opacity: 1, y: 0 });
+}
 </script>

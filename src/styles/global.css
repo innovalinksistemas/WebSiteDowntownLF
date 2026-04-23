@@ -481,41 +481,86 @@ body.menu-open {
 
 /* ══════════════════════════════════════════════════════════
    HERO
+   Cambios vs versión anterior:
+   · .hero-video        → capa de video (activa con VIDEO_READY)
+   · .hero-trust-*      → trust bar: ratings + urgencia (FOMO)
+   · .hero-microcopy    → micro-copy de confianza bajo CTAs
+   · .hero-urgency-dot  → punto rojo parpadeante (GSAP)
+   · .hero-live-dot     → indicador "en vivo" del volcán (GSAP)
+   · .hero-status-line  → línea vertical del widget volcán
+   · .hero-scroll-*     → scroll indicator con bounce (GSAP)
+   · Ken Burns mejorado → scale 1.08 + deriva leve (ease: none)
+   · CTAs rediseñados   → primario con box-shadow para contraste
 ══════════════════════════════════════════════════════════ */
+
+/* ── Sección base ──────────────────────────────────────── */
 .hero {
-	background: #111827;
+	background: #0d1821;
 }
 
+/* ── Imagen de fondo (Ken Burns vía GSAP) ──────────────── */
 .hero-bg {
-	transform: scale(1.16);
-	filter: saturate(0.88) contrast(0.94) brightness(0.78);
+	transform: scale(1.08);
+	transform-origin: center center;
+	filter: saturate(0.88) contrast(0.94) brightness(0.76);
+	will-change: transform;
 }
 
+/* ── Video de fondo (segunda capa, activa con VIDEO_READY)
+   GSAP maneja opacidad de entrada al cargar.
+   La imagen queda visible como poster hasta que cargue.
+──────────────────────────────────────────────────────────── */
+.hero-video {
+	transform-origin: center center;
+	filter: saturate(0.9) brightness(0.78);
+	z-index: 1;
+	will-change: opacity;
+}
+
+/* ── Overlays de composición ───────────────────────────── */
 .hero-overlay {
+	z-index: 2;
 	background:
-		radial-gradient(circle at 50% 26%, rgba(255, 255, 255, 0.08) 0, rgba(255, 255, 255, 0) 44%),
-		linear-gradient(to bottom, rgba(7, 12, 16, 0.48) 0%, rgba(6, 16, 22, 0.78) 66%, rgba(5, 14, 19, 0.93) 100%);
+		radial-gradient(circle at 50% 26%, rgba(255, 255, 255, 0.06) 0, rgba(255, 255, 255, 0) 44%),
+		linear-gradient(
+			to bottom,
+			rgba(7, 12, 16, 0.42) 0%,
+			rgba(6, 14, 22, 0.72) 55%,
+			rgba(5, 12, 19, 0.92) 100%
+		);
 }
 
 .hero-vignette {
-	background: radial-gradient(circle at 50% 40%, rgba(2, 6, 10, 0) 35%, rgba(3, 10, 14, 0.7) 100%);
+	z-index: 3;
+	background: radial-gradient(
+		circle at 50% 40%,
+		rgba(2, 6, 10, 0) 30%,
+		rgba(3, 10, 14, 0.68) 100%
+	);
 }
 
 .hero-grain {
-	opacity: 0.2;
+	z-index: 4;
+	opacity: 0.18;
 	mix-blend-mode: soft-light;
-	background-image: radial-gradient(circle, rgba(255, 255, 255, 0.17) 0.5px, transparent 0.5px);
+	background-image: radial-gradient(
+		circle,
+		rgba(255, 255, 255, 0.17) 0.5px,
+		transparent 0.5px
+	);
 	background-size: 3px 3px;
 }
 
+/* ── Kicker ─────────────────────────────────────────────── */
 .hero-kicker {
 	font-family: var(--font-script);
-	font-size: clamp(2rem, 2.4vw, 2.9rem);
+	font-size: clamp(1.9rem, 2.4vw, 2.9rem);
 	line-height: 1;
 	letter-spacing: 0.01em;
-	color: rgba(255, 251, 246, 0.92);
+	color: rgba(255, 251, 246, 0.9);
 }
 
+/* ── Título H1 ──────────────────────────────────────────── */
 .hero-title {
 	font-family: var(--font-display);
 	font-size: clamp(3.2rem, 10vw, 8.1rem);
@@ -523,109 +568,292 @@ body.menu-open {
 	letter-spacing: 0.065em;
 	font-weight: 500;
 	text-wrap: balance;
-	text-shadow: 0 8px 30px rgba(0, 0, 0, 0.36);
+	text-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
+/* ── Tagline ─────────────────────────────────────────────── */
 .hero-tagline {
 	font-family: var(--font-display);
-	font-size: clamp(1.2rem, 2.1vw, 2rem);
+	font-size: clamp(1.15rem, 2vw, 1.9rem);
 	font-style: italic;
 	font-weight: 500;
-	letter-spacing: 0.02em;
-	color: rgba(247, 240, 232, 0.9);
+	letter-spacing: 0.03em;
+	color: rgba(247, 240, 232, 0.88);
 }
 
-.hero-actions {
+/* ══════════════════════════════════════════════════════════
+   TRUST BAR — Prueba social + urgencia (neuromarketing)
+   Ratings primero → confianza. Escasez al final → FOMO.
+   La proximidad visual activa ambos estímulos en secuencia.
+══════════════════════════════════════════════════════════ */
+.hero-trust {
+	display: flex;
+	justify-content: center;
+}
+
+.hero-trust-inner {
+	display: inline-flex;
+	align-items: center;
+	gap: clamp(0.9rem, 2.2vw, 2rem);
+	padding: 0.7rem clamp(1.1rem, 2.4vw, 2.2rem);
+	background: rgba(5, 10, 16, 0.42);
+	border: 1px solid rgba(255, 248, 236, 0.18);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+}
+
+.hero-trust-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.18rem;
+	text-align: center;
+}
+
+.hero-trust-score {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	font-family: var(--font-display);
+	font-size: clamp(1.1rem, 1.6vw, 1.55rem);
+	font-weight: 600;
+	line-height: 1;
+	color: #f4edd8;
+	letter-spacing: 0.01em;
+}
+
+.hero-trust-label {
+	font-size: clamp(0.6rem, 0.75vw, 0.72rem);
+	font-weight: 600;
 	letter-spacing: 0.16em;
 	text-transform: uppercase;
-	font-size: 0.74rem;
+	color: rgba(244, 237, 216, 0.58);
+}
+
+.hero-trust-divider {
+	width: 1px;
+	height: 2rem;
+	background: rgba(255, 248, 236, 0.22);
+	flex-shrink: 0;
+}
+
+/* Ámbar dorado: urgencia sin perder tono premium */
+.hero-trust-urgent {
+	color: #c9ab5d;
+}
+
+/* Punto rojo parpadeante — animado por GSAP */
+.hero-urgency-dot {
+	display: inline-block;
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: #e05252;
+	flex-shrink: 0;
+}
+
+/* ── Micro-copy de confianza bajo los CTAs ───────────────
+   Elimina las 3 objeciones principales del turista intl.
+   antes de hacer clic: precio, cancelación, sorpresas.
+──────────────────────────────────────────────────────────── */
+.hero-microcopy {
+	font-size: 0.68rem;
+	font-weight: 600;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: rgba(247, 240, 230, 0.48);
+}
+
+/* ── CTAs ───────────────────────────────────────────────── */
+.hero-actions {
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	font-size: 0.76rem;
 	font-weight: 700;
 }
 
 .hero-btn {
 	display: inline-flex;
-	min-width: 190px;
+	min-width: 200px;
 	justify-content: center;
 	align-items: center;
-	padding: 0.95rem 1.35rem;
+	padding: 1.05rem 1.6rem;
 	text-decoration: none;
-	transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+	transition:
+		transform 0.28s ease,
+		background-color 0.28s ease,
+		color 0.28s ease,
+		border-color 0.28s ease,
+		box-shadow 0.28s ease;
 }
 
 .hero-btn:hover {
 	transform: translateY(-2px);
 }
 
+/* Primario: alta visibilidad, box-shadow para flotar sobre imagen */
 .hero-btn-primary {
-	background: #efe7dd;
-	border: 1px solid #efe7dd;
+	background: #efe8dd;
+	border: 1px solid #efe8dd;
 	color: #111827;
+	box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 }
 
 .hero-btn-primary:hover {
-	background: #f7f0e8;
-	border-color: #f7f0e8;
+	background: #f9f2e8;
+	border-color: #f9f2e8;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.38);
 }
 
+/* Secundario: para usuarios en fase de consideración */
 .hero-btn-outline {
-	border: 1px solid rgba(255, 248, 238, 0.44);
+	border: 1px solid rgba(255, 248, 238, 0.42);
 	color: #f8f1e8;
-	background: rgba(4, 12, 18, 0.24);
-	backdrop-filter: blur(3px);
+	background: rgba(4, 12, 18, 0.22);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
 }
 
 .hero-btn-outline:hover {
-	border-color: rgba(255, 248, 238, 0.76);
-	background: rgba(5, 14, 21, 0.42);
+	border-color: rgba(255, 248, 238, 0.72);
+	background: rgba(5, 14, 21, 0.4);
 }
 
+/* ── Estado del volcán ───────────────────────────────────── */
 .hero-status {
 	color: rgba(248, 240, 229, 0.86);
 }
 
+.hero-status-line {
+	width: 1px;
+	height: 2.8rem;
+	background: rgba(255, 255, 255, 0.32);
+	flex-shrink: 0;
+}
+
 .hero-status-label {
-	font-size: 0.65rem;
+	font-size: 0.62rem;
 	text-transform: uppercase;
-	letter-spacing: 0.2em;
-	margin: 0 0 0.35rem;
+	letter-spacing: 0.22em;
+	font-weight: 600;
+	margin: 0 0 0.3rem;
+	color: rgba(248, 240, 229, 0.6);
 }
 
 .hero-status-value {
 	font-family: var(--font-display);
 	font-style: italic;
-	font-size: 1.17rem;
+	font-size: 1.14rem;
 	margin: 0;
+	display: flex;
+	align-items: center;
+	gap: 0.45rem;
 }
 
+/* Punto verde "en vivo" — animado por GSAP */
+.hero-live-dot {
+	display: inline-block;
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: #4ade80;
+	flex-shrink: 0;
+}
+
+/* ── FAB ─────────────────────────────────────────────────── */
 .hero-fab {
 	background: #c9ab5d;
 	color: #fff9eb;
-	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.34);
-	transition: transform 0.3s ease, filter 0.3s ease;
+	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.36);
+	transition: transform 0.28s ease, filter 0.28s ease, box-shadow 0.28s ease;
 }
 
 .hero-fab:hover {
 	transform: translateY(-3px);
-	filter: brightness(1.06);
+	filter: brightness(1.08);
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.44);
 }
 
+/* ── Scroll indicator ─────────────────────────────────────
+   Solo desktop. Bounce animado por GSAP con delay de 2s.
+──────────────────────────────────────────────────────────── */
+.hero-scroll-indicator {
+	pointer-events: none;
+}
+
+.hero-scroll-label {
+	font-size: 0.58rem;
+	font-weight: 700;
+	letter-spacing: 0.24em;
+	text-transform: uppercase;
+	color: rgba(255, 248, 236, 0.42);
+}
+
+.hero-scroll-arrow {
+	display: block;
+	width: 1px;
+	height: 2rem;
+	background: linear-gradient(
+		to bottom,
+		rgba(255, 248, 236, 0.5),
+		rgba(255, 248, 236, 0)
+	);
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 640px) {
 	.hero-title {
 		letter-spacing: 0.045em;
 	}
 
 	.hero-tagline {
-		font-size: clamp(1.05rem, 4.9vw, 1.35rem);
+		font-size: clamp(1rem, 4.8vw, 1.3rem);
 		line-height: 1.45;
 	}
 
 	.hero-btn {
-		width: min(100%, 19rem);
+		width: min(100%, 20rem);
+	}
+
+	.hero-trust-inner {
+		gap: 0.8rem;
+		padding: 0.6rem 1rem;
+	}
+
+	.hero-trust-score {
+		font-size: 1.08rem;
+	}
+
+	.hero-trust-label {
+		font-size: 0.58rem;
+	}
+
+	/* Mobile: ocultar urgencia para no saturar */
+	.hero-trust-item:last-child,
+	.hero-trust-divider:last-of-type {
+		display: none;
+	}
+
+	.hero-microcopy {
+		font-size: 0.6rem;
+		letter-spacing: 0.12em;
 	}
 }
 
 /* ══════════════════════════════════════════════════════════
    ABOUT US
+   FIXES aplicados:
+   · Grid: repeat(4) en lugar de repeat(5) — 5 items, no 6 celdas
+   · figure margin: 0 — resetea el margin default del navegador
+   · .about-us-rating-score → inline-flex para alinear el <small>
+     de forma consistente en Safari
+   · .about-us-rating-meta strong → mayor peso visual al número
+     de reviews como ancla de prueba social
+   NUEVO:
+   · .about-us-rating-badge → label emocional bajo cada score
+   · .about-us-cta / .about-us-cta-btn → CTA al final de sección
+   · .about-us-cta-sub → micro-copy de confianza bajo el CTA
+   · .about-us-title-br → controla el salto de línea del h2
 ══════════════════════════════════════════════════════════ */
 .about-us-section {
 	position: relative;
@@ -672,14 +900,26 @@ body.menu-open {
 	text-wrap: balance;
 }
 
-.about-us-copy {
-	margin: clamp(1.8rem, 3vw, 2.8rem) auto 0;
-	max-width: 49rem;
-	font-size: clamp(0.9rem, 1.15vw, 1.25rem);
-	line-height: 1.45;
-	color: rgba(45, 42, 38, 0.85);
+/* Controla el <br> del título — oculto en mobile para flujo natural */
+.about-us-title-br {
+	display: none;
 }
 
+@media (min-width: 640px) {
+	.about-us-title-br {
+		display: inline;
+	}
+}
+
+.about-us-copy {
+	margin: clamp(1.8rem, 3vw, 2.8rem) auto 0;
+	max-width: 46rem;
+	font-size: clamp(0.95rem, 1.18vw, 1.28rem);
+	line-height: 1.62;
+	color: rgba(45, 42, 38, 0.82);
+}
+
+/* ── Ratings bar ─────────────────────────────────────────── */
 .about-us-ratings {
 	margin: clamp(1.8rem, 3.4vw, 3rem) auto 0;
 	max-width: min(100%, 68rem);
@@ -689,9 +929,10 @@ body.menu-open {
 	border-bottom: 1px solid rgba(38, 34, 30, 0.2);
 }
 
+/* FIX: 5 columnas para 5 items (era repeat(5) = 6 columnas → hueco) */
 .about-us-ratings-grid {
 	display: grid;
-	grid-template-columns: 1.35fr repeat(5, minmax(0, 0.82fr));
+	grid-template-columns: 1.35fr repeat(4, minmax(0, 0.82fr));
 	gap: clamp(0.35rem, 0.8vw, 0.75rem);
 	align-items: center;
 	justify-items: center;
@@ -714,8 +955,12 @@ body.menu-open {
 	border-right: 1px solid rgba(36, 33, 28, 0.28);
 }
 
+/* FIX: inline-flex para alinear correctamente el <small> en Safari */
 .about-us-rating-score {
 	margin: 0;
+	display: inline-flex;
+	align-items: flex-start;
+	gap: 0.18rem;
 	font-size: clamp(1.15rem, 1.55vw, 1.55rem);
 	font-weight: 600;
 	letter-spacing: -0.02em;
@@ -728,10 +973,11 @@ body.menu-open {
 }
 
 .about-us-rating-score small {
-	font-size: 0.5em;
+	font-size: 0.48em;
 	font-weight: 500;
-	vertical-align: super;
+	margin-top: 0.12em;
 	letter-spacing: 0;
+	color: rgba(30, 26, 22, 0.65);
 }
 
 .about-us-rating-label {
@@ -742,12 +988,18 @@ body.menu-open {
 	color: #2a2520;
 }
 
+/* FIX: strong dentro de meta para dar peso al número de reviews */
 .about-us-rating-meta {
 	width: 100%;
 	margin: 0;
 	font-size: clamp(0.66rem, 0.72vw, 0.76rem);
 	line-height: 1.2;
 	color: rgba(34, 30, 26, 0.68);
+}
+
+.about-us-rating-meta strong {
+	font-weight: 700;
+	color: rgba(34, 30, 26, 0.88);
 }
 
 .about-us-rating-source {
@@ -774,6 +1026,19 @@ body.menu-open {
 	vertical-align: super;
 }
 
+/* NUEVO: label emocional bajo cada score ("Excellent", "Superb"...)
+   Activa validación social más fuerte que el número solo */
+.about-us-rating-badge {
+	margin: 0.22rem 0 0;
+	font-size: clamp(0.6rem, 0.68vw, 0.72rem);
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	color: #ab8840;
+	text-transform: uppercase;
+}
+
+/* ── Media (video YouTube) ───────────────────────────────── */
+/* FIX: margin: 0 resetea el margin default del <figure> en navegadores */
 .about-us-media {
 	margin: clamp(2.4rem, 4.2vw, 3.6rem) auto 0;
 	max-width: min(100%, 87rem);
@@ -782,6 +1047,7 @@ body.menu-open {
 	box-shadow: 0 18px 36px rgba(14, 13, 12, 0.2);
 }
 
+/* Para el caso en que se use <img> en lugar del iframe */
 .about-us-media img {
 	display: block;
 	width: 100%;
@@ -789,6 +1055,51 @@ body.menu-open {
 	object-fit: cover;
 }
 
+/* ── CTA final de sección ────────────────────────────────────
+   Captura usuarios en fase de alta intención:
+   vieron los ratings + el video → listos para reservar
+──────────────────────────────────────────────────────────── */
+.about-us-cta {
+	margin-top: clamp(2.4rem, 4vw, 3.2rem);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.about-us-cta-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1rem 2.4rem;
+	background: #2d2a26;
+	color: #f4edd8;
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: 0.2em;
+	font-size: 0.74rem;
+	font-weight: 700;
+	border: 1px solid #2d2a26;
+	transition: background-color 0.26s ease, transform 0.26s ease, box-shadow 0.26s ease;
+}
+
+.about-us-cta-btn:hover {
+	background: #1a1815;
+	border-color: #1a1815;
+	transform: translateY(-2px);
+	box-shadow: 0 8px 24px rgba(29, 26, 22, 0.22);
+}
+
+.about-us-cta-sub {
+	margin: 0;
+	font-size: 0.68rem;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: rgba(45, 42, 38, 0.48);
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 768px) {
 	.about-us-title-wrap {
 		grid-template-columns: 1fr;
@@ -800,13 +1111,14 @@ body.menu-open {
 	}
 
 	.about-us-copy {
-		font-size: clamp(0.9rem, 3.8vw, 1.08rem);
+		font-size: clamp(0.92rem, 3.8vw, 1.08rem);
 	}
 
 	.about-us-ratings {
 		padding: 0.65rem 0;
 	}
 
+	/* Mobile: 2 columnas, primary ocupa todo el ancho */
 	.about-us-ratings-grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 0.45rem 0.75rem;
@@ -835,6 +1147,11 @@ body.menu-open {
 
 	.about-us-media {
 		border-width: 3px;
+	}
+
+	.about-us-cta-btn {
+		width: 100%;
+		max-width: 22rem;
 	}
 }
 
@@ -1308,7 +1625,17 @@ body.menu-open {
 
 /* ══════════════════════════════════════════════════════════
    ROOMS
+   ─────────────────────────────────────────────────────────
+   Solución de alineación: align-items:stretch en el grid
+   + flex-column con flex-grow:1 en la descripción.
+
+   align-items:stretch → todas las cards de la misma fila
+   tienen IGUAL altura. flex-grow:1 en .room-card-description
+   → absorbe el espacio sobrante y empuja el botón al fondo.
+   Resultado: imagen, título, descripción, read-more y botón
+   perfectamente alineados en todas las columnas.
 ══════════════════════════════════════════════════════════ */
+
 .rooms-section {
 	position: relative;
 	padding: clamp(3.8rem, 8vw, 6rem) 1.2rem clamp(4.2rem, 8vw, 6.4rem);
@@ -1321,6 +1648,7 @@ body.menu-open {
 	margin: 0 auto;
 }
 
+/* ── Header ──────────────────────────────────────────────── */
 .rooms-header {
 	display: flex;
 	align-items: center;
@@ -1333,6 +1661,7 @@ body.menu-open {
 	width: clamp(2.8rem, 5vw, 4.6rem);
 	height: 1px;
 	background: rgba(54, 47, 38, 0.58);
+	flex-shrink: 0;
 }
 
 .rooms-title {
@@ -1344,21 +1673,31 @@ body.menu-open {
 	text-transform: uppercase;
 }
 
+/* ── Grid ────────────────────────────────────────────────── */
 .rooms-grid {
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
-	gap: clamp(0.8rem, 1.5vw, 1.4rem);
+	column-gap: clamp(1.4rem, 2.4vw, 2.2rem);
+	row-gap: clamp(2.4rem, 5vw, 3.2rem);
+	align-items: stretch;
 }
 
+/* ── Card ────────────────────────────────────────────────── */
 .room-card {
 	display: flex;
 	flex-direction: column;
+	height: 100%;
 }
 
+/* ── Imagen ──────────────────────────────────────────────── */
 .room-image-link {
 	display: block;
+	/* overflow:hidden aquí bloquearía el clip-path de GSAP.
+	   El recorte lo gestiona clip-path en el <img> directamente. */
 	overflow: hidden;
-	height: clamp(12rem, 15vw, 15rem);
+	flex-shrink: 0;
+	height: clamp(13rem, 17vw, 17rem);
+	margin-bottom: clamp(0.9rem, 1.3vw, 1.2rem);
 	background: #d9d3ca;
 }
 
@@ -1367,96 +1706,106 @@ body.menu-open {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	transition: transform 0.5s ease;
+	/* Sin transition CSS — hover y reveal los maneja GSAP */
+	will-change: transform, clip-path;
 }
 
-.room-card:hover .room-image-link img {
-	transform: scale(1.04);
+/* Hover de CSS como fallback solo si JS está desactivado */
+@media (hover: hover) {
+	.room-card:hover .room-image-link img {
+		transform: scale(1.05);
+		transition: transform 0.55s ease;
+	}
 }
 
-.room-card-body {
-	display: flex;
-	flex-direction: column;
-	gap: 0.95rem;
-	padding-top: 1.1rem;
-}
-
+/* ── Título ──────────────────────────────────────────────── */
 .room-card-title {
-	margin: 0;
+	margin: 0 0 0.65rem;
 	font-family: var(--font-display);
-	font-size: clamp(1.62rem, 2.15vw, 2.28rem);
-	line-height: 1.02;
+	font-size: clamp(1.55rem, 2vw, 2.2rem);
+	line-height: 1.04;
 	color: #6f5430;
 }
 
+/* ── Descripción — flex-grow:1 empuja el botón al fondo ─── */
 .room-card-description {
-	margin: 0;
-	font-size: clamp(0.92rem, 1.02vw, 1.06rem);
-	line-height: 1.52;
-	color: rgba(50, 43, 35, 0.84);
+	margin: 0 0 0.9rem;
+	flex-grow: 1;
+	font-size: clamp(0.9rem, 1vw, 1.04rem);
+	line-height: 1.58;
+	color: rgba(50, 43, 35, 0.78);
 }
 
+/* ── Read more ───────────────────────────────────────────── */
 .room-read-link {
 	display: inline-flex;
 	width: fit-content;
+	margin-bottom: 1rem;
 	text-decoration: none;
 	font-family: var(--font-display);
-	font-size: 1.1rem;
+	font-size: clamp(1rem, 1.08vw, 1.12rem);
 	color: #6f5430;
-	border-bottom: 1px solid rgba(111, 84, 48, 0.46);
+	border-bottom: 1px solid rgba(111, 84, 48, 0.38);
 	padding-bottom: 0.1rem;
-	transition: color 0.25s ease, border-color 0.25s ease;
+	transition: color 0.24s ease, border-color 0.24s ease;
 }
 
 .room-read-link:hover {
 	color: #5c4220;
-	border-color: rgba(92, 66, 32, 0.62);
+	border-color: rgba(92, 66, 32, 0.6);
 }
 
+/* ── Botón Book now ──────────────────────────────────────── */
 .room-book-btn {
-	display: inline-flex;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin-top: auto;
-	min-height: 3.35rem;
 	width: 100%;
-	text-decoration: none;
-	background: #cba96b;
-	color: #1f1b16;
+	min-height: 3.2rem;
+	padding: 0 1rem;
+	border: none;
+	border-radius: 2rem;
+	background: #1e1b17;
+	color: #f4edd8;
 	text-transform: uppercase;
-	letter-spacing: 0.1em;
-	font-size: 0.76rem;
+	letter-spacing: 0.2em;
+	font-size: 0.7rem;
 	font-weight: 700;
-	transition: background-color 0.25s ease, transform 0.25s ease;
+	cursor: pointer;
+	transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .room-book-btn:hover {
-	background: #b89352;
+	background: #111;
 	transform: translateY(-1px);
+	box-shadow: 0 6px 20px rgba(20, 16, 12, 0.22);
 }
 
+/* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 1260px) {
 	.rooms-grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 1.3rem 1.1rem;
+		column-gap: clamp(1.6rem, 3.5vw, 2.8rem);
 	}
 
 	.room-image-link {
-		height: clamp(13.5rem, 26vw, 18rem);
+		height: clamp(14rem, 30vw, 20rem);
 	}
 }
 
 @media (max-width: 740px) {
 	.rooms-grid {
 		grid-template-columns: 1fr;
+		row-gap: clamp(2.4rem, 7vw, 3.4rem);
 	}
 
 	.room-image-link {
-		height: clamp(13rem, 56vw, 16rem);
+		height: clamp(14rem, 60vw, 18rem);
 	}
 
-	.room-read-link {
-		font-size: 1.02rem;
+	.room-book-btn {
+		min-height: 3.4rem;
 	}
 }
 
@@ -1598,197 +1947,517 @@ body.menu-open {
 }
 
 /* ══════════════════════════════════════════════════════════
-   RESTAURANTS
+   RESTAURANTS — Diseño editorial elite
+   ─────────────────────────────────────────────────────────
+   Cambios vs versión anterior:
+   · Fondo oscuro #0e1318 → sección destacada, rompe la
+     monotonía de la paleta crema del resto de la página
+   · Cards sin fondo de caja → solo imagen + texto limpio
+   · Flechas reubicadas al header (debajo del copy)
+   · Dots de progreso sincronizados con scroll
+   · Tag flotante sobre imagen para identificar el concepto
+   · "Ver menú" con flecha SVG inline
+   · GSAP maneja hover de imagen (sin transition CSS)
 ══════════════════════════════════════════════════════════ */
-.restaurants-section {
+
+/* ── Sección ─────────────────────────────────────────────── */
+.rest-section {
 	position: relative;
-	padding: clamp(3.8rem, 8vw, 6.1rem) 0 clamp(4.2rem, 8vw, 6.6rem);
-	background: #ece7de;
-	color: #312b23;
+	padding: clamp(4rem, 8vw, 6.4rem) 0 clamp(4.4rem, 8.5vw, 7rem);
+	background: #0e1318;
+	color: #f2ece2;
 }
 
-.restaurants-inner {
+.rest-inner {
 	max-width: 100rem;
 	margin: 0 auto;
-	padding: 0 1.2rem;
+	padding: 0 clamp(1.2rem, 4vw, 3.6rem);
 }
 
-.restaurants-head {
+/* ── Header ──────────────────────────────────────────────── */
+.rest-head {
 	display: grid;
-	grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-	gap: clamp(1rem, 3vw, 3.6rem);
-	align-items: start;
-	margin-bottom: clamp(1.6rem, 3vw, 2.8rem);
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	gap: clamp(1.5rem, 4vw, 5rem);
+	align-items: end;
+	margin-bottom: clamp(2.4rem, 4.5vw, 4rem);
 }
 
-.restaurants-title-wrap {
+.rest-head-left {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+.rest-title-wrap {
 	display: flex;
 	align-items: flex-start;
-	gap: clamp(0.8rem, 1.8vw, 1.5rem);
+	gap: clamp(0.8rem, 1.6vw, 1.4rem);
 }
 
-.restaurants-line {
+.rest-line {
 	display: inline-block;
-	width: clamp(2.7rem, 4.7vw, 4.5rem);
+	width: clamp(2.4rem, 4vw, 3.8rem);
 	height: 1px;
-	background: rgba(49, 43, 35, 0.58);
-	margin-top: 1rem;
+	background: rgba(242, 236, 226, 0.4);
+	flex-shrink: 0;
+	margin-top: 1.2rem;
 }
 
-.restaurants-title {
+.rest-title {
 	margin: 0;
 	font-family: var(--font-display);
-	font-size: clamp(2rem, 4.2vw, 4rem);
+	font-size: clamp(2.2rem, 4.4vw, 4.2rem);
 	line-height: 0.92;
+	font-weight: 400;
 	text-transform: uppercase;
-	letter-spacing: 0.01em;
-	max-width: 20ch;
+	letter-spacing: 0.02em;
+	color: #f2ece2;
 }
 
-.restaurants-copy {
+/* ── Head right: copy + controles ───────────────────────── */
+.rest-head-right {
+	display: flex;
+	flex-direction: column;
+	gap: clamp(1.4rem, 2.5vw, 2rem);
+	padding-bottom: 0.15rem;
+}
+
+.rest-copy {
 	margin: 0;
-	font-size: clamp(1rem, 1.35vw, 1.64rem);
-	line-height: 1.42;
-	max-width: 39rem;
-	color: rgba(49, 43, 35, 0.84);
+	font-size: clamp(0.95rem, 1.22vw, 1.35rem);
+	line-height: 1.56;
+	color: rgba(242, 236, 226, 0.62);
+	max-width: 38rem;
 }
 
-.restaurants-carousel {
+/* ── Controles: flechas + dots ───────────────────────────── */
+.rest-controls {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.rest-btn {
+	display: grid;
+	place-items: center;
+	width: 2.6rem;
+	height: 2.6rem;
+	border-radius: 50%;
+	border: 1px solid rgba(242, 236, 226, 0.28);
+	background: transparent;
+	color: rgba(242, 236, 226, 0.8);
+	cursor: pointer;
+	flex-shrink: 0;
+	transition: border-color 0.24s ease, background-color 0.24s ease, color 0.24s ease;
+}
+
+.rest-btn:hover {
+	border-color: rgba(242, 236, 226, 0.8);
+	background: rgba(242, 236, 226, 0.08);
+	color: #f2ece2;
+}
+
+.rest-btn:disabled {
+	opacity: 0.28;
+	cursor: default;
+	pointer-events: none;
+}
+
+/* Dots */
+.rest-dots {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.rest-dot {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	border: none;
+	background: rgba(242, 236, 226, 0.28);
+	cursor: pointer;
+	padding: 0;
+	transition: background-color 0.28s ease, transform 0.28s ease, width 0.28s ease;
+}
+
+.rest-dot--active {
+	width: 22px;
+	border-radius: 3px;
+	background: rgba(242, 236, 226, 0.88);
+}
+
+/* ── Carousel track ──────────────────────────────────────── */
+.rest-carousel {
 	position: relative;
 }
 
-.restaurants-track {
+.rest-track {
 	display: grid;
 	grid-auto-flow: column;
-	grid-auto-columns: minmax(46%, 40rem);
-	gap: clamp(1rem, 1.9vw, 1.45rem);
+	grid-auto-columns: minmax(min(100%, 42rem), 44rem);
+	gap: clamp(1.2rem, 2vw, 1.8rem);
 	overflow-x: auto;
 	scroll-snap-type: x mandatory;
-	padding: 0 clamp(1.6rem, 5vw, 5rem);
-	scrollbar-width: thin;
-	scrollbar-color: rgba(128, 103, 66, 0.45) transparent;
+	scrollbar-width: none;            /* ocultar scrollbar — nav por dots/botones */
+	-ms-overflow-style: none;
+	padding-bottom: 0.2rem;           /* espacio para sombras */
 }
 
-.restaurants-track::-webkit-scrollbar {
-	height: 7px;
+.rest-track::-webkit-scrollbar {
+	display: none;
 }
 
-.restaurants-track::-webkit-scrollbar-thumb {
-	background: rgba(128, 103, 66, 0.45);
-	border-radius: 999px;
+/* ── Card ────────────────────────────────────────────────── */
+.rest-card {
+	scroll-snap-align: start;
+	display: flex;
+	flex-direction: column;
 }
 
-.restaurant-card {
-	scroll-snap-align: center;
-	background: #f1eeea;
-	overflow: hidden;
-	box-shadow: 0 12px 28px rgba(23, 20, 16, 0.12);
-}
-
-.restaurant-image-link {
+/* ── Imagen ──────────────────────────────────────────────── */
+.rest-img-link {
 	display: block;
-	height: clamp(19rem, 33vw, 32rem);
+	position: relative;
 	overflow: hidden;
+	height: clamp(20rem, 32vw, 30rem);
+	flex-shrink: 0;
+	text-decoration: none;
 }
 
-.restaurant-image-link img {
+.rest-img-link img {
 	display: block;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	transition: transform 0.6s ease;
+	will-change: transform;
+	/* Sin transition CSS — GSAP gestiona el hover */
 }
 
-.restaurant-card:hover .restaurant-image-link img {
-	transform: scale(1.05);
-}
-
-.restaurant-card-body {
-	padding: clamp(1rem, 1.6vw, 1.55rem) clamp(1rem, 1.8vw, 1.8rem) clamp(1.2rem, 1.9vw, 2rem);
-}
-
-.restaurant-name {
-	margin: 0;
-	font-family: var(--font-display);
-	font-size: clamp(1.55rem, 2.2vw, 2.48rem);
-	line-height: 1;
-	color: #393127;
-}
-
-.restaurant-description {
-	margin: 0.65rem 0 0;
-	font-size: clamp(0.95rem, 1.08vw, 1.12rem);
-	line-height: 1.42;
-	color: rgba(57, 49, 39, 0.82);
-}
-
-.restaurant-link {
-	display: inline-flex;
-	margin-top: 0.8rem;
-	text-decoration: none;
-	font-family: var(--font-display);
-	font-size: 1.07rem;
-	color: #9a7339;
-	border-bottom: 1px solid rgba(154, 115, 57, 0.45);
-	padding-bottom: 0.08rem;
-	transition: color 0.25s ease, border-color 0.25s ease;
-}
-
-.restaurant-link:hover {
-	color: #7f5923;
-	border-color: rgba(127, 89, 35, 0.62);
-}
-
-.restaurants-nav {
+/* Overlay sutil sobre imagen para legibilidad del tag */
+.rest-img-link::after {
+	content: "";
 	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	z-index: 3;
-	display: grid;
-	place-items: center;
-	width: 3.4rem;
-	height: 3.4rem;
-	border-radius: 999px;
-	border: 1px solid rgba(255, 255, 255, 0.58);
-	background: rgba(247, 244, 240, 0.95);
-	color: #483d2f;
-	font-size: 2rem;
-	line-height: 1;
-	cursor: pointer;
-	box-shadow: 0 8px 24px rgba(34, 30, 24, 0.2);
-	transition: transform 0.22s ease, background-color 0.22s ease;
+	inset: 0;
+	background: linear-gradient(
+		to bottom,
+		rgba(8, 12, 16, 0) 55%,
+		rgba(8, 12, 16, 0.45) 100%
+	);
+	pointer-events: none;
 }
 
-.restaurants-nav:hover {
-	transform: translateY(-50%) scale(1.03);
-	background: #fdfbf8;
+/* Tag flotante — concepto del restaurante */
+.rest-tag {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	z-index: 2;
+	padding: 0.3rem 0.75rem;
+	background: rgba(14, 19, 24, 0.72);
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+	border: 1px solid rgba(242, 236, 226, 0.18);
+	color: rgba(242, 236, 226, 0.9);
+	font-size: 0.62rem;
+	font-weight: 700;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	pointer-events: none;
 }
 
-.restaurants-nav-prev {
-	left: 0.45rem;
+/* ── Cuerpo de la card ───────────────────────────────────── */
+.rest-card-body {
+	padding: clamp(1.1rem, 1.6vw, 1.6rem) 0 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0;
 }
 
-.restaurants-nav-next {
-	right: 0.45rem;
+.rest-name {
+	margin: 0 0 0.6rem;
+	font-family: var(--font-display);
+	font-size: clamp(1.55rem, 2.1vw, 2.3rem);
+	line-height: 1.02;
+	font-weight: 400;
+	color: #f2ece2;
 }
 
+.rest-desc {
+	margin: 0 0 0.85rem;
+	font-size: clamp(0.9rem, 1.02vw, 1.06rem);
+	line-height: 1.56;
+	color: rgba(242, 236, 226, 0.56);
+}
+
+.rest-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	width: fit-content;
+	text-decoration: none;
+	font-size: clamp(0.78rem, 0.9vw, 0.88rem);
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: #c9ab5d;
+	transition: gap 0.24s ease, color 0.24s ease;
+}
+
+.rest-link:hover {
+	gap: 0.65rem;
+	color: #d4bc76;
+}
+
+/* ── Separador entre imagen y body (línea dorada sutil) ──── */
+.rest-img-link + .rest-card-body::before {
+	content: "";
+	display: block;
+	width: 2.4rem;
+	height: 1px;
+	background: rgba(201, 171, 93, 0.5);
+	margin-bottom: 1rem;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 980px) {
-	.restaurants-head {
+	.rest-head {
 		grid-template-columns: 1fr;
-		gap: 0.9rem;
+		gap: 1.2rem;
+		align-items: start;
 	}
 
-	.restaurants-track {
-		grid-auto-columns: minmax(84%, 24rem);
-		padding: 0 0.35rem 0 0.1rem;
+	.rest-title {
+		font-size: clamp(2rem, 8vw, 3.2rem);
 	}
 
-	.restaurants-nav {
-		display: none;
+	.rest-track {
+		grid-auto-columns: minmax(82%, 26rem);
 	}
 
-	.restaurant-image-link {
-		height: clamp(15rem, 54vw, 19rem);
+	.rest-img-link {
+		height: clamp(16rem, 52vw, 22rem);
+	}
+}
+
+@media (max-width: 600px) {
+	.rest-track {
+		grid-auto-columns: minmax(90%, 22rem);
+	}
+
+	.rest-img-link {
+		height: clamp(14rem, 58vw, 18rem);
+	}
+
+	.rest-dot--active {
+		width: 16px;
+	}
+}
+
+/* ══════════════════════════════════════════════════════════
+   TROPICAL BANNER
+   ─────────────────────────────────────────────────────────
+   Banner cinematográfico edge-to-edge.
+   Imagen ocupa 100% del ancho, altura fija tipo widescreen.
+   El overlay va de transparente (izquierda) a denso (derecha)
+   para que la fotografía respire a la izquierda y el texto
+   sea legible sobre el oscuro de la derecha.
+   Contenido alineado a la derecha — mismo patrón que la
+   imagen de referencia del cliente.
+══════════════════════════════════════════════════════════ */
+
+.tropic-section {
+	position: relative;
+	overflow: hidden;
+	/* Altura widescreen: igual que la imagen de referencia */
+	height: clamp(34rem, 52vw, 54rem);
+	display: flex;
+	align-items: center;
+}
+
+/* ── Imagen de fondo ─────────────────────────────────────── */
+.tropic-bg {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center 30%;
+	/* Ken Burns gestionado por GSAP */
+	will-change: transform;
+}
+
+/* ── Overlay: transparent → oscuro de izquierda a derecha── */
+.tropic-overlay {
+	position: absolute;
+	inset: 0;
+	background:
+		linear-gradient(
+			to right,
+			rgba(4, 8, 12, 0.05) 0%,
+			rgba(4, 8, 12, 0.35) 42%,
+			rgba(4, 8, 12, 0.82) 72%,
+			rgba(4, 8, 12, 0.94) 100%
+		),
+		/* Franja oscura inferior para anclaje */
+		linear-gradient(
+			to top,
+			rgba(4, 8, 12, 0.55) 0%,
+			rgba(4, 8, 12, 0) 28%
+		);
+	z-index: 1;
+}
+
+/* ── Grain — coherente con el hero ──────────────────────── */
+.tropic-grain {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	opacity: 0.14;
+	mix-blend-mode: soft-light;
+	background-image: radial-gradient(
+		circle,
+		rgba(255, 255, 255, 0.17) 0.5px,
+		transparent 0.5px
+	);
+	background-size: 3px 3px;
+	pointer-events: none;
+}
+
+/* ── Contenido ───────────────────────────────────────────── */
+.tropic-content {
+	position: relative;
+	z-index: 3;
+	width: 100%;
+	/* Contenido alineado a la derecha — igual que referencia */
+	display: flex;
+	justify-content: flex-end;
+	padding: 0 clamp(1.4rem, 6vw, 7rem);
+}
+
+.tropic-inner {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	max-width: clamp(22rem, 40vw, 38rem);
+	gap: 0;
+}
+
+/* ── Kicker — "Visita La Fortuna" del reference ─────────── */
+.tropic-kicker {
+	margin: 0 0 clamp(0.6rem, 1.2vw, 1rem);
+	font-size: clamp(0.72rem, 0.9vw, 0.88rem);
+	font-weight: 700;
+	letter-spacing: 0.28em;
+	text-transform: uppercase;
+	color: rgba(242, 236, 226, 0.62);
+}
+
+/* ── Título principal ────────────────────────────────────── */
+.tropic-title {
+	margin: 0 0 clamp(1rem, 1.8vw, 1.5rem);
+	font-family: var(--font-display);
+	font-size: clamp(2rem, 4.2vw, 4rem);
+	line-height: 0.94;
+	font-weight: 500;
+	letter-spacing: 0.01em;
+	color: #f4ede0;
+	text-wrap: balance;
+	text-shadow: 0 4px 24px rgba(0, 0, 0, 0.38);
+}
+
+/* ── Separador dorado — consistente con la marca ─────────── */
+.tropic-rule {
+	display: block;
+	width: clamp(2.4rem, 3.5vw, 3.2rem);
+	height: 1px;
+	background: #c9ab5d;
+	margin-bottom: clamp(0.9rem, 1.6vw, 1.4rem);
+}
+
+/* ── Descripción ─────────────────────────────────────────── */
+.tropic-desc {
+	margin: 0 0 clamp(1.4rem, 2.4vw, 2rem);
+	font-size: clamp(0.92rem, 1.08vw, 1.1rem);
+	line-height: 1.62;
+	color: rgba(242, 236, 226, 0.72);
+	max-width: 30rem;
+}
+
+/* ── CTA — botón con fondo rojo vino: color de marca ─────── */
+.tropic-cta {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.88rem 2.2rem;
+	background: #9b1c2d;
+	border: 1px solid #9b1c2d;
+	color: #fff6ee;
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: 0.2em;
+	font-size: 0.72rem;
+	font-weight: 700;
+	/* GSAP gestiona la micro-interacción de hover */
+	transition: background-color 0.26s ease, border-color 0.26s ease, box-shadow 0.26s ease;
+}
+
+.tropic-cta:hover {
+	background: #b71f35;
+	border-color: #b71f35;
+	box-shadow: 0 8px 28px rgba(155, 28, 45, 0.42);
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+	.tropic-section {
+		height: clamp(28rem, 70vw, 38rem);
+		align-items: flex-end;
+		padding-bottom: clamp(2.4rem, 5vw, 3.6rem);
+	}
+
+	/* En tablet: el overlay se vuelve mayormente inferior
+	   para que el texto sobre el fondo oscuro de abajo */
+	.tropic-overlay {
+		background:
+			linear-gradient(
+				to top,
+				rgba(4, 8, 12, 0.94) 0%,
+				rgba(4, 8, 12, 0.72) 40%,
+				rgba(4, 8, 12, 0.2) 100%
+			);
+	}
+
+	.tropic-content {
+		justify-content: center;
+		padding: 0 clamp(1.2rem, 4vw, 2.4rem);
+	}
+
+	.tropic-inner {
+		max-width: 100%;
+		width: 100%;
+		align-items: center;
+		text-align: center;
+	}
+
+	.tropic-rule {
+		align-self: center;
+	}
+}
+
+@media (max-width: 540px) {
+	.tropic-section {
+		height: clamp(22rem, 100vw, 28rem);
+	}
+
+	.tropic-title {
+		font-size: clamp(1.9rem, 8vw, 2.6rem);
+	}
+
+	.tropic-cta {
+		width: 100%;
+		max-width: 20rem;
 	}
 }
 

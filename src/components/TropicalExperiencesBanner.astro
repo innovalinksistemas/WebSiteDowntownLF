@@ -1,0 +1,115 @@
+---
+/**
+ * TropicalBanner.astro
+ * ─────────────────────────────────────────────────────────────
+ * Banner cinematográfico de pantalla completa.
+ * Estilo: imagen edge-to-edge + texto derecho + un CTA.
+ * Replica el patrón de la imagen de referencia.
+ *
+ * Reemplazar la imagen de Unsplash por foto real de
+ * Tropical Experiences cuando esté disponible.
+ * ─────────────────────────────────────────────────────────────
+ */
+---
+
+<section
+  id="tours-top"
+  class="tropic-section"
+  aria-label="Tropical Experiences — Tours en La Fortuna"
+>
+  <!-- Imagen de fondo edge-to-edge -->
+  <img
+    src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=2400&q=85"
+    alt="Rafting en el río Toro, La Fortuna, Costa Rica"
+    class="tropic-bg"
+    loading="lazy"
+    decoding="async"
+    width="2400"
+    height="1350"
+  />
+
+  <!-- Overlay en degradado: izquierda transparente, derecha densa -->
+  <div class="tropic-overlay" aria-hidden="true"></div>
+
+  <!-- Grain de textura — coherente con el hero -->
+  <div class="tropic-grain" aria-hidden="true"></div>
+
+  <!-- Contenido alineado a la derecha — igual que la imagen de referencia -->
+  <div class="tropic-content">
+    <div class="tropic-inner">
+
+      <!-- Kicker -->
+      <p class="tropic-kicker tropic-anim">Tropical Experiences</p>
+
+      <!-- Título principal -->
+      <h2 class="tropic-title tropic-anim">
+        Tu próxima aventura<br />comienza aquí
+      </h2>
+
+      <!-- Separador dorado -->
+      <span class="tropic-rule tropic-anim" aria-hidden="true"></span>
+
+      <!-- Descripción breve -->
+      <p class="tropic-desc tropic-anim">
+        Rafting, canopy, cataratas y vida silvestre — tours
+        guiados por expertos locales en el corazón de La Fortuna.
+      </p>
+
+      <!-- CTA único: más conversión, menos fricción -->
+      <a href="#tours" class="tropic-cta tropic-anim">
+        Ver tours
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<script>
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (!reduced) {
+  /* Estado inicial */
+  gsap.set(".tropic-anim", { opacity: 0, x: 32 });
+
+  /* Ken Burns suave en la imagen */
+  gsap.to(".tropic-bg", {
+    scale: 1.06,
+    x: "-1.5%",
+    duration: 16,
+    ease: "none",
+  });
+
+  /* Entrada de contenido al llegar al viewport */
+  ScrollTrigger.create({
+    trigger: "#tours-top",
+    start: "top 75%",
+    once: true,
+    onEnter: () => {
+      gsap.to(".tropic-anim", {
+        opacity: 1,
+        x: 0,
+        duration: 0.85,
+        ease: "power3.out",
+        stagger: 0.13,
+      });
+    },
+  });
+
+  /* Hover en el CTA */
+  const cta = document.querySelector<HTMLElement>(".tropic-cta");
+  cta?.addEventListener("mouseenter", () =>
+    gsap.to(cta, { x: 4, duration: 0.22, ease: "power2.out" })
+  );
+  cta?.addEventListener("mouseleave", () =>
+    gsap.to(cta, { x: 0, duration: 0.22, ease: "power2.in" })
+  );
+
+} else {
+  gsap.set(".tropic-anim", { opacity: 1, x: 0 });
+}
+</script>

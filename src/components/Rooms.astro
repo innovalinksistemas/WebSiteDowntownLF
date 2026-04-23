@@ -1,71 +1,184 @@
 ---
 const rooms = [
 	{
-		title: "Sunset Ocean View",
-		description:
-			"Habitaciones luminosas con ambiente relajado y vistas abiertas para disfrutar atardeceres inolvidables.",
-		image:
-			"https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1400&q=80",
-		href: "#reservas"
+		title: "DownTown Standard Doble",
+		description: "Una opción cómoda y acogedora, ideal para parejas o viajeros solos que buscan descansar en un ambiente moderno y bien ubicado en el corazón de la ciudad.",
+		image: "https://i.ibb.co/SwhzWkZR/Estandar-Doble4.png",
+		href: "#reservas",
 	},
 	{
-		title: "Family Pool View",
-		description:
-			"Espacios amplios para familias, decorados en estilo tropical elegante y balcón con vista a la piscina.",
-		image:
-			"https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1400&q=80",
-		href: "#reservas"
+		title: "DownTown Standard Triple",
+		description: "Perfecta para pequeños grupos o familias, esta habitación combina funcionalidad y confort, con espacio suficiente para todos.",
+		image: "https://i.ibb.co/PGZPHP1N/Estandar-Doble3.png",
+		href: "#reservas",
 	},
 	{
-		title: "Tropicana Pool View",
-		description:
-			"Ubicadas en una zona tranquila del hotel, ideales para una estancia de descanso con atmósfera privada.",
-		image:
-			"https://images.unsplash.com/photo-1595576508898-0ad5c879a061?auto=format&fit=crop&w=1400&q=80",
-		href: "#reservas"
+		title: "DownTown Superior",
+		description: "Diseñada para quienes buscan un nivel extra de confort, esta habitación ofrece un ambiente elegante, moderno y espacioso.",
+		image: "https://i.ibb.co/kshJL68d/superior3.png",
+		href: "#reservas",
 	},
 	{
-		title: "Boulevard View King Bed",
-		description:
-			"Diseño contemporáneo con cama king, balcón privado y una experiencia confortable en cada detalle.",
-		image:
-			"https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&w=1400&q=80",
-		href: "#reservas"
-	}
+		title: "Tropical Family",
+		description: "Con vista a la piscina y ubicada en el corazón de la ciudad, esta habitación es ideal para familias o grupos que buscan la comodidad.",
+		image: "https://i.ibb.co/gbVPz97Z/tropical3.png",
+		href: "#reservas",
+	},
 ];
-
-
 ---
 
 <section id="habitaciones" class="rooms-section">
 	<div class="rooms-inner">
+
 		<div class="rooms-header">
-			<span class="rooms-line" aria-hidden="true"></span>
-			<h2 class="rooms-title">Habitaciones</h2>
+			<span class="rooms-line rooms-header-anim" aria-hidden="true"></span>
+			<h2 class="rooms-title rooms-header-anim">Habitaciones</h2>
 		</div>
 
 		<div class="rooms-grid">
-			{
-				rooms.map((room) => (
-					<article class="room-card">
-						<a href={room.href} class="room-image-link" aria-label={`Ver ${room.title}`}>
-							<img src={room.image} alt={room.title} loading="lazy" decoding="async" />
-						</a>
-						<div class="room-card-body">
-							<h3 class="room-card-title">{room.title}</h3>
-							<p class="room-card-description">{room.description}</p>
-							<a href={room.href} class="room-read-link">Read more</a>
-							<button
-								type="button"
-								data-be-url="https://us2.cloudbeds.com/es/reservation/Jq9H6y"
-								class="room-book-btn">Book now</button>
-						</div>
-					</article>
-				))
-			}
+			{rooms.map((room, i) => (
+				<article class="room-card" data-room-index={i}>
+					<a href={room.href} class="room-image-link" aria-label={`Ver ${room.title}`}>
+						<img src={room.image} alt={room.title} loading="lazy" decoding="async" />
+					</a>
+					<h3 class="room-card-title">{room.title}</h3>
+					<p class="room-card-description">{room.description}</p>
+					<a href={room.href} class="room-read-link">Read more</a>
+					<button
+						type="button"
+						data-be-url="https://us2.cloudbeds.com/es/reservation/Jq9H6y"
+						class="room-book-btn"
+						aria-label={`Reservar ${room.title}`}
+					>
+						Book now
+					</button>
+				</article>
+			))}
 		</div>
+
 	</div>
 </section>
 
 <script is:inline src="https://us2.cloudbeds.com/widget/load/Jq9H6y/immersive"></script>
 
+<script>
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (!reduced) {
+
+  /* ── 1. Header: línea se expande + título entra desde la izquierda ── */
+  const headerAnim = gsap.utils.toArray<HTMLElement>(".rooms-header-anim");
+
+  gsap.set(headerAnim[0], { scaleX: 0, transformOrigin: "left center" }); // línea
+  gsap.set(headerAnim[1], { opacity: 0, x: -24 });                        // título
+
+  ScrollTrigger.create({
+    trigger: "#habitaciones",
+    start: "top 82%",
+    once: true,
+    onEnter: () => {
+      gsap.to(headerAnim[0], {
+        scaleX: 1,
+        duration: 0.7,
+        ease: "power3.out",
+      });
+      gsap.to(headerAnim[1], {
+        opacity: 1,
+        x: 0,
+        duration: 0.7,
+        ease: "power3.out",
+        delay: 0.15,
+      });
+    },
+  });
+
+  /* ── 2. Cards: entrada escalonada en cascada ─────────────────────────
+     Cada card entra desde abajo con un delay progresivo.
+     Las imágenes tienen un efecto de reveal con clip-path.
+  ──────────────────────────────────────────────────────────────────── */
+  const cards = gsap.utils.toArray<HTMLElement>(".room-card");
+
+  // Estado inicial: cards invisibles y desplazadas hacia abajo
+  gsap.set(cards, { opacity: 0, y: 40 });
+
+  // Imágenes: clip-path revela de izquierda a derecha
+  const images = gsap.utils.toArray<HTMLElement>(".room-image-link img");
+  gsap.set(images, { clipPath: "inset(0 100% 0 0)", scale: 1.08 });
+
+  ScrollTrigger.create({
+    trigger: ".rooms-grid",
+    start: "top 78%",
+    once: true,
+    onEnter: () => {
+
+      // Cards entran escalonadas
+      gsap.to(cards, {
+        opacity: 1,
+        y: 0,
+        duration: 0.75,
+        ease: "power3.out",
+        stagger: {
+          amount: 0.45,   // tiempo total del stagger entre las 4 cards
+          from: "start",
+        },
+      });
+
+      // Imágenes: clip-path se revela + escala vuelve a 1
+      gsap.to(images, {
+        clipPath: "inset(0 0% 0 0)",
+        scale: 1,
+        duration: 0.85,
+        ease: "power3.out",
+        stagger: {
+          amount: 0.45,
+          from: "start",
+        },
+        delay: 0.08,
+      });
+
+    },
+  });
+
+  /* ── 3. Hover en imagen: zoom suave gestionado por GSAP ─────────────
+     Reemplaza la transición CSS del hover para mayor control.
+     GSAP da curva de ease más rica que CSS transition.
+  ──────────────────────────────────────────────────────────────────── */
+  cards.forEach((card) => {
+    const img = card.querySelector<HTMLElement>(".room-image-link img");
+    if (!img) return;
+
+    card.addEventListener("mouseenter", () => {
+      gsap.to(img, { scale: 1.06, duration: 0.55, ease: "power2.out" });
+    });
+
+    card.addEventListener("mouseleave", () => {
+      gsap.to(img, { scale: 1, duration: 0.55, ease: "power2.out" });
+    });
+  });
+
+  /* ── 4. Hover en botón: micro-interacción de escala ─────────────────
+     El botón se eleva ligeramente al hacer hover.
+  ──────────────────────────────────────────────────────────────────── */
+  const btns = gsap.utils.toArray<HTMLElement>(".room-book-btn");
+
+  btns.forEach((btn) => {
+    btn.addEventListener("mouseenter", () => {
+      gsap.to(btn, { y: -2, duration: 0.22, ease: "power2.out" });
+    });
+    btn.addEventListener("mouseleave", () => {
+      gsap.to(btn, { y: 0, duration: 0.22, ease: "power2.in" });
+    });
+  });
+
+} else {
+  // prefers-reduced-motion: mostrar todo directamente sin animación
+  gsap.set(".rooms-header-anim", { opacity: 1, x: 0, scaleX: 1 });
+  gsap.set(".room-card", { opacity: 1, y: 0 });
+  gsap.set(".room-image-link img", { clipPath: "inset(0 0% 0 0)", scale: 1 });
+}
+</script>
