@@ -190,7 +190,7 @@ const CHECKIN_LABEL = "Disponible esta noche";
       <p class="hero-status-label">Arenal Volcano</p>
       <p class="hero-status-value">
         <span class="hero-live-dot" aria-hidden="true"></span>
-        Clear skies · 24°C
+        <span id="hero-weather-text">· · ·</span>
       </p>
     </div>
   </div>
@@ -271,6 +271,69 @@ const CHECKIN_LABEL = "Disponible esta noche";
       }
     }, 4000);
   }
+
+  /* ─── Clima en tiempo real — Open Meteo, caché 6 h ─── */
+  (() => {
+    const CACHE_KEY = 'dlf_weather_v1';
+    const TTL = 6 * 60 * 60 * 1000;
+
+    const WMO: Record<number, string> = {
+      0: 'Cielo despejado', 1: 'Mayormente despejado',
+      2: 'Parcialmente nublado', 3: 'Nublado',
+      45: 'Niebla', 48: 'Niebla con escarcha',
+      51: 'Llovizna leve', 53: 'Llovizna', 55: 'Llovizna intensa',
+      61: 'Lluvia leve', 63: 'Lluvia', 65: 'Lluvia intensa',
+      80: 'Aguacero leve', 81: 'Aguacero', 82: 'Aguacero intenso',
+      95: 'Tormenta', 96: 'Tormenta con granizo', 99: 'Tormenta con granizo',
+    };
+
+    async function loadWeather() {
+      // Intentar caché primero
+      try {
+        const raw = localStorage.getItem(CACHE_KEY);
+        if (raw) {
+          const { ts, hourly } = JSON.parse(raw);
+          if (Date.now() - ts < TTL) return hourly;
+        }
+      } catch { /* localStorage bloqueado */ }
+
+      const res = await fetch(
+        'https://api.open-meteo.com/v1/forecast?latitude=10.4709&longitude=-84.6453' +
+        '&hourly=temperature_2m,weathercode&past_days=0&forecast_days=1' +
+        '&timezone=America%2FCosta_Rica'
+      );
+      if (!res.ok) throw new Error('weather fetch failed');
+      const { hourly } = await res.json();
+
+      try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), hourly }));
+      } catch { /* storage lleno */ }
+
+      return hourly;
+    }
+
+    async function updateWeather() {
+      const el = document.getElementById('hero-weather-text');
+      if (!el) return;
+      try {
+        const hourly = await loadWeather();
+        const now = new Date();
+        // Encontrar el índice de la hora actual (formato "YYYY-MM-DDTHH:00")
+        const pad = (n: number) => String(n).padStart(2, '0');
+        const key = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}T${pad(now.getHours())}:00`;
+        const idx = (hourly.time as string[]).indexOf(key);
+        if (idx === -1) return;
+        const temp = Math.round((hourly.temperature_2m as number[])[idx]);
+        const code = (hourly.weathercode as number[])[idx];
+        const desc = WMO[code] ?? 'Condición actual';
+        el.textContent = `${desc} · ${temp}°C`;
+      } catch {
+        // Mantener el texto por defecto si falla
+      }
+    }
+
+    updateWeather();
+  })();
 
   /* ─── Urgency dot: parpadeo de "en vivo" ────────────── */
   if (!reduced) {
