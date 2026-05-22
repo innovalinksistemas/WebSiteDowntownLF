@@ -1,5 +1,26 @@
 ---
 import logoBlanco from "../assets/logoBlancoDowntown.png";
+import logoTierraG from "../assets/logoTierraGBlanco.png";
+import logoMB from "../assets/logoMariaBonitaBlanco.png";
+import logoVentanita from "../assets/logoVentanitaBlanco.png";
+import logoPinto from "../assets/logoPintoeGalloBlanco.png";
+import logoTropical from "../assets/logoTropicalExpBlanco.png";
+import logoNuwa from "../assets/logoNuwaBlanco.png";
+import logoLava from "../assets/logoLavaDrinksBlanco.png";
+import logoSelva from "../assets/LogoSelvaNegraBlanco.png";
+
+const logos = [
+	{ src: logoBlanco,    alt: "La Fortuna Downtown",  href: "https://www.instagram.com/lafortunadowntown" },
+	{ src: logoTierraG,   alt: "Tierra Gastro",        href: "https://www.instagram.com/tierragastrocr" },
+	{ src: logoMB,        alt: "María Bonita",         href: "https://www.instagram.com/mariabonita.cr" },
+	{ src: logoVentanita, alt: "La Ventanita",         href: "https://www.instagram.com/ventanitamariabonita" },
+	{ src: logoPinto,     alt: "Pinto e' Gallo",       href: "https://www.instagram.com/pintoegallo.cr" },
+	{ src: logoTropical,  alt: "Tropical Experiences", href: "#" },
+	{ src: logoNuwa,      alt: "Nuwa Art Gallery",     href: "https://www.instagram.com/nuwagallery" },
+	{ src: logoLava,      alt: "Lava Drinks",          href: "https://www.instagram.com/lavadrinkscr" },
+	{ src: logoSelva,     alt: "Selva Negra",          href: "https://www.instagram.com/selvanegra.bar" },
+];
+const repeatedLogos = [...logos, ...logos];
 
 const quickLinks = [
 	{ label: "Habitaciones", href: "#habitaciones" },
@@ -21,68 +42,79 @@ const legalLinks = [
 	<div class="site-footer-inner">
 		<footer class="offers-footer" aria-label="Footer principal">
 			<div class="offers-footer-main">
-				<div class="offers-footer-subscribe">
+
+				<!-- Columna 1: marca + suscripción + redes -->
+				<div class="offers-footer-col offers-footer-brand-col">
 					<a href="/" class="offers-footer-logo" aria-label="Inicio La Fortuna Downtown">
 						<img src={logoBlanco.src} alt="La Fortuna Downtown" loading="lazy" />
 					</a>
-					<p class="offers-footer-label">Hotel boutique en el corazon de La Fortuna</p>
 					<p class="offers-footer-copy">
-						Disfruta una estadia elegante entre aventura, descanso y la energia natural del Arenal.
+						Hotel boutique en el corazón de La Fortuna. Disfruta una estadía elegante entre aventura, descanso y la energía natural del Arenal.
 					</p>
 					<form class="offers-footer-form" action="#" method="post">
-						<label for="footer-email" class="sr-only">Correo electronico</label>
+						<label for="footer-email" class="sr-only">Correo electrónico</label>
 						<input
 							id="footer-email"
 							name="email"
 							type="email"
-							placeholder="Tu correo electronico"
+							placeholder="Tu correo electrónico"
 							autocomplete="email"
 							required
 						/>
 						<button type="submit">Suscribirse</button>
 					</form>
-
-					<div class="offers-footer-contact-grid">
-						<div>
-							<p class="offers-footer-label">Reservaciones</p>
-							<a href="tel:+50624791111">+506 2479-1111</a>
-						</div>
-						<div>
-							<p class="offers-footer-label">Correo</p>
-							<a href="mailto:reservaciones@lafortunadowntown.com"
-								>reservaciones@lafortunadowntown.com</a
-							>
+					<div class="footer-social-block">
+						<p class="offers-footer-label">Síguenos</p>
+						<div class="offers-footer-social-links">
+							<a href="https://www.facebook.com/LaFortunaDowntown" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+							<a href="https://www.instagram.com/lafortunadowntown" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
+							<a href="https://wa.me/50685274677" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">wa</a>
 						</div>
 					</div>
 				</div>
 
-				<div class="offers-footer-links-wrap">
-					<p class="offers-footer-label">Explora</p>
-					<ul class="offers-footer-links">
-						{
-							quickLinks.map((link) => (
-								<li>
-									<a href={link.href}>{link.label}</a>
-								</li>
-							))
-						}
-					</ul>
+				<!-- Columna 2: contacto + links -->
+				<div class="offers-footer-col offers-footer-info-col">
+					<div>
+						<p class="offers-footer-label">Contacto</p>
+						<ul class="footer-contact-list">
+							<li>
+								<span class="footer-contact-item-label">Teléfono</span>
+								<a href="tel:+50640002027">+506 4000-2027</a>
+							</li>
+							<li>
+								<span class="footer-contact-item-label">WhatsApp</span>
+								<a href="https://wa.me/50685274677" target="_blank" rel="noopener noreferrer">+506 8527-4677</a>
+							</li>
+							<li>
+								<span class="footer-contact-item-label">Correo</span>
+								<a href="mailto:reservaciones@lafortunadowntown.com">reservaciones@lafortunadowntown.com</a>
+							</li>
+						</ul>
+					</div>
+					<div class="footer-links-block">
+						<p class="offers-footer-label">Explora</p>
+						<ul class="offers-footer-links">
+							{quickLinks.map((link) => (
+								<li><a href={link.href}>{link.label}</a></li>
+							))}
+						</ul>
+					</div>
 				</div>
 
-				<div class="offers-footer-social">
-					<p class="offers-footer-label">Visitanos</p>
-					<p class="offers-footer-social-copy">
-						Avenida Central, La Fortuna, San Carlos, Costa Rica.
+				<!-- Columna 3: mapa -->
+				<div class="offers-footer-col offers-footer-map-col">
+					<p class="offers-footer-label">Encuéntranos</p>
+					<p class="offers-footer-addr">
+						25 metros al sur de la Iglesia Católica,<br />La Fortuna, Alajuela, Costa Rica.
 					</p>
-					<p class="offers-footer-label">Redes</p>
-					<div class="offers-footer-social-links">
-						<a href="#" aria-label="Facebook">f</a>
-						<a href="#" aria-label="X">x</a>
-						<a href="#" aria-label="Instagram">ig</a>
-						<a href="#" aria-label="YouTube">yt</a>
-						<a href="#" aria-label="LinkedIn">in</a>
+					<div class="offers-footer-map-wrap">
+						<div id="footer-map-placeholder" class="offers-footer-map-placeholder">
+							Cargando mapa…
+						</div>
 					</div>
 				</div>
+
 			</div>
 
 			<div class="offers-footer-bottom">
@@ -100,3 +132,114 @@ const legalLinks = [
 		</footer>
 	</div>
 </section>
+
+<!-- Carrusel de logos de marcas -->
+<div class="logos-slider-rail">
+	<div class="logos-slider-track">
+		{repeatedLogos.map(({ src, alt, href }) => (
+			<a href={href} target="_blank" rel="noopener noreferrer" aria-label={`Visitar ${alt}`} class="logos-slider-item">
+				<img src={src.src} alt={alt} class="logos-slider-img" loading="lazy" decoding="async" />
+			</a>
+		))}
+	</div>
+</div>
+
+<style>
+	.logos-slider-rail {
+		background: #000;
+		width: 100%;
+		height: 4.5rem;
+		overflow: hidden;
+		display: flex;
+		align-items: center;
+	}
+	.logos-slider-track {
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+		animation: logos-scroll 28s linear infinite;
+		width: fit-content;
+	}
+	.logos-slider-track:hover {
+		animation-play-state: paused;
+	}
+	.logos-slider-item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+	}
+	.logos-slider-img {
+		width: 90px;
+		height: 52px;
+		object-fit: contain;
+		flex-shrink: 0;
+	}
+	@media (min-width: 640px) {
+		.logos-slider-rail  { height: 5rem; }
+		.logos-slider-track { gap: 3rem; }
+		.logos-slider-img   { width: 120px; height: 70px; }
+	}
+	.footer-contact-full {
+		grid-column: 1 / -1;
+	}
+
+	/* el mapa iframe ocupa todo el wrapper */
+	.offers-footer-map-wrap iframe {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
+		display: block;
+	}
+	@keyframes logos-scroll {
+		0%   { transform: translateX(0); }
+		100% { transform: translateX(-50%); }
+	}
+</style>
+
+<script>
+	const mapSrc =
+		"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d245.2108965499923!2d-84.64559211035048!3d10.47112706466293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa00c88c950b0d9%3A0x87d3b3f008d2807c!2sDowntown%20La%20Fortuna%20Boutique%20Hotel!5e0!3m2!1ses-419!2scr!4v1760390977343!5m2!1ses-419!2scr";
+
+	// Iguala la altura del mapa con la columna izquierda
+	function syncMapHeight() {
+		const leftCol  = document.querySelector<HTMLElement>('.offers-footer-subscribe');
+		const mapWrap  = document.querySelector<HTMLElement>('.offers-footer-map-wrap');
+		const mapCol   = document.querySelector<HTMLElement>('.offers-footer-map-col');
+		if (!leftCol || !mapWrap || !mapCol) return;
+		if (window.innerWidth <= 740) {
+			mapWrap.style.height = '220px';
+			return;
+		}
+		// Calcula el espacio disponible: alto de col izquierda - texto arriba del mapa
+		const leftH    = leftCol.offsetHeight;
+		const textH    = mapWrap.offsetTop - mapCol.offsetTop;
+		const mapH     = Math.max(240, leftH - textH);
+		mapWrap.style.height = mapH + 'px';
+	}
+
+	syncMapHeight();
+	window.addEventListener('resize', syncMapHeight);
+
+	const placeholder = document.getElementById("footer-map-placeholder");
+	if (placeholder) {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				if (entries[0].isIntersecting) {
+					const iframe = document.createElement("iframe");
+					iframe.src = mapSrc;
+					iframe.loading = "lazy";
+					iframe.allowFullscreen = true;
+					iframe.referrerPolicy = "no-referrer-when-downgrade";
+					placeholder.replaceWith(iframe);
+					observer.disconnect();
+					syncMapHeight();
+				}
+			},
+			{ threshold: 0.2 }
+		);
+		observer.observe(placeholder);
+	}
+</script>

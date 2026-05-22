@@ -19,37 +19,48 @@ const restaurants = [
   {
     name: "María Bonita Steak House",
     description:
-      "Una fusión de gastronomía, entretenimiento, pasión y arte donde cada plato se convierte en espectáculo. Cortes premium a las brasas de carbón natural, experiencias de fuego y flambé en mesa con postres y cocteles.",
-    tag: "Brasas & Vino",
+      "María Bonita Steak House es una fusión de gastronomía, entretenimiento, pasión y arte. Aquí, cada platillo se convierte en un espectáculo. Disfruta de cortes de carne premium cocinados a la perfección en brasas de carbón natural, flambé en mesa con postres, cafés y cócteles, experiencias con fuego, música en vivo. Sumérgete en una experiencia sensorial única en el corazón de La Fortuna.",
+    tag: "Brasas & Parrilla",
+    hours: "Lun – Dom · 11:30 am – 10:30 pm",
     image:
       "https://cdn.arenalcloud.com/arenal-a65b6eb9-29d7-4dec-9784-b1b37ff7dfce-downtown/restaurante_6b4c26ad.jpg",
     href: "#reservas",
   },
   {
-    name: "Selva Negra Cocktail & Wine Bar",
+    name: "Selva Negra",
     description:
-      "Sabores exóticos, mixología creativa y selectos vinos en un viaje sensorial inspirado en la magia de la selva tropical nocturna de Costa Rica. Noches temáticas, catas con sommelier y maridajes del chef.",
+      "Disfruta de sabores exóticos, mixología creativa, selectos vinos y experiencias en un viaje sensorial inspirado en la magia de la selva tropical nocturna de Costa Rica. Ofrecemos noches temáticas de mixología, catas de vinos con sommelier invitados, maridajes con gastronomía elaborada por nuestro chef y eventos privados para quienes buscan una experiencia personalizada.",
     tag: "Coctelería & Vinos",
+    hours: "Lun – Dom · 12:00 pm – 12:00 am",
     image:
       "https://cdn.arenalcloud.com/arenal-a65b6eb9-29d7-4dec-9784-b1b37ff7dfce-downtown/bar_d8f0d78e.jpg",
     href: "#reservas",
   },
   {
-    name: "Pinto e Gallo",
+    name: "Pinto e' Gallo",
     description:
-      "Desayuno estilo buffet con una variedad irresistible de opciones frescas para comenzar el día con energía y sin prisa.",
+      "Comienza tu día con el mejor sabor en Pinto e' Gallo. Disfruta de nuestro desayuno estilo buffet, donde encontrarás una variedad irresistible de opciones frescas. Ideal para comenzar el día con energía y sin prisas. ¡Ven y disfruta de un desayuno completo y delicioso!",
     tag: "Desayunos & Brunch",
-    image:
-      "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=2000&q=80",
+    hours: "Lun – Dom · 7:00 am – 11:30 am",
+    image: "/images/desayunoTipico.jpg",
     href: "#reservas",
   },
   {
-    name: "Volcán Rooftop Bar",
+    name: "La Ventanita de María Bonita",
     description:
-      "Coctelería de autor, tapas para compartir y vistas únicas del atardecer sobre el Volcán Arenal.",
-    tag: "Rooftop & Tapas",
-    image:
-      "https://images.unsplash.com/photo-1560053608-13721e0d69e8?auto=format&fit=crop&w=2000&q=80",
+      "En La Ventanita de María Bonita, sabemos que tu tiempo es valioso y tu apetito también. Somos una ventanita de comida rápida a la parrilla, donde cada plato se prepara al momento con ingredientes frescos y de la mejor calidad. Disfruta de sabores auténticos y jugosos, cocinados a la perfección en la parrilla, listos para llevar y sin largas esperas.",
+    tag: "Parrilla Rápida",
+    hours: "Lun – Dom · 12:00 pm – 12:00 am",
+    image: "https://cdn.arenalcloud.com/arenal-a65b6eb9-29d7-4dec-9784-b1b37ff7dfce-ventanita/6E3A6298_22f79edc.jpg",
+    href: "#reservas",
+  },
+  {
+    name: "Nuwa Art Gallery",
+    description:
+      "Es un espacio vibrante dedicado a la celebración del arte y la cultura costarricense. Presentamos obras de artistas locales, ofreciendo una experiencia única que conecta a los visitantes con la creatividad y la inspiración de nuestra tierra. ¡Descubre y apoya el arte costarricense en su máxima expresión en Nuwa Gallery!",
+    tag: "Arte & Cultura",
+    hours: "Lun – Dom · 6:00 am – 10:00 pm",
+    image: "/images/NuwaGallery.jpg",
     href: "#reservas",
   },
 ];
@@ -144,6 +155,15 @@ const restaurants = [
             <div class="rest-card-body">
               <h3 class="rest-name">{r.name}</h3>
               <p class="rest-desc">{r.description}</p>
+              {r.hours && (
+                <p class="rest-hours">
+                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                    <circle cx="6.5" cy="6.5" r="5.5" stroke="currentColor" stroke-width="1.3"/>
+                    <path d="M6.5 3.5v3l2 1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                  </svg>
+                  {r.hours}
+                </p>
+              )}
               <a href={r.href} class="rest-link">
                 Ver menú
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
