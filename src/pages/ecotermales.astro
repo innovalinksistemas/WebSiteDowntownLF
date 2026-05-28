@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 
 const includes = [
   'Alojamiento 1 noche en La Fortuna Downtown Boutique Hotel',
-  'Entrada a Ecotermales Los Lagos',
+  'Entrada a Ecotermales',
   'Desayuno incluido',
   'Bebida de bienvenida',
   'Cocteles 2×1 de 12:00 a 5:00 p.m. en Maria Bonita Steak House o Selva Negra Cocktail &amp; Bar',
@@ -22,10 +22,10 @@ const pricing = [
 ];
 
 const rooms = [
-  { name: 'Standard Doble',  img: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&auto=format&fit=crop&q=75', tag: 'Doble' },
-  { name: 'Standard Triple', img: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&auto=format&fit=crop&q=75', tag: 'Triple' },
-  { name: 'Superior',        img: 'https://images.unsplash.com/photo-1586105251261-72a756497a11?w=600&auto=format&fit=crop&q=75', tag: 'Superior' },
-  { name: 'Tropical Family', img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&auto=format&fit=crop&q=75', tag: 'Familiar' },
+  { name: 'Standard Doble',  img: 'https://i.ibb.co/SwhzWkZR/Estandar-Doble4.png', tag: 'Doble' },
+  { name: 'Standard Triple', img: 'https://i.ibb.co/PGZPHP1N/Estandar-Doble3.png', tag: 'Triple' },
+  { name: 'Superior',        img: 'https://i.ibb.co/kshJL68d/superior3.png',       tag: 'Superior' },
+  { name: 'Tropical Family', img: 'https://i.ibb.co/gbVPz97Z/tropical3.png',        tag: 'Familiar' },
 ];
 
 const policies = [
@@ -126,7 +126,7 @@ const policies = [
             <div class="eco-why-icon">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
             </div>
-            <h3>Ecotermales Los Lagos</h3>
+            <h3>Ecotermales</h3>
             <p>Las termales más naturales y tranquilas, con impresionantes vistas al volcán Arenal.</p>
           </div>
         </div>
@@ -161,8 +161,8 @@ const policies = [
             <div class="eco-feat-icon">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
-            <h3>Ecotermales Los Lagos</h3>
-            <p>Pase del día a las aguas termales naturales de Ecotermales Los Lagos, con vistas al volcán Arenal.</p>
+            <h3>Ecotermales</h3>
+            <p>Pase del día a las aguas termales naturales de Ecotermales, con vistas al volcán Arenal.</p>
           </div>
         </div>
 
@@ -235,7 +235,7 @@ const policies = [
         <div class="eco-exp-grid">
           <div class="eco-exp-img-wrap">
             <img
-              src="https://images.unsplash.com/photo-1530538987395-032d1800fdd4?w=900&auto=format&fit=crop&q=80"
+              src="/images/_P9A3695-Mejorado-NR.jpg"
               alt="Aguas termales naturales Ecotermales"
               loading="lazy"
               decoding="async"
@@ -245,7 +245,7 @@ const policies = [
             <h3>La Experiencia Ecotermales</h3>
             <p>
               Sumérgete por completo en una experiencia íntima y relajante, enmarcada por la exuberante
-              vegetación del bosque tropical. Las piscinas termales naturales de Ecotermales Los Lagos
+              vegetación del bosque tropical. Las piscinas termales naturales de Ecotermales
               son alimentadas directamente por el volcán Arenal — las aguas más puras de la zona —
               con vistas al volcán que te dejarán sin aliento.
             </p>
@@ -462,12 +462,17 @@ const policies = [
 .eco-hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(4, 12, 8, 0.52) 0%,
-    rgba(4, 12, 8, 0.46) 45%,
-    rgba(4, 12, 8, 0.7) 100%
-  );
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 42%,
+      rgba(4, 12, 8, 0.55) 0%,
+      rgba(4, 12, 8, 0) 75%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(4, 12, 8, 0.68) 0%,
+      rgba(4, 12, 8, 0.58) 45%,
+      rgba(4, 12, 8, 0.82) 100%
+    );
 }
 
 .eco-hero-content {
@@ -489,7 +494,8 @@ const policies = [
   font-weight: 700;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.82);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
 }
 
 .eco-hero-title {
@@ -507,7 +513,8 @@ const policies = [
   margin: 0 0 0.15rem;
   font-size: 0.82rem;
   letter-spacing: 0.2em;
-  color: rgba(255,255,255,0.72);
+  color: rgba(255,255,255,0.88);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
 }
 
 .eco-hero-price {
@@ -525,7 +532,8 @@ const policies = [
   margin: 0 0 1.4rem;
   font-size: clamp(0.82rem, 1.8vw, 0.96rem);
   letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.78);
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
 }
 
 .eco-hero-badge {
@@ -552,8 +560,9 @@ const policies = [
 .eco-hero-finepri {
   margin: 0;
   font-size: 0.68rem;
-  color: rgba(255,255,255,0.44);
+  color: rgba(255,255,255,0.6);
   letter-spacing: 0.06em;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
 }
 
 /* ══════════════════════════════════════════════════════
