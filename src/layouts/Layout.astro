@@ -3,9 +3,10 @@ import Header from "../components/Header.astro";
 
 interface Props {
 	title?: string;
+	headerSolid?: boolean;
 }
 
-const { title = "La Fortuna Downtown" } = Astro.props;
+const { title = "La Fortuna Downtown", headerSolid = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -21,7 +22,7 @@ const { title = "La Fortuna Downtown" } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
+	<body class={headerSolid ? 'header-solid' : ''}>
 		<Header />
 		<slot />
 	</body>

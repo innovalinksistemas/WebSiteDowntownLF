@@ -172,9 +172,10 @@ const linksRight = [
   };
 
   /* ─── Estado visual: transparente ↔ sólido ─────────────────── */
+  const forceSolid = document.body.classList.contains("header-solid");
   const updateState = () => {
     const isOpen = header.classList.contains("menu-open");
-    const solid  = window.scrollY > 24 || isOpen;
+    const solid  = forceSolid || window.scrollY > 24 || isOpen;
     header.classList.toggle("is-scrolled", solid);
   };
 
