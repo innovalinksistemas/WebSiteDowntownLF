@@ -1,17 +1,41 @@
 ---
 import galleryData from '../data/gallery.json';
 const { categories, images } = galleryData;
+
+interface Props {
+  lang?: 'es' | 'en';
+}
+const { lang = 'es' } = Astro.props;
+
+const t = {
+  es: {
+    kicker:   'Downtown La Fortuna',
+    title:    'Galería',
+    subtitle: 'Una mirada a nuestros espacios, sabores y aventuras',
+    ariaLabel: 'Galería fotográfica',
+    labels: { Todas: 'Todas', Hotel: 'Hotel', Habitaciones: 'Habitaciones', Restaurantes: 'Restaurantes', Actividades: 'Actividades' },
+  },
+  en: {
+    kicker:   'Downtown La Fortuna',
+    title:    'Gallery',
+    subtitle: 'A glimpse into our spaces, flavors and adventures',
+    ariaLabel: 'Photo gallery',
+    labels: { Todas: 'All', Hotel: 'Hotel', Habitaciones: 'Rooms', Restaurantes: 'Restaurants', Actividades: 'Activities' },
+  },
+} as const;
+
+const tx = t[lang];
 ---
 
 <!-- ── Page Header ─────────────────────────────────────────── -->
 <div class="gallery-page-header">
-  <p class="gallery-page-kicker">Downtown La Fortuna</p>
-  <h1 class="gallery-page-title">Galería</h1>
-  <p class="gallery-page-subtitle">Una mirada a nuestros espacios, sabores y aventuras</p>
+  <p class="gallery-page-kicker">{tx.kicker}</p>
+  <h1 class="gallery-page-title">{tx.title}</h1>
+  <p class="gallery-page-subtitle">{tx.subtitle}</p>
 </div>
 
 <!-- ── Gallery Section ───────────────────────────────────────── -->
-<section class="gallery-section" aria-label="Galería fotográfica">
+<section class="gallery-section" aria-label={tx.ariaLabel}>
   <div class="gallery-inner">
 
     <!-- Filter bar -->
@@ -22,7 +46,7 @@ const { categories, images } = galleryData;
           class={`gallery-filter-btn${i === 0 ? ' gallery-filter-btn--active' : ''}`}
           data-filter={cat}
         >
-          {cat}
+          {tx.labels[cat as keyof typeof tx.labels] ?? cat}
         </button>
       ))}
     </div>
