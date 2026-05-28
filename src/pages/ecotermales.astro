@@ -1,323 +1,1030 @@
 ---
-import logoBlancoDowntown from '../assets/logoBlancoDowntown.png';
+import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+
+const includes = [
+  'Alojamiento 1 noche en La Fortuna Downtown Boutique Hotel',
+  'Entrada a Ecotermales Los Lagos',
+  'Desayuno incluido',
+  'Bebida de bienvenida',
+  'Cocteles 2×1 de 12:00 a 5:00 p.m. en Maria Bonita Steak House o Selva Negra Cocktail &amp; Bar',
+  'Parqueo privado gratuito',
+  'Acceso a piscina privada del hotel',
+  'WiFi gratuito en todas las instalaciones',
+];
+
+const pricing = [
+  { label: 'Por pareja',          sub: '2 personas · ocupación doble', price: '₡135.000', highlight: true },
+  { label: '3ra o 4ta persona',   sub: 'adulto adicional',             price: '₡50.000',  highlight: false },
+  { label: 'Niños (5–11 años)',   sub: 'por niño',                     price: '₡27.500',  highlight: false },
+  { label: 'Niños (0–4 años)',    sub: 'entrada totalmente gratuita',  price: 'GRATIS',   highlight: false },
+];
+
+const rooms = [
+  { name: 'Standard Doble',  img: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&auto=format&fit=crop&q=75', tag: 'Doble' },
+  { name: 'Standard Triple', img: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&auto=format&fit=crop&q=75', tag: 'Triple' },
+  { name: 'Superior',        img: 'https://images.unsplash.com/photo-1586105251261-72a756497a11?w=600&auto=format&fit=crop&q=75', tag: 'Superior' },
+  { name: 'Tropical Family', img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&auto=format&fit=crop&q=75', tag: 'Familiar' },
+];
+
+const policies = [
+  { color: '#4ade80', range: 'Más de 30 días antes del ingreso',       charge: 'Sin cargo · cancelación gratuita' },
+  { color: '#facc15', range: 'Entre 15 y 30 días antes del ingreso',   charge: 'Cargo del 50% del total de la reserva' },
+  { color: '#f87171', range: 'Menos de 15 días antes del ingreso',     charge: 'Cargo del 100% del total de la reserva' },
+];
 ---
 
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Un escape para relajarte desde ¢135.000 por pareja. Hospedaje + Desayunos + Termales + Cena. La Fortuna Downtown Boutique Hotel." />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="icon" href="/favicon.ico" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
-  <title>Un Escape para Relajarte | La Fortuna Downtown</title>
-</head>
+<Layout title="Downtown + Ecotermales | La Fortuna Downtown">
+  <main>
 
-<body>
+    <!-- ════════════════════════════════════════════
+         HERO
+    ═════════════════════════════════════════════ -->
+    <section class="eco-hero" id="inicio">
+      <div
+        class="eco-hero-bg"
+        style="background-image:url('/images/_P9A3695-Mejorado-NR.jpg')"
+        aria-hidden="true"
+      ></div>
+      <div class="eco-hero-overlay" aria-hidden="true"></div>
 
-  <section class="ep-hero">
+      <div class="eco-hero-content">
+        <p class="eco-hero-eyebrow">Downtown Boutique Hotel · La Fortuna</p>
+        <h1 class="eco-hero-title">
+          Hospedaje +<br/>Pase del Día Ecotermales
+        </h1>
+        <p class="eco-hero-from">desde:</p>
+        <p class="eco-hero-price">₡135.000</p>
+        <p class="eco-hero-price-sub">por pareja en ocupación doble</p>
 
-    <!-- Fondo -->
-    <div
-      class="ep-bg"
-      style="background-image:url('/images/_P9A3695-Mejorado-NR.jpg')"
-      aria-hidden="true"
-    ></div>
-    <div class="ep-overlay" aria-hidden="true"></div>
+        <div class="eco-hero-badge">
+          Hospedaje · Entrada · Alimentación · Desayuno
+        </div>
 
-    <!-- Contenido -->
-    <div class="ep-content">
+        <div class="eco-hero-ctas">
+          <a
+            href="https://wa.me/50685274677?text=Hola!%20Me%20interesa%20la%20promoci%C3%B3n%20Downtown%20%2B%20Ecotermales%20%E2%82%A1135.000"
+            class="eco-btn eco-btn--primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Reservar Oferta</a>
+          <a href="#detalles" class="eco-btn eco-btn--outline">
+            Ver detalles del paquete
+          </a>
+        </div>
 
-      <!-- Logo -->
-      <a href="/" class="ep-logo-link" aria-label="La Fortuna Downtown – Inicio">
-        <img
-          src={logoBlancoDowntown.src}
-          alt="Downtown La Fortuna Boutique Hotel"
-          class="ep-logo"
-          width="180"
-          height="72"
-        />
-      </a>
-
-      <!-- Hero copy -->
-      <div class="ep-copy">
-        <h1 class="ep-title">Un escape<br/>para relajarte</h1>
-        <p class="ep-desde">desde:</p>
-        <p class="ep-price">¢135.000</p>
-        <p class="ep-price-sub">por pareja en ocupación doble</p>
+        <p class="eco-hero-finepri">
+          *Válido del 1 de junio al 30 de agosto · Aplican restricciones*
+        </p>
       </div>
+    </section>
 
-      <!-- Incluye badge -->
-      <div class="ep-includes">
-        <span class="ep-includes-label">Incluye:</span>
-        <span class="ep-includes-badge">
-          Hospedaje + Desayunos + Termales + Cena
+    <!-- ════════════════════════════════════════════
+         COUNTDOWN
+    ═════════════════════════════════════════════ -->
+    <div class="eco-countdown">
+      <div class="eco-countdown-inner">
+        <span class="eco-countdown-label">
+          Válida del 1 de junio al 30 de agosto
         </span>
+        <div class="eco-countdown-timer">
+          <div class="eco-cd-unit"><span id="cd-days">--</span><em>Días</em></div>
+          <div class="eco-cd-sep">:</div>
+          <div class="eco-cd-unit"><span id="cd-hours">--</span><em>Horas</em></div>
+          <div class="eco-cd-sep">:</div>
+          <div class="eco-cd-unit"><span id="cd-mins">--</span><em>Min</em></div>
+          <div class="eco-cd-sep">:</div>
+          <div class="eco-cd-unit"><span id="cd-secs">--</span><em>Seg</em></div>
+        </div>
       </div>
+    </div>
 
-      <!-- CTA principal -->
-      <a
-        href="https://wa.me/50685274677?text=Hola!%20Me%20interesa%20la%20promoci%C3%B3n%20de%20Ecotermales%20%C2%A2135.000"
-        class="ep-cta"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Reservar Ahora
-      </a>
+    <!-- ════════════════════════════════════════════
+         ¿POR QUÉ ELEGIRNOS?
+    ═════════════════════════════════════════════ -->
+    <section class="eco-section eco-why">
+      <div class="eco-container">
+        <p class="eco-eyebrow">¿Por qué elegirnos?</p>
+        <h2 class="eco-section-title">La mejor experiencia al mejor precio</h2>
+        <div class="eco-why-grid">
+          <div class="eco-why-card">
+            <div class="eco-why-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <h3>Mejores precios</h3>
+            <p>Precio justo para una experiencia inigualable en La Fortuna. ¡Ahorra sin sacrificar calidad!</p>
+          </div>
+          <div class="eco-why-card">
+            <div class="eco-why-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <h3>Hotel más céntrico</h3>
+            <p>A pasos del parque central y cerca de las principales atracciones de la zona.</p>
+          </div>
+          <div class="eco-why-card">
+            <div class="eco-why-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+            </div>
+            <h3>Ecotermales Los Lagos</h3>
+            <p>Las termales más naturales y tranquilas, con impresionantes vistas al volcán Arenal.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <!-- Contactos -->
-      <div class="ep-contacts">
-        <a href="tel:+50640002027" class="ep-contact">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-          </svg>
-          +506 4000-2027
-        </a>
+    <!-- ════════════════════════════════════════════
+         ¿QUÉ INCLUYE?
+    ═════════════════════════════════════════════ -->
+    <section class="eco-section eco-includes-section" id="detalles">
+      <div class="eco-container">
+        <p class="eco-eyebrow">Paquete completo</p>
+        <h2 class="eco-section-title">¿Qué incluye tu paquete?</h2>
+
+        <!-- 3 feature cards -->
+        <div class="eco-feat-grid">
+          <div class="eco-feat-card">
+            <div class="eco-feat-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            </div>
+            <h3>Hospedaje de Lujo</h3>
+            <p>1 noche en La Fortuna Downtown Boutique Hotel. Desayuno, bebida de bienvenida y servicios incluidos.</p>
+          </div>
+          <div class="eco-feat-card eco-feat-card--highlight">
+            <div class="eco-feat-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            </div>
+            <h3>Alimentación completa</h3>
+            <p>Desayuno incluido + cocteles 2×1 de 12 a 5 pm en Maria Bonita Steak House o Selva Negra Cocktail &amp; Bar.</p>
+          </div>
+          <div class="eco-feat-card">
+            <div class="eco-feat-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Ecotermales Los Lagos</h3>
+            <p>Pase del día a las aguas termales naturales de Ecotermales Los Lagos, con vistas al volcán Arenal.</p>
+          </div>
+        </div>
+
+        <!-- Full checklist -->
+        <div class="eco-checklist-wrap">
+          <p class="eco-checklist-title">Todo lo que está incluido</p>
+          <ul class="eco-checklist">
+            {includes.map(item => (
+              <li set:html={item}></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         TARIFAS
+    ═════════════════════════════════════════════ -->
+    <section class="eco-section eco-pricing-section">
+      <div class="eco-container eco-container--narrow">
+        <p class="eco-eyebrow">Tarifas</p>
+        <h2 class="eco-section-title">Elige tu plan</h2>
+        <div class="eco-pricing-grid">
+          {pricing.map(tier => (
+            <div class={`eco-price-card${tier.highlight ? ' eco-price-card--highlight' : ''}`}>
+              <p class="eco-price-label">{tier.label}</p>
+              <p class="eco-price-sub">{tier.sub}</p>
+              <p class="eco-price-amount">{tier.price}</p>
+            </div>
+          ))}
+        </div>
+        <p class="eco-pricing-note">
+          ✨ También contamos con opción de <strong>detalle romántico</strong> para aniversarios o celebraciones especiales. Consúltanos.
+        </p>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         HABITACIONES
+    ═════════════════════════════════════════════ -->
+    <section class="eco-section eco-rooms-section">
+      <div class="eco-container">
+        <p class="eco-eyebrow">Nuestras habitaciones</p>
+        <h2 class="eco-section-title">Una experiencia de hospedaje en el centro de La Fortuna</h2>
+        <p class="eco-section-sub">La habitación se asigna según disponibilidad y cantidad de personas en la reserva.</p>
+        <div class="eco-rooms-grid">
+          {rooms.map(room => (
+            <div class="eco-room-card">
+              <div class="eco-room-img-wrap">
+                <img src={room.img} alt={room.name} loading="lazy" decoding="async" />
+                <span class="eco-room-tag">{room.tag}</span>
+              </div>
+              <div class="eco-room-body">
+                <p class="eco-room-name">{room.name}</p>
+                <p class="eco-room-note">Consultar disponibilidad</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         EXPERIENCIA ECOTERMALES
+    ═════════════════════════════════════════════ -->
+    <section class="eco-section eco-exp-section">
+      <div class="eco-container">
+        <p class="eco-eyebrow">La experiencia Ecotermales</p>
+        <h2 class="eco-section-title">Sumérgete en las termales</h2>
+        <div class="eco-exp-grid">
+          <div class="eco-exp-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1530538987395-032d1800fdd4?w=900&auto=format&fit=crop&q=80"
+              alt="Aguas termales naturales Ecotermales"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="eco-exp-text">
+            <h3>La Experiencia Ecotermales</h3>
+            <p>
+              Sumérgete por completo en una experiencia íntima y relajante, enmarcada por la exuberante
+              vegetación del bosque tropical. Las piscinas termales naturales de Ecotermales Los Lagos
+              son alimentadas directamente por el volcán Arenal — las aguas más puras de la zona —
+              con vistas al volcán que te dejarán sin aliento.
+            </p>
+            <p>
+              Un lugar diseñado para el descanso total: sin bullicio, con espacios exclusivos y una
+              naturaleza que envuelve cada momento de tu estadía.
+            </p>
+            <a
+              href="https://wa.me/50685274677?text=Hola!%20Me%20interesa%20la%20promoci%C3%B3n%20Downtown%20%2B%20Ecotermales"
+              class="eco-btn eco-btn--dark"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Reservar ahora →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         CTA CUPOS LIMITADOS
+    ═════════════════════════════════════════════ -->
+    <section class="eco-section eco-cta-section">
+      <div class="eco-container eco-container--narrow" style="text-align:center">
+        <p class="eco-eyebrow eco-eyebrow--light">Cupos limitados</p>
+        <h2 class="eco-cta-title">Asegure su estancia</h2>
+        <p class="eco-cta-sub">Complete los detalles para verificar disponibilidad y consultar su precio promocional. Válido hasta el 30 de agosto.</p>
         <a
-          href="https://wa.me/50685274677"
-          class="ep-contact"
+          href="https://wa.me/50685274677?text=Hola!%20Me%20interesa%20la%20promoci%C3%B3n%20Downtown%20%2B%20Ecotermales%20%E2%82%A1135.000.%20Quisiera%20consultar%20disponibilidad."
+          class="eco-btn eco-btn--wa"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
           </svg>
-          +506 8527-4677
+          Consultar disponibilidad por WhatsApp
         </a>
       </div>
+    </section>
 
-      <!-- Fine print -->
-      <p class="ep-finepri">
-        *Promoción válida del 1 de julio al 30 de agosto*<br/>
-        *Aplican restricciones*
-      </p>
+    <!-- ════════════════════════════════════════════
+         POLÍTICAS DE CANCELACIÓN
+    ═════════════════════════════════════════════ -->
+    <section class="eco-section eco-policy-section">
+      <div class="eco-container eco-container--narrow">
+        <p class="eco-eyebrow">Políticas</p>
+        <h2 class="eco-section-title">Políticas de cancelación</h2>
+        <div class="eco-policy-list">
+          {policies.map(p => (
+            <div class="eco-policy-item">
+              <span class="eco-policy-dot" style={`background:${p.color}`}></span>
+              <div>
+                <p class="eco-policy-range">{p.range}</p>
+                <p class="eco-policy-charge">{p.charge}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
 
-    </div>
-  </section>
+    <Footer />
+  </main>
+</Layout>
 
-</body>
-</html>
+<!-- ════════════════════════════════════════════
+     COUNTDOWN SCRIPT
+═════════════════════════════════════════════ -->
+<script>
+  const end = new Date('2026-08-30T23:59:59-06:00').getTime();
+
+  function pad(n: number) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const diff = end - Date.now();
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = '00';
+      });
+      return;
+    }
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000) / 60000);
+    const secs  = Math.floor((diff % 60000) / 1000);
+
+    (document.getElementById('cd-days')  as HTMLElement).textContent = pad(days);
+    (document.getElementById('cd-hours') as HTMLElement).textContent = pad(hours);
+    (document.getElementById('cd-mins')  as HTMLElement).textContent = pad(mins);
+    (document.getElementById('cd-secs')  as HTMLElement).textContent = pad(secs);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>
 
 <style>
-  /* ── Reset mínimo ───────────────────────────────────────── */
-  *, *::before, *::after { box-sizing: border-box; }
+/* ══════════════════════════════════════════════════════
+   ECO-TERMALES LANDING PAGE
+══════════════════════════════════════════════════════ */
 
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Manrope', sans-serif;
-    background: #0a180d;
-    -webkit-font-smoothing: antialiased;
+/* ── Shared ─────────────────────────────────────────── */
+.eco-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+}
+.eco-container--narrow {
+  max-width: 56rem;
+}
+
+.eco-section {
+  padding: clamp(3.6rem, 7vw, 5.6rem) 0;
+}
+
+.eco-eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #9b1c2d;
+  text-align: center;
+}
+.eco-eyebrow--light { color: rgba(255,255,255,0.6); }
+
+.eco-section-title {
+  margin: 0 0 clamp(1.8rem, 3.5vw, 2.8rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: 0.01em;
+  color: #1e1a16;
+  text-align: center;
+}
+.eco-section-sub {
+  margin: -1.4rem 0 2rem;
+  text-align: center;
+  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+  color: rgba(30, 26, 22, 0.6);
+}
+
+/* ── Buttons ────────────────────────────────────────── */
+.eco-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.9rem 2.2rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 0.15rem;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+}
+.eco-btn:hover { transform: translateY(-2px); }
+
+.eco-btn--primary {
+  background: #9b1c2d;
+  color: #fff6ee;
+  box-shadow: 0 4px 18px rgba(155, 28, 45, 0.38);
+}
+.eco-btn--primary:hover { background: #b71f35; box-shadow: 0 8px 28px rgba(155, 28, 45, 0.5); }
+
+.eco-btn--outline {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.45);
+  color: #fff;
+  backdrop-filter: blur(4px);
+}
+.eco-btn--outline:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.7); }
+
+.eco-btn--dark {
+  background: #1e1a16;
+  color: #f4edd8;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.22);
+}
+.eco-btn--dark:hover { background: #111; box-shadow: 0 8px 28px rgba(0,0,0,0.32); }
+
+.eco-btn--wa {
+  background: #25d366;
+  color: #fff;
+  padding: 1rem 2.6rem;
+  font-size: 0.82rem;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.38);
+}
+.eco-btn--wa:hover { background: #1eb955; box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5); }
+
+/* ══════════════════════════════════════════════════════
+   HERO
+══════════════════════════════════════════════════════ */
+.eco-hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.eco-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 30%;
+  transform: scale(1.04);
+  will-change: transform;
+}
+
+.eco-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(4, 12, 8, 0.52) 0%,
+    rgba(4, 12, 8, 0.46) 45%,
+    rgba(4, 12, 8, 0.7) 100%
+  );
+}
+
+.eco-hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  padding: clamp(6rem, 12vw, 8rem) clamp(1.2rem, 5vw, 3rem) clamp(3rem, 6vw, 4rem);
+  max-width: 780px;
+  width: 100%;
+}
+
+.eco-hero-eyebrow {
+  margin: 0 0 0.7rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.eco-hero-title {
+  margin: 0 0 clamp(0.6rem, 1.5vw, 1rem);
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 7vw, 5.6rem);
+  line-height: 0.97;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 4px 28px rgba(0,0,0,0.45);
+}
+
+.eco-hero-from {
+  margin: 0 0 0.15rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.72);
+}
+
+.eco-hero-price {
+  margin: 0 0 0.2rem;
+  font-family: var(--font-body);
+  font-size: clamp(3.2rem, 10vw, 7rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-shadow: 0 4px 28px rgba(0,0,0,0.4);
+}
+
+.eco-hero-price-sub {
+  margin: 0 0 1.4rem;
+  font-size: clamp(0.82rem, 1.8vw, 0.96rem);
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.78);
+}
+
+.eco-hero-badge {
+  margin-bottom: 1.8rem;
+  display: inline-block;
+  background: #9b1c2d;
+  color: #fff6ee;
+  padding: 0.5rem 1.4rem;
+  border-radius: 2rem;
+  font-size: clamp(0.72rem, 2vw, 0.86rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 16px rgba(155, 28, 45, 0.45);
+}
+
+.eco-hero-ctas {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1.4rem;
+}
+
+.eco-hero-finepri {
+  margin: 0;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.44);
+  letter-spacing: 0.06em;
+}
+
+/* ══════════════════════════════════════════════════════
+   COUNTDOWN
+══════════════════════════════════════════════════════ */
+.eco-countdown {
+  background: #1a0d0f;
+  padding: clamp(0.9rem, 2vw, 1.3rem) 1.2rem;
+}
+
+.eco-countdown-inner {
+  max-width: 80rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.2rem, 4vw, 3.5rem);
+  flex-wrap: wrap;
+}
+
+.eco-countdown-label {
+  font-size: clamp(0.72rem, 1.4vw, 0.84rem);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.68);
+}
+
+.eco-countdown-timer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.eco-cd-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.eco-cd-unit span {
+  font-family: var(--font-body);
+  font-size: clamp(1.5rem, 4vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  min-width: 2ch;
+  text-align: center;
+}
+
+.eco-cd-unit em {
+  font-style: normal;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+
+.eco-cd-sep {
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  color: #9b1c2d;
+  line-height: 1;
+  margin-bottom: 0.8rem;
+}
+
+/* ══════════════════════════════════════════════════════
+   WHY US
+══════════════════════════════════════════════════════ */
+.eco-why { background: #fff; }
+
+.eco-why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.eco-why-card {
+  padding: clamp(1.4rem, 2.5vw, 2.2rem) clamp(1.2rem, 2vw, 1.8rem);
+  background: #f8f5f0;
+  border: 1px solid rgba(30,26,22,0.08);
+  text-align: center;
+}
+
+.eco-why-icon {
+  width: 3.2rem;
+  height: 3.2rem;
+  display: grid;
+  place-items: center;
+  background: rgba(155, 28, 45, 0.08);
+  border: 1px solid rgba(155, 28, 45, 0.22);
+  border-radius: 0.6rem;
+  margin: 0 auto 1rem;
+  color: #9b1c2d;
+}
+
+.eco-why-card h3 {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+  color: #1e1a16;
+}
+
+.eco-why-card p {
+  margin: 0;
+  font-size: clamp(0.88rem, 1vw, 0.98rem);
+  line-height: 1.55;
+  color: rgba(30,26,22,0.7);
+}
+
+/* ══════════════════════════════════════════════════════
+   INCLUDES
+══════════════════════════════════════════════════════ */
+.eco-includes-section { background: #f5f2ee; }
+
+.eco-feat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.8rem, 1.5vw, 1.4rem);
+  margin-bottom: clamp(2rem, 4vw, 3.2rem);
+}
+
+.eco-feat-card {
+  padding: clamp(1.4rem, 2.2vw, 2rem) clamp(1.2rem, 1.8vw, 1.6rem);
+  background: #fff;
+  border: 1px solid rgba(30,26,22,0.1);
+  border-radius: 0.4rem;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.eco-feat-card--highlight {
+  background: #9b1c2d;
+  border-color: #9b1c2d;
+  color: #fff;
+}
+.eco-feat-card--highlight .eco-feat-icon { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); color: #fff; }
+.eco-feat-card--highlight h3 { color: #fff; }
+.eco-feat-card--highlight p  { color: rgba(255,255,255,0.82); }
+
+.eco-feat-icon {
+  width: 3.6rem;
+  height: 3.6rem;
+  display: grid;
+  place-items: center;
+  background: rgba(155, 28, 45, 0.08);
+  border: 1px solid rgba(155, 28, 45, 0.22);
+  border-radius: 0.6rem;
+  margin: 0 auto 1rem;
+  color: #9b1c2d;
+}
+
+.eco-feat-card h3 {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.7vw, 1.5rem);
+  color: #1e1a16;
+}
+
+.eco-feat-card p {
+  margin: 0;
+  font-size: clamp(0.86rem, 0.98vw, 0.96rem);
+  line-height: 1.55;
+  color: rgba(30,26,22,0.72);
+}
+
+/* Checklist */
+.eco-checklist-wrap {
+  background: #fff;
+  border: 1px solid rgba(30,26,22,0.1);
+  border-radius: 0.4rem;
+  padding: clamp(1.4rem, 2.5vw, 2rem) clamp(1.4rem, 3vw, 2.4rem);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.eco-checklist-title {
+  margin: 0 0 1.1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  color: #1e1a16;
+  text-align: center;
+}
+
+.eco-checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.7rem 2rem;
+}
+
+.eco-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: clamp(0.88rem, 1vw, 0.96rem);
+  color: rgba(30,26,22,0.82);
+  line-height: 1.4;
+}
+
+.eco-checklist li::before {
+  content: '✔';
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  color: #9b1c2d;
+  margin-top: 0.05rem;
+}
+
+/* ══════════════════════════════════════════════════════
+   PRICING
+══════════════════════════════════════════════════════ */
+.eco-pricing-section { background: #fff; }
+
+.eco-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.8rem, 1.5vw, 1.2rem);
+  margin-bottom: 1.6rem;
+}
+
+.eco-price-card {
+  padding: clamp(1.2rem, 2vw, 1.8rem) 1rem;
+  border: 1px solid rgba(30,26,22,0.12);
+  border-radius: 0.4rem;
+  text-align: center;
+  background: #f8f5f0;
+}
+
+.eco-price-card--highlight {
+  background: #9b1c2d;
+  border-color: #9b1c2d;
+}
+.eco-price-card--highlight .eco-price-label { color: rgba(255,255,255,0.75); }
+.eco-price-card--highlight .eco-price-sub   { color: rgba(255,255,255,0.55); }
+.eco-price-card--highlight .eco-price-amount{ color: #fff; }
+
+.eco-price-label {
+  margin: 0 0 0.2rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(30,26,22,0.65);
+}
+
+.eco-price-sub {
+  margin: 0 0 0.6rem;
+  font-size: 0.72rem;
+  color: rgba(30,26,22,0.5);
+  line-height: 1.3;
+}
+
+.eco-price-amount {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1;
+  color: #1e1a16;
+  letter-spacing: -0.01em;
+}
+
+.eco-pricing-note {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(0.88rem, 1vw, 0.96rem);
+  color: rgba(30,26,22,0.7);
+  line-height: 1.55;
+}
+
+/* ══════════════════════════════════════════════════════
+   ROOMS
+══════════════════════════════════════════════════════ */
+.eco-rooms-section { background: #f5f2ee; }
+
+.eco-rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.8rem, 1.5vw, 1.2rem);
+}
+
+.eco-room-card {
+  background: #fff;
+  border-radius: 0.35rem;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+}
+
+.eco-room-img-wrap {
+  position: relative;
+  height: clamp(10rem, 16vw, 14rem);
+  overflow: hidden;
+}
+
+.eco-room-img-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.eco-room-card:hover .eco-room-img-wrap img {
+  transform: scale(1.05);
+}
+
+.eco-room-tag {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
+  background: rgba(10,14,18,0.65);
+  backdrop-filter: blur(4px);
+  color: rgba(255,255,255,0.9);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border-radius: 2rem;
+}
+
+.eco-room-body {
+  padding: 0.9rem 1rem;
+}
+
+.eco-room-name {
+  margin: 0 0 0.2rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  color: #1e1a16;
+}
+
+.eco-room-note {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #9b1c2d;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+/* ══════════════════════════════════════════════════════
+   EXPERIENCE
+══════════════════════════════════════════════════════ */
+.eco-exp-section { background: #fff; }
+
+.eco-exp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+}
+
+.eco-exp-img-wrap {
+  border-radius: 0.4rem;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.eco-exp-img-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.eco-exp-text h3 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  line-height: 1.05;
+  color: #1e1a16;
+}
+
+.eco-exp-text p {
+  margin: 0 0 0.9rem;
+  font-size: clamp(0.9rem, 1.05vw, 1.02rem);
+  line-height: 1.62;
+  color: rgba(30,26,22,0.74);
+}
+
+/* ══════════════════════════════════════════════════════
+   CTA SECTION
+══════════════════════════════════════════════════════ */
+.eco-cta-section { background: #0d1611; }
+
+.eco-cta-title {
+  margin: 0 0 0.8rem;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.6rem);
+  line-height: 1.04;
+  color: #f4ede0;
+  text-align: center;
+}
+
+.eco-cta-sub {
+  margin: 0 0 1.8rem;
+  font-size: clamp(0.9rem, 1.1vw, 1.04rem);
+  line-height: 1.6;
+  color: rgba(244,237,224,0.58);
+  text-align: center;
+}
+
+/* ══════════════════════════════════════════════════════
+   POLICIES
+══════════════════════════════════════════════════════ */
+.eco-policy-section { background: #f8f5f0; }
+
+.eco-policy-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.eco-policy-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  background: #fff;
+  border: 1px solid rgba(30,26,22,0.09);
+  border-radius: 0.35rem;
+}
+
+.eco-policy-dot {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-top: 0.2rem;
+}
+
+.eco-policy-range {
+  margin: 0 0 0.2rem;
+  font-size: clamp(0.88rem, 1vw, 0.96rem);
+  font-weight: 700;
+  color: #1e1a16;
+}
+
+.eco-policy-charge {
+  margin: 0;
+  font-size: clamp(0.84rem, 0.96vw, 0.92rem);
+  color: rgba(30,26,22,0.65);
+}
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .eco-pricing-grid { grid-template-columns: repeat(2, 1fr); }
+  .eco-rooms-grid   { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .eco-why-grid  { grid-template-columns: 1fr; }
+  .eco-feat-grid { grid-template-columns: 1fr; }
+  .eco-exp-grid  { grid-template-columns: 1fr; }
+  .eco-checklist { grid-template-columns: 1fr; }
+
+  .eco-exp-img-wrap {
+    aspect-ratio: 16/9;
   }
+}
 
-  /* ── Hero ───────────────────────────────────────────────── */
-  .ep-hero {
-    position: relative;
-    min-height: 100dvh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  /* ── Fondo ──────────────────────────────────────────────── */
-  .ep-bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center 30%;
-    background-repeat: no-repeat;
-    transform: scale(1.04);
-    will-change: transform;
-  }
-
-  .ep-overlay {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(circle at 50% 30%, rgba(4, 14, 7, 0.2) 0%, rgba(4, 14, 7, 0) 50%),
-      linear-gradient(to bottom,
-        rgba(4, 14, 7, 0.55) 0%,
-        rgba(4, 14, 7, 0.45) 40%,
-        rgba(4, 14, 7, 0.65) 100%
-      );
-  }
-
-  /* ── Contenido ──────────────────────────────────────────── */
-  .ep-content {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    color: #fff;
-    padding: clamp(2rem, 6vw, 3.5rem) clamp(1.2rem, 5vw, 3rem);
-    width: 100%;
-    max-width: 680px;
-    gap: 0;
-  }
-
-  /* ── Logo ───────────────────────────────────────────────── */
-  .ep-logo-link {
-    display: inline-block;
-    margin-bottom: clamp(1.6rem, 4vw, 3rem);
-  }
-
-  .ep-logo {
-    width: clamp(130px, 22vw, 190px);
-    height: auto;
-    display: block;
-    filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.4));
-  }
-
-  /* ── Copy ───────────────────────────────────────────────── */
-  .ep-copy {
-    margin-bottom: clamp(1.2rem, 3vw, 2rem);
-  }
-
-  .ep-title {
-    font-family: 'Dancing Script', cursive;
-    font-size: clamp(3rem, 10vw, 6.5rem);
-    font-weight: 700;
-    line-height: 1.02;
-    color: #fff;
-    margin: 0 0 clamp(0.5rem, 1.5vw, 0.9rem);
-    text-shadow: 0 3px 24px rgba(0, 0, 0, 0.45);
-  }
-
-  .ep-desde {
-    margin: 0 0 0.1rem;
-    font-size: clamp(0.78rem, 2vw, 0.9rem);
-    letter-spacing: 0.22em;
-    color: rgba(255, 255, 255, 0.78);
-    text-transform: lowercase;
-  }
-
-  .ep-price {
-    font-family: 'Manrope', sans-serif;
-    font-size: clamp(3.6rem, 13vw, 8.5rem);
-    font-weight: 700;
-    line-height: 1;
-    color: #fff;
-    margin: 0 0 0.2rem;
-    text-shadow: 0 3px 28px rgba(0, 0, 0, 0.45);
-    letter-spacing: -0.02em;
-  }
-
-  .ep-price-sub {
-    font-size: clamp(0.85rem, 2.2vw, 1rem);
-    letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.8);
-    margin: 0;
-  }
-
-  /* ── Incluye ────────────────────────────────────────────── */
-  .ep-includes {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.35rem;
-    margin-bottom: clamp(1.4rem, 3.5vw, 2.2rem);
-  }
-
-  .ep-includes-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.65);
-  }
-
-  .ep-includes-badge {
-    display: inline-block;
-    background: #b81c2c;
-    color: #fff;
-    padding: 0.55rem clamp(1rem, 3vw, 1.6rem);
-    border-radius: 2rem;
-    font-size: clamp(0.78rem, 2.4vw, 0.95rem);
-    font-weight: 700;
-    letter-spacing: 0.03em;
-    box-shadow: 0 4px 18px rgba(184, 28, 44, 0.45);
-  }
-
-  /* ── CTA principal ──────────────────────────────────────── */
-  .ep-cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.95rem 2.6rem;
-    background: #fff;
-    color: #1a0a0d;
-    font-family: 'Manrope', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 0.1rem;
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
-    margin-bottom: clamp(1.2rem, 3vw, 1.8rem);
-    transition: background-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
-  }
-
-  .ep-cta:hover {
-    background: #f0ece4;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.38);
-  }
-
-  /* ── Contactos ──────────────────────────────────────────── */
-  .ep-contacts {
-    display: flex;
-    gap: clamp(0.7rem, 2vw, 1.2rem);
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: clamp(1rem, 2.5vw, 1.6rem);
-  }
-
-  .ep-contact {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1.2rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.32);
-    border-radius: 0.2rem;
-    color: #fff;
-    text-decoration: none;
-    font-size: clamp(0.82rem, 2.2vw, 0.92rem);
-    font-weight: 600;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    transition: background-color 0.2s ease, border-color 0.2s ease;
-  }
-
-  .ep-contact:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.58);
-  }
-
-  /* ── Fine print ─────────────────────────────────────────── */
-  .ep-finepri {
-    margin: 0;
-    font-size: clamp(0.68rem, 1.6vw, 0.76rem);
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.48);
-  }
-
-  /* ── Responsive ─────────────────────────────────────────── */
-  @media (max-width: 480px) {
-    .ep-contacts {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .ep-contact {
-      width: min(100%, 18rem);
-      justify-content: center;
-    }
-  }
+@media (max-width: 560px) {
+  .eco-pricing-grid { grid-template-columns: repeat(2, 1fr); }
+  .eco-rooms-grid   { grid-template-columns: repeat(2, 1fr); }
+  .eco-hero-ctas    { flex-direction: column; align-items: center; width: 100%; }
+  .eco-btn          { width: min(100%, 20rem); }
+  .eco-countdown-inner { flex-direction: column; gap: 0.6rem; }
+}
 </style>
