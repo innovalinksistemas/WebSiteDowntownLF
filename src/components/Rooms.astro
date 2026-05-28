@@ -1,4 +1,6 @@
 ---
+const bookingUrl = "https://www.simplebooking.it/ibe2/hotel/9184/?hid=9184&lang=ES&cur=USD";
+
 const rooms = [
 	{
 		title: "DownTown Standard Doble",
@@ -44,22 +46,21 @@ const rooms = [
 					<h3 class="room-card-title">{room.title}</h3>
 					<p class="room-card-description">{room.description}</p>
 					<a href={room.href} class="room-read-link">Ver más</a>
-					<button
-						type="button"
-						data-be-url="https://us2.cloudbeds.com/es/reservation/Jq9H6y"
+					<a
+						href={bookingUrl}
 						class="room-book-btn"
+						target="_blank"
+						rel="noopener noreferrer"
 						aria-label={`Reservar ${room.title}`}
 					>
 						Book now
-					</button>
+					</a>
 				</article>
 			))}
 		</div>
 
 	</div>
 </section>
-
-<script is:inline src="https://us2.cloudbeds.com/widget/load/Jq9H6y/immersive"></script>
 
 <script>
 import { gsap } from "gsap";

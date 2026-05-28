@@ -1864,6 +1864,7 @@ body.menu-open {
 	border-radius: 2rem;
 	background: #1e1b17;
 	color: #f4edd8;
+	text-decoration: none;
 	text-transform: uppercase;
 	letter-spacing: 0.2em;
 	font-size: 0.7rem;
