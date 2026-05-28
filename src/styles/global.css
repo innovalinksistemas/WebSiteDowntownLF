@@ -1792,9 +1792,15 @@ body.menu-open {
 	   El recorte lo gestiona clip-path en el <img> directamente. */
 	overflow: hidden;
 	flex-shrink: 0;
+	width: 100%;
 	height: clamp(13rem, 17vw, 17rem);
 	margin-bottom: clamp(0.9rem, 1.3vw, 1.2rem);
 	background: #d9d3ca;
+	/* Reset de <button> */
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	font: inherit;
 }
 
 .room-image-link img {
@@ -1841,8 +1847,11 @@ body.menu-open {
 	font-family: var(--font-display);
 	font-size: clamp(1rem, 1.08vw, 1.12rem);
 	color: #6f5430;
+	border: none;
 	border-bottom: 1px solid rgba(111, 84, 48, 0.38);
-	padding-bottom: 0.1rem;
+	padding: 0 0 0.1rem;
+	background: none;
+	cursor: pointer;
 	transition: color 0.24s ease, border-color 0.24s ease;
 }
 
@@ -2959,4 +2968,262 @@ body.menu-open {
 		max-width: 96vw;
 		max-height: 75vh;
 	}
+}
+/* ══════════════════════════════════════════════════════════
+   ROOM DETAIL MODAL (estilo SimpleBooking)
+══════════════════════════════════════════════════════════ */
+.room-modal {
+	display: none;
+	position: fixed;
+	inset: 0;
+	z-index: 200;
+	align-items: center;
+	justify-content: center;
+	padding: clamp(0.5rem, 2vw, 2rem);
+}
+
+.room-modal--open {
+	display: flex;
+}
+
+.room-modal-backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgba(8, 12, 16, 0.72);
+	backdrop-filter: blur(3px);
+	-webkit-backdrop-filter: blur(3px);
+	cursor: pointer;
+}
+
+.room-modal-dialog {
+	position: relative;
+	z-index: 1;
+	display: grid;
+	grid-template-columns: 1.25fr 1fr;
+	width: min(100%, 70rem);
+	max-height: 92vh;
+	background: #fff;
+	border-radius: 0.5rem;
+	overflow: hidden;
+	box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+	animation: room-modal-in 0.28s ease;
+}
+
+@keyframes room-modal-in {
+	from { opacity: 0; transform: translateY(14px) scale(0.985); }
+	to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+/* ── Galería ─────────────────────────────────────────────── */
+.room-modal-gallery {
+	position: relative;
+	background: #0d1116;
+	display: flex;
+	flex-direction: column;
+}
+
+.room-modal-main-img {
+	width: 100%;
+	flex: 1;
+	min-height: 0;
+	object-fit: cover;
+	background: #0d1116;
+}
+
+.room-modal-nav {
+	position: absolute;
+	top: calc(50% - 2.4rem);
+	transform: translateY(-50%);
+	display: grid;
+	place-items: center;
+	width: 2.8rem;
+	height: 2.8rem;
+	border-radius: 50%;
+	border: none;
+	background: rgba(255, 255, 255, 0.9);
+	color: #1e1a16;
+	cursor: pointer;
+	transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.room-modal-nav:hover { background: #fff; transform: translateY(-50%) scale(1.06); }
+.room-modal-prev { left: 0.8rem; }
+.room-modal-next { right: 0.8rem; }
+
+.room-modal-counter {
+	position: absolute;
+	bottom: 5.6rem;
+	right: 1rem;
+	padding: 0.3rem 0.7rem;
+	background: rgba(255, 255, 255, 0.92);
+	border-radius: 0.3rem;
+	font-size: 0.74rem;
+	font-weight: 700;
+	color: #1e1a16;
+}
+
+.room-modal-thumbs {
+	display: flex;
+	gap: 0.4rem;
+	padding: 0.55rem;
+	background: #f5f2ee;
+	overflow-x: auto;
+	scrollbar-width: thin;
+}
+
+.room-modal-thumb {
+	flex: 0 0 auto;
+	width: 4.4rem;
+	height: 3.4rem;
+	border: 2px solid transparent;
+	border-radius: 0.25rem;
+	overflow: hidden;
+	padding: 0;
+	cursor: pointer;
+	background: none;
+	opacity: 0.6;
+	transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.room-modal-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.room-modal-thumb:hover { opacity: 0.85; }
+.room-modal-thumb--active { opacity: 1; border-color: #9b1c2d; }
+
+/* ── Panel de detalles ───────────────────────────────────── */
+.room-modal-panel {
+	position: relative;
+	padding: clamp(1.4rem, 2.5vw, 2.4rem);
+	overflow-y: auto;
+}
+
+.room-modal-close {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	display: grid;
+	place-items: center;
+	width: 2.4rem;
+	height: 2.4rem;
+	border: 1px solid rgba(30, 26, 22, 0.18);
+	border-radius: 50%;
+	background: #fff;
+	color: #1e1a16;
+	cursor: pointer;
+	transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.room-modal-close:hover { background: #f5f2ee; border-color: rgba(30, 26, 22, 0.4); }
+
+.room-modal-title {
+	margin: 0 2.6rem 1rem 0;
+	font-family: var(--font-display);
+	font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+	line-height: 1.05;
+	color: #1e1a16;
+}
+
+.room-modal-meta {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-bottom: 0.5rem;
+	font-size: 0.9rem;
+	color: rgba(30, 26, 22, 0.78);
+}
+
+.room-modal-meta-item { font-weight: 700; color: #1e1a16; }
+.room-modal-meta-sep { width: 1px; height: 1rem; background: rgba(30, 26, 22, 0.2); }
+.room-modal-guests { display: inline-flex; gap: 0.15rem; color: #9b1c2d; }
+
+.room-modal-beds {
+	margin: 0 0 1.4rem;
+	font-size: 0.9rem;
+	color: rgba(30, 26, 22, 0.65);
+}
+
+.room-modal-subtitle {
+	margin: 0 0 0.85rem;
+	font-size: 1.05rem;
+	font-weight: 700;
+	color: #1e1a16;
+}
+
+.room-modal-features {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1.1rem;
+	margin-bottom: 1.2rem;
+	padding-bottom: 1.2rem;
+	border-bottom: 1px solid rgba(30, 26, 22, 0.1);
+}
+
+.room-modal-feature {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	font-size: 0.86rem;
+	color: rgba(30, 26, 22, 0.82);
+}
+
+.room-modal-feature svg { color: #9b1c2d; flex-shrink: 0; }
+
+.room-modal-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-bottom: 1.4rem;
+}
+
+.room-modal-tag {
+	padding: 0.32rem 0.8rem;
+	background: rgba(155, 28, 45, 0.09);
+	color: #9b1c2d;
+	border-radius: 0.3rem;
+	font-size: 0.78rem;
+	font-weight: 600;
+}
+
+.room-modal-desc {
+	margin: 0 0 1.6rem;
+	font-size: 0.94rem;
+	line-height: 1.6;
+	color: rgba(30, 26, 22, 0.78);
+}
+
+.room-modal-cta {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 0.95rem 1.5rem;
+	background: #9b1c2d;
+	color: #fff6ee;
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: 0.16em;
+	font-size: 0.76rem;
+	font-weight: 700;
+	border-radius: 0.25rem;
+	transition: background-color 0.22s ease, transform 0.22s ease;
+}
+
+.room-modal-cta:hover { background: #b71f35; transform: translateY(-2px); }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 860px) {
+	.room-modal-dialog {
+		grid-template-columns: 1fr;
+		max-height: 94vh;
+	}
+
+	.room-modal-gallery {
+		max-height: 42vh;
+	}
+
+	.room-modal-main-img {
+		min-height: 14rem;
+	}
+
+	.room-modal-counter { bottom: 5rem; }
 }
