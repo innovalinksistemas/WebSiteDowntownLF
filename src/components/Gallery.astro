@@ -1,0 +1,234 @@
+---
+import galleryData from '../data/gallery.json';
+const { categories, images } = galleryData;
+---
+
+<!-- ── Page Header ─────────────────────────────────────────── -->
+<div class="gallery-page-header">
+  <p class="gallery-page-kicker">Downtown La Fortuna</p>
+  <h1 class="gallery-page-title">Galería</h1>
+  <p class="gallery-page-subtitle">Una mirada a nuestros espacios, sabores y aventuras</p>
+</div>
+
+<!-- ── Gallery Section ───────────────────────────────────────── -->
+<section class="gallery-section" aria-label="Galería fotográfica">
+  <div class="gallery-inner">
+
+    <!-- Filter bar -->
+    <div class="gallery-filters" role="group" aria-label="Filtrar por categoría">
+      {categories.map((cat, i) => (
+        <button
+          type="button"
+          class={`gallery-filter-btn${i === 0 ? ' gallery-filter-btn--active' : ''}`}
+          data-filter={cat}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <!-- Masonry grid -->
+    <div class="gallery-grid" id="gallery-grid">
+      {images.map((img) => (
+        <button
+          type="button"
+          class="gallery-item"
+          style={`--col-span:${img.colSpan};--row-span:${img.rowSpan}`}
+          data-category={img.category}
+          data-src={img.src}
+          aria-label={`Ver foto: ${img.alt}`}
+        >
+          <img
+            src={`${img.src}?w=800&auto=format&fit=crop&q=75`}
+            alt={img.alt}
+            loading="lazy"
+            decoding="async"
+          />
+        </button>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Lightbox ───────────────────────────────────────────────── -->
+<div
+  class="gallery-lightbox"
+  id="gallery-lightbox"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Vista ampliada de la fotografía"
+>
+  <div class="gallery-lb-backdrop" id="gallery-lb-backdrop"></div>
+
+  <button class="gallery-lb-close" id="gallery-lb-close" aria-label="Cerrar" type="button">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <path d="M1 1L17 17M17 1L1 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+  <button class="gallery-lb-nav gallery-lb-prev" id="gallery-lb-prev" aria-label="Foto anterior" type="button">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M13 16L7 10L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <div class="gallery-lb-img-wrap">
+    <img class="gallery-lb-img" id="gallery-lb-img" src="" alt="" />
+  </div>
+
+  <button class="gallery-lb-nav gallery-lb-next" id="gallery-lb-next" aria-label="Foto siguiente" type="button">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M7 16L13 10L7 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <p class="gallery-lb-counter" id="gallery-lb-counter" aria-live="polite">1 / 20</p>
+</div>
+
+<script>
+import { gsap } from 'gsap';
+
+const grid        = document.getElementById('gallery-grid')!;
+const lightbox    = document.getElementById('gallery-lightbox')!;
+const lbImg       = document.getElementById('gallery-lb-img') as HTMLImageElement;
+const lbClose     = document.getElementById('gallery-lb-close')!;
+const lbPrev      = document.getElementById('gallery-lb-prev')!;
+const lbNext      = document.getElementById('gallery-lb-next')!;
+const lbCounter   = document.getElementById('gallery-lb-counter')!;
+const lbBackdrop  = document.getElementById('gallery-lb-backdrop')!;
+const filterBtns  = document.querySelectorAll<HTMLButtonElement>('.gallery-filter-btn');
+
+const allItems = Array.from(grid.querySelectorAll<HTMLElement>('.gallery-item'));
+let visibleItems: HTMLElement[] = [...allItems];
+let currentIdx = 0;
+let lbOpen = false;
+
+// ─── Filters ──────────────────────────────────────────────────────
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (lbOpen) closeLb();
+
+    const filter = btn.dataset.filter!;
+    filterBtns.forEach(b => b.classList.remove('gallery-filter-btn--active'));
+    btn.classList.add('gallery-filter-btn--active');
+
+    const toHide = filter === 'Todas'
+      ? []
+      : allItems.filter(el => el.dataset.category !== filter);
+    const toShow = filter === 'Todas'
+      ? allItems
+      : allItems.filter(el => el.dataset.category === filter);
+
+    if (toHide.length === 0) {
+      allItems.forEach(el => el.classList.remove('gallery-item--hidden'));
+      visibleItems = allItems;
+      gsap.fromTo(allItems,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.4, stagger: 0.03, clearProps: 'opacity' }
+      );
+      return;
+    }
+
+    gsap.to(toHide, {
+      opacity: 0,
+      scale: 0.95,
+      duration: 0.2,
+      onComplete() {
+        toHide.forEach(el => el.classList.add('gallery-item--hidden'));
+        toShow.forEach(el => el.classList.remove('gallery-item--hidden'));
+        visibleItems = toShow;
+        gsap.fromTo(toShow,
+          { opacity: 0, scale: 0.97 },
+          { opacity: 1, scale: 1, duration: 0.3, stagger: 0.04, clearProps: 'scale' }
+        );
+      }
+    });
+  });
+});
+
+// ─── Lightbox ─────────────────────────────────────────────────────
+function syncLb() {
+  const item = visibleItems[currentIdx];
+  if (!item) return;
+  const baseSrc = item.dataset.src!;
+  const imgEl = item.querySelector('img')!;
+  lbImg.src = baseSrc + '?w=1600&auto=format&fit=crop&q=85';
+  lbImg.alt = imgEl.alt;
+  lbCounter.textContent = `${currentIdx + 1} / ${visibleItems.length}`;
+}
+
+function openLb(idx: number) {
+  currentIdx = idx;
+  syncLb();
+  lightbox.style.display = 'flex';
+  lightbox.removeAttribute('aria-hidden');
+  document.body.style.overflow = 'hidden';
+  lbOpen = true;
+  gsap.fromTo(lightbox, { opacity: 0 }, { opacity: 1, duration: 0.25 });
+  gsap.fromTo(lbImg, { scale: 0.92 }, { scale: 1, duration: 0.3, ease: 'power2.out' });
+}
+
+function closeLb() {
+  gsap.to(lightbox, {
+    opacity: 0,
+    duration: 0.2,
+    onComplete() {
+      lightbox.style.display = 'none';
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      lbOpen = false;
+    }
+  });
+}
+
+function navLb(dir: number) {
+  if (visibleItems.length < 2) return;
+  currentIdx = (currentIdx + dir + visibleItems.length) % visibleItems.length;
+  const fromX = dir * 40;
+  gsap.to(lbImg, {
+    opacity: 0,
+    x: -fromX,
+    duration: 0.15,
+    onComplete() {
+      syncLb();
+      gsap.fromTo(lbImg,
+        { opacity: 0, x: fromX },
+        { opacity: 1, x: 0, duration: 0.2, clearProps: 'x' }
+      );
+    }
+  });
+}
+
+// Grid click
+allItems.forEach(item => {
+  item.addEventListener('click', () => {
+    const idx = visibleItems.indexOf(item);
+    if (idx !== -1) openLb(idx);
+  });
+});
+
+// Lightbox controls
+lbClose.addEventListener('click', closeLb);
+lbBackdrop.addEventListener('click', closeLb);
+lbPrev.addEventListener('click', () => navLb(-1));
+lbNext.addEventListener('click', () => navLb(1));
+
+document.addEventListener('keydown', e => {
+  if (!lbOpen) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') navLb(-1);
+  if (e.key === 'ArrowRight') navLb(1);
+});
+
+// Touch swipe
+let touchStartX = 0;
+lightbox.addEventListener('touchstart', e => {
+  touchStartX = e.touches[0].clientX;
+}, { passive: true });
+lightbox.addEventListener('touchend', e => {
+  const delta = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(delta) > 50) navLb(delta > 0 ? 1 : -1);
+});
+</script>

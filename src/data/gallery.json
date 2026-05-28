@@ -1,0 +1,165 @@
+{
+  "categories": ["Todas", "Hotel", "Habitaciones", "Restaurantes", "Actividades"],
+  "images": [
+    {
+      "id": 1,
+      "src": "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb",
+      "alt": "Piscina principal del hotel al atardecer",
+      "category": "Hotel",
+      "colSpan": 2,
+      "rowSpan": 2
+    },
+    {
+      "id": 2,
+      "src": "https://images.unsplash.com/photo-1564501049412-61c2a3083791",
+      "alt": "Terraza con vista panorámica",
+      "category": "Hotel",
+      "colSpan": 1,
+      "rowSpan": 1
+    },
+    {
+      "id": 3,
+      "src": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4",
+      "alt": "Piscina infinita rodeada de vegetación",
+      "category": "Hotel",
+      "colSpan": 1,
+      "rowSpan": 2
+    },
+    {
+      "id": 4,
+      "src": "https://images.unsplash.com/photo-1571896349842-33c89424de2d",
+      "alt": "Lobby del hotel con diseño boutique",
+      "category": "Hotel",
+      "colSpan": 1,
+      "rowSpan": 1
+    },
+    {
+      "id": 5,
+      "src": "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+      "alt": "Vista de la piscina con palmeras",
+      "category": "Hotel",
+      "colSpan": 2,
+      "rowSpan": 1
+    },
+    {
+      "id": 6,
+      "src": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304",
+      "alt": "Habitación deluxe con cama king size",
+      "category": "Habitaciones",
+      "colSpan": 2,
+      "rowSpan": 2
+    },
+    {
+      "id": 7,
+      "src": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af",
+      "alt": "Suite con sala de estar privada",
+      "category": "Habitaciones",
+      "colSpan": 1,
+      "rowSpan": 2
+    },
+    {
+      "id": 8,
+      "src": "https://images.unsplash.com/photo-1560185893-a55cbc8c57e8",
+      "alt": "Baño con bañera de inmersión",
+      "category": "Habitaciones",
+      "colSpan": 1,
+      "rowSpan": 1
+    },
+    {
+      "id": 9,
+      "src": "https://images.unsplash.com/photo-1586105251261-72a756497a11",
+      "alt": "Cama matrimonial con ropa de cama premium",
+      "category": "Habitaciones",
+      "colSpan": 2,
+      "rowSpan": 1
+    },
+    {
+      "id": 10,
+      "src": "https://images.unsplash.com/photo-1564078516393-cf04bd966897",
+      "alt": "Habitación con balcón privado",
+      "category": "Habitaciones",
+      "colSpan": 1,
+      "rowSpan": 1
+    },
+    {
+      "id": 11,
+      "src": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0",
+      "alt": "Salón principal del restaurante",
+      "category": "Restaurantes",
+      "colSpan": 2,
+      "rowSpan": 2
+    },
+    {
+      "id": 12,
+      "src": "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
+      "alt": "Plato estrella de la casa",
+      "category": "Restaurantes",
+      "colSpan": 1,
+      "rowSpan": 1
+    },
+    {
+      "id": 13,
+      "src": "https://images.unsplash.com/photo-1467003909585-2f8a72700288",
+      "alt": "Detalle de presentación gastronómica",
+      "category": "Restaurantes",
+      "colSpan": 1,
+      "rowSpan": 2
+    },
+    {
+      "id": 14,
+      "src": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
+      "alt": "Especialidad local con ingredientes frescos",
+      "category": "Restaurantes",
+      "colSpan": 1,
+      "rowSpan": 1
+    },
+    {
+      "id": 15,
+      "src": "https://images.unsplash.com/photo-1482049016688-2d3e1291311a",
+      "alt": "Desayuno típico costarricense",
+      "category": "Restaurantes",
+      "colSpan": 2,
+      "rowSpan": 1
+    },
+    {
+      "id": 16,
+      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
+      "alt": "Vista al volcán Arenal desde las alturas",
+      "category": "Actividades",
+      "colSpan": 2,
+      "rowSpan": 2
+    },
+    {
+      "id": 17,
+      "src": "https://images.unsplash.com/photo-1439853949212-36589b188cc4",
+      "alt": "Caminata a la catarata La Fortuna",
+      "category": "Actividades",
+      "colSpan": 1,
+      "rowSpan": 2
+    },
+    {
+      "id": 18,
+      "src": "https://images.unsplash.com/photo-1547970810-dc1eac37d174",
+      "alt": "Tour en kayak por el río",
+      "category": "Actividades",
+      "colSpan": 1,
+      "rowSpan": 1
+    },
+    {
+      "id": 19,
+      "src": "https://images.unsplash.com/photo-1530538987395-032d1800fdd4",
+      "alt": "Aguas termales naturales cerca del volcán",
+      "category": "Actividades",
+      "colSpan": 2,
+      "rowSpan": 1
+    },
+    {
+      "id": 20,
+      "src": "https://images.unsplash.com/photo-1501555088652-021faa106b9b",
+      "alt": "Canopy y tirolesa entre el bosque",
+      "category": "Actividades",
+      "colSpan": 1,
+      "rowSpan": 1
+    }
+  ]
+}

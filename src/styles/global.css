@@ -2698,3 +2698,264 @@ body.menu-open {
 		min-height: auto;
 	}
 }
+
+/* ══════════════════════════════════════════════════════════
+   GALLERY PAGE
+   · CSS Grid masonry con grid-auto-flow: dense
+   · Filtros animados con GSAP
+   · Lightbox full-screen con nav prev/next y swipe
+══════════════════════════════════════════════════════════ */
+
+/* ── Page header ─────────────────────────────────────────── */
+.gallery-page-header {
+	padding: clamp(7rem, 14vw, 11rem) 1.2rem clamp(2rem, 4vw, 3rem);
+	background: #081015;
+	text-align: center;
+}
+
+.gallery-page-kicker {
+	margin: 0 0 0.6rem;
+	font-family: var(--font-script);
+	font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+	color: #c9ab5d;
+	line-height: 1;
+}
+
+.gallery-page-title {
+	margin: 0 0 0.7rem;
+	font-family: var(--font-display);
+	font-size: clamp(2.8rem, 7vw, 6rem);
+	line-height: 0.92;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: #f4ede0;
+}
+
+.gallery-page-subtitle {
+	margin: 0;
+	font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+	color: rgba(244, 237, 224, 0.52);
+	letter-spacing: 0.06em;
+}
+
+/* ── Section ─────────────────────────────────────────────── */
+.gallery-section {
+	background: #081015;
+	padding: 0 0 clamp(4rem, 8vw, 6rem);
+}
+
+.gallery-inner {
+	max-width: 100%;
+	margin: 0 auto;
+	padding: 0 clamp(0.25rem, 1vw, 0.75rem);
+}
+
+/* ── Filter bar ──────────────────────────────────────────── */
+.gallery-filters {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	padding: clamp(1.4rem, 2.8vw, 2.4rem) 1rem;
+}
+
+.gallery-filter-btn {
+	padding: 0.52rem 1.2rem;
+	background: transparent;
+	border: 1px solid rgba(244, 237, 224, 0.26);
+	color: rgba(244, 237, 224, 0.68);
+	font-family: var(--font-body);
+	font-size: 0.7rem;
+	font-weight: 600;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: background-color 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+}
+
+.gallery-filter-btn:hover {
+	border-color: rgba(244, 237, 224, 0.68);
+	color: #f4ede0;
+}
+
+.gallery-filter-btn--active {
+	background: #9b1c2d;
+	border-color: #9b1c2d;
+	color: #fff6ee;
+}
+
+/* ── Masonry grid ────────────────────────────────────────── */
+.gallery-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-auto-rows: 200px;
+	gap: 3px;
+	grid-auto-flow: dense;
+}
+
+/* ── Grid item ───────────────────────────────────────────── */
+.gallery-item {
+	grid-column: span var(--col-span, 1);
+	grid-row: span var(--row-span, 1);
+	overflow: hidden;
+	cursor: pointer;
+	background: #0d1821;
+	border: none;
+	padding: 0;
+	position: relative;
+	display: block;
+}
+
+.gallery-item img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.55s ease;
+}
+
+.gallery-item:hover img {
+	transform: scale(1.06);
+}
+
+.gallery-item--hidden {
+	display: none !important;
+}
+
+/* ── Lightbox ────────────────────────────────────────────── */
+.gallery-lightbox {
+	display: none;
+	position: fixed;
+	inset: 0;
+	z-index: 200;
+	align-items: center;
+	justify-content: center;
+}
+
+.gallery-lb-backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgba(4, 8, 12, 0.94);
+	cursor: pointer;
+}
+
+.gallery-lb-img-wrap {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.gallery-lb-img {
+	display: block;
+	max-width: 88vw;
+	max-height: 82vh;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+	box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7);
+}
+
+.gallery-lb-close {
+	position: absolute;
+	top: 1.1rem;
+	right: 1.1rem;
+	z-index: 2;
+	display: grid;
+	place-items: center;
+	width: 2.6rem;
+	height: 2.6rem;
+	background: rgba(8, 16, 21, 0.65);
+	border: 1px solid rgba(244, 237, 224, 0.28);
+	color: rgba(244, 237, 224, 0.88);
+	cursor: pointer;
+	transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.gallery-lb-close:hover {
+	background: rgba(8, 16, 21, 0.9);
+	border-color: rgba(244, 237, 224, 0.65);
+	color: #f4ede0;
+}
+
+.gallery-lb-nav {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 2;
+	display: grid;
+	place-items: center;
+	width: 3rem;
+	height: 3rem;
+	background: rgba(8, 16, 21, 0.65);
+	border: 1px solid rgba(244, 237, 224, 0.28);
+	color: rgba(244, 237, 224, 0.88);
+	cursor: pointer;
+	transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.gallery-lb-nav:hover {
+	background: rgba(8, 16, 21, 0.9);
+	border-color: rgba(244, 237, 224, 0.65);
+	color: #f4ede0;
+}
+
+.gallery-lb-prev {
+	left: 1.1rem;
+}
+
+.gallery-lb-next {
+	right: 1.1rem;
+}
+
+.gallery-lb-counter {
+	position: absolute;
+	bottom: 1.2rem;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 2;
+	margin: 0;
+	font-size: 0.72rem;
+	font-weight: 600;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: rgba(244, 237, 224, 0.52);
+	pointer-events: none;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 1024px) {
+	.gallery-grid {
+		grid-template-columns: repeat(3, 1fr);
+		grid-auto-rows: 190px;
+	}
+}
+
+@media (max-width: 640px) {
+	.gallery-grid {
+		grid-template-columns: repeat(2, 1fr);
+		grid-auto-rows: 160px;
+		gap: 2px;
+	}
+
+	/* En mobile todos los items son 1×1 para evitar spans rotos */
+	.gallery-item {
+		grid-column: span 1 !important;
+		grid-row: span 1 !important;
+	}
+
+	.gallery-lb-prev {
+		left: 0.4rem;
+	}
+
+	.gallery-lb-next {
+		right: 0.4rem;
+	}
+
+	.gallery-lb-img {
+		max-width: 96vw;
+		max-height: 75vh;
+	}
+}
