@@ -1,58 +1,26 @@
 ---
+import { useTranslations } from "../i18n/utils";
+const t = useTranslations(Astro.currentLocale);
+
 const faqs = [
-	{
-		id: "q1",
-		question: "¿Cuál es el mejor momento para visitar el volcán?",
-		answer: "Las vistas más claras típicamente ocurren durante la estación seca de diciembre a abril, aunque las primeras mañanas en la estación verde ofrecen vistas místicas con niebla. Recomendamos visitarlo al amanecer para las mejores temperaturas y visibilidad."
-	},
-	{
-		id: "q2",
-		question: "¿Ofrecen transferencias desde el aeropuerto?",
-		answer: "Sí, coordinamos traslados privados y compartidos desde los aeropuertos de SJO y LIR directamente al hotel. Contáctanos por WhatsApp al +506 8527-4677 o llama al +506 4000-2027 para reservar tu transferencia."
-	},
-	{
-		id: "q3",
-		question: "¿Es segura el agua del grifo para beber?",
-		answer: "El agua del grifo en La Fortuna es generalmente segura, pero proporcionamos estaciones de agua filtrada artesanalmente en toda la propiedad para tu conveniencia."
-	},
-	{
-		id: "q4",
-		question: "¿Cuál es la política de cancelación?",
-		answer: "Las cancelaciones hechas 14 días antes de tu llegada reciben un reembolso completo. Se aplican políticas estacionales especiales durante períodos pico. Contáctanos para políticas específicas según tus fechas."
-	},
-	{
-		id: "q5",
-		question: "¿Qué se incluye en el desayuno?",
-		answer: "El desayuno buffet en Pinto e' Gallo incluye una variedad de opciones locales e internacionales con productos frescos de la región. Se sirve de 7:00 AM a 11:30 AM, con tiempo suficiente para salir a explorar sin prisa."
-	},
-	{
-		id: "q6",
-		question: "¿Tienen estacionamiento disponible?",
-		answer: "Sí, ofrecemos estacionamiento privado con vigilancia las 24 horas, completamente gratuito para huéspedes. Contamos además con estación de carga para vehículos eléctricos."
-	},
-	{
-		id: "q7",
-		question: "¿Dónde puedo encontrar tours y actividades locales?",
-		answer: "Nuestro equipo de expertos locales puede ayudarte a planificar tours al Volcán Arenal, Catarata Río Fortuna, aguas termales y otras experiencias. Ofrecemos recomendaciones personalizadas según tus intereses."
-	},
-	{
-		id: "q8",
-		question: "¿Es seguro el área de La Fortuna?",
-		answer: "Sí, La Fortuna es generalmente segura para turistas. Recomendamos tomar precauciones estándar como en cualquier área turística. Nuestro personal está disponible 24/7 para asistencia si lo necesitas."
-	}
+  { id: "q1", question: t("faq.q1"), answer: t("faq.a1") },
+  { id: "q2", question: t("faq.q2"), answer: t("faq.a2") },
+  { id: "q3", question: t("faq.q3"), answer: t("faq.a3") },
+  { id: "q4", question: t("faq.q4"), answer: t("faq.a4") },
+  { id: "q5", question: t("faq.q5"), answer: t("faq.a5") },
+  { id: "q6", question: t("faq.q6"), answer: t("faq.a6") },
+  { id: "q7", question: t("faq.q7"), answer: t("faq.a7") },
+  { id: "q8", question: t("faq.q8"), answer: t("faq.a8") },
 ];
 
 const structuredData = {
-	"@context": "https://schema.org",
-	"@type": "FAQPage",
-	"mainEntity": faqs.map(faq => ({
-		"@type": "Question",
-		"name": faq.question,
-		"acceptedAnswer": {
-			"@type": "Answer",
-			"text": faq.answer
-		}
-	}))
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": { "@type": "Answer", "text": faq.answer },
+  })),
 };
 ---
 

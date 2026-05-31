@@ -1,39 +1,21 @@
 ---
+import { useTranslations } from "../i18n/utils";
+const t = useTranslations(Astro.currentLocale);
+
 const stories = [
-	{
-		id: 1,
-		title: "Top 3 hidden hot springs in La Fortuna",
-		description: "Descubre las aguas termales más exclusivas de la región, lejos de las multitudes.",
-		image: "https://images.unsplash.com/photo-1580738965095-1b5b1d204a23?auto=format&fit=crop&w=800&q=80",
-		href: "#reservas",
-		category: "Experiencias"
-	},
-	{
-		id: 2,
-		title: "Sustainable travel: Our commitment to Costa Rica",
-		description: "Conoce cómo trabajamos para preservar la belleza natural de nuestro destino.",
-		image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80",
-		href: "#reservas",
-		category: "Sostenibilidad"
-	},
-	{
-		id: 3,
-		title: "A guide to local flavors: What to eat at María Bonita",
-		description: "Explora la gastronomía costarricense a través de nuestro menú signature.",
-		image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80",
-		href: "#reservas",
-		category: "Gastronomía"
-	}
+  { id: 1, title: t("stories.s1.title"), description: t("stories.s1.desc"), image: "https://images.unsplash.com/photo-1580738965095-1b5b1d204a23?auto=format&fit=crop&w=800&q=80", href: "#reservas", category: t("stories.s1.cat") },
+  { id: 2, title: t("stories.s2.title"), description: t("stories.s2.desc"), image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80", href: "#reservas", category: t("stories.s2.cat") },
+  { id: 3, title: t("stories.s3.title"), description: t("stories.s3.desc"), image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80", href: "#reservas", category: t("stories.s3.cat") },
 ];
 ---
 
 <section class="stories-section">
 	<div class="stories-inner">
-		<p class="stories-kicker">Historias desde el Corazón</p>
+		<p class="stories-kicker">{t("stories.kicker")}</p>
 
 		<div class="stories-title-wrap">
 			<span class="stories-line" aria-hidden="true"></span>
-			<h2 class="stories-title">Tips, guías y el alma de San Carlos</h2>
+			<h2 class="stories-title">{t("stories.title")}</h2>
 			<span class="stories-line" aria-hidden="true"></span>
 		</div>
 
@@ -55,7 +37,7 @@ const stories = [
 						<h3 class="story-title">{story.title}</h3>
 						<p class="story-description">{story.description}</p>
 						<a href={story.href} class="story-link">
-							<span>Leer más</span>
+							<span>{t("stories.link")}</span>
 							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
 								<line x1="5" y1="12" x2="19" y2="12"></line>
 								<polyline points="12 5 19 12 12 19"></polyline>

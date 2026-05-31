@@ -1,32 +1,17 @@
 ---
+import { useTranslations } from "../i18n/utils";
+const t = useTranslations(Astro.currentLocale);
+
 const testimonials = [
-	{
-		id: 1,
-		quote: "Gran hotel. Check-in y check-out muy fluidos. Habitaciones limpias. Ubicación inmejorable, a pasos de tiendas, restaurantes y spas.",
-		author: "Tim B.",
-		location: "TripAdvisor",
-		rating: 5
-	},
-	{
-		id: 2,
-		quote: "Habitación amplia y cómoda. El área de piscina es genial. El personal, increíblemente amable y atento.",
-		author: "David M.",
-		location: "Google",
-		rating: 5
-	},
-	{
-		id: 3,
-		quote: "Me encantó el balcón con vista a la iglesia y la plaza central. Habitación confortable y en una ubicación perfecta.",
-		author: "Ian",
-		location: "Booking.com",
-		rating: 5
-	}
+  { id: 1, quote: t("testimonials.t1.quote"), author: "Tim B.", location: "TripAdvisor", rating: 5 },
+  { id: 2, quote: t("testimonials.t2.quote"), author: "David M.", location: "Google", rating: 5 },
+  { id: 3, quote: t("testimonials.t3.quote"), author: "Ian", location: "Booking.com", rating: 5 },
 ];
 ---
 
 <section class="testimonials-section">
 	<div class="testimonials-inner">
-		<h2 class="testimonials-title">Voces de la Selva</h2>
+		<h2 class="testimonials-title">{t("testimonials.title")}</h2>
 
 		<div class="testimonials-dots" aria-hidden="true">
 			<span class="dot"></span>
@@ -40,7 +25,7 @@ const testimonials = [
 			<button 
 				class="testimonials-nav testimonials-nav-prev" 
 				data-testimonial-prev
-				aria-label="Testimonio anterior"
+				aria-label={t("testimonials.prev")}
 			>
 				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 					<polyline points="15 18 9 12 15 6"></polyline>
@@ -64,7 +49,7 @@ const testimonials = [
 			<button 
 				class="testimonials-nav testimonials-nav-next" 
 				data-testimonial-next
-				aria-label="Próximo testimonio"
+				aria-label={t("testimonials.next")}
 			>
 				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 					<polyline points="9 18 15 12 9 6"></polyline>
