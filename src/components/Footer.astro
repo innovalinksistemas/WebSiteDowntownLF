@@ -8,132 +8,149 @@ import logoTropical from "../assets/logoTropicalExpBlanco.png";
 import logoNuwa from "../assets/logoNuwaBlanco.png";
 import logoLava from "../assets/logoLavaDrinksBlanco.png";
 import logoSelva from "../assets/LogoSelvaNegraBlanco.png";
+import { useTranslations } from "../i18n/utils";
+const t = useTranslations(Astro.currentLocale);
 
 const logos = [
 	{ src: logoBlanco,    alt: "La Fortuna Downtown",  href: "https://www.instagram.com/lafortunadowntown" },
 	{ src: logoTierraG,   alt: "Tierra Gastro",        href: "https://www.instagram.com/tierragastrocr" },
 	{ src: logoMB,        alt: "María Bonita",         href: "https://www.instagram.com/mariabonita.cr" },
 	{ src: logoVentanita, alt: "La Ventanita",         href: "https://www.instagram.com/ventanitamariabonita" },
-	{ src: logoPinto,     alt: "Pinto e' Gallo",       href: "https://www.instagram.com/pintoegallo.cr" },
+	{ src: logoPinto,     alt: "Pinto e' Gallo",       href: "https://www.instagram.com/pintoegallo.cr?igsh=MXR1NWUzYzMxN2hoYQ==" },
 	{ src: logoTropical,  alt: "Tropical Experiences", href: "#" },
-	{ src: logoNuwa,      alt: "Nuwa Art Gallery",     href: "https://www.instagram.com/nuwagallery" },
-	{ src: logoLava,      alt: "Lava Drinks",          href: "https://www.instagram.com/lavadrinkscr" },
+	{ src: logoNuwa,      alt: "Nuwa Art Gallery",     href: "https://www.instagram.com/nuwagallery?igsh=ejlqNnVsOWY2Zm1v" },
+	{ src: logoLava,      alt: "Lava Drinks",          href: "https://www.instagram.com/lavadrinkscr?igsh=ZDA3eWVtazVlMTRs&utm_source=qr" },
 	{ src: logoSelva,     alt: "Selva Negra",          href: "https://www.instagram.com/selvanegra.bar" },
 ];
 const repeatedLogos = [...logos, ...logos];
 
 const quickLinks = [
-	{ label: "Habitaciones", href: "#habitaciones" },
-	{ label: "Experiencias", href: "#experiencias" },
-	{ label: "Bienestar", href: "#bienestar" },
-	{ label: "Gastronomia", href: "#gastronomia" },
-	{ label: "Ofertas", href: "#ofertas" },
-	{ label: "Tours", href: "#tours-top" }
+	{ label: t("footer.nav.rooms"),       href: "#habitaciones" },
+	{ label: t("footer.nav.experiences"), href: "#experiencias" },
+	{ label: t("footer.nav.wellness"),    href: "#bienestar" },
+	{ label: t("footer.nav.gastronomy"),  href: "#gastronomia" },
+	{ label: t("footer.nav.offers"),      href: "#ofertas" },
+	{ label: t("footer.nav.tours"),       href: "#tours-top" },
 ];
 
 const legalLinks = [
-	{ label: "Politica de privacidad", href: "#contacto" },
-	{ label: "Terminos y condiciones", href: "#contacto" },
-	{ label: "Contacto", href: "#contacto" }
+	{ label: t("footer.links.privacy"), href: "#contacto" },
+	{ label: t("footer.links.terms"),   href: "#contacto" },
+	{ label: t("footer.links.contact"), href: "#contacto" },
+];
+
+const ratings = [
+	{ platform: "Google",      score: "4.3", max: "/5"  },
+	{ platform: "TripAdvisor", score: "4.4", max: "/5"  },
+	{ platform: "Booking.com", score: "8.1", max: "/10" },
+	{ platform: "Expedia",     score: "8.8", max: "/10" },
 ];
 ---
 
 <section id="contacto" class="site-footer-section">
 	<div class="site-footer-inner">
-		<footer class="offers-footer" aria-label="Footer principal">
-			<div class="offers-footer-main">
+		<footer class="ef-footer" aria-label={t("footer.aria")}>
 
-				<!-- Columna 1: marca + suscripción + redes -->
-				<div class="offers-footer-col offers-footer-brand-col">
-					<a href="/" class="offers-footer-logo" aria-label="Inicio La Fortuna Downtown">
-						<img src={logoBlanco.src} alt="La Fortuna Downtown" loading="lazy" />
+			<!-- CUERPO PRINCIPAL: 2/3 + 1/3 -->
+			<div class="ef-main">
+
+				<!-- COLUMNA IZQUIERDA -->
+				<div class="ef-col-left">
+					<a href="/" aria-label="Inicio La Fortuna Downtown" class="ef-logo-link">
+						<img src={logoBlanco.src} alt="La Fortuna Downtown" loading="lazy" class="ef-logo" />
 					</a>
-					<p class="offers-footer-copy">
-						Hotel boutique en el corazón de La Fortuna. Disfruta una estadía elegante entre aventura, descanso y la energía natural del Arenal.
+
+					<blockquote class="ef-tagline">
+						{t("footer.tagline")}
+					</blockquote>
+
+					<p class="ef-desc">
+						{t("footer.desc")}
 					</p>
-					<form class="offers-footer-form" action="#" method="post">
-						<label for="footer-email" class="sr-only">Correo electrónico</label>
-						<input
-							id="footer-email"
-							name="email"
-							type="email"
-							placeholder="Tu correo electrónico"
-							autocomplete="email"
-							required
-						/>
-						<button type="submit">Suscribirse</button>
-					</form>
-					<div class="footer-social-block">
-						<p class="offers-footer-label">Síguenos</p>
-						<div class="offers-footer-social-links">
-							<a href="https://www.facebook.com/LaFortunaDowntown" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
-							<a href="https://www.instagram.com/lafortunadowntown" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
-							<a href="https://wa.me/50685274677" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">wa</a>
-						</div>
+
+					<div class="ef-ratings" aria-label={t("footer.ratings.aria")}>
+						{ratings.map(({ platform, score, max }) => (
+							<div class="ef-rating-item">
+								<span class="ef-rating-score">{score}</span>
+								<span class="ef-rating-max">{max}</span>
+								<span class="ef-rating-platform">{platform}</span>
+							</div>
+						))}
 					</div>
+
+					<nav class="ef-nav" aria-label={t("footer.nav.aria")}>
+						{quickLinks.map(({ label, href }) => (
+							<a href={href} class="ef-nav-link">{label}</a>
+						))}
+					</nav>
 				</div>
 
-				<!-- Columna 2: contacto + links -->
-				<div class="offers-footer-col offers-footer-info-col">
-					<div>
-						<p class="offers-footer-label">Contacto</p>
-						<ul class="footer-contact-list">
-							<li>
-								<span class="footer-contact-item-label">Teléfono</span>
-								<a href="tel:+50640002027">+506 4000-2027</a>
-							</li>
-							<li>
-								<span class="footer-contact-item-label">WhatsApp</span>
-								<a href="https://wa.me/50685274677" target="_blank" rel="noopener noreferrer">+506 8527-4677</a>
-							</li>
-							<li>
-								<span class="footer-contact-item-label">Correo</span>
-								<a href="mailto:reservaciones@lafortunadowntown.com">reservaciones@lafortunadowntown.com</a>
-							</li>
-						</ul>
-					</div>
-					<div class="footer-links-block">
-						<p class="offers-footer-label">Explora</p>
-						<ul class="offers-footer-links">
-							{quickLinks.map((link) => (
-								<li><a href={link.href}>{link.label}</a></li>
-							))}
-						</ul>
-					</div>
-				</div>
+				<!-- COLUMNA DERECHA -->
+				<div class="ef-col-right">
+					<p class="ef-label">{t("footer.contact.label")}</p>
+					<ul class="ef-contact-list">
+						<li>
+							<a href="tel:+50640002027">+506 4000-2027</a>
+						</li>
+						<li>
+							<a href="https://wa.me/50685274677" target="_blank" rel="noopener noreferrer">+506 8527-4677</a>
+						</li>
+						<li class="ef-contact-email">
+							<a href="mailto:reservaciones@lafortunadowntown.com">reservaciones@lafortunadowntown.com</a>
+						</li>
+					</ul>
 
-				<!-- Columna 3: mapa -->
-				<div class="offers-footer-col offers-footer-map-col">
-					<p class="offers-footer-label">Encuéntranos</p>
-					<p class="offers-footer-addr">
-						25 metros al sur de la Iglesia Católica,<br />La Fortuna, Alajuela, Costa Rica.
+					<p class="ef-label ef-label-addr">{t("footer.address.label")}</p>
+					<p class="ef-addr">
+						{t("footer.address.text").split("\n").map((line: string, i: number) => (
+							<>{line}{i === 0 && <br />}</>
+						))}
 					</p>
-					<div class="offers-footer-map-wrap">
-						<div id="footer-map-placeholder" class="offers-footer-map-placeholder">
-							Cargando mapa…
-						</div>
+
+					<div class="ef-map-wrap">
+						<div id="footer-map-placeholder" class="ef-map-placeholder">{t("footer.map.loading")}</div>
 					</div>
 				</div>
-
 			</div>
 
-			<div class="offers-footer-bottom">
-				<p>&copy; 2026 La Fortuna Downtown. Todos los derechos reservados.</p>
+			<!-- COPYRIGHT + SOCIAL + LEGAL -->
+			<div class="ef-bottom">
+				<p>{t("footer.copyright")}</p>
+
+				<div class="ef-bottom-right">
+				<div class="ef-social" aria-label={t("footer.social.aria")}>
+					<a href="https://www.facebook.com/LaFortunaDowntown" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="ef-social-link">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+							<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+						</svg>
+					</a>
+					<a href="https://www.instagram.com/lafortunadowntown" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="ef-social-link">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+							<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+							<line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+						</svg>
+					</a>
+					<a href="https://wa.me/50685274677" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="ef-social-link">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+							<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+						</svg>
+					</a>
+				</div>
+
 				<ul>
-					{
-						legalLinks.map((link) => (
-							<li>
-								<a href={link.href}>{link.label}</a>
-							</li>
-						))
-					}
+					{legalLinks.map(({ label, href }) => (
+						<li><a href={href}>{label}</a></li>
+					))}
 				</ul>
+				</div>
 			</div>
+
 		</footer>
 	</div>
 </section>
 
-<!-- Carrusel de logos de marcas -->
+
 <div class="logos-slider-rail">
 	<div class="logos-slider-track">
 		{repeatedLogos.map(({ src, alt, href }) => (
@@ -145,6 +162,7 @@ const legalLinks = [
 </div>
 
 <style>
+	/* ── Logos slider ── */
 	.logos-slider-rail {
 		background: #000;
 		width: 100%;
@@ -160,9 +178,7 @@ const legalLinks = [
 		animation: logos-scroll 28s linear infinite;
 		width: fit-content;
 	}
-	.logos-slider-track:hover {
-		animation-play-state: paused;
-	}
+	.logos-slider-track:hover { animation-play-state: paused; }
 	.logos-slider-item {
 		display: flex;
 		align-items: center;
@@ -180,12 +196,13 @@ const legalLinks = [
 		.logos-slider-track { gap: 3rem; }
 		.logos-slider-img   { width: 120px; height: 70px; }
 	}
-	.footer-contact-full {
-		grid-column: 1 / -1;
+	@keyframes logos-scroll {
+		0%   { transform: translateX(0); }
+		100% { transform: translateX(-50%); }
 	}
 
-	/* el mapa iframe ocupa todo el wrapper */
-	.offers-footer-map-wrap iframe {
+	/* ── Map iframe ── */
+	.ef-map-wrap iframe {
 		position: absolute;
 		inset: 0;
 		width: 100%;
@@ -193,35 +210,11 @@ const legalLinks = [
 		border: 0;
 		display: block;
 	}
-	@keyframes logos-scroll {
-		0%   { transform: translateX(0); }
-		100% { transform: translateX(-50%); }
-	}
 </style>
 
 <script>
 	const mapSrc =
 		"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d245.2108965499923!2d-84.64559211035048!3d10.47112706466293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa00c88c950b0d9%3A0x87d3b3f008d2807c!2sDowntown%20La%20Fortuna%20Boutique%20Hotel!5e0!3m2!1ses-419!2scr!4v1760390977343!5m2!1ses-419!2scr";
-
-	// Iguala la altura del mapa con la columna izquierda
-	function syncMapHeight() {
-		const leftCol  = document.querySelector<HTMLElement>('.offers-footer-subscribe');
-		const mapWrap  = document.querySelector<HTMLElement>('.offers-footer-map-wrap');
-		const mapCol   = document.querySelector<HTMLElement>('.offers-footer-map-col');
-		if (!leftCol || !mapWrap || !mapCol) return;
-		if (window.innerWidth <= 740) {
-			mapWrap.style.height = '220px';
-			return;
-		}
-		// Calcula el espacio disponible: alto de col izquierda - texto arriba del mapa
-		const leftH    = leftCol.offsetHeight;
-		const textH    = mapWrap.offsetTop - mapCol.offsetTop;
-		const mapH     = Math.max(240, leftH - textH);
-		mapWrap.style.height = mapH + 'px';
-	}
-
-	syncMapHeight();
-	window.addEventListener('resize', syncMapHeight);
 
 	const placeholder = document.getElementById("footer-map-placeholder");
 	if (placeholder) {
@@ -235,7 +228,6 @@ const legalLinks = [
 					iframe.referrerPolicy = "no-referrer-when-downgrade";
 					placeholder.replaceWith(iframe);
 					observer.disconnect();
-					syncMapHeight();
 				}
 			},
 			{ threshold: 0.2 }
