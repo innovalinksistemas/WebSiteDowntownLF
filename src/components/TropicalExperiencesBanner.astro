@@ -10,17 +10,20 @@
  * Tropical Experiences cuando esté disponible.
  * ─────────────────────────────────────────────────────────────
  */
+import { useTranslations } from "../i18n/utils";
+const t = useTranslations(Astro.currentLocale);
+const [titleLine1, titleLine2] = t("tropic.title").split("\n");
 ---
 
 <section
   id="tours-top"
   class="tropic-section"
-  aria-label="Tropical Experiences — Tours en La Fortuna"
+  aria-label={t("tropic.aria")}
 >
-  <!-- Imagen de fondo edge-to-edge -->
+  
   <img
     src="/images/Rafting.jpg"
-    alt="Rafting en el río Toro, La Fortuna, Costa Rica"
+    alt={t("tropic.img.alt")}
     class="tropic-bg"
     loading="lazy"
     decoding="async"
@@ -28,36 +31,35 @@
     height="1350"
   />
 
-  <!-- Overlay en degradado: izquierda transparente, derecha densa -->
+  
   <div class="tropic-overlay" aria-hidden="true"></div>
 
-  <!-- Grain de textura — coherente con el hero -->
+  
   <div class="tropic-grain" aria-hidden="true"></div>
 
-  <!-- Contenido alineado a la derecha — igual que la imagen de referencia -->
+  
   <div class="tropic-content">
     <div class="tropic-inner">
 
-      <!-- Kicker -->
-      <p class="tropic-kicker tropic-anim">Tropical Experiences</p>
+      
+      <p class="tropic-kicker tropic-anim">{t("tropic.kicker")}</p>
 
-      <!-- Título principal -->
+      
       <h2 class="tropic-title tropic-anim">
-        Tu próxima aventura<br />comienza aquí
+        {titleLine1}<br />{titleLine2}
       </h2>
 
-      <!-- Separador dorado -->
+      
       <span class="tropic-rule tropic-anim" aria-hidden="true"></span>
 
-      <!-- Descripción breve -->
+      
       <p class="tropic-desc tropic-anim">
-        Rafting, canopy, cataratas y vida silvestre — tours
-        guiados por expertos locales en el corazón de La Fortuna.
+        {t("tropic.desc")}
       </p>
 
-      <!-- CTA único: más conversión, menos fricción -->
+      
       <a href="https://online.flippingbook.com/view/743187584/4/" target="_blank" rel="noopener noreferrer" class="tropic-cta tropic-anim">
-        Ver tours
+        {t("tropic.cta")}
       </a>
 
     </div>

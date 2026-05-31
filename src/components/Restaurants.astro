@@ -14,54 +14,45 @@
  * · Hover en imágenes gestionado por GSAP
  * ─────────────────────────────────────────────────────────────
  */
+import { useTranslations } from "../i18n/utils";
+const t = useTranslations(Astro.currentLocale);
 
 const restaurants = [
   {
-    name: "María Bonita Steak House",
-    description:
-      "María Bonita Steak House es una fusión de gastronomía, entretenimiento, pasión y arte. Aquí, cada platillo se convierte en un espectáculo. Disfruta de cortes de carne premium cocinados a la perfección en brasas de carbón natural, flambé en mesa con postres, cafés y cócteles, experiencias con fuego, música en vivo. Sumérgete en una experiencia sensorial única en el corazón de La Fortuna.",
-    tag: "Brasas & Parrilla",
-    hours: "Lun – Dom · 11:30 am – 10:30 pm",
-    image:
-      "https://cdn.arenalcloud.com/arenal-a65b6eb9-29d7-4dec-9784-b1b37ff7dfce-downtown/restaurante_6b4c26ad.jpg",
-    href: "#reservas",
+    name: t("restaurants.r1.name"),
+    description: t("restaurants.r1.desc"),
+    tag: t("restaurants.r1.tag"),
+    hours: t("restaurants.r1.hours"),
+    image: "https://cdn.arenalcloud.com/arenal-a65b6eb9-29d7-4dec-9784-b1b37ff7dfce-downtown/restaurante_6b4c26ad.jpg",
+    href: "https://qrfy.io/p/iLG_cBukNI",
+    cta: t("restaurants.cta"),
   },
   {
-    name: "Selva Negra",
-    description:
-      "Disfruta de sabores exóticos, mixología creativa, selectos vinos y experiencias en un viaje sensorial inspirado en la magia de la selva tropical nocturna de Costa Rica. Ofrecemos noches temáticas de mixología, catas de vinos con sommelier invitados, maridajes con gastronomía elaborada por nuestro chef y eventos privados para quienes buscan una experiencia personalizada.",
-    tag: "Coctelería & Vinos",
-    hours: "Lun – Dom · 12:00 pm – 12:00 am",
-    image:
-      "https://cdn.arenalcloud.com/arenal-a65b6eb9-29d7-4dec-9784-b1b37ff7dfce-downtown/bar_d8f0d78e.jpg",
-    href: "#reservas",
+    name: t("restaurants.r2.name"),
+    description: t("restaurants.r2.desc"),
+    tag: t("restaurants.r2.tag"),
+    hours: t("restaurants.r2.hours"),
+    image: "https://cdn.arenalcloud.com/arenal-a65b6eb9-29d7-4dec-9784-b1b37ff7dfce-downtown/bar_d8f0d78e.jpg",
+    href: "https://online.flippingbook.com/view/510681266/",
+    cta: t("restaurants.cta"),
   },
   {
-    name: "Pinto e' Gallo",
-    description:
-      "Comienza tu día con el mejor sabor en Pinto e' Gallo. Disfruta de nuestro desayuno estilo buffet, donde encontrarás una variedad irresistible de opciones frescas. Ideal para comenzar el día con energía y sin prisas. ¡Ven y disfruta de un desayuno completo y delicioso!",
-    tag: "Desayunos & Brunch",
-    hours: "Lun – Dom · 7:00 am – 11:30 am",
+    name: t("restaurants.r3.name"),
+    description: t("restaurants.r3.desc"),
+    tag: t("restaurants.r3.tag"),
+    hours: t("restaurants.r3.hours"),
     image: "/images/desayunoTipico.jpg",
-    href: "#reservas",
+    href: "https://online.flippingbook.com/view/739784065/",
+    cta: t("restaurants.cta"),
   },
   {
-    name: "La Ventanita de María Bonita",
-    description:
-      "En La Ventanita de María Bonita, sabemos que tu tiempo es valioso y tu apetito también. Somos una ventanita de comida rápida a la parrilla, donde cada plato se prepara al momento con ingredientes frescos y de la mejor calidad. Disfruta de sabores auténticos y jugosos, cocinados a la perfección en la parrilla, listos para llevar y sin largas esperas.",
-    tag: "Parrilla Rápida",
-    hours: "Lun – Dom · 12:00 pm – 12:00 am",
+    name: t("restaurants.r4.name"),
+    description: t("restaurants.r4.desc"),
+    tag: t("restaurants.r4.tag"),
+    hours: t("restaurants.r4.hours"),
     image: "https://cdn.arenalcloud.com/arenal-a65b6eb9-29d7-4dec-9784-b1b37ff7dfce-ventanita/6E3A6298_22f79edc.jpg",
-    href: "#reservas",
-  },
-  {
-    name: "Nuwa Art Gallery",
-    description:
-      "Es un espacio vibrante dedicado a la celebración del arte y la cultura costarricense. Presentamos obras de artistas locales, ofreciendo una experiencia única que conecta a los visitantes con la creatividad y la inspiración de nuestra tierra. ¡Descubre y apoya el arte costarricense en su máxima expresión en Nuwa Gallery!",
-    tag: "Arte & Cultura",
-    hours: "Lun – Dom · 6:00 am – 10:00 pm",
-    image: "/images/NuwaGallery.jpg",
-    href: "#reservas",
+    href: "https://online.flippingbook.com/view/179568887/",
+    cta: t("restaurants.cta"),
   },
 ];
 ---
@@ -69,13 +60,13 @@ const restaurants = [
 <section id="gastronomia" class="rest-section">
   <div class="rest-inner">
 
-    <!-- ── Header ───────────────────────────────────────────── -->
+    
     <div class="rest-head">
       <div class="rest-head-left">
         <div class="rest-title-wrap">
           <span class="rest-line rest-head-anim" aria-hidden="true"></span>
           <h2 class="rest-title rest-head-anim">
-            Nuestras Experiencias<br />Gastronómicas
+            {t("restaurants.section.title")}
           </h2>
         </div>
       </div>
@@ -87,7 +78,7 @@ const restaurants = [
           momentos memorables.
         </p>
 
-        <!-- Flechas bajo el copy — no sobre las imágenes -->
+        
         <div class="rest-controls rest-head-anim" aria-label="Controles del carousel">
           <button
             type="button"
@@ -100,7 +91,7 @@ const restaurants = [
             </svg>
           </button>
 
-          <!-- Dots de progreso -->
+          
           <div class="rest-dots" role="tablist" aria-label="Navegación de restaurantes">
             {restaurants.map((_, i) => (
               <button
@@ -128,7 +119,7 @@ const restaurants = [
       </div>
     </div>
 
-    <!-- ── Carousel ─────────────────────────────────────────── -->
+    
     <div class="rest-carousel" data-rest-carousel>
       <div class="rest-track" data-rest-track>
         {restaurants.map((r, i) => (
@@ -137,8 +128,8 @@ const restaurants = [
             data-rest-index={i}
             aria-label={r.name}
           >
-            <!-- Imagen -->
-            <a href={r.href} class="rest-img-link" aria-label={`Ver ${r.name}`} tabindex="-1">
+            
+            <a href={r.href} class="rest-img-link" aria-label={`Ver ${r.name}`} tabindex="-1" target="_blank" rel="noopener noreferrer">
               <img
                 src={r.image}
                 alt={r.name}
@@ -147,11 +138,11 @@ const restaurants = [
                 width="2000"
                 height="1333"
               />
-              <!-- Tag flotante sobre imagen -->
+              
               <span class="rest-tag">{r.tag}</span>
             </a>
 
-            <!-- Cuerpo -->
+            
             <div class="rest-card-body">
               <h3 class="rest-name">{r.name}</h3>
               <p class="rest-desc">{r.description}</p>
@@ -164,8 +155,8 @@ const restaurants = [
                   {r.hours}
                 </p>
               )}
-              <a href={r.href} class="rest-link">
-                Ver menú
+              <a href={r.href} class="rest-link" target="_blank" rel="noopener noreferrer">
+                {r.cta}
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                   <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>

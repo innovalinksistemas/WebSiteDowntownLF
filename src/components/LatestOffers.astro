@@ -1,33 +1,36 @@
 ---
+import { useTranslations } from "../i18n/utils";
+const t = useTranslations(Astro.currentLocale);
+
 const packages = [
-	{
-		title: "Escapada Romántica",
-		subtitle: "Edición Exclusiva con Cena Gastronómica",
-		description: "Habitación Superior decorada, ambientación romántica con pétalos de rosa, masaje en pareja, botella de vino, desayuno buffet y cena gourmet en María Bonita Steak House con experiencia Wine Tasting MB™.",
-		image: "https://i.ibb.co/hRtLzbmD/paq-Romantico.png",
-		href: "https://www.simplebooking.it/ibe2/hotel/9184/package/70564?lang=EN&cur=USD"
-	},
-	{
-		title: "Escapada Romántica",
-		subtitle: "Experiencia Clásica de Amor",
-		description: "Habitación tropical decorada con pétalos de rosa, masaje en pareja, botella de vino y desayuno buffet completo con frutas tropicales, jugos, wafles y huevos al gusto.",
-		image: "https://i.ibb.co/PkkhG7q/paq-Romantico2.png",
-		href: "https://www.simplebooking.it/ibe2/hotel/9184/package/70563?lang=EN&cur=USD"
-	},
-	{
-		title: "Clásico al Volcán Arenal",
-		subtitle: "Naturaleza, Bienestar y Gastronomía",
-		description: "Caminata guiada al Volcán Arenal y Puentes Colgantes, acceso a Baldi Hot Springs con cena, masaje terapéutico, almuerzo en María Bonita, tour de café y chocolate, y desayuno buffet diario.",
-		image: "https://i.ibb.co/kgm5ZBqx/puentes1.png",
-		href: "https://www.simplebooking.it/ibe2/hotel/9184/package/70571?lang=EN&cur=USD"
-	},
-	{
-		title: "Aventura Épica",
-		subtitle: "Adrenalina, Naturaleza y Confort",
-		description: "Canyoning y rafting con equipo completo, masaje relajante de 60 minutos, acceso a Baldi Hot Springs con cena, cena de bienvenida en María Bonita, desayuno buffet diario y 2 almuerzos.",
-		image: "https://i.ibb.co/7tGKMNXs/Rafting11.png",
-		href: "https://www.simplebooking.it/ibe2/hotel/9184/package/70572?lang=EN"
-	}
+  {
+    title: t("offers.p1.title"),
+    subtitle: t("offers.p1.subtitle"),
+    description: t("offers.p1.desc"),
+    image: "https://i.ibb.co/hRtLzbmD/paq-Romantico.png",
+    href: "https://www.simplebooking.it/ibe2/hotel/9184/package/70564?lang=EN&cur=USD",
+  },
+  {
+    title: t("offers.p2.title"),
+    subtitle: t("offers.p2.subtitle"),
+    description: t("offers.p2.desc"),
+    image: "https://i.ibb.co/PkkhG7q/paq-Romantico2.png",
+    href: "https://www.simplebooking.it/ibe2/hotel/9184/package/70563?lang=EN&cur=USD",
+  },
+  {
+    title: t("offers.p3.title"),
+    subtitle: t("offers.p3.subtitle"),
+    description: t("offers.p3.desc"),
+    image: "https://i.ibb.co/kgm5ZBqx/puentes1.png",
+    href: "https://www.simplebooking.it/ibe2/hotel/9184/package/70571?lang=EN&cur=USD",
+  },
+  {
+    title: t("offers.p4.title"),
+    subtitle: t("offers.p4.subtitle"),
+    description: t("offers.p4.desc"),
+    image: "https://i.ibb.co/7tGKMNXs/Rafting11.png",
+    href: "https://www.simplebooking.it/ibe2/hotel/9184/package/70572?lang=EN",
+  },
 ];
 ---
 
@@ -36,10 +39,10 @@ const packages = [
 		<div class="latest-offers-header">
 			<div class="latest-offers-title-wrap">
 				<span class="latest-offers-line" aria-hidden="true"></span>
-				<h2 class="latest-offers-title">Nuestros Paquetes</h2>
+				<h2 class="latest-offers-title">{t("offers.title")}</h2>
 			</div>
 			<p class="latest-offers-copy">
-				Experiencias diseñadas para parejas, aventureros y amantes de la naturaleza en el corazón de La Fortuna.
+				{t("offers.copy")}
 			</p>
 		</div>
 
