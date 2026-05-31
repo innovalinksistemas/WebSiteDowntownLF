@@ -165,6 +165,10 @@ export const ui = {
     // ── FAQ Page
     "faq.page.h1": "Preguntas Frecuentes",
     "faq.page.subtitle": "Todo lo que necesitas saber sobre La Fortuna Downtown",
+    "faq.section.kicker": "Preguntas Frecuentes",
+    "faq.section.title": "Todo lo que debes saber",
+    "faq.section.desc": "Respuestas a las preguntas más comunes de nuestros huéspedes sobre La Fortuna Downtown",
+    "faq.section.aria": "Preguntas frecuentes",
     "faq.q1": "¿Cuál es el mejor momento para visitar el volcán?",
     "faq.a1": "Las vistas más claras típicamente ocurren durante la estación seca de diciembre a abril, aunque las primeras mañanas en la estación verde ofrecen vistas místicas con niebla. Recomendamos visitarlo al amanecer para las mejores temperaturas y visibilidad.",
     "faq.q2": "¿Ofrecen transferencias desde el aeropuerto?",
@@ -403,6 +407,10 @@ export const ui = {
     // ── FAQ Page
     "faq.page.h1": "Frequently Asked Questions",
     "faq.page.subtitle": "Everything you need to know about La Fortuna Downtown",
+    "faq.section.kicker": "Frequently Asked Questions",
+    "faq.section.title": "Everything You Need to Know",
+    "faq.section.desc": "Answers to the most common questions from our guests about La Fortuna Downtown",
+    "faq.section.aria": "Frequently asked questions",
     "faq.q1": "When is the best time to visit the volcano?",
     "faq.a1": "The clearest views typically occur during the dry season from December to April, although early mornings in the green season offer mystical misty views. We recommend visiting at dawn for the best temperatures and visibility.",
     "faq.q2": "Do you offer airport transfers?",

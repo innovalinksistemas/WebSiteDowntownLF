@@ -28,19 +28,19 @@ const structuredData = {
 	<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
 	<div class="faq-inner">
-		<p class="faq-kicker">Preguntas Frecuentes</p>
+		<p class="faq-kicker">{t("faq.section.kicker")}</p>
 
 		<div class="faq-title-wrap">
 			<span class="faq-line" aria-hidden="true"></span>
-			<h2 class="faq-title">Todo lo que debes saber</h2>
+			<h2 class="faq-title">{t("faq.section.title")}</h2>
 			<span class="faq-line" aria-hidden="true"></span>
 		</div>
 
 		<p class="faq-description">
-			Respuestas a las preguntas más comunes de nuestros huéspedes sobre La Fortuna Downtown
+			{t("faq.section.desc")}
 		</p>
 
-		<div class="faq-container" role="region" aria-label="Preguntas frecuentes">
+		<div class="faq-container" role="region" aria-label={t("faq.section.aria")}>
 			{
 				faqs.map(({ id, question, answer }) => (
 					<details class="faq-item" id={id}>
