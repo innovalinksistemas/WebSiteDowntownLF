@@ -1,93 +1,122 @@
 ---
+import { useTranslations } from "../i18n/utils";
+const t = useTranslations(Astro.currentLocale);
+
 const bookingUrl = "https://www.simplebooking.it/ibe2/hotel/9184/?hid=9184&lang=ES&cur=USD";
 
-const longDescription =
-	"Las habitaciones ofrecen una decoración fresca y tropical, aire acondicionado A/C, pantalla de televisión por cable, baño privado, agua caliente y escritorio.";
-
-const baseFeatures = ["ac", "balcony", "pool", "wifi"];
 const baseTags = [
-	"Baño privado",
-	"Artículos de aseo gratuitos",
-	"Ducha · Agua caliente",
-	"TV de pantalla plana",
-	"Toallas",
-	"Ropa de cama",
-	"Escritorio",
+  t("rooms.tags.base.0"),
+  t("rooms.tags.base.1"),
+  t("rooms.tags.base.2"),
+  t("rooms.tags.base.3"),
+  t("rooms.tags.base.4"),
+  t("rooms.tags.base.5"),
+  t("rooms.tags.base.6"),
 ];
 
 const rooms = [
-	{
-		title: "DownTown Standard Doble",
-		description:
-			"Una opción cómoda y acogedora, ideal para parejas o viajeros solos que buscan descansar en un ambiente moderno y bien ubicado en el corazón de la ciudad.",
-		longDescription,
-		size: "22 m²",
-		guests: 2,
-		beds: "1 cama Matrimonial",
-		features: baseFeatures,
-		tags: [...baseTags, "Acceso a pisos superiores solo mediante escaleras"],
-		images: [
-			"https://i.ibb.co/SwhzWkZR/Estandar-Doble4.png",
-			"https://i.ibb.co/PGZPHP1N/Estandar-Doble3.png",
-			"https://i.ibb.co/YFLqgW2q/Estandar-Doble2.png",
-			"https://i.ibb.co/rRdWHxfw/Estandar-Doble1.png",
-		],
-		href: "#reservas",
-	},
-	{
-		title: "DownTown Standard Triple",
-		description:
-			"Perfecta para pequeños grupos o familias, esta habitación combina funcionalidad y confort, con espacio suficiente para todos.",
-		longDescription,
-		size: "26 m²",
-		guests: 3,
-		beds: "1 cama Matrimonial y 1 Individual",
-		features: baseFeatures,
-		tags: baseTags,
-		images: [
-			"https://i.ibb.co/SX2LGSHN/Estandar-Triple3.png",
-			"https://i.ibb.co/whNd3XSv/Estandar-Triple2.png",
-			"https://i.ibb.co/j90LrhVJ/Estandar-Triple1.png",
-			"https://i.ibb.co/pvrBmBw4/Estandar-Triple4.webp",
-		],
-		href: "#reservas",
-	},
-	{
-		title: "DownTown Superior",
-		description:
-			"Diseñada para quienes buscan un nivel extra de confort, esta habitación ofrece un ambiente elegante, moderno y espacioso.",
-		longDescription,
-		size: "24 m²",
-		guests: 2,
-		beds: "1 cama Queen",
-		features: baseFeatures,
-		tags: baseTags,
-		images: [
-			"https://i.ibb.co/kshJL68d/superior3.png",
-			"https://i.ibb.co/jPQ5JDvP/superior4.png",
-			"https://i.ibb.co/p6DwHt0w/superior2.png",
-			"https://i.ibb.co/bj0GzzS3/superior1.png",
-		],
-		href: "#reservas",
-	},
-	{
-		title: "Tropical Family",
-		description:
-			"Con vista a la piscina y ubicada en el corazón de la ciudad, esta habitación es ideal para familias o grupos que buscan la comodidad.",
-		longDescription,
-		size: "34 m²",
-		guests: 5,
-		beds: "2 camas matrimoniales ó 1 matrimonial + 2 individuales",
-		features: baseFeatures,
-		tags: baseTags,
-		images: [
-			"https://i.ibb.co/gbVPz97Z/tropical3.png",
-			"https://i.ibb.co/qFVLr5X7/FC1737-AF-A457-42-FD-9-B6-D-2791-A2192608.jpg",
-			"https://i.ibb.co/kRMTGHk/tropical1.png",
-			"https://i.ibb.co/gMDhn2Bw/tropical2.png",
-		],
-		href: "#reservas",
-	},
+  {
+    title: t("rooms.room.doble.title"),
+    description: t("rooms.room.doble.desc"),
+    longDescription: t("rooms.long.desc"),
+    size: "22 m²",
+    guests: 2,
+    beds: t("rooms.room.doble.beds"),
+    features: ["ac", "balcony", "pool", "wifi"],
+    tags: [...baseTags, t("rooms.tags.stairs")],
+    images: [
+      "https://i.ibb.co/SwhzWkZR/Estandar-Doble4.png",
+      "https://i.ibb.co/PGZPHP1N/Estandar-Doble3.png",
+      "https://i.ibb.co/YFLqgW2q/Estandar-Doble2.png",
+      "https://i.ibb.co/rRdWHxfw/Estandar-Doble1.png",
+    ],
+    href: bookingUrl,
+  },
+  {
+    title: t("rooms.room.triple.title"),
+    description: t("rooms.room.triple.desc"),
+    longDescription: t("rooms.long.desc"),
+    size: "26 m²",
+    guests: 3,
+    beds: t("rooms.room.triple.beds"),
+    features: ["ac", "balcony", "pool", "wifi"],
+    tags: baseTags,
+    images: [
+      "https://i.ibb.co/SX2LGSHN/Estandar-Triple3.png",
+      "https://i.ibb.co/whNd3XSv/Estandar-Triple2.png",
+      "https://i.ibb.co/j90LrhVJ/Estandar-Triple1.png",
+      "https://i.ibb.co/pvrBmBw4/Estandar-Triple4.webp",
+    ],
+    href: bookingUrl,
+  },
+  {
+    title: t("rooms.room.superior.title"),
+    description: t("rooms.room.superior.desc"),
+    longDescription: t("rooms.long.desc"),
+    size: "24 m²",
+    guests: 2,
+    beds: t("rooms.room.superior.beds"),
+    features: ["ac", "balcony", "pool", "wifi"],
+    tags: baseTags,
+    images: [
+      "https://i.ibb.co/kshJL68d/superior3.png",
+      "https://i.ibb.co/jPQ5JDvP/superior4.png",
+      "https://i.ibb.co/p6DwHt0w/superior2.png",
+      "https://i.ibb.co/bj0GzzS3/superior1.png",
+    ],
+    href: bookingUrl,
+  },
+  {
+    title: t("rooms.room.tropical.title"),
+    description: t("rooms.room.tropical.desc"),
+    longDescription: t("rooms.long.desc"),
+    size: "34 m²",
+    guests: 5,
+    beds: t("rooms.room.tropical.beds"),
+    features: ["ac", "balcony", "pool", "wifi"],
+    tags: baseTags,
+    images: [
+      "https://i.ibb.co/gbVPz97Z/tropical3.png",
+      "https://i.ibb.co/YB0G8WF8/tropical4.png",
+      "https://i.ibb.co/JF1xgnxG/tropical1.png",
+      "https://i.ibb.co/h1p4Cwgh/tropical2.png",
+    ],
+    href: bookingUrl,
+  },
+  {
+    title: t("rooms.room.confort.title"),
+    description: t("rooms.room.confort.desc"),
+    longDescription: t("rooms.long.desc"),
+    size: "28 m²",
+    guests: 2,
+    beds: t("rooms.room.confort.beds"),
+    features: ["ac", "balcony", "pool", "wifi"],
+    tags: baseTags,
+    images: [
+      "/images/rooms/confort/confort-1.jpg",
+      "/images/rooms/confort/confort-2.jpg",
+      "/images/rooms/confort/confort-family.jpg",
+      "/images/rooms/confort/bano.jpg",
+    ],
+    href: bookingUrl,
+  },
+  {
+    title: t("rooms.room.confortfam.title"),
+    description: t("rooms.room.confortfam.desc"),
+    longDescription: t("rooms.long.desc"),
+    size: "40 m²",
+    guests: 5,
+    beds: t("rooms.room.confortfam.beds"),
+    features: ["ac", "balcony", "pool", "wifi"],
+    tags: baseTags,
+    images: [
+      "/images/rooms/tropical-family/tf-1.jpg",
+      "/images/rooms/tropical-family/tf-2.jpg",
+      "/images/rooms/tropical-family/tf-3.jpg",
+      "/images/rooms/tropical-family/tf-4.jpg",
+    ],
+    href: bookingUrl,
+  },
 ];
 ---
 
@@ -96,7 +125,7 @@ const rooms = [
 
 		<div class="rooms-header">
 			<span class="rooms-line rooms-header-anim" aria-hidden="true"></span>
-			<h2 class="rooms-title rooms-header-anim">Habitaciones</h2>
+			<h2 class="rooms-title rooms-header-anim">{t("rooms.section.title")}</h2>
 		</div>
 
 		<div class="rooms-grid">
@@ -106,13 +135,13 @@ const rooms = [
 						type="button"
 						class="room-image-link"
 						data-room-modal={i}
-						aria-label={`Ver detalles de ${room.title}`}
+						aria-label={`${t("rooms.cta.details")} ${room.title}`}
 					>
 						<img src={room.images[0]} alt={room.title} loading="lazy" decoding="async" />
 					</button>
 					<h3 class="room-card-title">{room.title}</h3>
 					<p class="room-card-description">{room.description}</p>
-					<button type="button" class="room-read-link" data-room-modal={i}>Ver más</button>
+					<button type="button" class="room-read-link" data-room-modal={i}>{t("rooms.cta.details")}</button>
 					<a
 						href={bookingUrl}
 						class="room-book-btn"
@@ -120,7 +149,7 @@ const rooms = [
 						rel="noopener noreferrer"
 						aria-label={`Reservar ${room.title}`}
 					>
-						Book now
+						{t("rooms.cta.book")}
 					</a>
 				</article>
 			))}
@@ -129,29 +158,27 @@ const rooms = [
 	</div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════
-     ROOM DETAIL MODAL (estilo SimpleBooking)
-══════════════════════════════════════════════════════════ -->
+
 <div class="room-modal" id="room-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="room-modal-title">
 	<div class="room-modal-backdrop" data-room-close></div>
 
 	<div class="room-modal-dialog">
-		<!-- Galería -->
+		
 		<div class="room-modal-gallery">
-			<button class="room-modal-nav room-modal-prev" id="room-modal-prev" aria-label="Imagen anterior" type="button">
+			<button class="room-modal-nav room-modal-prev" id="room-modal-prev" aria-label={t("rooms.modal.prev")} type="button">
 				<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 16L7 10L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 			</button>
 			<img class="room-modal-main-img" id="room-modal-main-img" src="" alt="" />
-			<button class="room-modal-nav room-modal-next" id="room-modal-next" aria-label="Imagen siguiente" type="button">
+			<button class="room-modal-nav room-modal-next" id="room-modal-next" aria-label={t("rooms.modal.next")} type="button">
 				<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 16L13 10L7 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 			</button>
 			<span class="room-modal-counter" id="room-modal-counter">1 / 4</span>
 			<div class="room-modal-thumbs" id="room-modal-thumbs"></div>
 		</div>
 
-		<!-- Panel de detalles -->
+		
 		<div class="room-modal-panel">
-			<button class="room-modal-close" data-room-close aria-label="Cerrar" type="button">
+			<button class="room-modal-close" data-room-close aria-label={t("rooms.modal.close")} type="button">
 				<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M1 1L17 17M17 1L1 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
 			</button>
 
@@ -160,13 +187,13 @@ const rooms = [
 			<div class="room-modal-meta">
 				<span class="room-modal-meta-item" id="room-modal-size"></span>
 				<span class="room-modal-meta-sep"></span>
-				<span class="room-modal-meta-label">Máximo de huéspedes:</span>
+				<span class="room-modal-meta-label">{t("rooms.modal.guests.label")}</span>
 				<span class="room-modal-guests" id="room-modal-guests"></span>
 			</div>
 
 			<p class="room-modal-beds" id="room-modal-beds"></p>
 
-			<h4 class="room-modal-subtitle">Características de la habitación</h4>
+			<h4 class="room-modal-subtitle">{t("rooms.modal.features.title")}</h4>
 			<div class="room-modal-features" id="room-modal-features"></div>
 
 			<div class="room-modal-tags" id="room-modal-tags"></div>
@@ -174,7 +201,7 @@ const rooms = [
 			<p class="room-modal-desc" id="room-modal-desc"></p>
 
 			<a class="room-modal-cta" id="room-modal-cta" href={bookingUrl} target="_blank" rel="noopener noreferrer">
-				Consultar disponibilidad
+				{t("rooms.modal.cta")}
 			</a>
 		</div>
 	</div>
