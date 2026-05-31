@@ -1,0 +1,1045 @@
+---
+import '../../styles/global.css';
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+
+const includes = [
+  'One night accommodation at La Fortuna Downtown Boutique Hotel',
+  'Ecotermales admission',
+  'Breakfast included',
+  'Welcome drink',
+  '2×1 cocktails from 12:00 to 5:00 p.m. at Maria Bonita Steak House or Selva Negra Cocktail & Bar',
+  'Free private parking',
+  'Access to hotel private pool',
+  'Free WiFi throughout the property',
+];
+
+const pricing = [
+  { label: 'Per couple',        sub: '2 people · double occupancy', price: '₡135,000', highlight: true },
+  { label: '3rd or 4th person', sub: 'additional adult',            price: '₡50,000',  highlight: false },
+  { label: 'Children (5–11)',   sub: 'per child',                   price: '₡27,500',  highlight: false },
+  { label: 'Children (0–4)',    sub: 'completely free admission',   price: 'FREE',     highlight: false },
+];
+
+const rooms = [
+  { name: 'Standard Double',  img: 'https://i.ibb.co/SwhzWkZR/Estandar-Doble4.png', tag: 'Double' },
+  { name: 'Standard Triple',  img: 'https://i.ibb.co/PGZPHP1N/Estandar-Doble3.png', tag: 'Triple' },
+  { name: 'Superior',         img: 'https://i.ibb.co/kshJL68d/superior3.png',       tag: 'Superior' },
+  { name: 'Tropical Family',  img: 'https://i.ibb.co/gbVPz97Z/tropical3.png',       tag: 'Family' },
+];
+
+const policies = [
+  { color: '#4ade80', range: 'More than 30 days before check-in',       charge: 'No charge · free cancellation' },
+  { color: '#facc15', range: 'Between 15 and 30 days before check-in',  charge: '50% charge of the total reservation' },
+  { color: '#f87171', range: 'Less than 15 days before check-in',       charge: '100% charge of the total reservation' },
+];
+---
+
+<Layout
+  title="Ecotermales Package | Downtown La Fortuna Boutique Hotel"
+  description="All-inclusive package with Ecotermales admission, accommodation at La Fortuna's most central hotel, and breakfast included."
+  image="https://cdn.arenalcloud.com/arenal-a65b6eb9-29d7-4dec-9784-b1b37ff7dfce-downtown/DJI_0333_copia_c93de22e.jpg"
+>
+  <Fragment slot="head">
+    <meta name="keywords" content="Ecotermales La Fortuna package, hot springs accommodation La Fortuna, Costa Rica packages, boutique hotel La Fortuna, Arenal Volcano hot springs" />
+    <link rel="alternate" hreflang="en" href="https://lafortunadowntown.com/en/ecotermales" />
+    <link rel="alternate" hreflang="es-CR" href="https://lafortunadowntown.com/ecotermales" />
+  </Fragment>
+
+  <main>
+
+
+    <section class="eco-hero" id="inicio">
+      <div
+        class="eco-hero-bg"
+        style="background-image:url('https://cdn.arenalcloud.com/arenal-a65b6eb9-29d7-4dec-9784-b1b37ff7dfce-downtown/_MG_6736_028d1d9a.JPG')"
+        aria-hidden="true"
+      ></div>
+      <div class="eco-hero-overlay" aria-hidden="true"></div>
+
+      <div class="eco-hero-content">
+        <p class="eco-hero-eyebrow">Downtown Boutique Hotel · La Fortuna</p>
+        <h1 class="eco-hero-title">
+          Accommodation +<br/>Ecotermales Day Pass
+        </h1>
+        <p class="eco-hero-from">from:</p>
+        <p class="eco-hero-price">₡135,000</p>
+        <p class="eco-hero-price-sub">per couple double occupancy</p>
+
+        <div class="eco-hero-badge">
+          Accommodation · Admission · Food · Breakfast
+        </div>
+
+        <div class="eco-hero-ctas">
+          <a
+            href="https://wa.me/50685274677?text=Hello!%20I'm%20interested%20in%20the%20Downtown%20%2B%20Ecotermales%20package%20%E2%82%A1135%2C000"
+            class="eco-btn eco-btn--primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Book Now</a>
+          <a href="#detalles" class="eco-btn eco-btn--outline">
+            View package details
+          </a>
+        </div>
+
+        <p class="eco-hero-finepri">
+          *Valid June 1 to August 30 · Restrictions apply*
+        </p>
+      </div>
+    </section>
+
+
+    <div class="eco-countdown">
+      <div class="eco-countdown-inner">
+        <span class="eco-countdown-label">
+          Valid June 1 to August 30
+        </span>
+        <div class="eco-countdown-timer">
+          <div class="eco-cd-unit"><span id="cd-days">--</span><em>Days</em></div>
+          <div class="eco-cd-sep">:</div>
+          <div class="eco-cd-unit"><span id="cd-hours">--</span><em>Hours</em></div>
+          <div class="eco-cd-sep">:</div>
+          <div class="eco-cd-unit"><span id="cd-mins">--</span><em>Min</em></div>
+          <div class="eco-cd-sep">:</div>
+          <div class="eco-cd-unit"><span id="cd-secs">--</span><em>Sec</em></div>
+        </div>
+      </div>
+    </div>
+
+
+    <section class="eco-section eco-why">
+      <div class="eco-container">
+        <p class="eco-eyebrow">Why choose us?</p>
+        <h2 class="eco-section-title">The best experience at the best price</h2>
+        <div class="eco-why-grid">
+          <div class="eco-why-card">
+            <div class="eco-why-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <h3>Best prices</h3>
+            <p>Fair price for an unmatched experience in La Fortuna. Save without sacrificing quality!</p>
+          </div>
+          <div class="eco-why-card">
+            <div class="eco-why-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <h3>Most central hotel</h3>
+            <p>Steps from the central park and close to the main attractions in the area.</p>
+          </div>
+          <div class="eco-why-card">
+            <div class="eco-why-icon">
+              <svg width="30" height="30" viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="true">
+                <g transform="translate(0,1024) scale(0.1,-0.1)" fill="currentColor" stroke="none">
+                  <path d="M5381 8944 c-46 -8 -123 -27 -172 -44 -473 -158 -822 -565 -935 -1090 -26 -120 -26 -410 0 -530 35 -164 101 -322 194 -465 62 -97 106 -150 259 -307 190 -196 258 -308 283 -465 31 -192 -43 -360 -264 -607 -262 -293 -369 -482 -423 -753 -26 -131 -24 -415 4 -543 86 -396 367 -750 738 -931 118 -57 198 -86 266 -95 56 -7 61 1 23 37 -14 13 -46 51 -71 83 -215 287 -289 649 -197 971 57 199 141 323 367 539 320 306 453 493 543 761 55 167 77 321 71 500 -11 276 -80 495 -230 723 -80 122 -139 193 -301 361 -257 267 -363 456 -402 714 -65 423 183 850 629 1087 26 14 47 28 47 32 0 35 -274 49 -429 22z"/>
+                  <path d="M3640 7749 c-90 -14 -259 -72 -338 -116 -86 -48 -193 -137 -264 -221 -243 -284 -302 -687 -148 -1019 55 -119 98 -178 227 -315 169 -179 211 -251 228 -389 8 -64 -13 -166 -49 -237 -34 -67 -100 -153 -194 -255 -151 -163 -230 -300 -274 -473 -31 -123 -31 -380 0 -496 96 -357 375 -650 729 -766 71 -24 173 -38 173 -25 0 5 -25 33 -56 63 -117 115 -217 299 -250 461 -24 120 -16 278 21 379 47 128 88 183 295 395 249 254 331 374 394 573 139 442 16 896 -338 1247 -188 186 -241 263 -276 400 -37 146 -25 255 47 405 40 82 58 107 137 185 55 54 117 104 155 125 36 19 66 41 69 47 10 32 -164 51 -288 32z"/>
+                  <path d="M7103 7746 c-633 -120 -990 -786 -723 -1345 55 -115 115 -196 241 -327 176 -182 227 -285 217 -436 -10 -136 -65 -237 -219 -404 -125 -134 -183 -213 -235 -319 -64 -132 -85 -223 -91 -390 -5 -125 -2 -152 20 -253 79 -348 324 -634 670 -781 88 -38 220 -71 233 -58 3 3 -27 44 -68 90 -84 97 -126 163 -173 274 -102 237 -83 486 52 690 21 32 119 142 219 244 196 201 284 319 347 464 158 359 113 789 -116 1132 -28 43 -119 148 -202 233 -83 85 -165 176 -183 202 -138 201 -147 429 -25 638 55 93 171 208 271 265 45 26 82 51 82 55 0 31 -202 48 -317 26z"/>
+                  <path d="M5486 4540 c-40 -13 -72 -44 -121 -120 -159 -243 -192 -578 -85 -842 44 -107 105 -207 187 -304 42 -49 84 -102 94 -119 28 -44 25 -107 -6 -144 -37 -44 -82 -55 -194 -48 -345 21 -741 269 -966 607 -177 264 -265 540 -265 828 0 156 14 148 -231 136 l-182 -9 -33 -39 c-19 -21 -47 -73 -63 -115 -76 -201 -64 -387 36 -571 42 -78 74 -119 170 -222 83 -90 102 -134 84 -191 -31 -93 -139 -126 -300 -92 -228 48 -453 168 -617 331 -186 184 -297 403 -343 673 -11 68 -23 127 -27 132 -8 14 -63 11 -239 -11 -749 -95 -1357 -245 -1446 -358 -93 -119 163 -227 751 -316 91 -14 278 -39 415 -55 138 -17 266 -35 286 -40 47 -14 115 -74 140 -124 16 -31 20 -53 17 -94 -9 -104 -66 -146 -307 -226 -264 -89 -408 -163 -462 -238 -69 -97 -11 -211 156 -304 219 -121 688 -256 1180 -339 719 -121 1715 -184 2480 -157 1066 37 2003 184 2600 406 142 53 249 112 317 173 178 164 56 301 -405 458 -93 31 -187 69 -209 85 -110 73 -117 200 -16 296 62 59 106 71 471 124 379 54 439 65 642 115 148 37 272 88 318 131 77 75 -10 156 -243 227 -360 108 -781 184 -1515 271 -22 2 -107 9 -189 15 -170 13 -181 10 -217 -62 -68 -133 -92 -289 -66 -415 32 -149 90 -257 209 -391 93 -104 116 -155 99 -212 -33 -109 -159 -135 -368 -74 -397 115 -730 440 -848 829 -31 101 -55 240 -55 315 0 41 -5 61 -16 71 -13 11 -78 14 -303 16 -157 1 -299 -2 -315 -7z"/>
+                  <path d="M8013 3525 c-56 -24 -70 -79 -29 -120 13 -13 55 -33 97 -45 319 -92 476 -157 602 -250 96 -71 154 -159 156 -235 1 -43 -41 -126 -89 -178 -114 -124 -374 -255 -700 -352 -776 -230 -2136 -374 -3190 -336 -755 27 -1357 85 -1840 176 -41 8 -127 24 -190 35 -718 134 -1228 359 -1306 577 -34 98 -1 188 103 282 111 100 270 173 545 251 190 54 218 70 218 126 0 49 -37 74 -111 74 -129 0 -555 -97 -819 -187 -455 -154 -732 -338 -834 -553 -29 -60 -31 -73 -31 -171 0 -106 0 -107 45 -195 36 -71 63 -107 135 -179 113 -114 232 -193 450 -300 331 -163 769 -299 1350 -420 556 -115 1082 -181 1825 -227 277 -17 1311 -17 1570 0 596 40 908 72 1354 143 750 118 1386 294 1801 499 203 100 326 182 440 292 259 249 269 494 30 728 -245 241 -813 467 -1419 565 -115 18 -122 18 -163 0z"/>
+                </g>
+              </svg>
+            </div>
+            <h3>Ecotermales</h3>
+            <p>The most natural and peaceful hot springs, with stunning views of Arenal Volcano.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="eco-section eco-includes-section" id="detalles">
+      <div class="eco-container">
+        <p class="eco-eyebrow">Complete package</p>
+        <h2 class="eco-section-title">What's included in your package?</h2>
+
+
+        <div class="eco-feat-grid">
+          <div class="eco-feat-card">
+            <div class="eco-feat-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            </div>
+            <h3>Luxury Accommodation</h3>
+            <p>1 night at La Fortuna Downtown Boutique Hotel. Breakfast, welcome drink, and services included.</p>
+          </div>
+          <div class="eco-feat-card eco-feat-card--highlight">
+            <div class="eco-feat-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            </div>
+            <h3>Full meals</h3>
+            <p>Breakfast included + 2×1 cocktails 12–5 pm at Maria Bonita Steak House or Selva Negra Cocktail &amp; Bar.</p>
+          </div>
+          <div class="eco-feat-card">
+            <div class="eco-feat-icon">
+              <svg width="34" height="34" viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="true">
+                <g transform="translate(0,1024) scale(0.1,-0.1)" fill="currentColor" stroke="none">
+                  <path d="M5381 8944 c-46 -8 -123 -27 -172 -44 -473 -158 -822 -565 -935 -1090 -26 -120 -26 -410 0 -530 35 -164 101 -322 194 -465 62 -97 106 -150 259 -307 190 -196 258 -308 283 -465 31 -192 -43 -360 -264 -607 -262 -293 -369 -482 -423 -753 -26 -131 -24 -415 4 -543 86 -396 367 -750 738 -931 118 -57 198 -86 266 -95 56 -7 61 1 23 37 -14 13 -46 51 -71 83 -215 287 -289 649 -197 971 57 199 141 323 367 539 320 306 453 493 543 761 55 167 77 321 71 500 -11 276 -80 495 -230 723 -80 122 -139 193 -301 361 -257 267 -363 456 -402 714 -65 423 183 850 629 1087 26 14 47 28 47 32 0 35 -274 49 -429 22z"/>
+                  <path d="M3640 7749 c-90 -14 -259 -72 -338 -116 -86 -48 -193 -137 -264 -221 -243 -284 -302 -687 -148 -1019 55 -119 98 -178 227 -315 169 -179 211 -251 228 -389 8 -64 -13 -166 -49 -237 -34 -67 -100 -153 -194 -255 -151 -163 -230 -300 -274 -473 -31 -123 -31 -380 0 -496 96 -357 375 -650 729 -766 71 -24 173 -38 173 -25 0 5 -25 33 -56 63 -117 115 -217 299 -250 461 -24 120 -16 278 21 379 47 128 88 183 295 395 249 254 331 374 394 573 139 442 16 896 -338 1247 -188 186 -241 263 -276 400 -37 146 -25 255 47 405 40 82 58 107 137 185 55 54 117 104 155 125 36 19 66 41 69 47 10 32 -164 51 -288 32z"/>
+                  <path d="M7103 7746 c-633 -120 -990 -786 -723 -1345 55 -115 115 -196 241 -327 176 -182 227 -285 217 -436 -10 -136 -65 -237 -219 -404 -125 -134 -183 -213 -235 -319 -64 -132 -85 -223 -91 -390 -5 -125 -2 -152 20 -253 79 -348 324 -634 670 -781 88 -38 220 -71 233 -58 3 3 -27 44 -68 90 -84 97 -126 163 -173 274 -102 237 -83 486 52 690 21 32 119 142 219 244 196 201 284 319 347 464 158 359 113 789 -116 1132 -28 43 -119 148 -202 233 -83 85 -165 176 -183 202 -138 201 -147 429 -25 638 55 93 171 208 271 265 45 26 82 51 82 55 0 31 -202 48 -317 26z"/>
+                  <path d="M5486 4540 c-40 -13 -72 -44 -121 -120 -159 -243 -192 -578 -85 -842 44 -107 105 -207 187 -304 42 -49 84 -102 94 -119 28 -44 25 -107 -6 -144 -37 -44 -82 -55 -194 -48 -345 21 -741 269 -966 607 -177 264 -265 540 -265 828 0 156 14 148 -231 136 l-182 -9 -33 -39 c-19 -21 -47 -73 -63 -115 -76 -201 -64 -387 36 -571 42 -78 74 -119 170 -222 83 -90 102 -134 84 -191 -31 -93 -139 -126 -300 -92 -228 48 -453 168 -617 331 -186 184 -297 403 -343 673 -11 68 -23 127 -27 132 -8 14 -63 11 -239 -11 -749 -95 -1357 -245 -1446 -358 -93 -119 163 -227 751 -316 91 -14 278 -39 415 -55 138 -17 266 -35 286 -40 47 -14 115 -74 140 -124 16 -31 20 -53 17 -94 -9 -104 -66 -146 -307 -226 -264 -89 -408 -163 -462 -238 -69 -97 -11 -211 156 -304 219 -121 688 -256 1180 -339 719 -121 1715 -184 2480 -157 1066 37 2003 184 2600 406 142 53 249 112 317 173 178 164 56 301 -405 458 -93 31 -187 69 -209 85 -110 73 -117 200 -16 296 62 59 106 71 471 124 379 54 439 65 642 115 148 37 272 88 318 131 77 75 -10 156 -243 227 -360 108 -781 184 -1515 271 -22 2 -107 9 -189 15 -170 13 -181 10 -217 -62 -68 -133 -92 -289 -66 -415 32 -149 90 -257 209 -391 93 -104 116 -155 99 -212 -33 -109 -159 -135 -368 -74 -397 115 -730 440 -848 829 -31 101 -55 240 -55 315 0 41 -5 61 -16 71 -13 11 -78 14 -303 16 -157 1 -299 -2 -315 -7z"/>
+                  <path d="M8013 3525 c-56 -24 -70 -79 -29 -120 13 -13 55 -33 97 -45 319 -92 476 -157 602 -250 96 -71 154 -159 156 -235 1 -43 -41 -126 -89 -178 -114 -124 -374 -255 -700 -352 -776 -230 -2136 -374 -3190 -336 -755 27 -1357 85 -1840 176 -41 8 -127 24 -190 35 -718 134 -1228 359 -1306 577 -34 98 -1 188 103 282 111 100 270 173 545 251 190 54 218 70 218 126 0 49 -37 74 -111 74 -129 0 -555 -97 -819 -187 -455 -154 -732 -338 -834 -553 -29 -60 -31 -73 -31 -171 0 -106 0 -107 45 -195 36 -71 63 -107 135 -179 113 -114 232 -193 450 -300 331 -163 769 -299 1350 -420 556 -115 1082 -181 1825 -227 277 -17 1311 -17 1570 0 596 40 908 72 1354 143 750 118 1386 294 1801 499 203 100 326 182 440 292 259 249 269 494 30 728 -245 241 -813 467 -1419 565 -115 18 -122 18 -163 0z"/>
+                </g>
+              </svg>
+            </div>
+            <h3>Ecotermales</h3>
+            <p>Day pass to the natural hot springs of Ecotermales, with views of Arenal Volcano.</p>
+          </div>
+        </div>
+
+
+        <div class="eco-checklist-wrap">
+          <p class="eco-checklist-title">Everything that is included</p>
+          <ul class="eco-checklist">
+            {includes.map(item => (
+              <li set:html={item}></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="eco-section eco-pricing-section">
+      <div class="eco-container eco-container--narrow">
+        <p class="eco-eyebrow">Rates</p>
+        <h2 class="eco-section-title">Choose your plan</h2>
+        <div class="eco-pricing-grid">
+          {pricing.map(tier => (
+            <div class={`eco-price-card${tier.highlight ? ' eco-price-card--highlight' : ''}`}>
+              <p class="eco-price-label">{tier.label}</p>
+              <p class="eco-price-sub">{tier.sub}</p>
+              <p class="eco-price-amount">{tier.price}</p>
+            </div>
+          ))}
+        </div>
+        <p class="eco-pricing-note">
+          ✨ We also offer a <strong>romantic detail</strong> option for anniversaries or special celebrations. Ask us.
+        </p>
+      </div>
+    </section>
+
+
+    <section class="eco-section eco-rooms-section">
+      <div class="eco-container">
+        <p class="eco-eyebrow">Our rooms</p>
+        <h2 class="eco-section-title">A lodging experience in the heart of La Fortuna</h2>
+        <p class="eco-section-sub">Room assigned based on availability and number of guests in the reservation.</p>
+        <div class="eco-rooms-grid">
+          {rooms.map(room => (
+            <div class="eco-room-card">
+              <div class="eco-room-img-wrap">
+                <img src={room.img} alt={room.name} loading="lazy" decoding="async" />
+                <span class="eco-room-tag">{room.tag}</span>
+              </div>
+              <div class="eco-room-body">
+                <p class="eco-room-name">{room.name}</p>
+                <p class="eco-room-note">Check availability</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+
+    <section class="eco-section eco-exp-section">
+      <div class="eco-container">
+        <p class="eco-eyebrow">The Ecotermales experience</p>
+        <h2 class="eco-section-title">Immerse yourself in the hot springs</h2>
+        <div class="eco-exp-grid">
+          <div class="eco-exp-img-wrap">
+            <img
+              src="https://cdn.arenalcloud.com/arenal-a65b6eb9-29d7-4dec-9784-b1b37ff7dfce-downtown/DJI_0333_copia_c93de22e.jpg"
+              alt="Natural hot springs Ecotermales"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="eco-exp-text">
+            <h3>The Ecotermales Experience</h3>
+            <p>
+              Fully immerse yourself in an intimate and relaxing experience, framed by the lush
+              vegetation of the tropical forest. The natural thermal pools of Ecotermales
+              are fed directly by Arenal Volcano — the purest waters in the area —
+              with breathtaking volcano views.
+            </p>
+            <p>
+              A place designed for total rest: no crowds, exclusive spaces, and a
+              nature that wraps every moment of your stay.
+            </p>
+            <a
+              href="https://wa.me/50685274677?text=Hello!%20I'm%20interested%20in%20the%20Downtown%20%2B%20Ecotermales%20package"
+              class="eco-btn eco-btn--dark"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Book now →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="eco-section eco-cta-section">
+      <div class="eco-container eco-container--narrow" style="text-align:center">
+        <p class="eco-eyebrow eco-eyebrow--light">Limited spots</p>
+        <h2 class="eco-cta-title">Secure your stay</h2>
+        <p class="eco-cta-sub">Fill in the details to check availability and get your promotional price. Valid until August 30.</p>
+        <a
+          href="https://wa.me/50685274677?text=Hello!%20I'm%20interested%20in%20the%20Downtown%20%2B%20Ecotermales%20package%20%E2%82%A1135%2C000.%20I'd%20like%20to%20check%20availability."
+          class="eco-btn eco-btn--wa"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Check availability on WhatsApp
+        </a>
+      </div>
+    </section>
+
+
+    <section class="eco-section eco-policy-section">
+      <div class="eco-container eco-container--narrow">
+        <p class="eco-eyebrow">Policies</p>
+        <h2 class="eco-section-title">Cancellation policies</h2>
+        <div class="eco-policy-list">
+          {policies.map(p => (
+            <div class="eco-policy-item">
+              <span class="eco-policy-dot" style={`background:${p.color}`}></span>
+              <div>
+                <p class="eco-policy-range">{p.range}</p>
+                <p class="eco-policy-charge">{p.charge}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>
+
+
+<script>
+  const end = new Date('2026-08-30T23:59:59-06:00').getTime();
+
+  function pad(n: number) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const diff = end - Date.now();
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = '00';
+      });
+      return;
+    }
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000) / 60000);
+    const secs  = Math.floor((diff % 60000) / 1000);
+
+    (document.getElementById('cd-days')  as HTMLElement).textContent = pad(days);
+    (document.getElementById('cd-hours') as HTMLElement).textContent = pad(hours);
+    (document.getElementById('cd-mins')  as HTMLElement).textContent = pad(mins);
+    (document.getElementById('cd-secs')  as HTMLElement).textContent = pad(secs);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>
+
+<style>
+/* ══════════════════════════════════════════════════════
+   ECO-TERMALES LANDING PAGE
+══════════════════════════════════════════════════════ */
+
+/* ── Shared ─────────────────────────────────────────── */
+.eco-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+}
+.eco-container--narrow {
+  max-width: 56rem;
+}
+
+.eco-section {
+  padding: clamp(3.6rem, 7vw, 5.6rem) 0;
+}
+
+.eco-eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #9b1c2d;
+  text-align: center;
+}
+.eco-eyebrow--light { color: rgba(255,255,255,0.6); }
+
+.eco-section-title {
+  margin: 0 0 clamp(1.8rem, 3.5vw, 2.8rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: 0.01em;
+  color: #1e1a16;
+  text-align: center;
+}
+.eco-section-sub {
+  margin: -1.4rem 0 2rem;
+  text-align: center;
+  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+  color: rgba(30, 26, 22, 0.6);
+}
+
+/* ── Buttons ────────────────────────────────────────── */
+.eco-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.9rem 2.2rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 0.15rem;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+}
+.eco-btn:hover { transform: translateY(-2px); }
+
+.eco-btn--primary {
+  background: #9b1c2d;
+  color: #fff6ee;
+  box-shadow: 0 4px 18px rgba(155, 28, 45, 0.38);
+}
+.eco-btn--primary:hover { background: #b71f35; box-shadow: 0 8px 28px rgba(155, 28, 45, 0.5); }
+
+.eco-btn--outline {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.45);
+  color: #fff;
+  backdrop-filter: blur(4px);
+}
+.eco-btn--outline:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.7); }
+
+.eco-btn--dark {
+  background: #1e1a16;
+  color: #f4edd8;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.22);
+}
+.eco-btn--dark:hover { background: #111; box-shadow: 0 8px 28px rgba(0,0,0,0.32); }
+
+.eco-btn--wa {
+  background: #25d366;
+  color: #fff;
+  padding: 1rem 2.6rem;
+  font-size: 0.82rem;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.38);
+}
+.eco-btn--wa:hover { background: #1eb955; box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5); }
+
+/* ══════════════════════════════════════════════════════
+   HERO
+══════════════════════════════════════════════════════ */
+.eco-hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.eco-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 30%;
+  transform: scale(1.04);
+  will-change: transform;
+}
+
+.eco-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 42%,
+      rgba(4, 12, 8, 0.55) 0%,
+      rgba(4, 12, 8, 0) 75%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(4, 12, 8, 0.68) 0%,
+      rgba(4, 12, 8, 0.58) 45%,
+      rgba(4, 12, 8, 0.82) 100%
+    );
+}
+
+.eco-hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  padding: clamp(6rem, 12vw, 8rem) clamp(1.2rem, 5vw, 3rem) clamp(3rem, 6vw, 4rem);
+  max-width: 780px;
+  width: 100%;
+}
+
+.eco-hero-eyebrow {
+  margin: 0 0 0.7rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+}
+
+.eco-hero-title {
+  margin: 0 0 clamp(0.6rem, 1.5vw, 1rem);
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 7vw, 5.6rem);
+  line-height: 0.97;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 4px 28px rgba(0,0,0,0.45);
+}
+
+.eco-hero-from {
+  margin: 0 0 0.15rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.88);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+}
+
+.eco-hero-price {
+  margin: 0 0 0.2rem;
+  font-family: var(--font-body);
+  font-size: clamp(3.2rem, 10vw, 7rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-shadow: 0 4px 28px rgba(0,0,0,0.4);
+}
+
+.eco-hero-price-sub {
+  margin: 0 0 1.4rem;
+  font-size: clamp(0.82rem, 1.8vw, 0.96rem);
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+}
+
+.eco-hero-badge {
+  margin-bottom: 1.8rem;
+  display: inline-block;
+  background: #9b1c2d;
+  color: #fff6ee;
+  padding: 0.5rem 1.4rem;
+  border-radius: 2rem;
+  font-size: clamp(0.72rem, 2vw, 0.86rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 16px rgba(155, 28, 45, 0.45);
+}
+
+.eco-hero-ctas {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1.4rem;
+}
+
+.eco-hero-finepri {
+  margin: 0;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.06em;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+}
+
+/* ══════════════════════════════════════════════════════
+   COUNTDOWN
+══════════════════════════════════════════════════════ */
+.eco-countdown {
+  background: #1a0d0f;
+  padding: clamp(0.9rem, 2vw, 1.3rem) 1.2rem;
+}
+
+.eco-countdown-inner {
+  max-width: 80rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.2rem, 4vw, 3.5rem);
+  flex-wrap: wrap;
+}
+
+.eco-countdown-label {
+  font-size: clamp(0.72rem, 1.4vw, 0.84rem);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.68);
+}
+
+.eco-countdown-timer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.eco-cd-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.eco-cd-unit span {
+  font-family: var(--font-body);
+  font-size: clamp(1.5rem, 4vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  min-width: 2ch;
+  text-align: center;
+}
+
+.eco-cd-unit em {
+  font-style: normal;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+
+.eco-cd-sep {
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  color: #9b1c2d;
+  line-height: 1;
+  margin-bottom: 0.8rem;
+}
+
+/* ══════════════════════════════════════════════════════
+   WHY US
+══════════════════════════════════════════════════════ */
+.eco-why { background: #fff; }
+
+.eco-why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.eco-why-card {
+  padding: clamp(1.4rem, 2.5vw, 2.2rem) clamp(1.2rem, 2vw, 1.8rem);
+  background: #f8f5f0;
+  border: 1px solid rgba(30,26,22,0.08);
+  text-align: center;
+}
+
+.eco-why-icon {
+  width: 3.2rem;
+  height: 3.2rem;
+  display: grid;
+  place-items: center;
+  background: rgba(155, 28, 45, 0.08);
+  border: 1px solid rgba(155, 28, 45, 0.22);
+  border-radius: 0.6rem;
+  margin: 0 auto 1rem;
+  color: #9b1c2d;
+}
+
+.eco-why-card h3 {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+  color: #1e1a16;
+}
+
+.eco-why-card p {
+  margin: 0;
+  font-size: clamp(0.88rem, 1vw, 0.98rem);
+  line-height: 1.55;
+  color: rgba(30,26,22,0.7);
+}
+
+/* ══════════════════════════════════════════════════════
+   INCLUDES
+══════════════════════════════════════════════════════ */
+.eco-includes-section { background: #f5f2ee; }
+
+.eco-feat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.8rem, 1.5vw, 1.4rem);
+  margin-bottom: clamp(2rem, 4vw, 3.2rem);
+}
+
+.eco-feat-card {
+  padding: clamp(1.4rem, 2.2vw, 2rem) clamp(1.2rem, 1.8vw, 1.6rem);
+  background: #fff;
+  border: 1px solid rgba(30,26,22,0.1);
+  border-radius: 0.4rem;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.eco-feat-card--highlight {
+  background: #9b1c2d;
+  border-color: #9b1c2d;
+  color: #fff;
+}
+.eco-feat-card.eco-feat-card--highlight .eco-feat-icon { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.4); color: #fff; }
+.eco-feat-card.eco-feat-card--highlight h3 { color: #fff; }
+.eco-feat-card.eco-feat-card--highlight p  { color: rgba(255,255,255,0.9); }
+
+.eco-feat-icon {
+  width: 3.6rem;
+  height: 3.6rem;
+  display: grid;
+  place-items: center;
+  background: rgba(155, 28, 45, 0.08);
+  border: 1px solid rgba(155, 28, 45, 0.22);
+  border-radius: 0.6rem;
+  margin: 0 auto 1rem;
+  color: #9b1c2d;
+}
+
+.eco-feat-card h3 {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.7vw, 1.5rem);
+  color: #1e1a16;
+}
+
+.eco-feat-card p {
+  margin: 0;
+  font-size: clamp(0.86rem, 0.98vw, 0.96rem);
+  line-height: 1.55;
+  color: rgba(30,26,22,0.72);
+}
+
+/* Checklist */
+.eco-checklist-wrap {
+  background: #fff;
+  border: 1px solid rgba(30,26,22,0.1);
+  border-radius: 0.4rem;
+  padding: clamp(1.4rem, 2.5vw, 2rem) clamp(1.4rem, 3vw, 2.4rem);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.eco-checklist-title {
+  margin: 0 0 1.1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  color: #1e1a16;
+  text-align: center;
+}
+
+.eco-checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.7rem 2rem;
+}
+
+.eco-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: clamp(0.88rem, 1vw, 0.96rem);
+  color: rgba(30,26,22,0.82);
+  line-height: 1.4;
+}
+
+.eco-checklist li::before {
+  content: '✔';
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  color: #9b1c2d;
+  margin-top: 0.05rem;
+}
+
+/* ══════════════════════════════════════════════════════
+   PRICING
+══════════════════════════════════════════════════════ */
+.eco-pricing-section { background: #fff; }
+
+.eco-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.8rem, 1.5vw, 1.2rem);
+  margin-bottom: 1.6rem;
+}
+
+.eco-price-card {
+  padding: clamp(1.2rem, 2vw, 1.8rem) 1rem;
+  border: 1px solid rgba(30,26,22,0.12);
+  border-radius: 0.4rem;
+  text-align: center;
+  background: #f8f5f0;
+}
+
+.eco-price-card--highlight {
+  background: #9b1c2d;
+  border-color: #9b1c2d;
+}
+.eco-price-card--highlight .eco-price-label { color: rgba(255,255,255,0.75); }
+.eco-price-card--highlight .eco-price-sub   { color: rgba(255,255,255,0.55); }
+.eco-price-card--highlight .eco-price-amount{ color: #fff; }
+
+.eco-price-label {
+  margin: 0 0 0.2rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(30,26,22,0.65);
+}
+
+.eco-price-sub {
+  margin: 0 0 0.6rem;
+  font-size: 0.72rem;
+  color: rgba(30,26,22,0.5);
+  line-height: 1.3;
+}
+
+.eco-price-amount {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1;
+  color: #1e1a16;
+  letter-spacing: -0.01em;
+}
+
+.eco-pricing-note {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(0.88rem, 1vw, 0.96rem);
+  color: rgba(30,26,22,0.7);
+  line-height: 1.55;
+}
+
+/* ══════════════════════════════════════════════════════
+   ROOMS
+══════════════════════════════════════════════════════ */
+.eco-rooms-section { background: #f5f2ee; }
+
+.eco-rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.8rem, 1.5vw, 1.2rem);
+}
+
+.eco-room-card {
+  background: #fff;
+  border-radius: 0.35rem;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+}
+
+.eco-room-img-wrap {
+  position: relative;
+  height: clamp(10rem, 16vw, 14rem);
+  overflow: hidden;
+}
+
+.eco-room-img-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.eco-room-card:hover .eco-room-img-wrap img {
+  transform: scale(1.05);
+}
+
+.eco-room-tag {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
+  background: rgba(10,14,18,0.65);
+  backdrop-filter: blur(4px);
+  color: rgba(255,255,255,0.9);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border-radius: 2rem;
+}
+
+.eco-room-body {
+  padding: 0.9rem 1rem;
+}
+
+.eco-room-name {
+  margin: 0 0 0.2rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  color: #1e1a16;
+}
+
+.eco-room-note {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #9b1c2d;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+/* ══════════════════════════════════════════════════════
+   EXPERIENCE
+══════════════════════════════════════════════════════ */
+.eco-exp-section { background: #fff; }
+
+.eco-exp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+}
+
+.eco-exp-img-wrap {
+  border-radius: 0.4rem;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.eco-exp-img-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.eco-exp-text h3 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  line-height: 1.05;
+  color: #1e1a16;
+}
+
+.eco-exp-text p {
+  margin: 0 0 0.9rem;
+  font-size: clamp(0.9rem, 1.05vw, 1.02rem);
+  line-height: 1.62;
+  color: rgba(30,26,22,0.74);
+}
+
+/* ══════════════════════════════════════════════════════
+   CTA SECTION
+══════════════════════════════════════════════════════ */
+.eco-cta-section { background: #0d1611; }
+
+.eco-cta-title {
+  margin: 0 0 0.8rem;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.6rem);
+  line-height: 1.04;
+  color: #f4ede0;
+  text-align: center;
+}
+
+.eco-cta-sub {
+  margin: 0 0 1.8rem;
+  font-size: clamp(0.9rem, 1.1vw, 1.04rem);
+  line-height: 1.6;
+  color: rgba(244,237,224,0.58);
+  text-align: center;
+}
+
+/* ══════════════════════════════════════════════════════
+   POLICIES
+══════════════════════════════════════════════════════ */
+.eco-policy-section { background: #f8f5f0; }
+
+.eco-policy-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.eco-policy-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  background: #fff;
+  border: 1px solid rgba(30,26,22,0.09);
+  border-radius: 0.35rem;
+}
+
+.eco-policy-dot {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-top: 0.2rem;
+}
+
+.eco-policy-range {
+  margin: 0 0 0.2rem;
+  font-size: clamp(0.88rem, 1vw, 0.96rem);
+  font-weight: 700;
+  color: #1e1a16;
+}
+
+.eco-policy-charge {
+  margin: 0;
+  font-size: clamp(0.84rem, 0.96vw, 0.92rem);
+  color: rgba(30,26,22,0.65);
+}
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .eco-pricing-grid { grid-template-columns: repeat(2, 1fr); }
+  .eco-rooms-grid   { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .eco-why-grid  { grid-template-columns: 1fr; }
+  .eco-feat-grid { grid-template-columns: 1fr; }
+  .eco-exp-grid  { grid-template-columns: 1fr; }
+  .eco-checklist { grid-template-columns: 1fr; }
+
+  .eco-exp-img-wrap {
+    aspect-ratio: 16/9;
+  }
+}
+
+@media (max-width: 560px) {
+  .eco-pricing-grid { grid-template-columns: repeat(2, 1fr); }
+  .eco-rooms-grid   { grid-template-columns: repeat(2, 1fr); }
+  .eco-hero-ctas    { flex-direction: column; align-items: center; width: 100%; }
+  .eco-btn          { width: min(100%, 20rem); }
+  .eco-countdown-inner { flex-direction: column; gap: 0.6rem; }
+}
+</style>

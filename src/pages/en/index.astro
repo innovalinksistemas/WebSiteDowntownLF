@@ -1,0 +1,29 @@
+---
+import "../../styles/global.css";
+import AboutUs from "../../components/AboutUs.astro";
+import Amenities from "../../components/Amenities.astro";
+import Footer from "../../components/Footer.astro";
+import Hero from "../../components/Hero.astro";
+import LatestOffers from "../../components/LatestOffers.astro";
+import Layout from "../../layouts/Layout.astro";
+import Restaurants from "../../components/Restaurants.astro";
+import Rooms from "../../components/Rooms.astro";
+import TopTours from "../../components/TopTours.astro";
+import TropicalExperiencesBanner from "../../components/TropicalExperiencesBanner.astro";
+---
+
+<Layout
+  title="Downtown La Fortuna | Boutique Hotel in the heart of La Fortuna"
+  description="Boutique hotel in the heart of La Fortuna, Costa Rica. Modern rooms, pool, restaurants, and easy access to Arenal Volcano and hot springs. Book direct for the best price guaranteed."
+>
+  <main class="relative min-h-screen overflow-hidden text-stone-100">
+    <Hero />
+    <AboutUs />
+    <Rooms />
+    <Amenities />
+    <LatestOffers />
+    <Restaurants />
+    <TropicalExperiencesBanner />
+    <Footer />
+  </main>
+</Layout>
