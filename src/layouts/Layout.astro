@@ -1,38 +1,95 @@
 ---
 import Header from "../components/Header.astro";
+import { getLang } from "../i18n/utils";
+
+const SITE = "https://lafortunadowntown.com";
 
 interface Props {
-	title?: string;
-	headerSolid?: boolean;
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  ogType?: string;
+  headerSolid?: boolean;
 }
 
-const { title = "La Fortuna Downtown", headerSolid = false } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+
+const {
+  title = lang === "en"
+    ? "Downtown La Fortuna | Boutique Hotel in the heart of La Fortuna"
+    : "Downtown La Fortuna | Hotel Boutique en el centro de La Fortuna",
+  description = lang === "en"
+    ? "Boutique hotel in the heart of La Fortuna, Costa Rica. Modern rooms, pool, restaurants, and easy access to Arenal Volcano and hot springs."
+    : "Vive una experiencia única de hospedaje en el corazón de La Fortuna, Costa Rica. Hotel boutique a pasos del parque central.",
+  image = `${SITE}/og-image.jpg`,
+  canonical = new URL(Astro.url.pathname, SITE).href,
+  ogType = "website",
+  headerSolid = false,
+} = Astro.props;
+
+const ogImage = image.startsWith("http") ? image : `${SITE}${image}`;
+const ogLocale = lang === "en" ? "en_US" : "es_CR";
+
+const path = Astro.url.pathname;
+const esPath = path.startsWith("/en") ? path.replace(/^\/en/, "") || "/" : path;
+const enPath = path.startsWith("/en") ? path : `/en${path === "/" ? "" : path}`;
 ---
 
 <!doctype html>
-<html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Great+Vibes&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body class={headerSolid ? 'header-solid' : ''}>
-		<Header />
-		<slot />
-	</body>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- hreflang alternates -->
+    <link rel="alternate" hreflang="es" href={`${SITE}${esPath}`} />
+    <link rel="alternate" hreflang="en" href={`${SITE}${enPath}`} />
+    <link rel="alternate" hreflang="x-default" href={`${SITE}${esPath}`} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Downtown La Fortuna Boutique Hotel" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={lang === "en" ? "es_CR" : "en_US"} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Great+Vibes&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <meta name="generator" content={Astro.generator} />
+
+    <slot name="head" />
+  </head>
+  <body class={headerSolid ? "header-solid" : ""}>
+    <Header />
+    <slot />
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>
