@@ -105,6 +105,7 @@ export const ui = {
     // ── Restaurants
     "restaurants.section.kicker": "Gastronomía",
     "restaurants.section.title": "Sabores que se Convierten en Memorias",
+    "restaurants.section.desc": "Descubre espacios culinarios con identidad propia, donde los sabores de Costa Rica se fusionan con técnicas contemporáneas para crear momentos memorables.",
     "restaurants.cta": "Ver menú",
     "restaurants.r1.name": "María Bonita Steak House",
     "restaurants.r1.desc": "María Bonita Steak House es una fusión de gastronomía, entretenimiento, pasión y arte. Aquí, cada platillo se convierte en un espectáculo. Disfruta de cortes de carne premium cocinados a la perfección en brasas de carbón natural, flambé en mesa con postres, cafés y cócteles, experiencias con fuego, música en vivo. Sumérgete en una experiencia sensorial única en el corazón de La Fortuna.",
@@ -146,6 +147,7 @@ export const ui = {
     "tropic.img.alt": "Rafting en el río Toro, La Fortuna, Costa Rica",
     "tropic.aria": "Tropical Experiences — Tours en La Fortuna",
     // ── Latest Offers
+    "offers.cta": "Reservar",
     "offers.title": "Nuestros Paquetes",
     "offers.copy": "Experiencias diseñadas para parejas, aventureros y amantes de la naturaleza en el corazón de La Fortuna.",
     "offers.p1.title": "Escapada Romántica",
@@ -341,6 +343,7 @@ export const ui = {
     // ── Restaurants
     "restaurants.section.kicker": "Gastronomy",
     "restaurants.section.title": "Flavors That Become Memories",
+    "restaurants.section.desc": "Discover culinary spaces with their own identity, where the flavors of Costa Rica blend with contemporary techniques to create memorable moments.",
     "restaurants.cta": "View menu",
     "restaurants.r1.name": "María Bonita Steak House",
     "restaurants.r1.desc": "María Bonita Steak House is a fusion of gastronomy, entertainment, passion, and art. Here, every dish becomes a spectacle. Enjoy premium cuts of meat cooked to perfection on natural charcoal grills, tableside flambé desserts, coffees and cocktails, fire experiences, and live music. Immerse yourself in a unique sensory experience in the heart of La Fortuna.",
@@ -382,6 +385,7 @@ export const ui = {
     "tropic.img.alt": "Whitewater rafting on the Toro River, La Fortuna, Costa Rica",
     "tropic.aria": "Tropical Experiences — Tours in La Fortuna",
     // ── Latest Offers
+    "offers.cta": "Book",
     "offers.title": "Our Packages",
     "offers.copy": "Experiences designed for couples, adventurers, and nature lovers in the heart of La Fortuna.",
     "offers.p1.title": "Romantic Getaway",
