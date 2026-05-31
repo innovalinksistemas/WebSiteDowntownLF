@@ -1,24 +1,7 @@
 ---
-/**
- * Hero.astro
- * ─────────────────────────────────────────────────────────────
- * PRIORIDAD: Conversión → reservas directas
- * AUDIENCIA:  Turistas internacionales (aventura / naturaleza)
- * MEDIA:      Imagen estática + Ken Burns HOY
- *             Arquitectura lista para video cuando esté disponible
- *
- * Para activar video cuando esté listo:
- *   1. Coloca los archivos en /public/video/hero.mp4 y hero.webm
- *   2. Cambia VIDEO_READY = true
- *   3. El video se carga como segunda capa; la imagen sigue como poster
- * ─────────────────────────────────────────────────────────────
- */
-
-const VIDEO_READY = false; // ← cambiar a true cuando haya video profesional
-
-// Urgencia dinámica — en producción conectar con disponibilidad real
-const ROOMS_LEFT = 3;
-const CHECKIN_LABEL = "Disponible esta noche";
+import { useTranslations } from "../i18n/utils";
+const t = useTranslations(Astro.currentLocale);
+const VIDEO_READY = false;
 ---
 
 <section
@@ -26,26 +9,11 @@ const CHECKIN_LABEL = "Disponible esta noche";
   aria-label="La Fortuna Downtown Hotel — Hero"
 >
 
-  <!-- ═══════════════════════════════════════════════════
-       CAPA 1: Imagen de fondo (Ken Burns con GSAP)
-       Reemplazar src por imagen real del hotel en WebP
-       Usar srcset para responsive (400/800/1600/2400w)
-  ═══════════════════════════════════════════════════ -->
+  
   <picture>
-    <source
-      type="image/webp"
-      srcset="
-        /images/hero-400.webp   400w,
-        /images/hero-800.webp   800w,
-        /images/hero-1600.webp 1600w,
-        /images/hero-2400.webp 2400w
-      "
-      sizes="100vw"
-    />
-    <!-- Fallback JPG / placeholder Unsplash mientras no haya foto propia -->
     <img
-      src="https://images.unsplash.com/photo-1589385680218-7e2f8fca0bd3?auto=format&fit=crop&w=2400&q=80"
-      alt="Vista del Volcán Arenal al amanecer desde La Fortuna Downtown Hotel, Costa Rica"
+      src="/images/hero.jpg"
+      alt={t("hero.img.alt")}
       class="hero-bg absolute inset-0 h-full w-full object-cover"
       loading="eager"
       fetchpriority="high"
@@ -55,15 +23,7 @@ const CHECKIN_LABEL = "Disponible esta noche";
     />
   </picture>
 
-  <!-- ═══════════════════════════════════════════════════
-       CAPA 2: Video de fondo (se activa con VIDEO_READY)
-       Requisitos del video:
-         · Duración loop: 20–30 s
-         · Resolución: 1920×1080 mínimo
-         · Peso máximo: 8 MB (VP9/WebM) + 12 MB (H.264/MP4)
-         · Sin audio (muted es obligatorio para autoplay)
-         · Evitar texto o elementos UI en el video
-  ═══════════════════════════════════════════════════ -->
+  
   {VIDEO_READY && (
     <video
       class="hero-video absolute inset-0 h-full w-full object-cover"
@@ -81,52 +41,40 @@ const CHECKIN_LABEL = "Disponible esta noche";
     </video>
   )}
 
-  <!-- ═══════════════════════════════════════════════════
-       CAPAS DE COMPOSICIÓN
-  ═══════════════════════════════════════════════════ -->
+  
   <div class="hero-overlay absolute inset-0" aria-hidden="true"></div>
   <div class="hero-vignette absolute inset-0" aria-hidden="true"></div>
   <div class="hero-grain absolute inset-0" aria-hidden="true"></div>
 
-  <!-- ═══════════════════════════════════════════════════
-       CONTENIDO PRINCIPAL
-       Jerarquía de neuromarketing:
-         1. Kicker   → ancla geográfica concreta (imagen mental)
-         2. H1       → nombre de marca + promesa de ubicación
-         3. Tagline  → beneficio emocional (no genérico)
-         4. Trust    → prueba social + urgencia (FOMO)
-         5. CTAs     → primario (reserva) + secundario (explorar)
-  ═══════════════════════════════════════════════════ -->
+  
   <div class="relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col justify-center px-6 py-24 text-center sm:px-10">
 
-    <!-- 1. Kicker — imagen mental concreta, NO genérica -->
+    
     <p class="hero-kicker hero-anim mb-4">
-      En el corazón de las experiencias
+      {t("hero.kicker")}
     </p>
 
-    <!-- 2. H1 — marca + propuesta de valor de ubicación -->
+    
     <h1 class="hero-title hero-anim mb-6">
       LA FORTUNA<br />DOWNTOWN
     </h1>
 
-    <!-- 3. Tagline — beneficio emocional específico -->
-    <p class="hero-tagline hero-anim mb-8">
-      UNA EXPERIENCIA ÚNICA DE HOSPEDAJE EN LA FORTUNA
-    </p>
+    
+  
 
-    <!-- 4. Trust bar — prueba social + escasez (FOMO) -->
-    <div class="hero-trust hero-anim mb-10" aria-label="Calificaciones y disponibilidad">
+    
+    <div class="hero-trust hero-anim mb-10" aria-label={t("hero.trust.aria")}>
       <div class="hero-trust-inner">
 
-        <!-- Rating Booking -->
+        
         <div class="hero-trust-item">
-          <span class="hero-trust-score">8.2</span>
+          <span class="hero-trust-score">8.1</span>
           <span class="hero-trust-label">Booking.com</span>
         </div>
 
         <div class="hero-trust-divider" aria-hidden="true"></div>
 
-        <!-- Rating TripAdvisor -->
+        
         <div class="hero-trust-item">
           <span class="hero-trust-score">★ 4.4</span>
           <span class="hero-trust-label">TripAdvisor</span>
@@ -134,60 +82,56 @@ const CHECKIN_LABEL = "Disponible esta noche";
 
         <div class="hero-trust-divider" aria-hidden="true"></div>
 
-        <!-- Urgencia — escasez real -->
-        <div class="hero-trust-item">
+        
+        <div class="hero-trust-item" id="hero-availability-block">
           <span class="hero-trust-score hero-trust-urgent">
-            <span class="hero-urgency-dot" aria-hidden="true"></span>
-            {ROOMS_LEFT} habitaciones disponibles
+            <span class="hero-urgency-dot" id="hero-avail-dot" aria-hidden="true"></span>
+            <span id="hero-avail-text">{t("hero.avail.checking")}</span>
           </span>
-          <span class="hero-trust-label">{CHECKIN_LABEL}</span>
+          <span class="hero-trust-label" id="hero-avail-label">{t("hero.avail.label")}</span>
         </div>
 
       </div>
     </div>
 
-    <!-- 5. CTAs — primario directo a reserva, secundario a explorar -->
+    
     <div class="hero-actions hero-anim flex flex-col items-center justify-center gap-3 sm:flex-row">
 
-      <!-- CTA Primario: máxima fricción removida, acción clara -->
+      
       <a
         href="#habitaciones"
         class="hero-btn hero-btn-primary"
-        aria-label="Ver habitaciones disponibles y reservar"
+        aria-label={t("hero.btn.book.aria")}
       >
-        Reserva tu estancia
+        {t("hero.btn.book")}
       </a>
 
-      <!-- CTA Secundario: para usuarios en fase de consideración -->
+      
       <a
         href="#explorar"
         class="hero-btn hero-btn-outline"
-        aria-label="Explorar el hotel y sus experiencias"
+        aria-label={t("hero.btn.explore.aria")}
       >
-        Descubre el hotel
+        {t("hero.btn.explore")}
       </a>
 
     </div>
 
-    <!-- Micro-copy de confianza bajo los CTAs (reduce ansiedad de compra) -->
+    
     <p class="hero-microcopy hero-anim mt-4">
-      Mejor precio garantizado · Cancelación gratuita · Sin gastos ocultos
+      {t("hero.microcopy")}
     </p>
 
   </div>
 
-  <!-- ═══════════════════════════════════════════════════
-       ESTADO DEL VOLCÁN — prueba social ambiental
-       Ancla la experiencia geográfica en tiempo real
-       En producción: conectar con API meteorológica o CMS
-  ═══════════════════════════════════════════════════ -->
+  
   <div
     class="hero-status hero-anim absolute bottom-8 left-6 z-10 flex items-center gap-3"
     aria-label="Condiciones actuales en La Fortuna"
   >
     <div class="hero-status-line" aria-hidden="true"></div>
     <div>
-      <p class="hero-status-label">Arenal Volcano</p>
+      <p class="hero-status-label">{t("hero.weather.label")}</p>
       <p class="hero-status-value">
         <span class="hero-live-dot" aria-hidden="true"></span>
         <span id="hero-weather-text">· · ·</span>
@@ -195,15 +139,12 @@ const CHECKIN_LABEL = "Disponible esta noche";
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════
-       FAB — Contacto / WhatsApp
-       Reemplazar href por wa.me/+506XXXXXXXX para WhatsApp
-  ═══════════════════════════════════════════════════ -->
+  
   <a
     href="https://wa.me/50685274677"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Contactar al hotel por WhatsApp"
+    aria-label={t("hero.whatsapp.aria")}
     class="hero-fab hero-anim absolute bottom-8 right-6 z-10 grid h-14 w-14 place-items-center rounded-full"
   >
     <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true">
@@ -212,7 +153,7 @@ const CHECKIN_LABEL = "Disponible esta noche";
     <span class="sr-only">Contactar al hotel por WhatsApp</span>
   </a>
 
-  <!-- Scroll indicator — invita a continuar explorando -->
+  
   <div class="hero-scroll-indicator hero-anim absolute bottom-8 left-1/2 z-10 -translate-x-1/2 hidden flex-col items-center gap-1 sm:flex" aria-hidden="true">
     <span class="hero-scroll-label">Scroll</span>
     <span class="hero-scroll-arrow"></span>
@@ -333,6 +274,41 @@ const CHECKIN_LABEL = "Disponible esta noche";
     }
 
     updateWeather();
+  })();
+
+  /* ─── Disponibilidad real — CloudBeds ──────────────── */
+  (async () => {
+    const dot   = document.getElementById('hero-avail-dot');
+    const text  = document.getElementById('hero-avail-text');
+    const label = document.getElementById('hero-avail-label');
+    if (!dot || !text || !label) return;
+
+    try {
+      const res  = await fetch('https://cloudbeds-service.onrender.com/availability');
+      const data = await res.json();
+      const { available, available_rooms } = data;
+
+      const hoy = new Intl.DateTimeFormat('es-CR', {
+        weekday: 'long', day: 'numeric', month: 'long',
+        timeZone: 'America/Costa_Rica'
+      }).format(new Date());
+      const hoyLabel = `Hoy, ${hoy.charAt(0).toUpperCase() + hoy.slice(1)}`;
+
+      if (available) {
+        dot.style.background = '#4ade80';
+        dot.style.boxShadow  = '0 0 6px #4ade80';
+        text.textContent  = `${available_rooms} habitaciones disponibles`;
+        label.textContent = hoyLabel;
+      } else {
+        dot.style.background = '#f87171';
+        dot.style.boxShadow  = '0 0 6px #f87171';
+        text.textContent  = 'Sin disponibilidad';
+        label.textContent = hoyLabel;
+      }
+    } catch {
+      text.textContent  = 'Disponibilidad no cargada';
+      label.textContent = 'Intenta más tarde';
+    }
   })();
 
   /* ─── Urgency dot: parpadeo de "en vivo" ────────────── */

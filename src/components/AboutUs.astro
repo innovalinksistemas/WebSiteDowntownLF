@@ -1,28 +1,25 @@
+---
+import { useTranslations } from "../i18n/utils";
+const t = useTranslations(Astro.currentLocale);
+---
+
 <section id="explorar" class="about-us-section">
   <div class="about-us-inner">
-    <p class="about-us-kicker">La Fortuna Downtown</p>
+    <p class="about-us-kicker">{t("about.kicker")}</p>
 
     <div class="about-us-title-wrap">
       <span class="about-us-line" aria-hidden="true"></span>
-      <h2 class="about-us-title">En el corazón de las experiencias</h2>
+      <h2 class="about-us-title">{t("about.title")}</h2>
       <span class="about-us-line" aria-hidden="true"></span>
     </div>
 
     <p class="about-us-copy">
-      La Fortuna Downtown Boutique Hotel es el hotel más céntrico de La Fortuna,
-      Costa Rica, ofreciéndote una experiencia única con comodidad y estilo.
-      Disfruta de fácil acceso a atracciones como el Volcán Arenal, la Catarata
-      Río Fortuna y aguas termales. Entendemos que cada viajero es único, por
-      eso brindamos servicios personalizados y experiencias inolvidables, ya sea
-      explorando la naturaleza, disfrutando de actividades o relajándote.
-      Además, nuestro equipo de expertos locales te ayudará a planificar tu
-      aventura y descubrir la esencia de este destino icónico. ¡Tu escapada
-      perfecta comienza aquí!
+      {t("about.copy")}
     </p>
 
     <div
       class="about-us-ratings"
-      aria-label="Calificaciones del hotel en plataformas de viajes"
+      aria-label={t("about.ratings.aria")}
     >
       <div class="about-us-ratings-grid">
         <article class="about-us-rating-item">
@@ -37,7 +34,7 @@
 
         <article class="about-us-rating-item">
           <p class="about-us-rating-source">Booking.com</p>
-          <p class="about-us-rating-value">8.2<span>/10</span></p>
+          <p class="about-us-rating-value">8.1<span>/10</span></p>
         </article>
 
         <article class="about-us-rating-item">
@@ -51,7 +48,7 @@
       <div class="responsive-iframe-container">
         <iframe
           src="https://www.youtube.com/embed/c8maA-QJGYc"
-          title="Recorrido por La Fortuna Downtown Hotel Boutique | En el corazón de las experiencias. 🌋"
+          title={t("about.video.title")}
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin"
