@@ -236,15 +236,15 @@ body.menu-open {
 }
 
 .site-header.is-scrolled .header-season {
-	color: #2d6234 !important;
-	background: rgba(42, 90, 50, 0.12);
-	border: 1px solid rgba(42, 90, 50, 0.3);
+	color: #fff !important;
+	background: #3a7d44;
+	border: 1px solid #3a7d44;
 }
 
 .site-header.is-scrolled .header-season:hover {
 	color: #fff !important;
-	background: #3a7d44;
-	border-color: #3a7d44;
+	background: #2d6234;
+	border-color: #2d6234;
 }
 
 /* ══════════════════════════════════════════════════════════
