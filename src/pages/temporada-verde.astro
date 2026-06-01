@@ -1,0 +1,592 @@
+---
+import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+
+const packages = [
+  {
+    id: 'ecotermales',
+    name: 'Hospedaje + Ecotermales',
+    tagline: 'Aguas termales naturales cerca del Volcán Arenal',
+    image: 'https://cdn.arenalcloud.com/arenal-a65b6eb9-29d7-4dec-9784-b1b37ff7dfce-downtown/_MG_6736_028d1d9a.JPG',
+    price: '₡135.000',
+    priceSub: 'por pareja en ocupación doble',
+    validity: 'Válido 1 jun – 30 ago 2026',
+    href: '/ecotermales',
+    includes: [
+      'Alojamiento 1 noche en Downtown La Fortuna',
+      'Pase del día a Ecotermales',
+      'Desayuno incluido',
+      'Bebida de bienvenida',
+      'Cocteles 2×1 de 12:00–5:00 p.m.',
+      'Parqueo privado gratuito',
+    ],
+    cta: 'Ver paquete Ecotermales',
+  },
+  {
+    id: 'baldi',
+    name: 'Hospedaje + Baldi Hot Springs',
+    tagline: '25 piscinas termales, toboganes y buffet todo el día',
+    image: 'https://i.ibb.co/Xr70WzXY/baldi3.png',
+    price: '₡49.800',
+    priceSub: 'por persona · i.i.',
+    validity: 'Válido 10 abr – 30 jun 2026',
+    href: '/baldi',
+    includes: [
+      'Alojamiento 1 noche en Downtown La Fortuna',
+      'Pase del día en Baldi (10AM–10PM)',
+      'Desayuno, almuerzo y cena en Baldi',
+      'Bebida de bienvenida',
+      'Cocteles 2×1 de 12:00–5:00 p.m.',
+      'Parqueo privado gratuito',
+    ],
+    cta: 'Ver paquete Baldi',
+  },
+];
+
+const trust = [
+  { icon: '🏨', label: 'Reserva directa', sub: 'Sin intermediarios' },
+  { icon: '💰', label: 'Mejor precio garantizado', sub: 'Solo reservando con nosotros' },
+  { icon: '✅', label: 'Cancelación flexible', sub: 'Sin cargo con +30 días de anticipación' },
+  { icon: '🇨🇷', label: 'Solo para nacionales y residentes', sub: 'Cédula CR o residencia vigente' },
+];
+---
+
+<Layout
+  title="Temporada Verde 2026 | Paquetes para Nacionales – Downtown La Fortuna"
+  description="Paquetes exclusivos de Temporada Verde para costarricenses y residentes: Hospedaje + Ecotermales desde ₡135.000 por pareja o Hospedaje + Baldi desde ₡49.800 por persona. Reserva directa en Downtown La Fortuna Boutique Hotel."
+>
+  <main class="tv-main">
+
+    <!-- ── HERO ──────────────────────────────────────── -->
+    <section class="tv-hero">
+      <div class="tv-hero-bg" aria-hidden="true"></div>
+      <div class="tv-hero-overlay" aria-hidden="true"></div>
+      <div class="tv-hero-content">
+        <p class="tv-eyebrow">Downtown Boutique Hotel · La Fortuna</p>
+        <h1 class="tv-hero-title">Temporada<br/><em>Verde</em></h1>
+        <p class="tv-hero-sub">Ofertas exclusivas para nacionales y residentes de Costa Rica</p>
+        <div class="tv-hero-badge">
+          <span class="tv-badge-dot" aria-hidden="true"></span>
+          Mayo · Noviembre · Naturaleza en su máximo esplendor
+        </div>
+        <a href="#paquetes" class="tv-btn tv-btn--primary">Ver paquetes</a>
+      </div>
+      <!-- hojas decorativas -->
+      <div class="tv-hero-flora" aria-hidden="true">
+        <svg class="tv-leaf tv-leaf--l1" viewBox="0 0 60 100" fill="none"><path d="M30 95C30 95 5 70 5 40C5 18 16 5 30 5C44 5 55 18 55 40C55 70 30 95 30 95Z" fill="#2d6234" opacity="0.35"/><line x1="30" y1="95" x2="30" y2="22" stroke="#1e4a24" stroke-width="2" opacity="0.4"/></svg>
+        <svg class="tv-leaf tv-leaf--l2" viewBox="0 0 50 85" fill="none"><path d="M25 80C25 80 3 58 3 33C3 14 13 3 25 3C37 3 47 14 47 33C47 58 25 80 25 80Z" fill="#3a7d44" opacity="0.25"/><line x1="25" y1="80" x2="25" y2="18" stroke="#2d6234" stroke-width="1.5" opacity="0.35"/></svg>
+        <svg class="tv-leaf tv-leaf--r1" viewBox="0 0 55 92" fill="none"><path d="M27 88C27 88 4 65 4 37C4 16 14 4 27 4C40 4 50 16 50 37C50 65 27 88 27 88Z" fill="#4a9c5d" opacity="0.2"/><line x1="27" y1="88" x2="27" y2="20" stroke="#3a7d44" stroke-width="1.5" opacity="0.3"/></svg>
+        <svg class="tv-leaf tv-leaf--r2" viewBox="0 0 42 72" fill="none"><path d="M21 68C21 68 2 50 2 28C2 12 10 2 21 2C32 2 40 12 40 28C40 50 21 68 21 68Z" fill="#2d6234" opacity="0.3"/><line x1="21" y1="68" x2="21" y2="15" stroke="#1e4a24" stroke-width="1.2" opacity="0.4"/></svg>
+      </div>
+    </section>
+
+    <!-- ── INTRO ─────────────────────────────────────── -->
+    <section class="tv-intro">
+      <div class="tv-container tv-container--narrow">
+        <p class="tv-intro-text">
+          La temporada de lluvia transforma La Fortuna en un paraíso verde. Cascadas más caudalosas,
+          volcán envuelto en niebla mística y la naturaleza en todo su esplendor.
+          Por eso creamos paquetes especiales <strong>solo para costarricenses y residentes</strong>,
+          para que disfruten su país al mejor precio.
+        </p>
+        <p class="tv-nationals-note">
+          <span class="tv-cr-flag" aria-hidden="true">🇨🇷</span>
+          Presentación de cédula costarricense o residencia vigente requerida al momento del check-in.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── PAQUETES ───────────────────────────────────── -->
+    <section class="tv-packages" id="paquetes">
+      <div class="tv-container">
+        <p class="tv-section-eyebrow">Elige tu experiencia</p>
+        <h2 class="tv-section-title">Paquetes Temporada Verde</h2>
+
+        <div class="tv-packages-grid">
+          {packages.map((pkg) => (
+            <article class="tv-card">
+              <div class="tv-card-media">
+                <img src={pkg.image} alt={pkg.name} loading="lazy" decoding="async" />
+                <div class="tv-card-badge-nationals">Solo nacionales / residentes</div>
+                <div class="tv-card-validity">{pkg.validity}</div>
+              </div>
+              <div class="tv-card-body">
+                <h3 class="tv-card-title">{pkg.name}</h3>
+                <p class="tv-card-tagline">{pkg.tagline}</p>
+
+                <ul class="tv-card-includes">
+                  {pkg.includes.map((item) => (
+                    <li>
+                      <span class="tv-check" aria-hidden="true">✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                <div class="tv-card-price-wrap">
+                  <span class="tv-card-from">desde</span>
+                  <span class="tv-card-price">{pkg.price}</span>
+                  <span class="tv-card-price-sub">{pkg.priceSub}</span>
+                </div>
+
+                <a href={pkg.href} class="tv-btn tv-btn--card">
+                  {pkg.cta}
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TRUST BAR ──────────────────────────────────── -->
+    <section class="tv-trust">
+      <div class="tv-container">
+        <div class="tv-trust-grid">
+          {trust.map((item) => (
+            <div class="tv-trust-item">
+              <span class="tv-trust-icon" aria-hidden="true">{item.icon}</span>
+              <strong class="tv-trust-label">{item.label}</strong>
+              <span class="tv-trust-sub">{item.sub}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+/* ── Variables locales ───────────────────────────────────── */
+:root {
+  --tv-green:     #3a7d44;
+  --tv-green-dk:  #2d6234;
+  --tv-gold:      #c9a84c;
+  --tv-base:      #0c1114;
+  --tv-surface:   #131a1e;
+  --tv-cream:     #f4eee3;
+}
+
+.tv-main { background: var(--tv-base); color: var(--tv-cream); }
+
+/* ── HERO ────────────────────────────────────────────────── */
+.tv-hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+}
+
+.tv-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://cdn.arenalcloud.com/arenal-a65b6eb9-29d7-4dec-9784-b1b37ff7dfce-downtown/DJI_0333_copia_c93de22e.jpg');
+  background-size: cover;
+  background-position: center 40%;
+  transform: scale(1.04);
+}
+
+.tv-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(10, 18, 12, 0.82) 0%,
+    rgba(12, 17, 14, 0.75) 50%,
+    rgba(10, 18, 12, 0.88) 100%
+  );
+}
+
+.tv-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.tv-eyebrow {
+  margin: 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--tv-gold);
+}
+
+.tv-hero-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.tv-hero-title em {
+  font-style: italic;
+  color: #a8d8b0;
+}
+
+.tv-hero-sub {
+  margin: 0;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: rgba(244, 238, 227, 0.7);
+  max-width: 38ch;
+}
+
+.tv-hero-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid rgba(58, 125, 68, 0.5);
+  border-radius: 99px;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a8d8b0;
+  background: rgba(58, 125, 68, 0.12);
+}
+
+.tv-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  animation: tvPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes tvPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* ── Hojas decorativas del hero ──────────────────────────── */
+.tv-hero-flora {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.tv-leaf {
+  position: absolute;
+  bottom: 0;
+}
+
+.tv-leaf--l1 { left: 2%;  width: clamp(60px, 8vw, 110px); transform-origin: bottom left;  transform: rotate(-18deg); }
+.tv-leaf--l2 { left: 10%; width: clamp(45px, 6vw, 80px);  transform-origin: bottom left;  transform: rotate(-8deg);  bottom: -10px; }
+.tv-leaf--r1 { right: 3%; width: clamp(55px, 7vw, 100px); transform-origin: bottom right; transform: rotate(15deg);  }
+.tv-leaf--r2 { right: 11%;width: clamp(40px, 5vw, 70px);  transform-origin: bottom right; transform: rotate(6deg);   bottom: -8px; }
+
+/* ── Botones ─────────────────────────────────────────────── */
+.tv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.tv-btn--primary {
+  padding: 0.9rem 2.2rem;
+  background: var(--tv-green);
+  color: #fff;
+  border: 1px solid var(--tv-green);
+}
+
+.tv-btn--primary:hover {
+  background: var(--tv-green-dk);
+  transform: translateY(-2px);
+}
+
+.tv-btn--card {
+  padding: 0.8rem 1.6rem;
+  background: transparent;
+  color: var(--tv-gold);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  margin-top: auto;
+}
+
+.tv-btn--card:hover {
+  background: var(--tv-gold);
+  color: #0c1114;
+  border-color: var(--tv-gold);
+}
+
+/* ── Layout helpers ──────────────────────────────────────── */
+.tv-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+}
+
+.tv-container--narrow { max-width: 720px; }
+
+/* ── INTRO ───────────────────────────────────────────────── */
+.tv-intro {
+  padding: clamp(3rem, 6vw, 5rem) 0 clamp(2rem, 4vw, 3.5rem);
+  text-align: center;
+  border-bottom: 1px solid rgba(244, 238, 227, 0.07);
+}
+
+.tv-intro-text {
+  margin: 0 0 1.4rem;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.75;
+  color: rgba(244, 238, 227, 0.72);
+}
+
+.tv-intro-text strong { color: var(--tv-cream); font-weight: 600; }
+
+.tv-nationals-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid rgba(58, 125, 68, 0.35);
+  border-radius: 99px;
+  font-size: 0.8rem;
+  color: #a8d8b0;
+  background: rgba(58, 125, 68, 0.08);
+}
+
+/* ── PAQUETES ────────────────────────────────────────────── */
+.tv-packages {
+  padding: clamp(3.5rem, 7vw, 6rem) 0;
+}
+
+.tv-section-eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--tv-gold);
+  text-align: center;
+}
+
+.tv-section-title {
+  margin: 0 0 clamp(2.5rem, 5vw, 4rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 300;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+
+.tv-packages-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/* ── Card ────────────────────────────────────────────────── */
+.tv-card {
+  background: var(--tv-surface);
+  border: 1px solid rgba(244, 238, 227, 0.07);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.tv-card:hover {
+  border-color: rgba(58, 125, 68, 0.4);
+  transform: translateY(-4px);
+}
+
+.tv-card-media {
+  position: relative;
+  height: clamp(200px, 28vw, 320px);
+  overflow: hidden;
+}
+
+.tv-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.55s ease;
+}
+
+.tv-card:hover .tv-card-media img { transform: scale(1.04); }
+
+.tv-card-badge-nationals {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.3rem 0.8rem;
+  background: rgba(10, 18, 12, 0.85);
+  border: 1px solid rgba(58, 125, 68, 0.6);
+  border-radius: 99px;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #a8d8b0;
+  backdrop-filter: blur(4px);
+}
+
+.tv-card-validity {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 0.25rem 0.7rem;
+  background: rgba(10, 18, 12, 0.8);
+  border-radius: 4px;
+  font-size: 0.65rem;
+  color: rgba(244, 238, 227, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.tv-card-body {
+  padding: clamp(1.4rem, 3vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+.tv-card-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.tv-card-tagline {
+  margin: 0;
+  font-size: 0.85rem;
+  color: rgba(244, 238, 227, 0.5);
+  line-height: 1.5;
+}
+
+.tv-card-includes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.tv-card-includes li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.83rem;
+  color: rgba(244, 238, 227, 0.7);
+  line-height: 1.4;
+}
+
+.tv-check {
+  color: var(--tv-green);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.tv-card-price-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(244, 238, 227, 0.08);
+}
+
+.tv-card-from {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(244, 238, 227, 0.4);
+}
+
+.tv-card-price {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 500;
+  color: #fff;
+  line-height: 1;
+}
+
+.tv-card-price-sub {
+  font-size: 0.72rem;
+  color: rgba(244, 238, 227, 0.45);
+}
+
+/* ── TRUST BAR ───────────────────────────────────────────── */
+.tv-trust {
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
+  background: #0a0c0e;
+  border-top: 1px solid rgba(244, 238, 227, 0.06);
+}
+
+.tv-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.tv-trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.35rem;
+}
+
+.tv-trust-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.tv-trust-label {
+  font-size: 0.82rem;
+  color: var(--tv-cream);
+  font-weight: 600;
+}
+
+.tv-trust-sub {
+  font-size: 0.72rem;
+  color: rgba(244, 238, 227, 0.4);
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .tv-packages-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tv-trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tv-leaf--l2, .tv-leaf--r2 { display: none; }
+}
+
+@media (max-width: 480px) {
+  .tv-trust-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
