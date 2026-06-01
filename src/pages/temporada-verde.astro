@@ -45,10 +45,10 @@ const packages = [
 ];
 
 const trust = [
-  { icon: '🏨', label: 'Reserva directa', sub: 'Sin intermediarios' },
-  { icon: '💰', label: 'Mejor precio garantizado', sub: 'Solo reservando con nosotros' },
-  { icon: '✅', label: 'Cancelación flexible', sub: 'Sin cargo con +30 días de anticipación' },
-  { icon: '🇨🇷', label: 'Solo para nacionales y residentes', sub: 'Cédula CR o residencia vigente' },
+  { label: 'Reserva directa', sub: 'Sin intermediarios' },
+  { label: 'Mejor precio garantizado', sub: 'Solo reservando con nosotros' },
+  { label: 'Cancelación flexible', sub: 'Sin cargo con +30 días de anticipación' },
+  { label: 'Solo para nacionales y residentes', sub: 'Cédula CR o residencia vigente' },
 ];
 ---
 
@@ -91,7 +91,6 @@ const trust = [
           para que disfruten su país al mejor precio.
         </p>
         <p class="tv-nationals-note">
-          <span class="tv-cr-flag" aria-hidden="true">🇨🇷</span>
           Presentación de cédula costarricense o residencia vigente requerida al momento del check-in.
         </p>
       </div>
@@ -108,7 +107,7 @@ const trust = [
             <article class="tv-card">
               <div class="tv-card-media">
                 <img src={pkg.image} alt={pkg.name} loading="lazy" decoding="async" />
-                <div class="tv-card-badge-nationals">Solo nacionales / residentes</div>
+                <div class="tv-card-badge-nationals">Solo nacionales · residentes</div>
                 <div class="tv-card-validity">{pkg.validity}</div>
               </div>
               <div class="tv-card-body">
@@ -147,7 +146,6 @@ const trust = [
         <div class="tv-trust-grid">
           {trust.map((item) => (
             <div class="tv-trust-item">
-              <span class="tv-trust-icon" aria-hidden="true">{item.icon}</span>
               <strong class="tv-trust-label">{item.label}</strong>
               <span class="tv-trust-sub">{item.sub}</span>
             </div>
@@ -357,16 +355,11 @@ const trust = [
 .tv-intro-text strong { color: var(--tv-cream); font-weight: 600; }
 
 .tv-nationals-note {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
   margin: 0;
-  padding: 0.6rem 1.4rem;
-  border: 1px solid rgba(58, 125, 68, 0.35);
-  border-radius: 99px;
-  font-size: 0.8rem;
-  color: #a8d8b0;
-  background: rgba(58, 125, 68, 0.08);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: rgba(244, 238, 227, 0.35);
+  font-style: italic;
 }
 
 /* ── PAQUETES ────────────────────────────────────────────── */
@@ -435,13 +428,13 @@ const trust = [
   top: 1rem;
   left: 1rem;
   padding: 0.3rem 0.8rem;
-  background: rgba(10, 18, 12, 0.85);
-  border: 1px solid rgba(58, 125, 68, 0.6);
-  border-radius: 99px;
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
+  background: rgba(10, 18, 12, 0.78);
+  border: 1px solid rgba(244, 238, 227, 0.15);
+  border-radius: 2px;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #a8d8b0;
+  color: rgba(244, 238, 227, 0.55);
   backdrop-filter: blur(4px);
 }
 
@@ -544,31 +537,33 @@ const trust = [
 .tv-trust-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  gap: 0;
 }
 
 .tv-trust-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.35rem;
+  gap: 0.3rem;
+  padding: 0 clamp(1rem, 3vw, 2.5rem);
+  border-right: 1px solid rgba(244, 238, 227, 0.08);
 }
 
-.tv-trust-icon {
-  font-size: 1.6rem;
-  line-height: 1;
-}
+.tv-trust-item:first-child { padding-left: 0; }
+.tv-trust-item:last-child  { border-right: none; }
 
 .tv-trust-label {
-  font-size: 0.82rem;
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+  font-weight: 400;
+  font-style: italic;
   color: var(--tv-cream);
-  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 .tv-trust-sub {
   font-size: 0.72rem;
-  color: rgba(244, 238, 227, 0.4);
+  letter-spacing: 0.06em;
+  color: rgba(244, 238, 227, 0.35);
 }
 
 /* ── Responsive ──────────────────────────────────────────── */
