@@ -37,12 +37,6 @@ const switchAria = t("lang.switch.aria");
       ))}
       <a href={seasonHref} class="header-link header-season" aria-label={seasonLabel}>
         <span class="season-text">{seasonLabel}</span>
-        <!-- hojas SVG -->
-        <span class="season-flora" aria-hidden="true">
-          <svg class="season-leaf season-leaf--1" viewBox="0 0 24 40" fill="none"><path d="M12 38C12 38 2 28 2 16C2 8 7 2 12 2C17 2 22 8 22 16C22 28 12 38 12 38Z" fill="currentColor" opacity="0.9"/><line x1="12" y1="38" x2="12" y2="10" stroke="currentColor" stroke-width="1.2" opacity="0.5"/></svg>
-          <svg class="season-leaf season-leaf--2" viewBox="0 0 20 34" fill="none"><path d="M10 32C10 32 1 24 1 13C1 6 5.5 1 10 1C14.5 1 19 6 19 13C19 24 10 32 10 32Z" fill="currentColor" opacity="0.75"/><line x1="10" y1="32" x2="10" y2="8" stroke="currentColor" stroke-width="1" opacity="0.45"/></svg>
-          <svg class="season-leaf season-leaf--3" viewBox="0 0 18 30" fill="none"><path d="M9 28C9 28 1 21 1 12C1 5.5 4.5 1 9 1C13.5 1 17 5.5 17 12C17 21 9 28 9 28Z" fill="currentColor" opacity="0.85"/><line x1="9" y1="28" x2="9" y2="7" stroke="currentColor" stroke-width="1" opacity="0.5"/></svg>
-        </span>
         <!-- gotas de lluvia -->
         <span class="season-rain" aria-hidden="true">
           {Array.from({length: 8}).map((_, i) => (
