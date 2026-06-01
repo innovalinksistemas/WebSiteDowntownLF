@@ -1,0 +1,840 @@
+---
+import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+
+const includes = [
+  'Alojamiento 1 noche en Downtown La Fortuna Boutique Hotel',
+  'Pase del día en Baldi Hot Springs (10AM – 10PM)',
+  'Acceso a 25 piscinas termales, toboganes y sauna',
+  'Desayuno (a la carta o buffet)',
+  'Almuerzo y Cena en Baldi Hot Springs (estilo buffet)',
+  'Bebida de bienvenida',
+  'Cocteles 2×1 en Selva Negra Bar o María Bonita · 12 m.d.–5 p.m.',
+  'Parqueo privado gratuito',
+  'Acceso a piscina del hotel',
+  'WiFi gratuito en todas las instalaciones',
+];
+
+const pricing = [
+  { label: 'Adulto',         sub: 'por persona · ocupación doble', price: '₡49.800', highlight: true  },
+  { label: 'Niño 6–10 años', sub: 'precio especial por niño',      price: '₡35.000', highlight: false },
+  { label: 'Niño 0–5 años',  sub: 'sin costo adicional',           price: 'GRATIS',  highlight: false },
+];
+
+const rooms = [
+  { name: 'Standard Doble',  img: 'https://i.ibb.co/SwhzWkZR/Estandar-Doble4.png', tag: 'Doble' },
+  { name: 'Standard Triple', img: 'https://i.ibb.co/PGZPHP1N/Estandar-Doble3.png', tag: 'Triple' },
+  { name: 'Superior',        img: 'https://i.ibb.co/kshJL68d/superior3.png',       tag: 'Superior' },
+  { name: 'Tropical Family', img: 'https://i.ibb.co/gbVPz97Z/tropical3.png',        tag: 'Familiar' },
+];
+
+const policies = [
+  { color: '#4ade80', range: 'Más de 30 días antes del ingreso',     charge: 'Sin cargo · cancelación gratuita' },
+  { color: '#facc15', range: 'Entre 15 y 30 días antes del ingreso', charge: 'Cargo del 50% del total de la reserva' },
+  { color: '#f87171', range: 'Menos de 15 días antes del ingreso',   charge: 'Cargo del 100% del total de la reserva' },
+];
+---
+
+<Layout
+  title="Paquete Hospedaje + Baldi Hot Springs | ₡49.800 i.i | Downtown La Fortuna"
+  description="Paquete para nacionales en La Fortuna: 1 noche en hotel boutique céntrico + Pase del día en Baldi Hot Springs (10AM–10PM) + Desayuno + Almuerzo y Cena. Desde ₡49.800 i.i por persona. Niños 0–5 GRATIS. Válido del 10 abril al 30 junio 2026."
+  image="https://i.ibb.co/Xr70WzXY/baldi3.png"
+>
+  <Fragment slot="head">
+    <meta name="keywords" content="paquetes La Fortuna Costa Rica, hospedaje aguas termales La Fortuna, Baldi Hot Springs paquete, hotel La Fortuna centro, paquetes nacionales Costa Rica, hotel boutique La Fortuna, Downtown La Fortuna hotel" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="author" content="Downtown La Fortuna Boutique Hotel" />
+    <link rel="alternate" hreflang="es-CR" href="https://lafortunadowntown.com/baldi" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Hotel",
+          "@id": "https://lafortunadowntown.com/#hotel",
+          "name": "Downtown La Fortuna Boutique Hotel",
+          "url": "https://lafortunadowntown.com",
+          "telephone": "+50640002027",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "25 m sur de la iglesia católica La Fortuna",
+            "addressLocality": "La Fortuna de San Carlos",
+            "addressRegion": "Alajuela",
+            "addressCountry": "CR"
+          }
+        },
+        {
+          "@type": "Product",
+          "@id": "https://lafortunadowntown.com/baldi#paquete",
+          "name": "Paquete Hospedaje + Pase del Día Baldi Hot Springs",
+          "description": "1 noche en Downtown La Fortuna Boutique Hotel + Pase del día en Baldi Hot Springs (10AM–10PM, 25 piscinas) + Desayuno + Almuerzo y Cena buffet + Bebida de bienvenida + Cocteles 2×1. Niños 0–5 sin costo.",
+          "image": "https://i.ibb.co/Xr70WzXY/baldi3.png",
+          "offers": {
+            "@type": "Offer",
+            "price": "49800",
+            "priceCurrency": "CRC",
+            "priceValidUntil": "2026-06-30",
+            "availability": "https://schema.org/InStock",
+            "validFrom": "2026-04-10",
+            "validThrough": "2026-06-30"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Qué incluye el paquete Hospedaje + Baldi en La Fortuna?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El paquete incluye: 1 noche de alojamiento, pase del día en Baldi Hot Springs (10AM–10PM, 25 piscinas), desayuno, almuerzo y cena buffet en Baldi, bebida de bienvenida, cocteles 2×1, parqueo y WiFi gratuitos."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto cuesta el paquete Baldi?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "₡49.800 i.i por persona en ocupación doble. Niños 0–5 GRATIS. Niños 6–10: ₡35.000."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Hasta cuándo es válida la oferta?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Válida del 10 de abril al 30 de junio de 2026. Sujeta a disponibilidad."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </Fragment>
+
+  <main>
+
+    
+    <section class="baldi-hero" id="inicio">
+      <div
+        class="baldi-hero-bg"
+        style="background-image:url('https://i.ibb.co/Xr70WzXY/baldi3.png')"
+        aria-hidden="true"
+      ></div>
+      <div class="baldi-hero-overlay" aria-hidden="true"></div>
+
+      <div class="baldi-hero-content">
+        <p class="baldi-hero-eyebrow">Oferta exclusiva para nacionales · La Fortuna</p>
+        <h1 class="baldi-hero-title">
+          Hospedaje +<br/>Pase del Día Baldi
+        </h1>
+        <p class="baldi-hero-from">desde:</p>
+        <p class="baldi-hero-price">₡49.800 <span>i.i</span></p>
+        <p class="baldi-hero-price-sub">por persona en ocupación doble</p>
+
+        <div class="baldi-hero-badge">
+          Hospedaje · Pase a Baldi · Almuerzo · Cena · Desayuno
+        </div>
+
+        <div class="baldi-hero-ctas">
+          <a
+            href="https://wa.me/50685274677?text=Hola,%20me%20interesa%20el%20paquete%20Hospedaje%20+%20Baldi%20(%E2%82%A149.800%20i.i)"
+            class="baldi-btn baldi-btn--primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Reservar Oferta</a>
+          <a href="#detalles" class="baldi-btn baldi-btn--outline">
+            Ver detalles del paquete
+          </a>
+        </div>
+
+        <p class="baldi-hero-finepri">
+          *Válido del 10 de abril al 30 de junio · Niños 0–5 GRATIS · Aplican restricciones*
+        </p>
+      </div>
+    </section>
+
+    
+    <div class="baldi-countdown">
+      <div class="baldi-countdown-inner">
+        <span class="baldi-countdown-label">
+          Válida del 10 de abril al 30 de junio
+        </span>
+        <div class="baldi-countdown-timer">
+          <div class="baldi-cd-unit"><span id="cd-days">--</span><em>Días</em></div>
+          <div class="baldi-cd-sep">:</div>
+          <div class="baldi-cd-unit"><span id="cd-hours">--</span><em>Horas</em></div>
+          <div class="baldi-cd-sep">:</div>
+          <div class="baldi-cd-unit"><span id="cd-mins">--</span><em>Min</em></div>
+          <div class="baldi-cd-sep">:</div>
+          <div class="baldi-cd-unit"><span id="cd-secs">--</span><em>Seg</em></div>
+        </div>
+      </div>
+    </div>
+
+    
+    <section class="baldi-section baldi-why">
+      <div class="baldi-container">
+        <p class="baldi-eyebrow">¿Por qué elegirnos?</p>
+        <h2 class="baldi-section-title">La mejor experiencia al mejor precio</h2>
+        <div class="baldi-why-grid">
+          <div class="baldi-why-card">
+            <div class="baldi-why-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <h3>Mejores precios</h3>
+            <p>Precios especiales para nacionales, mejores que en temporada alta. ¡Ahorra sin sacrificar calidad!</p>
+          </div>
+          <div class="baldi-why-card">
+            <div class="baldi-why-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <h3>Hotel más céntrico</h3>
+            <p>Ubicados en el corazón de La Fortuna, a pasos del parque central y cerca de todas las atracciones.</p>
+          </div>
+          <div class="baldi-why-card">
+            <div class="baldi-why-icon">
+              <svg width="30" height="30" viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="true">
+                <g transform="translate(0,1024) scale(0.1,-0.1)" fill="currentColor" stroke="none">
+                  <path d="M5381 8944 c-46 -8 -123 -27 -172 -44 -473 -158 -822 -565 -935 -1090 -26 -120 -26 -410 0 -530 35 -164 101 -322 194 -465 62 -97 106 -150 259 -307 190 -196 258 -308 283 -465 31 -192 -43 -360 -264 -607 -262 -293 -369 -482 -423 -753 -26 -131 -24 -415 4 -543 86 -396 367 -750 738 -931 118 -57 198 -86 266 -95 56 -7 61 1 23 37 -14 13 -46 51 -71 83 -215 287 -289 649 -197 971 57 199 141 323 367 539 320 306 453 493 543 761 55 167 77 321 71 500 -11 276 -80 495 -230 723 -80 122 -139 193 -301 361 -257 267 -363 456 -402 714 -65 423 183 850 629 1087 26 14 47 28 47 32 0 35 -274 49 -429 22z"/>
+                  <path d="M3640 7749 c-90 -14 -259 -72 -338 -116 -86 -48 -193 -137 -264 -221 -243 -284 -302 -687 -148 -1019 55 -119 98 -178 227 -315 169 -179 211 -251 228 -389 8 -64 -13 -166 -49 -237 -34 -67 -100 -153 -194 -255 -151 -163 -230 -300 -274 -473 -31 -123 -31 -380 0 -496 96 -357 375 -650 729 -766 71 -24 173 -38 173 -25 0 5 -25 33 -56 63 -117 115 -217 299 -250 461 -24 120 -16 278 21 379 47 128 88 183 295 395 249 254 331 374 394 573 139 442 16 896 -338 1247 -188 186 -241 263 -276 400 -37 146 -25 255 47 405 40 82 58 107 137 185 55 54 117 104 155 125 36 19 66 41 69 47 10 32 -164 51 -288 32z"/>
+                  <path d="M7103 7746 c-633 -120 -990 -786 -723 -1345 55 -115 115 -196 241 -327 176 -182 227 -285 217 -436 -10 -136 -65 -237 -219 -404 -125 -134 -183 -213 -235 -319 -64 -132 -85 -223 -91 -390 -5 -125 -2 -152 20 -253 79 -348 324 -634 670 -781 88 -38 220 -71 233 -58 3 3 -27 44 -68 90 -84 97 -126 163 -173 274 -102 237 -83 486 52 690 21 32 119 142 219 244 196 201 284 319 347 464 158 359 113 789 -116 1132 -28 43 -119 148 -202 233 -83 85 -165 176 -183 202 -138 201 -147 429 -25 638 55 93 171 208 271 265 45 26 82 51 82 55 0 31 -202 48 -317 26z"/>
+                  <path d="M5486 4540 c-40 -13 -72 -44 -121 -120 -159 -243 -192 -578 -85 -842 44 -107 105 -207 187 -304 42 -49 84 -102 94 -119 28 -44 25 -107 -6 -144 -37 -44 -82 -55 -194 -48 -345 21 -741 269 -966 607 -177 264 -265 540 -265 828 0 156 14 148 -231 136 l-182 -9 -33 -39 c-19 -21 -47 -73 -63 -115 -76 -201 -64 -387 36 -571 42 -78 74 -119 170 -222 83 -90 102 -134 84 -191 -31 -93 -139 -126 -300 -92 -228 48 -453 168 -617 331 -186 184 -297 403 -343 673 -11 68 -23 127 -27 132 -8 14 -63 11 -239 -11 -749 -95 -1357 -245 -1446 -358 -93 -119 163 -227 751 -316 91 -14 278 -39 415 -55 138 -17 266 -35 286 -40 47 -14 115 -74 140 -124 16 -31 20 -53 17 -94 -9 -104 -66 -146 -307 -226 -264 -89 -408 -163 -462 -238 -69 -97 -11 -211 156 -304 219 -121 688 -256 1180 -339 719 -121 1715 -184 2480 -157 1066 37 2003 184 2600 406 142 53 249 112 317 173 178 164 56 301 -405 458 -93 31 -187 69 -209 85 -110 73 -117 200 -16 296 62 59 106 71 471 124 379 54 439 65 642 115 148 37 272 88 318 131 77 75 -10 156 -243 227 -360 108 -781 184 -1515 271 -22 2 -107 9 -189 15 -170 13 -181 10 -217 -62 -68 -133 -92 -289 -66 -415 32 -149 90 -257 209 -391 93 -104 116 -155 99 -212 -33 -109 -159 -135 -368 -74 -397 115 -730 440 -848 829 -31 101 -55 240 -55 315 0 41 -5 61 -16 71 -13 11 -78 14 -303 16 -157 1 -299 -2 -315 -7z"/>
+                  <path d="M8013 3525 c-56 -24 -70 -79 -29 -120 13 -13 55 -33 97 -45 319 -92 476 -157 602 -250 96 -71 154 -159 156 -235 1 -43 -41 -126 -89 -178 -114 -124 -374 -255 -700 -352 -776 -230 -2136 -374 -3190 -336 -755 27 -1357 85 -1840 176 -41 8 -127 24 -190 35 -718 134 -1228 359 -1306 577 -34 98 -1 188 103 282 111 100 270 173 545 251 190 54 218 70 218 126 0 49 -37 74 -111 74 -129 0 -555 -97 -819 -187 -455 -154 -732 -338 -834 -553 -29 -60 -31 -73 -31 -171 0 -106 0 -107 45 -195 36 -71 63 -107 135 -179 113 -114 232 -193 450 -300 331 -163 769 -299 1350 -420 556 -115 1082 -181 1825 -227 277 -17 1311 -17 1570 0 596 40 908 72 1354 143 750 118 1386 294 1801 499 203 100 326 182 440 292 259 249 269 494 30 728 -245 241 -813 467 -1419 565 -115 18 -122 18 -163 0z"/>
+                </g>
+              </svg>
+            </div>
+            <h3>Termales más grandes</h3>
+            <p>Acceso a Baldi Hot Springs, el complejo termal más grande del mundo con 25 piscinas calentadas por el Volcán Arenal.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="baldi-section baldi-includes-section" id="detalles">
+      <div class="baldi-container">
+        <p class="baldi-eyebrow">Paquete completo</p>
+        <h2 class="baldi-section-title">¿Qué incluye tu paquete?</h2>
+
+        <div class="baldi-feat-grid">
+          <div class="baldi-feat-card">
+            <div class="baldi-feat-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            </div>
+            <h3>Hospedaje de Lujo</h3>
+            <p>1 noche en Downtown La Fortuna Boutique Hotel. Piscina, WiFi y parqueo privado gratuito incluidos.</p>
+          </div>
+          <div class="baldi-feat-card baldi-feat-card--highlight">
+            <div class="baldi-feat-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            </div>
+            <h3>Alimentación completa</h3>
+            <p>Desayuno a la carta + bebida de bienvenida + almuerzo y cena buffet en Baldi + cocteles 2×1 de 12–5 pm.</p>
+          </div>
+          <div class="baldi-feat-card">
+            <div class="baldi-feat-icon">
+              <svg width="30" height="30" viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="true">
+                <g transform="translate(0,1024) scale(0.1,-0.1)" fill="currentColor" stroke="none">
+                  <path d="M5381 8944 c-46 -8 -123 -27 -172 -44 -473 -158 -822 -565 -935 -1090 -26 -120 -26 -410 0 -530 35 -164 101 -322 194 -465 62 -97 106 -150 259 -307 190 -196 258 -308 283 -465 31 -192 -43 -360 -264 -607 -262 -293 -369 -482 -423 -753 -26 -131 -24 -415 4 -543 86 -396 367 -750 738 -931 118 -57 198 -86 266 -95 56 -7 61 1 23 37 -14 13 -46 51 -71 83 -215 287 -289 649 -197 971 57 199 141 323 367 539 320 306 453 493 543 761 55 167 77 321 71 500 -11 276 -80 495 -230 723 -80 122 -139 193 -301 361 -257 267 -363 456 -402 714 -65 423 183 850 629 1087 26 14 47 28 47 32 0 35 -274 49 -429 22z"/>
+                  <path d="M3640 7749 c-90 -14 -259 -72 -338 -116 -86 -48 -193 -137 -264 -221 -243 -284 -302 -687 -148 -1019 55 -119 98 -178 227 -315 169 -179 211 -251 228 -389 8 -64 -13 -166 -49 -237 -34 -67 -100 -153 -194 -255 -151 -163 -230 -300 -274 -473 -31 -123 -31 -380 0 -496 96 -357 375 -650 729 -766 71 -24 173 -38 173 -25 0 5 -25 33 -56 63 -117 115 -217 299 -250 461 -24 120 -16 278 21 379 47 128 88 183 295 395 249 254 331 374 394 573 139 442 16 896 -338 1247 -188 186 -241 263 -276 400 -37 146 -25 255 47 405 40 82 58 107 137 185 55 54 117 104 155 125 36 19 66 41 69 47 10 32 -164 51 -288 32z"/>
+                  <path d="M7103 7746 c-633 -120 -990 -786 -723 -1345 55 -115 115 -196 241 -327 176 -182 227 -285 217 -436 -10 -136 -65 -237 -219 -404 -125 -134 -183 -213 -235 -319 -64 -132 -85 -223 -91 -390 -5 -125 -2 -152 20 -253 79 -348 324 -634 670 -781 88 -38 220 -71 233 -58 3 3 -27 44 -68 90 -84 97 -126 163 -173 274 -102 237 -83 486 52 690 21 32 119 142 219 244 196 201 284 319 347 464 158 359 113 789 -116 1132 -28 43 -119 148 -202 233 -83 85 -165 176 -183 202 -138 201 -147 429 -25 638 55 93 171 208 271 265 45 26 82 51 82 55 0 31 -202 48 -317 26z"/>
+                  <path d="M5486 4540 c-40 -13 -72 -44 -121 -120 -159 -243 -192 -578 -85 -842 44 -107 105 -207 187 -304 42 -49 84 -102 94 -119 28 -44 25 -107 -6 -144 -37 -44 -82 -55 -194 -48 -345 21 -741 269 -966 607 -177 264 -265 540 -265 828 0 156 14 148 -231 136 l-182 -9 -33 -39 c-19 -21 -47 -73 -63 -115 -76 -201 -64 -387 36 -571 42 -78 74 -119 170 -222 83 -90 102 -134 84 -191 -31 -93 -139 -126 -300 -92 -228 48 -453 168 -617 331 -186 184 -297 403 -343 673 -11 68 -23 127 -27 132 -8 14 -63 11 -239 -11 -749 -95 -1357 -245 -1446 -358 -93 -119 163 -227 751 -316 91 -14 278 -39 415 -55 138 -17 266 -35 286 -40 47 -14 115 -74 140 -124 16 -31 20 -53 17 -94 -9 -104 -66 -146 -307 -226 -264 -89 -408 -163 -462 -238 -69 -97 -11 -211 156 -304 219 -121 688 -256 1180 -339 719 -121 1715 -184 2480 -157 1066 37 2003 184 2600 406 142 53 249 112 317 173 178 164 56 301 -405 458 -93 31 -187 69 -209 85 -110 73 -117 200 -16 296 62 59 106 71 471 124 379 54 439 65 642 115 148 37 272 88 318 131 77 75 -10 156 -243 227 -360 108 -781 184 -1515 271 -22 2 -107 9 -189 15 -170 13 -181 10 -217 -62 -68 -133 -92 -289 -66 -415 32 -149 90 -257 209 -391 93 -104 116 -155 99 -212 -33 -109 -159 -135 -368 -74 -397 115 -730 440 -848 829 -31 101 -55 240 -55 315 0 41 -5 61 -16 71 -13 11 -78 14 -303 16 -157 1 -299 -2 -315 -7z"/>
+                  <path d="M8013 3525 c-56 -24 -70 -79 -29 -120 13 -13 55 -33 97 -45 319 -92 476 -157 602 -250 96 -71 154 -159 156 -235 1 -43 -41 -126 -89 -178 -114 -124 -374 -255 -700 -352 -776 -230 -2136 -374 -3190 -336 -755 27 -1357 85 -1840 176 -41 8 -127 24 -190 35 -718 134 -1228 359 -1306 577 -34 98 -1 188 103 282 111 100 270 173 545 251 190 54 218 70 218 126 0 49 -37 74 -111 74 -129 0 -555 -97 -819 -187 -455 -154 -732 -338 -834 -553 -29 -60 -31 -73 -31 -171 0 -106 0 -107 45 -195 36 -71 63 -107 135 -179 113 -114 232 -193 450 -300 331 -163 769 -299 1350 -420 556 -115 1082 -181 1825 -227 277 -17 1311 -17 1570 0 596 40 908 72 1354 143 750 118 1386 294 1801 499 203 100 326 182 440 292 259 249 269 494 30 728 -245 241 -813 467 -1419 565 -115 18 -122 18 -163 0z"/>
+                </g>
+              </svg>
+            </div>
+            <h3>Aguas Termales Baldi</h3>
+            <p>Pase de día completo (10AM – 10PM): 25 piscinas termales, toboganes, sauna natural y jardín termal.</p>
+          </div>
+        </div>
+
+        <div class="baldi-checklist-wrap">
+          <p class="baldi-checklist-title">Todo lo que está incluido</p>
+          <ul class="baldi-checklist">
+            {includes.map(item => (
+              <li set:html={item}></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="baldi-section baldi-pricing-section">
+      <div class="baldi-container baldi-container--narrow">
+        <p class="baldi-eyebrow">Tarifas</p>
+        <h2 class="baldi-section-title">Precios para nacionales</h2>
+        <div class="baldi-pricing-grid">
+          {pricing.map(tier => (
+            <div class={`baldi-price-card${tier.highlight ? ' baldi-price-card--highlight' : ''}`}>
+              <p class="baldi-price-label">{tier.label}</p>
+              <p class="baldi-price-sub">{tier.sub}</p>
+              <p class="baldi-price-amount">{tier.price}</p>
+            </div>
+          ))}
+        </div>
+        <p class="baldi-pricing-note">
+          ✨ Precios en colones incluyen impuestos (i.i). Válido del 10 de abril al 30 de junio de 2026.
+        </p>
+      </div>
+    </section>
+
+    
+    <section class="baldi-section baldi-rooms-section">
+      <div class="baldi-container">
+        <p class="baldi-eyebrow">Nuestras habitaciones</p>
+        <h2 class="baldi-section-title">Una experiencia de hospedaje en el centro de La Fortuna</h2>
+        <p class="baldi-section-sub">La habitación se asigna según disponibilidad y cantidad de personas en la reserva.</p>
+        <div class="baldi-rooms-grid">
+          {rooms.map(room => (
+            <div class="baldi-room-card">
+              <div class="baldi-room-img-wrap">
+                <img src={room.img} alt={room.name} loading="lazy" decoding="async" />
+                <span class="baldi-room-tag">{room.tag}</span>
+              </div>
+              <div class="baldi-room-body">
+                <p class="baldi-room-name">{room.name}</p>
+                <p class="baldi-room-note">Consultar disponibilidad</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="baldi-section baldi-exp-section">
+      <div class="baldi-container">
+        <p class="baldi-eyebrow">La experiencia Baldi</p>
+        <h2 class="baldi-section-title">Sumérgete en las termales</h2>
+        <div class="baldi-exp-grid">
+          <div class="baldi-exp-img-wrap">
+            <img
+              src="https://i.ibb.co/0R16Yc59/baldi1.png"
+              alt="Aguas termales Baldi Hot Springs La Fortuna"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="baldi-exp-text">
+            <h3>La Experiencia Baldi</h3>
+            <p>
+              Sumérgete en aguas ricas en minerales, calentadas naturalmente por el corazón del
+              Volcán Arenal. 25 piscinas termales diseñadas para el descanso total: desde piscinas
+              tranquilas hasta toboganes y sauna natural.
+            </p>
+            <p>
+              El complejo termal más grande del mundo te espera con el jardín termal más extenso
+              de la zona, gastronomía incluida y un ambiente inigualable con vistas al volcán.
+            </p>
+            <a
+              href="https://wa.me/50685274677?text=Hola,%20me%20interesa%20el%20paquete%20Hospedaje%20+%20Baldi"
+              class="baldi-btn baldi-btn--dark"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Reservar ahora →</a>
+          </div>
+        </div>
+
+        
+        <div class="baldi-exp-img2-wrap">
+          <img
+            src="https://i.ibb.co/KjXW6MkG/baldi2.png"
+            alt="Piscinas Baldi Hot Springs"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="baldi-section baldi-cta-section">
+      <div class="baldi-container baldi-container--narrow" style="text-align:center">
+        <p class="baldi-eyebrow baldi-eyebrow--light">Cupos limitados</p>
+        <h2 class="baldi-cta-title">Asegure su estancia</h2>
+        <p class="baldi-cta-sub">Consulte disponibilidad y reserve su paquete directamente por WhatsApp. Oferta válida hasta el 30 de junio.</p>
+        <a
+          href="https://wa.me/50685274677?text=Hola,%20me%20interesa%20el%20paquete%20*Hospedaje%20+%20Baldi*%20(%E2%82%A149.800%20i.i%20por%20persona).%20Quisiera%20consultar%20disponibilidad."
+          class="baldi-btn baldi-btn--wa"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Consultar disponibilidad por WhatsApp
+        </a>
+      </div>
+    </section>
+
+    
+    <section class="baldi-section baldi-policy-section">
+      <div class="baldi-container baldi-container--narrow">
+        <p class="baldi-eyebrow">Políticas</p>
+        <h2 class="baldi-section-title">Políticas de cancelación</h2>
+        <div class="baldi-policy-list">
+          {policies.map(p => (
+            <div class="baldi-policy-item">
+              <span class="baldi-policy-dot" style={`background:${p.color}`}></span>
+              <div>
+                <p class="baldi-policy-range">{p.range}</p>
+                <p class="baldi-policy-charge">{p.charge}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>
+
+<script>
+  const end = new Date('2026-06-30T23:59:59-06:00').getTime();
+
+  function pad(n: number) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const diff = end - Date.now();
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = '00';
+      });
+      return;
+    }
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000) / 60000);
+    const secs  = Math.floor((diff % 60000) / 1000);
+
+    (document.getElementById('cd-days')  as HTMLElement).textContent = pad(days);
+    (document.getElementById('cd-hours') as HTMLElement).textContent = pad(hours);
+    (document.getElementById('cd-mins')  as HTMLElement).textContent = pad(mins);
+    (document.getElementById('cd-secs')  as HTMLElement).textContent = pad(secs);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>
+
+<style>
+/* ══════════════════════════════════════════════════════
+   BALDI LANDING PAGE
+══════════════════════════════════════════════════════ */
+
+.baldi-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+}
+.baldi-container--narrow { max-width: 56rem; }
+
+.baldi-section { padding: clamp(3.6rem, 7vw, 5.6rem) 0; }
+
+.baldi-eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #9b1c2d;
+  text-align: center;
+}
+.baldi-eyebrow--light { color: rgba(255,255,255,0.6); }
+
+.baldi-section-title {
+  margin: 0 0 clamp(1.8rem, 3.5vw, 2.8rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 3.4rem);
+  line-height: 1.04;
+  color: #1e1a16;
+  text-align: center;
+}
+.baldi-section-sub {
+  margin: -1.4rem 0 2rem;
+  text-align: center;
+  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+  color: rgba(30, 26, 22, 0.6);
+}
+
+/* ── Buttons ─────────────────────────────────────── */
+.baldi-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.9rem 2.2rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 0.15rem;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+}
+.baldi-btn:hover { transform: translateY(-2px); }
+
+.baldi-btn--primary {
+  background: #9b1c2d;
+  color: #fff6ee;
+  box-shadow: 0 4px 18px rgba(155,28,45,0.38);
+}
+.baldi-btn--primary:hover { background: #b71f35; box-shadow: 0 8px 28px rgba(155,28,45,0.5); }
+
+.baldi-btn--outline {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.45);
+  color: #fff;
+  backdrop-filter: blur(4px);
+}
+.baldi-btn--outline:hover { background: rgba(255,255,255,0.2); }
+
+.baldi-btn--dark {
+  background: #1e1a16;
+  color: #f4edd8;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.22);
+}
+.baldi-btn--dark:hover { background: #111; }
+
+.baldi-btn--wa {
+  background: #25d366;
+  color: #fff;
+  padding: 1rem 2.6rem;
+  font-size: 0.82rem;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.38);
+}
+.baldi-btn--wa:hover { background: #1eb955; }
+
+/* ── Hero ────────────────────────────────────────── */
+.baldi-hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.baldi-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 30%;
+  transform: scale(1.04);
+}
+.baldi-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 42%, rgba(4,12,8,0.55) 0%, rgba(4,12,8,0) 75%),
+    linear-gradient(to bottom, rgba(4,12,8,0.68) 0%, rgba(4,12,8,0.58) 45%, rgba(4,12,8,0.82) 100%);
+}
+.baldi-hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  padding: clamp(6rem,12vw,8rem) clamp(1.2rem,5vw,3rem) clamp(3rem,6vw,4rem);
+  max-width: 820px;
+  width: 100%;
+}
+.baldi-hero-eyebrow {
+  margin: 0 0 0.7rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.82);
+}
+.baldi-hero-title {
+  margin: 0 0 clamp(0.6rem,1.5vw,1rem);
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem,7vw,5.6rem);
+  line-height: 0.97;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 4px 28px rgba(0,0,0,0.45);
+}
+.baldi-hero-from {
+  margin: 0 0 0.15rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.88);
+}
+.baldi-hero-price {
+  margin: 0 0 0.2rem;
+  font-family: var(--font-body);
+  font-size: clamp(3rem,9vw,6rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-shadow: 0 4px 28px rgba(0,0,0,0.4);
+}
+.baldi-hero-price span {
+  font-size: clamp(1.4rem,3.5vw,2.8rem);
+  font-weight: 600;
+}
+.baldi-hero-price-sub {
+  margin: 0 0 0.5rem;
+  font-size: clamp(0.78rem,1.6vw,0.92rem);
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.75);
+}
+.baldi-hero-badge {
+  margin-bottom: 1.8rem;
+  display: inline-block;
+  background: #9b1c2d;
+  color: #fff6ee;
+  padding: 0.5rem 1.4rem;
+  border-radius: 2rem;
+  font-size: clamp(0.7rem,1.8vw,0.84rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 16px rgba(155,28,45,0.45);
+}
+.baldi-hero-ctas {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1.4rem;
+}
+.baldi-hero-finepri {
+  margin: 0;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.06em;
+}
+
+/* ── Countdown ───────────────────────────────────── */
+.baldi-countdown {
+  background: #1a0d0f;
+  padding: clamp(0.9rem,2vw,1.3rem) 1.2rem;
+}
+.baldi-countdown-inner {
+  max-width: 80rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.2rem,4vw,3.5rem);
+  flex-wrap: wrap;
+}
+.baldi-countdown-label {
+  font-size: clamp(0.72rem,1.4vw,0.84rem);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.68);
+}
+.baldi-countdown-timer { display: flex; align-items: center; gap: 0.5rem; }
+.baldi-cd-unit { display: flex; flex-direction: column; align-items: center; gap: 0.1rem; }
+.baldi-cd-unit span {
+  font-family: var(--font-body);
+  font-size: clamp(1.5rem,4vw,2.6rem);
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  min-width: 2ch;
+  text-align: center;
+}
+.baldi-cd-unit em {
+  font-style: normal;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+.baldi-cd-sep {
+  font-size: clamp(1.4rem,3.5vw,2.2rem);
+  font-weight: 700;
+  color: #9b1c2d;
+  line-height: 1;
+  margin-bottom: 0.8rem;
+}
+
+/* ── Why ─────────────────────────────────────────── */
+.baldi-why { background: #fff; }
+.baldi-why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem,2vw,2rem);
+}
+.baldi-why-card {
+  padding: clamp(1.4rem,2.5vw,2.2rem) clamp(1.2rem,2vw,1.8rem);
+  background: #f8f5f0;
+  border: 1px solid rgba(30,26,22,0.08);
+  text-align: center;
+}
+.baldi-why-icon {
+  width: 3.2rem; height: 3.2rem;
+  display: grid; place-items: center;
+  background: rgba(155,28,45,0.08);
+  border: 1px solid rgba(155,28,45,0.22);
+  border-radius: 0.6rem;
+  margin: 0 auto 1rem;
+  color: #9b1c2d;
+}
+.baldi-why-card h3 { margin: 0 0 0.55rem; font-family: var(--font-display); font-size: clamp(1.3rem,1.8vw,1.6rem); color: #1e1a16; }
+.baldi-why-card p  { margin: 0; font-size: clamp(0.88rem,1vw,0.98rem); line-height: 1.55; color: rgba(30,26,22,0.7); }
+
+/* ── Includes ────────────────────────────────────── */
+.baldi-includes-section { background: #f5f2ee; }
+.baldi-feat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.8rem,1.5vw,1.4rem);
+  margin-bottom: clamp(2rem,4vw,3.2rem);
+}
+.baldi-feat-card {
+  padding: clamp(1.4rem,2.2vw,2rem) clamp(1.2rem,1.8vw,1.6rem);
+  background: #fff;
+  border: 1px solid rgba(30,26,22,0.1);
+  border-radius: 0.4rem;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+.baldi-feat-card--highlight {
+  background: #9b1c2d;
+  border-color: #9b1c2d;
+  color: #fff;
+}
+.baldi-feat-card.baldi-feat-card--highlight .baldi-feat-icon { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.4); color: #fff; }
+.baldi-feat-card.baldi-feat-card--highlight h3 { color: #fff; }
+.baldi-feat-card.baldi-feat-card--highlight p  { color: rgba(255,255,255,0.9); }
+.baldi-feat-icon {
+  width: 3.6rem; height: 3.6rem;
+  display: grid; place-items: center;
+  background: rgba(155,28,45,0.08);
+  border: 1px solid rgba(155,28,45,0.22);
+  border-radius: 0.6rem;
+  margin: 0 auto 1rem;
+  color: #9b1c2d;
+}
+.baldi-feat-card h3 { margin: 0 0 0.6rem; font-family: var(--font-display); font-size: clamp(1.2rem,1.7vw,1.5rem); color: #1e1a16; }
+.baldi-feat-card p  { margin: 0; font-size: clamp(0.86rem,0.98vw,0.96rem); line-height: 1.55; color: rgba(30,26,22,0.72); }
+
+.baldi-checklist-wrap {
+  background: #fff;
+  border: 1px solid rgba(30,26,22,0.1);
+  border-radius: 0.4rem;
+  padding: clamp(1.4rem,2.5vw,2rem) clamp(1.4rem,3vw,2.4rem);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+.baldi-checklist-title {
+  margin: 0 0 1.1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem,1.8vw,1.5rem);
+  color: #1e1a16;
+  text-align: center;
+}
+.baldi-checklist {
+  list-style: none; margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.7rem 2rem;
+}
+.baldi-checklist li {
+  display: flex; align-items: flex-start; gap: 0.6rem;
+  font-size: clamp(0.88rem,1vw,0.96rem);
+  color: rgba(30,26,22,0.82); line-height: 1.4;
+}
+.baldi-checklist li::before { content: '✔'; flex-shrink: 0; font-size: 0.9rem; color: #9b1c2d; margin-top: 0.05rem; }
+
+/* ── Pricing ─────────────────────────────────────── */
+.baldi-pricing-section { background: #fff; }
+.baldi-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.8rem,1.5vw,1.2rem);
+  margin-bottom: 1.6rem;
+}
+.baldi-price-card {
+  padding: clamp(1.4rem,2.4vw,2rem) 1rem;
+  border: 1px solid rgba(30,26,22,0.12);
+  border-radius: 0.4rem;
+  text-align: center;
+  background: #f8f5f0;
+}
+.baldi-price-card--highlight { background: #9b1c2d; border-color: #9b1c2d; }
+.baldi-price-card--highlight .baldi-price-label  { color: rgba(255,255,255,0.75); }
+.baldi-price-card--highlight .baldi-price-sub    { color: rgba(255,255,255,0.55); }
+.baldi-price-card--highlight .baldi-price-amount { color: #fff; }
+.baldi-price-label  { margin: 0 0 0.2rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(30,26,22,0.65); }
+.baldi-price-sub    { margin: 0 0 0.6rem; font-size: 0.72rem; color: rgba(30,26,22,0.5); line-height: 1.3; }
+.baldi-price-amount { margin: 0; font-family: var(--font-display); font-size: clamp(1.6rem,2.8vw,2.6rem); font-weight: 600; line-height: 1; color: #1e1a16; }
+.baldi-pricing-note { margin: 0; text-align: center; font-size: clamp(0.88rem,1vw,0.96rem); color: rgba(30,26,22,0.7); line-height: 1.55; }
+
+/* ── Rooms ───────────────────────────────────────── */
+.baldi-rooms-section { background: #f5f2ee; }
+.baldi-rooms-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(0.8rem,1.5vw,1.2rem); }
+.baldi-room-card { background: #fff; border-radius: 0.35rem; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+.baldi-room-img-wrap { position: relative; height: clamp(10rem,16vw,14rem); overflow: hidden; }
+.baldi-room-img-wrap img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.baldi-room-card:hover .baldi-room-img-wrap img { transform: scale(1.05); }
+.baldi-room-tag { position: absolute; top: 0.7rem; left: 0.7rem; background: rgba(10,14,18,0.65); backdrop-filter: blur(4px); color: rgba(255,255,255,0.9); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.25rem 0.65rem; border-radius: 2rem; }
+.baldi-room-body { padding: 0.9rem 1rem; }
+.baldi-room-name { margin: 0 0 0.2rem; font-family: var(--font-display); font-size: clamp(1.1rem,1.5vw,1.3rem); color: #1e1a16; }
+.baldi-room-note { margin: 0; font-size: 0.75rem; color: #9b1c2d; font-weight: 600; letter-spacing: 0.06em; }
+
+/* ── Experience ──────────────────────────────────── */
+.baldi-exp-section { background: #fff; }
+.baldi-exp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem,4vw,4rem);
+  align-items: center;
+  margin-bottom: clamp(1.5rem,3vw,2.5rem);
+}
+.baldi-exp-img-wrap { border-radius: 0.4rem; overflow: hidden; aspect-ratio: 4/3; }
+.baldi-exp-img-wrap img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.baldi-exp-text h3 { margin: 0 0 1rem; font-family: var(--font-display); font-size: clamp(1.6rem,2.8vw,2.4rem); line-height: 1.05; color: #1e1a16; }
+.baldi-exp-text p  { margin: 0 0 0.9rem; font-size: clamp(0.9rem,1.05vw,1.02rem); line-height: 1.62; color: rgba(30,26,22,0.74); }
+.baldi-exp-img2-wrap { border-radius: 0.4rem; overflow: hidden; height: clamp(14rem,22vw,20rem); }
+.baldi-exp-img2-wrap img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* ── CTA ─────────────────────────────────────────── */
+.baldi-cta-section { background: #0d1611; }
+.baldi-cta-title { margin: 0 0 0.8rem; font-family: var(--font-display); font-size: clamp(2rem,4.5vw,3.6rem); line-height: 1.04; color: #f4ede0; text-align: center; }
+.baldi-cta-sub   { margin: 0 0 1.8rem; font-size: clamp(0.9rem,1.1vw,1.04rem); line-height: 1.6; color: rgba(244,237,224,0.58); text-align: center; }
+
+/* ── Policies ────────────────────────────────────── */
+.baldi-policy-section { background: #f8f5f0; }
+.baldi-policy-list { display: flex; flex-direction: column; gap: 1rem; }
+.baldi-policy-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.2rem; background: #fff; border: 1px solid rgba(30,26,22,0.09); border-radius: 0.35rem; }
+.baldi-policy-dot  { flex-shrink: 0; width: 12px; height: 12px; border-radius: 50%; margin-top: 0.2rem; }
+.baldi-policy-range  { margin: 0 0 0.2rem; font-size: clamp(0.88rem,1vw,0.96rem); font-weight: 700; color: #1e1a16; }
+.baldi-policy-charge { margin: 0; font-size: clamp(0.84rem,0.96vw,0.92rem); color: rgba(30,26,22,0.65); }
+
+/* ── Responsive ──────────────────────────────────── */
+@media (max-width: 1024px) {
+  .baldi-rooms-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .baldi-why-grid   { grid-template-columns: 1fr; }
+  .baldi-feat-grid  { grid-template-columns: 1fr; }
+  .baldi-exp-grid   { grid-template-columns: 1fr; }
+  .baldi-checklist  { grid-template-columns: 1fr; }
+  .baldi-exp-img-wrap { aspect-ratio: 16/9; }
+  .baldi-pricing-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .baldi-rooms-grid   { grid-template-columns: repeat(2, 1fr); }
+  .baldi-hero-ctas    { flex-direction: column; align-items: center; width: 100%; }
+  .baldi-btn          { width: min(100%, 20rem); }
+  .baldi-countdown-inner { flex-direction: column; gap: 0.6rem; }
+}
+</style>

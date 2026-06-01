@@ -35,12 +35,18 @@ const policies = [
 ];
 ---
 
-<Layout title="Downtown + Ecotermales | La Fortuna Downtown">
+<Layout
+  title="Paquete Hospedaje + Ecotermales | ₡135.000 – La Fortuna"
+  description="Paquete para nacionales: 1 noche en Downtown La Fortuna Boutique Hotel + pase del día a Ecotermales + desayuno + bebida de bienvenida. Desde ₡135.000 por pareja. Niños 0–4 GRATIS."
+  image="https://cdn.arenalcloud.com/arenal-a65b6eb9-29d7-4dec-9784-b1b37ff7dfce-downtown/DJI_0333_copia_c93de22e.jpg"
+>
+  <Fragment slot="head">
+    <meta name="keywords" content="paquete Ecotermales La Fortuna, hospedaje aguas termales La Fortuna, paquetes nacionales Costa Rica, hotel boutique La Fortuna, Volcán Arenal termales" />
+  </Fragment>
+
   <main>
 
-    <!-- ════════════════════════════════════════════
-         HERO
-    ═════════════════════════════════════════════ -->
+    
     <section class="eco-hero" id="inicio">
       <div
         class="eco-hero-bg"
@@ -80,9 +86,7 @@ const policies = [
       </div>
     </section>
 
-    <!-- ════════════════════════════════════════════
-         COUNTDOWN
-    ═════════════════════════════════════════════ -->
+    
     <div class="eco-countdown">
       <div class="eco-countdown-inner">
         <span class="eco-countdown-label">
@@ -100,9 +104,7 @@ const policies = [
       </div>
     </div>
 
-    <!-- ════════════════════════════════════════════
-         ¿POR QUÉ ELEGIRNOS?
-    ═════════════════════════════════════════════ -->
+    
     <section class="eco-section eco-why">
       <div class="eco-container">
         <p class="eco-eyebrow">¿Por qué elegirnos?</p>
@@ -141,15 +143,13 @@ const policies = [
       </div>
     </section>
 
-    <!-- ════════════════════════════════════════════
-         ¿QUÉ INCLUYE?
-    ═════════════════════════════════════════════ -->
+    
     <section class="eco-section eco-includes-section" id="detalles">
       <div class="eco-container">
         <p class="eco-eyebrow">Paquete completo</p>
         <h2 class="eco-section-title">¿Qué incluye tu paquete?</h2>
 
-        <!-- 3 feature cards -->
+        
         <div class="eco-feat-grid">
           <div class="eco-feat-card">
             <div class="eco-feat-icon">
@@ -182,7 +182,7 @@ const policies = [
           </div>
         </div>
 
-        <!-- Full checklist -->
+        
         <div class="eco-checklist-wrap">
           <p class="eco-checklist-title">Todo lo que está incluido</p>
           <ul class="eco-checklist">
@@ -194,9 +194,7 @@ const policies = [
       </div>
     </section>
 
-    <!-- ════════════════════════════════════════════
-         TARIFAS
-    ═════════════════════════════════════════════ -->
+    
     <section class="eco-section eco-pricing-section">
       <div class="eco-container eco-container--narrow">
         <p class="eco-eyebrow">Tarifas</p>
@@ -216,9 +214,7 @@ const policies = [
       </div>
     </section>
 
-    <!-- ════════════════════════════════════════════
-         HABITACIONES
-    ═════════════════════════════════════════════ -->
+    
     <section class="eco-section eco-rooms-section">
       <div class="eco-container">
         <p class="eco-eyebrow">Nuestras habitaciones</p>
@@ -241,9 +237,7 @@ const policies = [
       </div>
     </section>
 
-    <!-- ════════════════════════════════════════════
-         EXPERIENCIA ECOTERMALES
-    ═════════════════════════════════════════════ -->
+    
     <section class="eco-section eco-exp-section">
       <div class="eco-container">
         <p class="eco-eyebrow">La experiencia Ecotermales</p>
@@ -280,9 +274,7 @@ const policies = [
       </div>
     </section>
 
-    <!-- ════════════════════════════════════════════
-         CTA CUPOS LIMITADOS
-    ═════════════════════════════════════════════ -->
+    
     <section class="eco-section eco-cta-section">
       <div class="eco-container eco-container--narrow" style="text-align:center">
         <p class="eco-eyebrow eco-eyebrow--light">Cupos limitados</p>
@@ -302,9 +294,7 @@ const policies = [
       </div>
     </section>
 
-    <!-- ════════════════════════════════════════════
-         POLÍTICAS DE CANCELACIÓN
-    ═════════════════════════════════════════════ -->
+    
     <section class="eco-section eco-policy-section">
       <div class="eco-container eco-container--narrow">
         <p class="eco-eyebrow">Políticas</p>
@@ -327,9 +317,7 @@ const policies = [
   </main>
 </Layout>
 
-<!-- ════════════════════════════════════════════
-     COUNTDOWN SCRIPT
-═════════════════════════════════════════════ -->
+
 <script>
   const end = new Date('2026-08-30T23:59:59-06:00').getTime();
 
