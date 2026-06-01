@@ -233,7 +233,7 @@ const trust = [
 
 .tv-hero-title em {
   font-style: italic;
-  color: #a8d8b0;
+  color: var(--tv-gold);
 }
 
 .tv-hero-sub {
@@ -247,28 +247,23 @@ const trust = [
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.5rem 1.2rem;
-  border: 1px solid rgba(58, 125, 68, 0.5);
-  border-radius: 99px;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
+  padding: 0.5rem 1.4rem;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 2px;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #a8d8b0;
-  background: rgba(58, 125, 68, 0.12);
+  color: rgba(244, 238, 227, 0.55);
+  background: rgba(201, 168, 76, 0.06);
 }
 
 .tv-badge-dot {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background: #4ade80;
-  animation: tvPulse 2s ease-in-out infinite;
+  background: var(--tv-gold);
   flex-shrink: 0;
-}
-
-@keyframes tvPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.5; transform: scale(0.8); }
+  opacity: 0.7;
 }
 
 /* ── Hojas decorativas del hero ──────────────────────────── */
@@ -304,14 +299,15 @@ const trust = [
 }
 
 .tv-btn--primary {
-  padding: 0.9rem 2.2rem;
-  background: var(--tv-green);
-  color: #fff;
-  border: 1px solid var(--tv-green);
+  padding: 0.9rem 2.4rem;
+  background: transparent;
+  color: var(--tv-cream);
+  border: 1px solid rgba(244, 238, 227, 0.4);
 }
 
 .tv-btn--primary:hover {
-  background: var(--tv-green-dk);
+  background: rgba(244, 238, 227, 0.08);
+  border-color: rgba(244, 238, 227, 0.7);
   transform: translateY(-2px);
 }
 
