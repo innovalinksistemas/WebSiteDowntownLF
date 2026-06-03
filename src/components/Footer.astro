@@ -10,6 +10,7 @@ import logoLava from "../assets/logoLavaDrinksBlanco.png";
 import logoSelva from "../assets/LogoSelvaNegraBlanco.png";
 import { useTranslations } from "../i18n/utils";
 const t = useTranslations(Astro.currentLocale);
+const homeBase = (Astro.currentLocale ?? "es") === "es" ? "/" : "/en";
 
 const logos = [
 	{ src: logoBlanco,    alt: "La Fortuna Downtown",  href: "https://www.instagram.com/lafortunadowntown" },
@@ -25,12 +26,12 @@ const logos = [
 const repeatedLogos = [...logos, ...logos];
 
 const quickLinks = [
-	{ label: t("footer.nav.rooms"),       href: "#habitaciones" },
-	{ label: t("footer.nav.experiences"), href: "#experiencias" },
-	{ label: t("footer.nav.wellness"),    href: "#bienestar" },
-	{ label: t("footer.nav.gastronomy"),  href: "#gastronomia" },
-	{ label: t("footer.nav.offers"),      href: "#ofertas" },
-	{ label: t("footer.nav.tours"),       href: "#tours-top" },
+	{ label: t("footer.nav.rooms"),       href: `${homeBase}#habitaciones` },
+	{ label: t("footer.nav.experiences"), href: `${homeBase}#experiencias` },
+	{ label: t("footer.nav.wellness"),    href: `${homeBase}#bienestar` },
+	{ label: t("footer.nav.gastronomy"),  href: `${homeBase}#gastronomia` },
+	{ label: t("footer.nav.offers"),      href: `${homeBase}#ofertas` },
+	{ label: t("footer.nav.tours"),       href: `${homeBase}#tours-top` },
 ];
 
 const legalLinks = [

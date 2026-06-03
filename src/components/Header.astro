@@ -5,17 +5,18 @@ import { useTranslations } from "../i18n/utils";
 
 const t = useTranslations(Astro.currentLocale);
 
+const homeBase = (Astro.currentLocale ?? "es") === "es" ? "/" : "/en";
 const linksLeft = [
-  { label: t("header.nav.rooms"),       href: "#habitaciones" },
-  { label: t("header.nav.experiences"), href: "#tours-top" },
-  { label: t("header.nav.wellness"),    href: "#bienestar" },
+  { label: t("header.nav.rooms"),       href: `${homeBase}#habitaciones` },
+  { label: t("header.nav.experiences"), href: `${homeBase}#tours-top` },
+  { label: t("header.nav.wellness"),    href: `${homeBase}#bienestar` },
 ];
 
 const seasonLabel = t("header.nav.season");
 const seasonHref  = t("header.nav.season.href");
 
 const linksRight = [
-  { label: t("header.nav.gastronomy"), href: "#gastronomia" },
+  { label: t("header.nav.gastronomy"), href: `${homeBase}#gastronomia` },
   { label: t("header.nav.gallery"),    href: t("header.nav.gallery.href") },
   { label: t("header.nav.faq"),        href: t("header.nav.faq.href") },
 ];
