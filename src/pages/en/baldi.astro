@@ -17,7 +17,7 @@ const includes = [
 ];
 
 const pricing = [
-  { label: 'Adult',          sub: 'per person · double occupancy', price: '₡49,800', highlight: true  },
+  { label: 'Adult',          sub: 'per person · double occupancy', price: '₡60,000', highlight: true  },
   { label: 'Child 6–10 yrs', sub: 'special price per child',       price: '₡35,000', highlight: false },
   { label: 'Child 0–5 yrs',  sub: 'no additional cost',            price: 'FREE',    highlight: false },
 ];
@@ -31,7 +31,7 @@ const rooms = [
 
 const policies = [
   { color: '#4ade80', range: 'More than 30 days before check-in',       charge: 'No charge · free cancellation' },
-  { color: '#facc15', range: 'Between 15 and 30 days before check-in',  charge: '50% charge of the total reservation' },
+  { color: '#b90024', range: 'Between 15 and 30 days before check-in',  charge: '50% charge of the total reservation' },
   { color: '#f87171', range: 'Less than 15 days before check-in',       charge: '100% charge of the total reservation' },
 ];
 ---
@@ -66,7 +66,7 @@ const policies = [
           Accommodation +<br/>Baldi Day Pass
         </h1>
         <p class="baldi-hero-from">from:</p>
-        <p class="baldi-hero-price">₡49,800 <span>incl.</span></p>
+        <p class="baldi-hero-price">₡60,000 <span>incl.</span></p>
         <p class="baldi-hero-price-sub">per person double occupancy</p>
 
         <div class="baldi-hero-badge">
@@ -75,7 +75,7 @@ const policies = [
 
         <div class="baldi-hero-ctas">
           <a
-            href="https://wa.me/50685274677?text=Hello,%20I'm%20interested%20in%20the%20Accommodation%20+%20Baldi%20package%20(%E2%82%A149%2C800)"
+            href="https://wa.me/50685274677?text=Hello,%20I'm%20interested%20in%20the%20Accommodation%20+%20Baldi%20package%20(%E2%82%A160%2C000)"
             class="baldi-btn baldi-btn--primary"
             target="_blank"
             rel="noopener noreferrer"
@@ -86,7 +86,7 @@ const policies = [
         </div>
 
         <p class="baldi-hero-finepri">
-          *Valid April 10 to June 30 · Children 0–5 FREE · Restrictions apply*
+          *Valid July 1 to August 31 · Children 0–5 FREE · Restrictions apply*
         </p>
       </div>
     </section>
@@ -95,7 +95,7 @@ const policies = [
     <div class="baldi-countdown">
       <div class="baldi-countdown-inner">
         <span class="baldi-countdown-label">
-          Valid April 10 to June 30
+          Valid July 1 to August 31
         </span>
         <div class="baldi-countdown-timer">
           <div class="baldi-cd-unit"><span id="cd-days">--</span><em>Days</em></div>
@@ -212,7 +212,7 @@ const policies = [
           ))}
         </div>
         <p class="baldi-pricing-note">
-          ✨ Prices in colones include taxes. Valid from April 10 to June 30, 2026.
+          ✨ Prices in colones include taxes. Valid from July 1 to August 31, 2026.
         </p>
       </div>
     </section>
@@ -291,9 +291,9 @@ const policies = [
       <div class="baldi-container baldi-container--narrow" style="text-align:center">
         <p class="baldi-eyebrow baldi-eyebrow--light">Limited spots</p>
         <h2 class="baldi-cta-title">Secure your stay</h2>
-        <p class="baldi-cta-sub">Check availability and book your package directly on WhatsApp. Offer valid until June 30.</p>
+        <p class="baldi-cta-sub">Check availability and book your package directly on WhatsApp. Offer valid until August 31.</p>
         <a
-          href="https://wa.me/50685274677?text=Hello,%20I'm%20interested%20in%20the%20*Accommodation%20+%20Baldi*%20package%20(%E2%82%A149%2C800%20per%20person).%20I'd%20like%20to%20check%20availability."
+          href="https://wa.me/50685274677?text=Hello,%20I'm%20interested%20in%20the%20*Accommodation%20+%20Baldi*%20package%20(%E2%82%A160%2C000%20per%20person).%20I'd%20like%20to%20check%20availability."
           class="baldi-btn baldi-btn--wa"
           target="_blank"
           rel="noopener noreferrer"
@@ -330,7 +330,7 @@ const policies = [
 </Layout>
 
 <script>
-  const end = new Date('2026-06-30T23:59:59-06:00').getTime();
+  const end = new Date('2026-08-31T23:59:59-06:00').getTime();
 
   function pad(n: number) { return String(n).padStart(2, '0'); }
 
@@ -378,7 +378,7 @@ const policies = [
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #9b1c2d;
+  color: #b90024;
   text-align: center;
 }
 .baldi-eyebrow--light { color: rgba(255,255,255,0.6); }
@@ -388,7 +388,7 @@ const policies = [
   font-family: var(--font-display);
   font-size: clamp(1.9rem, 4vw, 3.4rem);
   line-height: 1.04;
-  color: #1e1a16;
+  color: #1e1e1e;
   text-align: center;
 }
 .baldi-section-sub {
@@ -417,11 +417,11 @@ const policies = [
 .baldi-btn:hover { transform: translateY(-2px); }
 
 .baldi-btn--primary {
-  background: #9b1c2d;
+  background: #b90024;
   color: #fff6ee;
   box-shadow: 0 4px 18px rgba(155,28,45,0.38);
 }
-.baldi-btn--primary:hover { background: #b71f35; box-shadow: 0 8px 28px rgba(155,28,45,0.5); }
+.baldi-btn--primary:hover { background: #8f001c; box-shadow: 0 8px 28px rgba(155,28,45,0.5); }
 
 .baldi-btn--outline {
   background: rgba(255,255,255,0.1);
@@ -432,7 +432,7 @@ const policies = [
 .baldi-btn--outline:hover { background: rgba(255,255,255,0.2); }
 
 .baldi-btn--dark {
-  background: #1e1a16;
+  background: #1e1e1e;
   color: #f4edd8;
   box-shadow: 0 4px 18px rgba(0,0,0,0.22);
 }
@@ -529,7 +529,7 @@ const policies = [
 .baldi-hero-badge {
   margin-bottom: 1.8rem;
   display: inline-block;
-  background: #9b1c2d;
+  background: #b90024;
   color: #fff6ee;
   padding: 0.5rem 1.4rem;
   border-radius: 2rem;
@@ -595,7 +595,7 @@ const policies = [
 .baldi-cd-sep {
   font-size: clamp(1.4rem,3.5vw,2.2rem);
   font-weight: 700;
-  color: #9b1c2d;
+  color: #b90024;
   line-height: 1;
   margin-bottom: 0.8rem;
 }
@@ -620,9 +620,9 @@ const policies = [
   border: 1px solid rgba(155,28,45,0.22);
   border-radius: 0.6rem;
   margin: 0 auto 1rem;
-  color: #9b1c2d;
+  color: #b90024;
 }
-.baldi-why-card h3 { margin: 0 0 0.55rem; font-family: var(--font-display); font-size: clamp(1.3rem,1.8vw,1.6rem); color: #1e1a16; }
+.baldi-why-card h3 { margin: 0 0 0.55rem; font-family: var(--font-display); font-size: clamp(1.3rem,1.8vw,1.6rem); color: #1e1e1e; }
 .baldi-why-card p  { margin: 0; font-size: clamp(0.88rem,1vw,0.98rem); line-height: 1.55; color: rgba(30,26,22,0.7); }
 
 /* ── Includes ────────────────────────────────────── */
@@ -642,8 +642,8 @@ const policies = [
   box-shadow: 0 4px 16px rgba(0,0,0,0.06);
 }
 .baldi-feat-card--highlight {
-  background: #9b1c2d;
-  border-color: #9b1c2d;
+  background: #b90024;
+  border-color: #b90024;
   color: #fff;
 }
 .baldi-feat-card.baldi-feat-card--highlight .baldi-feat-icon { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.4); color: #fff; }
@@ -656,9 +656,9 @@ const policies = [
   border: 1px solid rgba(155,28,45,0.22);
   border-radius: 0.6rem;
   margin: 0 auto 1rem;
-  color: #9b1c2d;
+  color: #b90024;
 }
-.baldi-feat-card h3 { margin: 0 0 0.6rem; font-family: var(--font-display); font-size: clamp(1.2rem,1.7vw,1.5rem); color: #1e1a16; }
+.baldi-feat-card h3 { margin: 0 0 0.6rem; font-family: var(--font-display); font-size: clamp(1.2rem,1.7vw,1.5rem); color: #1e1e1e; }
 .baldi-feat-card p  { margin: 0; font-size: clamp(0.86rem,0.98vw,0.96rem); line-height: 1.55; color: rgba(30,26,22,0.72); }
 
 .baldi-checklist-wrap {
@@ -672,7 +672,7 @@ const policies = [
   margin: 0 0 1.1rem;
   font-family: var(--font-display);
   font-size: clamp(1.2rem,1.8vw,1.5rem);
-  color: #1e1a16;
+  color: #1e1e1e;
   text-align: center;
 }
 .baldi-checklist {
@@ -686,7 +686,7 @@ const policies = [
   font-size: clamp(0.88rem,1vw,0.96rem);
   color: rgba(30,26,22,0.82); line-height: 1.4;
 }
-.baldi-checklist li::before { content: '✔'; flex-shrink: 0; font-size: 0.9rem; color: #9b1c2d; margin-top: 0.05rem; }
+.baldi-checklist li::before { content: '✔'; flex-shrink: 0; font-size: 0.9rem; color: #b90024; margin-top: 0.05rem; }
 
 /* ── Pricing ─────────────────────────────────────── */
 .baldi-pricing-section { background: #fff; }
@@ -703,13 +703,13 @@ const policies = [
   text-align: center;
   background: #f8f5f0;
 }
-.baldi-price-card--highlight { background: #9b1c2d; border-color: #9b1c2d; }
+.baldi-price-card--highlight { background: #b90024; border-color: #b90024; }
 .baldi-price-card--highlight .baldi-price-label  { color: rgba(255,255,255,0.75); }
 .baldi-price-card--highlight .baldi-price-sub    { color: rgba(255,255,255,0.55); }
 .baldi-price-card--highlight .baldi-price-amount { color: #fff; }
 .baldi-price-label  { margin: 0 0 0.2rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(30,26,22,0.65); }
 .baldi-price-sub    { margin: 0 0 0.6rem; font-size: 0.72rem; color: rgba(30,26,22,0.5); line-height: 1.3; }
-.baldi-price-amount { margin: 0; font-family: var(--font-display); font-size: clamp(1.6rem,2.8vw,2.6rem); font-weight: 600; line-height: 1; color: #1e1a16; }
+.baldi-price-amount { margin: 0; font-family: var(--font-display); font-size: clamp(1.6rem,2.8vw,2.6rem); font-weight: 600; line-height: 1; color: #1e1e1e; }
 .baldi-pricing-note { margin: 0; text-align: center; font-size: clamp(0.88rem,1vw,0.96rem); color: rgba(30,26,22,0.7); line-height: 1.55; }
 
 /* ── Rooms ───────────────────────────────────────── */
@@ -721,8 +721,8 @@ const policies = [
 .baldi-room-card:hover .baldi-room-img-wrap img { transform: scale(1.05); }
 .baldi-room-tag { position: absolute; top: 0.7rem; left: 0.7rem; background: rgba(10,14,18,0.65); backdrop-filter: blur(4px); color: rgba(255,255,255,0.9); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.25rem 0.65rem; border-radius: 2rem; }
 .baldi-room-body { padding: 0.9rem 1rem; }
-.baldi-room-name { margin: 0 0 0.2rem; font-family: var(--font-display); font-size: clamp(1.1rem,1.5vw,1.3rem); color: #1e1a16; }
-.baldi-room-note { margin: 0; font-size: 0.75rem; color: #9b1c2d; font-weight: 600; letter-spacing: 0.06em; }
+.baldi-room-name { margin: 0 0 0.2rem; font-family: var(--font-display); font-size: clamp(1.1rem,1.5vw,1.3rem); color: #1e1e1e; }
+.baldi-room-note { margin: 0; font-size: 0.75rem; color: #b90024; font-weight: 600; letter-spacing: 0.06em; }
 
 /* ── Experience ──────────────────────────────────── */
 .baldi-exp-section { background: #fff; }
@@ -735,7 +735,7 @@ const policies = [
 }
 .baldi-exp-img-wrap { border-radius: 0.4rem; overflow: hidden; aspect-ratio: 4/3; }
 .baldi-exp-img-wrap img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.baldi-exp-text h3 { margin: 0 0 1rem; font-family: var(--font-display); font-size: clamp(1.6rem,2.8vw,2.4rem); line-height: 1.05; color: #1e1a16; }
+.baldi-exp-text h3 { margin: 0 0 1rem; font-family: var(--font-display); font-size: clamp(1.6rem,2.8vw,2.4rem); line-height: 1.05; color: #1e1e1e; }
 .baldi-exp-text p  { margin: 0 0 0.9rem; font-size: clamp(0.9rem,1.05vw,1.02rem); line-height: 1.62; color: rgba(30,26,22,0.74); }
 .baldi-exp-img2-wrap { border-radius: 0.4rem; overflow: hidden; height: clamp(14rem,22vw,20rem); }
 .baldi-exp-img2-wrap img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -750,7 +750,7 @@ const policies = [
 .baldi-policy-list { display: flex; flex-direction: column; gap: 1rem; }
 .baldi-policy-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.2rem; background: #fff; border: 1px solid rgba(30,26,22,0.09); border-radius: 0.35rem; }
 .baldi-policy-dot  { flex-shrink: 0; width: 12px; height: 12px; border-radius: 50%; margin-top: 0.2rem; }
-.baldi-policy-range  { margin: 0 0 0.2rem; font-size: clamp(0.88rem,1vw,0.96rem); font-weight: 700; color: #1e1a16; }
+.baldi-policy-range  { margin: 0 0 0.2rem; font-size: clamp(0.88rem,1vw,0.96rem); font-weight: 700; color: #1e1e1e; }
 .baldi-policy-charge { margin: 0; font-size: clamp(0.84rem,0.96vw,0.92rem); color: rgba(30,26,22,0.65); }
 
 /* ── Responsive ──────────────────────────────────── */

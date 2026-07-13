@@ -26,6 +26,19 @@
 	--font-script: "Great Vibes", cursive;
 	--font-body: "Manrope", sans-serif;
 	--header-offset: 8rem;
+
+	/* ═══════════════════════════════════════════════════════════
+	   PALETA DE MARCA — DOWNTOWN (Pantone brand book)
+	   Aplicada en todo el sitio. Temporada Verde conserva su
+	   propia paleta estacional verde aparte.
+	═══════════════════════════════════════════════════════════ */
+	--brand-cream:    #f5f1eb; /* Pantone Warm Gray 1 C — fondo claro / superficies */
+	--brand-red:      #b90024; /* Pantone 200 C — acento primario: CTA, links, badge */
+	--brand-red-dark: #8f001c; /* Variante hover/active del rojo */
+	--brand-black:    #1e1e1e; /* Pantone Black 7 — botón primario, tiles oscuros, texto */
+	--brand-black-90: #0d0d0d; /* Negro hover/active */
+	--brand-tan:      #d8c5a0; /* Pantone 7501 C — tiles cálidos, marcos decorativos */
+	--brand-gray:     #909090; /* Pantone Cool Gray 7 C — texto tenue, bordes, meta */
 }
 
 * {
@@ -178,7 +191,7 @@ body.menu-open {
 }
 
 .header-star {
-	color: #c9ab5d;
+	color: #b90024;
 }
 
 .site-header.is-scrolled .header-social-proof {
@@ -214,14 +227,14 @@ body.menu-open {
 
 /* Scrolled: botón rojo vino sólido */
 .site-header.is-scrolled .header-reserve-btn {
-	background: #9b1c2d;
-	border-color: #9b1c2d;
+	background: #b90024;
+	border-color: #b90024;
 	color: #fff6ee;
 }
 
 .site-header.is-scrolled .header-reserve-btn:hover {
-	background: #b71f35;
-	border-color: #b71f35;
+	background: #8f001c;
+	border-color: #8f001c;
 }
 
 /* ── Estado scrolled: desktop ──────────────────────────── */
@@ -232,7 +245,7 @@ body.menu-open {
 }
 
 .site-header.is-scrolled .header-link {
-	color: #1a1815;
+	color: #0d0d0d;
 }
 
 .site-header.is-scrolled .header-season {
@@ -291,8 +304,8 @@ body.menu-open {
 }
 
 .site-header.is-scrolled .mobile-menu-toggle {
-	background: #9b1c2d;
-	border-color: #9b1c2d;
+	background: #b90024;
+	border-color: #b90024;
 }
 
 /*
@@ -392,14 +405,14 @@ body.menu-open {
 	background: rgba(155, 28, 45, 0.1);
 	border: 1px solid rgba(155, 28, 45, 0.3);
 	border-radius: 50%;
-	color: #9b1c2d;
+	color: #b90024;
 	cursor: pointer;
 	transition: background 0.2s ease, transform 0.2s ease;
 	z-index: 10;
 }
 
 .site-mobile-close:hover {
-	background: #9b1c2d;
+	background: #b90024;
 	color: #fff;
 	transform: rotate(90deg);
 }
@@ -425,7 +438,7 @@ body.menu-open {
 }
 
 .site-mobile-link:hover {
-	color: #9b1c2d;
+	color: #b90024;
 	padding-left: 0.4rem;
 }
 
@@ -447,7 +460,7 @@ body.menu-open {
 }
 
 .site-mobile-social-proof span {
-	color: #c9ab5d;
+	color: #b90024;
 }
 
 /*
@@ -461,7 +474,7 @@ body.menu-open {
 	width: 100%;
 	max-width: 24rem;
 	padding: 1.1rem 2rem;
-	background: #9b1c2d;
+	background: #b90024;
 	color: #fff6ee;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -472,7 +485,7 @@ body.menu-open {
 }
 
 .site-mobile-reserve:hover {
-	background: #b71f35;
+	background: #8f001c;
 	transform: translateY(-1px);
 }
 
@@ -674,9 +687,9 @@ body.menu-open {
 	flex-shrink: 0;
 }
 
-/* Ámbar dorado: urgencia sin perder tono premium */
+/* Urgencia sobre hero oscuro: crema de marca para máxima legibilidad */
 .hero-trust-urgent {
-	color: #c9ab5d;
+	color: var(--brand-cream);
 }
 
 /* Punto rojo parpadeante — animado por GSAP */
@@ -799,7 +812,7 @@ body.menu-open {
 
 /* ── FAB ─────────────────────────────────────────────────── */
 .hero-fab {
-	background: #c9ab5d;
+	background: #b90024;
 	color: #fff9eb;
 	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.36);
 	transition: transform 0.28s ease, filter 0.28s ease, box-shadow 0.28s ease;
@@ -896,7 +909,7 @@ body.menu-open {
 	position: relative;
 	padding: clamp(4.2rem, 9vw, 7.8rem) 1.2rem clamp(4rem, 8vw, 6.4rem);
 	background: linear-gradient(180deg, #f0ece6 0%, #ece7de 100%);
-	color: #2d2a26;
+	color: #1e1e1e;
 }
 
 .about-us-inner {
@@ -911,7 +924,7 @@ body.menu-open {
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
 	margin: 0;
-	color: #ab8840;
+	color: #b90024;
 }
 
 .about-us-title-wrap {
@@ -1002,7 +1015,7 @@ body.menu-open {
 	font-weight: 600;
 	letter-spacing: -0.02em;
 	line-height: 1;
-	color: #1e1a16;
+	color: #1e1e1e;
 }
 
 .about-us-rating-score span {
@@ -1054,7 +1067,7 @@ body.menu-open {
 	font-size: clamp(1.08rem, 1.45vw, 1.45rem);
 	line-height: 1;
 	letter-spacing: -0.02em;
-	color: #1e1a16;
+	color: #1e1e1e;
 }
 
 .about-us-rating-value span {
@@ -1070,7 +1083,7 @@ body.menu-open {
 	font-size: clamp(0.6rem, 0.68vw, 0.72rem);
 	font-weight: 600;
 	letter-spacing: 0.06em;
-	color: #ab8840;
+	color: #b90024;
 	text-transform: uppercase;
 }
 
@@ -1079,7 +1092,7 @@ body.menu-open {
 .about-us-media {
 	margin: clamp(2.4rem, 4.2vw, 3.6rem) auto 0;
 	max-width: min(100%, 87rem);
-	border: 4px solid #b18f4c;
+	border: 4px solid #d8c5a0;
 	background: #111;
 	box-shadow: 0 18px 36px rgba(14, 13, 12, 0.2);
 }
@@ -1109,20 +1122,20 @@ body.menu-open {
 	align-items: center;
 	justify-content: center;
 	padding: 1rem 2.4rem;
-	background: #2d2a26;
+	background: #1e1e1e;
 	color: #f4edd8;
 	text-decoration: none;
 	text-transform: uppercase;
 	letter-spacing: 0.2em;
 	font-size: 0.74rem;
 	font-weight: 700;
-	border: 1px solid #2d2a26;
+	border: 1px solid #1e1e1e;
 	transition: background-color 0.26s ease, transform 0.26s ease, box-shadow 0.26s ease;
 }
 
 .about-us-cta-btn:hover {
-	background: #1a1815;
-	border-color: #1a1815;
+	background: #0d0d0d;
+	border-color: #0d0d0d;
 	transform: translateY(-2px);
 	box-shadow: 0 8px 24px rgba(29, 26, 22, 0.22);
 }
@@ -1311,14 +1324,14 @@ body.menu-open {
 	letter-spacing: 0.17em;
 	font-size: 0.82rem;
 	font-weight: 700;
-	color: #a2803d;
+	color: #b90024;
 	border-bottom: 1px solid rgba(162, 128, 61, 0.42);
 	padding-bottom: 0.15rem;
 	transition: color 0.25s ease, border-color 0.25s ease;
 }
 
 .offer-card-link:hover {
-	color: #8c6828;
+	color: #8f001c;
 	border-color: rgba(140, 104, 40, 0.58);
 }
 
@@ -1370,14 +1383,14 @@ body.menu-open {
 }
 
 .ef-tagline {
-	border-left: 2px solid #c9a84c;
+	border-left: 2px solid var(--brand-red);
 	padding-left: 1.1rem;
 	margin: 0 0 1.8rem;
 	font-family: var(--font-display);
 	font-size: clamp(1rem, 1.4vw, 1.3rem);
 	font-style: italic;
 	line-height: 1.6;
-	color: #e8d5a0;
+	color: var(--brand-tan);
 }
 
 .ef-desc {
@@ -1449,7 +1462,7 @@ body.menu-open {
 	transition: color 0.2s ease;
 }
 
-.ef-contact-list a:hover { color: #c9a84c; }
+.ef-contact-list a:hover { color: #b90024; }
 
 .ef-contact-email a {
 	font-size: 0.78rem;
@@ -1499,7 +1512,7 @@ body.menu-open {
 	transition: color 0.2s ease;
 }
 
-.ef-nav-link:hover { color: #c9a84c; }
+.ef-nav-link:hover { color: #b90024; }
 
 .ef-social {
 	display: flex;
@@ -1522,7 +1535,7 @@ body.menu-open {
 
 .ef-social-link:hover {
 	border-color: rgba(201, 168, 76, 0.6);
-	color: #c9a84c;
+	color: #b90024;
 }
 
 /* Copyright */
@@ -1598,7 +1611,7 @@ body.menu-open {
 }
 
 .offers-footer-links a:hover {
-	color: #d4ad63;
+	color: #b90024;
 }
 
 .offers-footer-social {
@@ -1632,7 +1645,7 @@ body.menu-open {
 }
 
 .offers-footer-social-links a:hover {
-	color: #d4ad63;
+	color: #b90024;
 	border-color: rgba(212, 173, 99, 0.76);
 	transform: translateY(-1px);
 }
@@ -1720,7 +1733,7 @@ body.menu-open {
 }
 
 .offers-footer-bottom a:hover {
-	color: #d4ad63;
+	color: #b90024;
 }
 
 @media (max-width: 860px) {
@@ -1917,7 +1930,7 @@ body.menu-open {
 	font-family: var(--font-display);
 	font-size: clamp(1.55rem, 2vw, 2.2rem);
 	line-height: 1.04;
-	color: #6f5430;
+	color: var(--brand-black);
 }
 
 /* ── Descripción — flex-grow:1 empuja el botón al fondo ─── */
@@ -1937,7 +1950,7 @@ body.menu-open {
 	text-decoration: none;
 	font-family: var(--font-display);
 	font-size: clamp(1rem, 1.08vw, 1.12rem);
-	color: #6f5430;
+	color: #8f001c;
 	border: none;
 	border-bottom: 1px solid rgba(111, 84, 48, 0.38);
 	padding: 0 0 0.1rem;
@@ -1947,7 +1960,7 @@ body.menu-open {
 }
 
 .room-read-link:hover {
-	color: #5c4220;
+	color: #8f001c;
 	border-color: rgba(92, 66, 32, 0.6);
 }
 
@@ -1962,7 +1975,7 @@ body.menu-open {
 	padding: 0 1rem;
 	border: none;
 	border-radius: 2rem;
-	background: #1e1b17;
+	background: #1e1e1e;
 	color: #f4edd8;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -2109,7 +2122,7 @@ body.menu-open {
 
 .tour-read-link {
 	text-decoration: none;
-	color: #9c5d22;
+	color: #8f001c;
 	font-weight: 700;
 	font-size: 0.95rem;
 	text-transform: uppercase;
@@ -2118,7 +2131,7 @@ body.menu-open {
 }
 
 .tour-read-link:hover {
-	color: #7a4714;
+	color: #8f001c;
 	transform: translateY(-1px);
 }
 
@@ -2408,13 +2421,13 @@ body.menu-open {
 	font-weight: 600;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
-	color: #c9ab5d;
+	color: #b90024;
 	transition: gap 0.24s ease, color 0.24s ease;
 }
 
 .rest-link:hover {
 	gap: 0.65rem;
-	color: #d4bc76;
+	color: #d8c5a0;
 }
 
 /* ── Separador entre imagen y body (línea dorada sutil) ──── */
@@ -2579,7 +2592,7 @@ body.menu-open {
 	display: block;
 	width: clamp(2.4rem, 3.5vw, 3.2rem);
 	height: 1px;
-	background: #c9ab5d;
+	background: #b90024;
 	margin-bottom: clamp(0.9rem, 1.6vw, 1.4rem);
 }
 
@@ -2598,8 +2611,8 @@ body.menu-open {
 	align-items: center;
 	justify-content: center;
 	padding: 0.88rem 2.2rem;
-	background: #9b1c2d;
-	border: 1px solid #9b1c2d;
+	background: #b90024;
+	border: 1px solid #b90024;
 	color: #fff6ee;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -2611,8 +2624,8 @@ body.menu-open {
 }
 
 .tropic-cta:hover {
-	background: #b71f35;
-	border-color: #b71f35;
+	background: #8f001c;
+	border-color: #8f001c;
 	box-shadow: 0 8px 28px rgba(155, 28, 45, 0.42);
 }
 
@@ -2697,7 +2710,7 @@ body.menu-open {
 	font-size: clamp(1.15rem, 2.1vw, 1.85rem);
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
-	color: #aa8749;
+	color: #b90024;
 }
 
 .amenities-title {
@@ -2753,7 +2766,7 @@ body.menu-open {
 	margin-top: 0.8rem;
 	display: grid;
 	place-items: center;
-	color: #b44334;
+	color: #b90024;
 	background: rgba(180, 67, 52, 0.08);
 	border: 1px solid rgba(180, 67, 52, 0.3);
 	border-radius: 0.55rem;
@@ -2809,7 +2822,7 @@ body.menu-open {
 
 /* ── Page header ─────────────────────────────────────────── */
 .gallery-page-header {
-	padding: clamp(7rem, 14vw, 11rem) 1.2rem clamp(2rem, 4vw, 3rem);
+	padding: clamp(9rem, 16vw, 13rem) 1.2rem clamp(2rem, 4vw, 3rem);
 	background: #f5f2ee;
 	text-align: center;
 }
@@ -2818,7 +2831,7 @@ body.menu-open {
 	margin: 0 0 0.6rem;
 	font-family: var(--font-script);
 	font-size: clamp(1.6rem, 2.5vw, 2.4rem);
-	color: #a07830;
+	color: #8f001c;
 	line-height: 1;
 }
 
@@ -2829,7 +2842,7 @@ body.menu-open {
 	line-height: 0.92;
 	letter-spacing: 0.04em;
 	text-transform: uppercase;
-	color: #1e1a16;
+	color: #1e1e1e;
 }
 
 .gallery-page-subtitle {
@@ -2877,12 +2890,12 @@ body.menu-open {
 
 .gallery-filter-btn:hover {
 	border-color: rgba(30, 26, 22, 0.7);
-	color: #1e1a16;
+	color: #1e1e1e;
 }
 
 .gallery-filter-btn--active {
-	background: #9b1c2d;
-	border-color: #9b1c2d;
+	background: #b90024;
+	border-color: #b90024;
 	color: #fff6ee;
 }
 
@@ -3155,7 +3168,7 @@ body.menu-open {
 	border-radius: 50%;
 	border: none;
 	background: rgba(255, 255, 255, 0.9);
-	color: #1e1a16;
+	color: #1e1e1e;
 	cursor: pointer;
 	transition: background-color 0.2s ease, transform 0.2s ease;
 }
@@ -3173,7 +3186,7 @@ body.menu-open {
 	border-radius: 0.3rem;
 	font-size: 0.74rem;
 	font-weight: 700;
-	color: #1e1a16;
+	color: #1e1e1e;
 }
 
 .room-modal-thumbs {
@@ -3201,7 +3214,7 @@ body.menu-open {
 
 .room-modal-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .room-modal-thumb:hover { opacity: 0.85; }
-.room-modal-thumb--active { opacity: 1; border-color: #9b1c2d; }
+.room-modal-thumb--active { opacity: 1; border-color: #b90024; }
 
 /* ── Panel de detalles ───────────────────────────────────── */
 .room-modal-panel {
@@ -3221,7 +3234,7 @@ body.menu-open {
 	border: 1px solid rgba(30, 26, 22, 0.18);
 	border-radius: 50%;
 	background: #fff;
-	color: #1e1a16;
+	color: #1e1e1e;
 	cursor: pointer;
 	transition: background-color 0.2s ease, border-color 0.2s ease;
 }
@@ -3233,7 +3246,7 @@ body.menu-open {
 	font-family: var(--font-display);
 	font-size: clamp(1.6rem, 2.6vw, 2.2rem);
 	line-height: 1.05;
-	color: #1e1a16;
+	color: #1e1e1e;
 }
 
 .room-modal-meta {
@@ -3246,9 +3259,9 @@ body.menu-open {
 	color: rgba(30, 26, 22, 0.78);
 }
 
-.room-modal-meta-item { font-weight: 700; color: #1e1a16; }
+.room-modal-meta-item { font-weight: 700; color: #1e1e1e; }
 .room-modal-meta-sep { width: 1px; height: 1rem; background: rgba(30, 26, 22, 0.2); }
-.room-modal-guests { display: inline-flex; gap: 0.15rem; color: #9b1c2d; }
+.room-modal-guests { display: inline-flex; gap: 0.15rem; color: #b90024; }
 
 .room-modal-beds {
 	margin: 0 0 1.4rem;
@@ -3260,7 +3273,7 @@ body.menu-open {
 	margin: 0 0 0.85rem;
 	font-size: 1.05rem;
 	font-weight: 700;
-	color: #1e1a16;
+	color: #1e1e1e;
 }
 
 .room-modal-features {
@@ -3280,7 +3293,7 @@ body.menu-open {
 	color: rgba(30, 26, 22, 0.82);
 }
 
-.room-modal-feature svg { color: #9b1c2d; flex-shrink: 0; }
+.room-modal-feature svg { color: #b90024; flex-shrink: 0; }
 
 .room-modal-tags {
 	display: flex;
@@ -3292,7 +3305,7 @@ body.menu-open {
 .room-modal-tag {
 	padding: 0.32rem 0.8rem;
 	background: rgba(155, 28, 45, 0.09);
-	color: #9b1c2d;
+	color: #b90024;
 	border-radius: 0.3rem;
 	font-size: 0.78rem;
 	font-weight: 600;
@@ -3311,7 +3324,7 @@ body.menu-open {
 	justify-content: center;
 	width: 100%;
 	padding: 0.95rem 1.5rem;
-	background: #9b1c2d;
+	background: #b90024;
 	color: #fff6ee;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -3322,7 +3335,7 @@ body.menu-open {
 	transition: background-color 0.22s ease, transform 0.22s ease;
 }
 
-.room-modal-cta:hover { background: #b71f35; transform: translateY(-2px); }
+.room-modal-cta:hover { background: #8f001c; transform: translateY(-2px); }
 
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 860px) {
@@ -3340,4 +3353,253 @@ body.menu-open {
 	}
 
 	.room-modal-counter { bottom: 5rem; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   SISTEMA DE COMPONENTES DE MARCA — "EJEMPLOS DE USO"
+   Clases reutilizables que codifican el brand book Downtown.
+   Todas usan los tokens de la paleta (--brand-*).
+   Uso: <a class="btn btn--primary">…</a>, <span class="badge">NUEVO</span>, etc.
+══════════════════════════════════════════════════════════ */
+
+/* ── Botones ───────────────────────────────────────────── */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 1rem 2.4rem;
+	font-family: var(--font-body);
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	text-decoration: none;
+	text-align: center;
+	border: 1px solid transparent;
+	cursor: pointer;
+	transition:
+		background-color 0.25s ease,
+		border-color 0.25s ease,
+		color 0.25s ease,
+		transform 0.25s ease;
+}
+
+.btn:hover { transform: translateY(-1px); }
+
+/* Primario: negro sólido (BOTÓN PRIMARIO del brand book) */
+.btn--primary {
+	background: var(--brand-black);
+	border-color: var(--brand-black);
+	color: var(--brand-cream);
+}
+
+.btn--primary:hover {
+	background: var(--brand-black-90);
+	border-color: var(--brand-black-90);
+}
+
+/* Secundario: contorno (BOTÓN SECUNDARIO del brand book) */
+.btn--secondary {
+	background: transparent;
+	border-color: var(--brand-black);
+	color: var(--brand-black);
+}
+
+.btn--secondary:hover {
+	background: var(--brand-black);
+	color: var(--brand-cream);
+}
+
+/* Acento rojo: para CTA de alta intención */
+.btn--red {
+	background: var(--brand-red);
+	border-color: var(--brand-red);
+	color: #fff;
+}
+
+.btn--red:hover {
+	background: var(--brand-red-dark);
+	border-color: var(--brand-red-dark);
+}
+
+/* ── Enlace de texto rojo con flecha (ENLACE DE TEXTO →) ── */
+.text-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: var(--brand-red);
+	transition: gap 0.25s ease, color 0.25s ease;
+}
+
+.text-link::after {
+	content: "→";
+	transition: transform 0.25s ease;
+}
+
+.text-link:hover {
+	color: var(--brand-red-dark);
+}
+
+.text-link:hover::after {
+	transform: translateX(0.25rem);
+}
+
+/* ── Badge / etiqueta (NUEVO) ──────────────────────────── */
+.badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.4rem 0.85rem;
+	background: var(--brand-red);
+	color: #fff;
+	font-size: 0.66rem;
+	font-weight: 700;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	line-height: 1;
+}
+
+.badge--black { background: var(--brand-black); }
+.badge--tan   { background: var(--brand-tan); color: var(--brand-black); }
+
+/* ── Botones con ícono (circulares) ────────────────────── */
+.icon-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 3.2rem;
+	height: 3.2rem;
+	border-radius: 50%;
+	border: 1px solid var(--brand-black);
+	background: transparent;
+	color: var(--brand-black);
+	cursor: pointer;
+	transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.icon-btn:hover { transform: translateY(-1px); }
+
+/* Variante sólida (el primer ícono activo del brand book) */
+.icon-btn--solid {
+	background: var(--brand-black);
+	border-color: var(--brand-black);
+	color: var(--brand-cream);
+}
+
+.icon-btn--solid:hover { background: var(--brand-black-90); }
+
+.icon-btn svg { width: 1.15rem; height: 1.15rem; }
+
+/* ── Paginación ────────────────────────────────────────── */
+.pagination {
+	display: inline-flex;
+	gap: 0.4rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.pagination a,
+.pagination button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.9rem;
+	height: 2.9rem;
+	border: 1px solid rgba(30, 30, 30, 0.22);
+	background: transparent;
+	color: var(--brand-black);
+	font-size: 0.85rem;
+	font-weight: 600;
+	text-decoration: none;
+	cursor: pointer;
+	transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.pagination a:hover,
+.pagination button:hover {
+	border-color: var(--brand-black);
+}
+
+.pagination .is-active {
+	background: var(--brand-black);
+	border-color: var(--brand-black);
+	color: var(--brand-cream);
+}
+
+/* ══════════════════════════════════════════════════════════
+   PROMO TILES — "EJEMPLOS DE USO" del brand book
+   4 variantes: crema, rojo, negro, tan.
+   Uso: <article class="promo-tile promo-tile--red"> … </article>
+══════════════════════════════════════════════════════════ */
+.promo-grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: clamp(0.8rem, 1.6vw, 1.4rem);
+}
+
+.promo-tile {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 1.4rem;
+	min-height: clamp(12rem, 18vw, 15rem);
+	padding: clamp(1.4rem, 2vw, 2rem);
+}
+
+.promo-tile__title {
+	margin: 0;
+	font-family: var(--font-body);
+	font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: 0.01em;
+	text-transform: uppercase;
+}
+
+.promo-tile__rule {
+	width: 2.2rem;
+	height: 2px;
+	border: 0;
+	margin: 0;
+	background: var(--brand-red);
+}
+
+/* Crema: texto negro, link rojo (ENVÍO GRATIS …) */
+.promo-tile--cream {
+	background: var(--brand-cream);
+	color: var(--brand-black);
+}
+
+/* Rojo sólido: texto blanco (SS25 NUEVA COLECCIÓN) */
+.promo-tile--red {
+	background: var(--brand-red);
+	color: #fff;
+}
+.promo-tile--red .text-link { color: #fff; }
+.promo-tile--red .text-link:hover { color: rgba(255, 255, 255, 0.78); }
+
+/* Negro: texto blanco (DOWNTOWN DESIGNED IN THE CITY.) */
+.promo-tile--black {
+	background: var(--brand-black);
+	color: var(--brand-cream);
+}
+
+/* Tan: texto negro, regla roja (CALIDAD. DISEÑO. FUNCIONALIDAD.) */
+.promo-tile--tan {
+	background: var(--brand-tan);
+	color: var(--brand-black);
+}
+
+@media (max-width: 900px) {
+	.promo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 480px) {
+	.promo-grid { grid-template-columns: 1fr; }
 }

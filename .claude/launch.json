@@ -5,7 +5,15 @@
       "name": "dev",
       "runtimeExecutable": "/Users/wil/Documents/Dinamiq/WebSiteDowntownLF/node_modules/.bin/astro",
       "runtimeArgs": ["dev"],
-      "port": 4321
+      "port": 4321,
+      "autoPort": true
+    },
+    {
+      "name": "static",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4330", "--directory", "dist"],
+      "port": 4330,
+      "autoPort": true
     }
   ]
 }

@@ -1,0 +1,130 @@
+---
+import { useTranslations } from "../i18n/utils";
+const t = useTranslations(Astro.currentLocale);
+---
+
+<!--
+  BRAND HIGHLIGHTS — "Ejemplos de uso" del brand book Downtown.
+  4 promo tiles (crema / rojo / negro / tan) que demuestran la paleta
+  de marca aplicada con los patrones de uso oficiales.
+  Estilos: .promo-* y .text-link en global.css.
+-->
+<section class="brand-highlights" aria-label={t("brand.heading")}>
+	<div class="brand-highlights__inner">
+		<header class="brand-highlights__head">
+			<p class="brand-highlights__kicker">{t("brand.kicker")}</p>
+			<h2 class="brand-highlights__title">{t("brand.heading")}</h2>
+		</header>
+
+		<div class="promo-grid">
+			<!-- Tile crema: texto negro + enlace rojo -->
+			<article class="promo-tile promo-tile--cream">
+				<div>
+					<h3 class="promo-tile__title">{t("brand.tile1.title")}</h3>
+					<p class="promo-tile__sub">{t("brand.tile1.sub")}</p>
+				</div>
+				<a class="text-link" href={t("brand.tile1.href")}>{t("brand.tile1.link")}</a>
+			</article>
+
+			<!-- Tile rojo sólido: texto blanco + enlace -->
+			<article class="promo-tile promo-tile--red">
+				<div>
+					<h3 class="promo-tile__title">{t("brand.tile2.title")}</h3>
+					<p class="promo-tile__sub">{t("brand.tile2.sub")}</p>
+				</div>
+				<a class="text-link" href={t("brand.tile2.href")}>{t("brand.tile2.link")}</a>
+			</article>
+
+			<!-- Tile negro: statement de marca, mismo estilo del Hero (display + script) -->
+			<article class="promo-tile promo-tile--black promo-tile--brand">
+				<h3 class="promo-tile__brand-title">
+					{t("brand.tile3.line1")}<br />
+					{t("brand.tile3.line2")}
+				</h3>
+				<p class="promo-tile__brand-sub">{t("brand.tile3.sub")}</p>
+			</article>
+
+			<!-- Tile tan: texto negro + regla roja -->
+			<article class="promo-tile promo-tile--tan">
+				<h3 class="promo-tile__title promo-tile__title--lg">
+					{t("brand.tile4.line1")}<br />
+					{t("brand.tile4.line2")}<br />
+					{t("brand.tile4.line3")}
+				</h3>
+				<hr class="promo-tile__rule" />
+			</article>
+		</div>
+	</div>
+</section>
+
+<style>
+	.brand-highlights {
+		padding: clamp(3.4rem, 7vw, 5.6rem) 1.2rem;
+		background: var(--brand-cream);
+	}
+
+	.brand-highlights__inner {
+		max-width: 90rem;
+		margin: 0 auto;
+	}
+
+	.brand-highlights__head {
+		margin-bottom: clamp(1.6rem, 3vw, 2.6rem);
+	}
+
+	.brand-highlights__kicker {
+		margin: 0 0 0.4rem;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.24em;
+		text-transform: uppercase;
+		color: var(--brand-red);
+	}
+
+	.brand-highlights__title {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.9rem, 3.8vw, 3.2rem);
+		line-height: 1;
+		letter-spacing: 0.01em;
+		color: var(--brand-black);
+	}
+
+	.promo-tile__sub {
+		margin: 0.5rem 0 0;
+		font-size: 0.82rem;
+		line-height: 1.4;
+		letter-spacing: 0.02em;
+		opacity: 0.78;
+	}
+
+	.promo-tile__title--lg {
+		font-size: clamp(1.2rem, 1.7vw, 1.55rem);
+		line-height: 1.18;
+	}
+
+	/* Tile de marca: mismo lenguaje visual del Hero (h1 display + script italic) */
+	.promo-tile--brand {
+		justify-content: center;
+		align-items: flex-start;
+		gap: 0.7rem;
+	}
+
+	.promo-tile__brand-title {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.7rem, 2.6vw, 2.6rem);
+		line-height: 0.96;
+		letter-spacing: 0.03em;
+		text-transform: uppercase;
+		font-weight: 500;
+	}
+
+	.promo-tile__brand-sub {
+		margin: 0;
+		font-family: var(--font-script);
+		font-size: clamp(1.05rem, 1.4vw, 1.4rem);
+		line-height: 1;
+		color: var(--brand-tan);
+	}
+</style>
