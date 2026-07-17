@@ -1,0 +1,114 @@
+<script type="text/javascript">
+(function (i, s, o, g, r, a, m) {
+    i['SBSyncroBoxParam'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+})(window, document, 'script', 'https://cdn.simplebooking.it/search-box-script.axd?IDA=10487','SBSyncroBox');
+
+SBSyncroBox({
+    CodLang: 'EN',
+    Currency: 'USD',
+	Styles: {Theme: "dark",
+    FontFamily: '"Rubik", Sans-serif',
+      CustomColor: "#000000",  // Primary color
+      CustomColorHover: "#000000",  // Primary hover color
+      CustomBGColor: "#f5eee4",  // Primary background color
+      CustomFieldBackgroundColor: "#fff",  // Calendar fields background color
+      CustomLabelColor: "#000000",  // Labels color
+      CustomLabelHoverColor: "#000000",  // Lobels color on hover
+      CustomButtonColor:"#fff",  // Buttons color
+      CustomButtonBGColor: "#166A70",  // Buttons background color
+      CustomButtonHoverBGColor:"#166A70",  // Bottons background color on hover
+      CustomIconColor:"#000000",  // Icons color
+      CustomLinkColor: "#000000",  // Links color
+      CustomWidgetColor: "#000000", // Widgets color
+      CustomWidgetBGColor: "#fff",  // Widgets background color
+      CustomWidgetElementHoverColor: "#000000",  // Widget elements color on hover
+      CustomWidgetElementHoverBGColor: "#fff", // Widget elements background color on hover
+      CustomBoxShadowColor:"#000000",  // Box shadows color
+      CustomBoxShadowColorFocus:"#000000",  // Box shadows color when have focus
+      CustomBoxShadowColorHover: "##aba19a",  // Box shadows color on hover
+      CustomAddRoomBoxShadowColor: "#000000", // Guests widget add room button border color
+      CustomIntentSelectionColor: "#000000", // Color of date range currently selected, when hovering on calendar
+      CustomIntentSelectionDaysBGColor: "#575350",  // Background color of intent selection cells
+      CustomSelectedDaysColor: "#fff",  // Color of current selected range
+      CustomAccentColor: "#575350", // Calendar’s main color
+      CustomAccentColorHover: "#edd3c0",  // Calendar’s hover color
+      CustomCalendarBackgroundColor: "#fff", // Calendar’s background color
+
+
+
+	},
+});
+</script>
+
+<style>
+       @media  (min-width:768px) {
+    input#sb-container_sb__form-field--checkavailability {
+        margin-top: 0;
+    }
+
+    #sb-container .sb-custom-bg-color {
+        padding: 10px 20px 10px 20px;
+        border-radius: 0px 0px 25px 25px;
+    }
+
+    .sb__footer-link--promo {
+        font-size: 20px !important; /* Adjust the value as needed */
+        position: relative; /* Make it positionable */
+        top: -15px; /* Move the element up */
+        left: 30px; /* Move it more to the right */
+    }
+
+    #sb-container .sb {
+        display: flex !important;
+        gap: 0px;
+    }
+
+    #sb-container a#sb-container_sb__footer-promo-wrapper {
+        margin-top: 10px;
+        margin-left: 30px; /* Move it more to the right */
+    }
+
+    #sb-container a#sb-container_sb__form-field--reservationedit {
+        float: left;
+        margin-top: 4px;
+        margin-left: 40px; /* Move it more to the right */
+        font-size: 15px !important;
+    }
+
+    .sb__form-field-label {
+        display: none !important;
+    }
+}
+
+    @media  (max-width:767px) {
+
+        input#sb-container_sb__form-field--checkavailability {
+        margin-top: 0;
+    }
+
+    #sb-container .sb-custom-bg-color {
+        padding: 10px 20px 10px 20px;
+        border-radius: 0px 0px 25px 25px;
+    }
+
+
+    .sb__form-field-label {
+        display: none !important;
+    }
+    
+
+    }
+    
+</style>
+
+
+
+
+
+
+<div class="container">
+    <div id="sb-container" ></div>
+</div>
