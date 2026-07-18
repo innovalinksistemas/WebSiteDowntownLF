@@ -10,31 +10,31 @@ SBSyncroBox({
     CodLang: 'EN',
     Currency: 'USD',
 	Styles: {Theme: "dark",
-    FontFamily: '"Rubik", Sans-serif',
-      CustomColor: "#000000",  // Primary color
-      CustomColorHover: "#000000",  // Primary hover color
-      CustomBGColor: "#f5eee4",  // Primary background color
+    FontFamily: '"Manrope", sans-serif',   // Coincide con la tipografía del sitio
+      CustomColor: "#1e1e1e",  // Primary color (brand black)
+      CustomColorHover: "#1e1e1e",  // Primary hover color
+      CustomBGColor: "#f5f1eb",  // Primary background color (brand cream)
       CustomFieldBackgroundColor: "#fff",  // Calendar fields background color
-      CustomLabelColor: "#000000",  // Labels color
-      CustomLabelHoverColor: "#000000",  // Lobels color on hover
+      CustomLabelColor: "#1e1e1e",  // Labels color
+      CustomLabelHoverColor: "#1e1e1e",  // Lobels color on hover
       CustomButtonColor:"#fff",  // Buttons color
-      CustomButtonBGColor: "#166A70",  // Buttons background color
-      CustomButtonHoverBGColor:"#166A70",  // Bottons background color on hover
-      CustomIconColor:"#000000",  // Icons color
-      CustomLinkColor: "#000000",  // Links color
-      CustomWidgetColor: "#000000", // Widgets color
+      CustomButtonBGColor: "#b90024",  // Buttons background color (brand red)
+      CustomButtonHoverBGColor:"#8f001c",  // Bottons background color on hover (brand red-dark)
+      CustomIconColor:"#1e1e1e",  // Icons color
+      CustomLinkColor: "#1e1e1e",  // Links color
+      CustomWidgetColor: "#1e1e1e", // Widgets color
       CustomWidgetBGColor: "#fff",  // Widgets background color
-      CustomWidgetElementHoverColor: "#000000",  // Widget elements color on hover
-      CustomWidgetElementHoverBGColor: "#fff", // Widget elements background color on hover
-      CustomBoxShadowColor:"#000000",  // Box shadows color
-      CustomBoxShadowColorFocus:"#000000",  // Box shadows color when have focus
-      CustomBoxShadowColorHover: "##aba19a",  // Box shadows color on hover
-      CustomAddRoomBoxShadowColor: "#000000", // Guests widget add room button border color
-      CustomIntentSelectionColor: "#000000", // Color of date range currently selected, when hovering on calendar
-      CustomIntentSelectionDaysBGColor: "#575350",  // Background color of intent selection cells
+      CustomWidgetElementHoverColor: "#1e1e1e",  // Widget elements color on hover
+      CustomWidgetElementHoverBGColor: "#f5f1eb", // Widget elements background color on hover
+      CustomBoxShadowColor:"#1e1e1e",  // Box shadows color
+      CustomBoxShadowColorFocus:"#b90024",  // Box shadows color when have focus (brand red)
+      CustomBoxShadowColorHover: "#aba19a",  // Box shadows color on hover
+      CustomAddRoomBoxShadowColor: "#1e1e1e", // Guests widget add room button border color
+      CustomIntentSelectionColor: "#1e1e1e", // Color of date range currently selected, when hovering on calendar
+      CustomIntentSelectionDaysBGColor: "#eccdd2",  // Background color of intent selection cells (light red tint)
       CustomSelectedDaysColor: "#fff",  // Color of current selected range
-      CustomAccentColor: "#575350", // Calendar’s main color
-      CustomAccentColorHover: "#edd3c0",  // Calendar’s hover color
+      CustomAccentColor: "#b90024", // Calendar’s main color (brand red)
+      CustomAccentColorHover: "#8f001c",  // Calendar’s hover color (brand red-dark)
       CustomCalendarBackgroundColor: "#fff", // Calendar’s background color
 
 
@@ -49,16 +49,10 @@ SBSyncroBox({
         margin-top: 0;
     }
 
+    /* Caja flotante sobre el hero: esquinas redondeadas y padding cómodo */
     #sb-container .sb-custom-bg-color {
-        padding: 10px 20px 10px 20px;
-        border-radius: 0px 0px 25px 25px;
-    }
-
-    .sb__footer-link--promo {
-        font-size: 20px !important; /* Adjust the value as needed */
-        position: relative; /* Make it positionable */
-        top: -15px; /* Move the element up */
-        left: 30px; /* Move it more to the right */
+        padding: 14px 22px;
+        border-radius: 16px;
     }
 
     #sb-container .sb {
@@ -66,16 +60,33 @@ SBSyncroBox({
         gap: 0px;
     }
 
+    /* Footer (código promocional + gestionar reserva):
+       centrado verticalmente y apilado, con tipografía proporcional */
+    #sb-container .sb__footer {
+        display: flex !important;
+        align-items: center;
+        padding-left: 36px; /* Separa el bloque promo/gestionar del botón */
+    }
+
+    #sb-container .sb__footer-actions {
+        display: flex !important;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    #sb-container .sb__footer-link--promo {
+        font-size: 14px !important;
+    }
+
     #sb-container a#sb-container_sb__footer-promo-wrapper {
-        margin-top: 10px;
-        margin-left: 30px; /* Move it more to the right */
+        margin: 0;
     }
 
     #sb-container a#sb-container_sb__form-field--reservationedit {
-        float: left;
-        margin-top: 4px;
-        margin-left: 40px; /* Move it more to the right */
-        font-size: 15px !important;
+        float: none;
+        margin: 0;
+        font-size: 12.5px !important;
     }
 
     .sb__form-field-label {
@@ -90,15 +101,15 @@ SBSyncroBox({
     }
 
     #sb-container .sb-custom-bg-color {
-        padding: 10px 20px 10px 20px;
-        border-radius: 0px 0px 25px 25px;
+        padding: 12px 18px;
+        border-radius: 16px;
     }
 
 
     .sb__form-field-label {
         display: none !important;
     }
-    
+
 
     }
     

@@ -1,5 +1,6 @@
 ---
 import Header from "../components/Header.astro";
+import Widget from "../components/WidgetSB.html";
 import { getLang } from "../i18n/utils";
 
 const SITE = "https://lafortunadowntown.com";
@@ -11,6 +12,7 @@ interface Props {
   canonical?: string;
   ogType?: string;
   headerSolid?: boolean;
+  bookingBar?: boolean;
 }
 
 const lang = getLang(Astro.currentLocale);
@@ -26,6 +28,7 @@ const {
   canonical = new URL(Astro.url.pathname, SITE).href,
   ogType = "website",
   headerSolid = false,
+  bookingBar = false,
 } = Astro.props;
 
 const ogImage = image.startsWith("http") ? image : `${SITE}${image}`;
@@ -79,7 +82,12 @@ const enPath = path.startsWith("/en") ? path : `/en${path === "/" ? "/" : path}`
 
     <slot name="head" />
   </head>
-  <body class={headerSolid ? "header-solid" : ""}>
+  <body class={`${headerSolid ? "header-solid" : ""}${bookingBar ? " has-booking-bar" : ""}`.trim()}>
+    {bookingBar && (
+      <div class="booking-bar">
+        <Widget />
+      </div>
+    )}
     <Header />
     <slot />
     <a

@@ -46,7 +46,7 @@ export const ui = {
     "hero.btn.book.aria": "Ver habitaciones disponibles y reservar",
     "hero.btn.explore": "Descubre el hotel",
     "hero.btn.explore.aria": "Explorar el hotel y sus experiencias",
-    "hero.microcopy": "Mejor precio garantizado · Cancelación gratuita · Sin gastos ocultos",
+    "hero.microcopy": "Mejor precio garantizado · Sin gastos ocultos",
     "hero.weather.label": "ARENAL VOLCANO",
     "hero.whatsapp.aria": "Contactar al hotel por WhatsApp",
     // ── About Us
@@ -307,7 +307,7 @@ export const ui = {
     "hero.btn.book.aria": "View available rooms and book",
     "hero.btn.explore": "Discover the hotel",
     "hero.btn.explore.aria": "Explore the hotel and its experiences",
-    "hero.microcopy": "Best price guaranteed · Free cancellation · No hidden fees",
+    "hero.microcopy": "Best price guaranteed · No hidden fees",
     "hero.weather.label": "ARENAL VOLCANO",
     "hero.whatsapp.aria": "Contact the hotel on WhatsApp",
     // ── About Us

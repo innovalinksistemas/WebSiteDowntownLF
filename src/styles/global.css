@@ -610,10 +610,26 @@ body.menu-open {
 	color: rgba(255, 251, 246, 0.9);
 }
 
+/* ── Contenedor del contenido del hero ──────────────────────
+   Con la barra de reserva + header en flujo por encima, el hero
+   ya no necesita reservar espacio para un header fijo: se centra
+   dentro de su propia altura. */
+.hero-content {
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+}
+
+@media (min-width: 640px) {
+	.hero-content {
+		padding-top: 3.5rem;
+		padding-bottom: 3rem;
+	}
+}
+
 /* ── Título H1 ──────────────────────────────────────────── */
 .hero-title {
 	font-family: var(--font-display);
-	font-size: clamp(3.2rem, 10vw, 8.1rem);
+	font-size: clamp(3.2rem, 9.2vw, 7.3rem);
 	line-height: 0.93;
 	letter-spacing: 0.065em;
 	font-weight: 500;
@@ -712,6 +728,60 @@ body.menu-open {
 	letter-spacing: 0.18em;
 	text-transform: uppercase;
 	color: rgba(247, 240, 230, 0.48);
+}
+
+/* ══════════════════════════════════════════════════════════
+   BARRA DE RESERVA (SimpleBooking) — full-width, arriba del navbar
+   Se muestra en el tope del documento, en flujo normal, así que
+   se va con el scroll. El header debajo es sticky y se re-fija.
+══════════════════════════════════════════════════════════ */
+.booking-bar {
+	width: 100%;
+	background: #f5f1eb; /* crema de marca — se extiende a lo ancho */
+	position: relative;
+	z-index: 81; /* por encima del header sticky */
+}
+
+.booking-bar .container {
+	width: 100%;
+	max-width: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* El fondo crema lo pinta .booking-bar a lo ancho; el widget queda
+   transparente y su contenido se centra dentro de un ancho máximo. */
+.has-booking-bar #sb-container .sb-custom-bg-color {
+	background: transparent !important;
+	border-radius: 0 !important;
+	padding-block: 12px !important;
+}
+
+.has-booking-bar #sb-container .sb {
+	max-width: 1240px;
+	margin-inline: auto;
+	justify-content: center;
+}
+
+/* Header en flujo (sticky) debajo de la barra: se va con el scroll y
+   se vuelve a fijar arriba al pasarlo. Solo en páginas con barra. */
+.has-booking-bar .site-header {
+	position: sticky;
+}
+
+/* Con la barra + header por encima ocupando el tope, el hero llena el
+   resto del viewport (no 100vh completo) para que el contenido no quede
+   centrado demasiado abajo dejando imagen vacía arriba. */
+.has-booking-bar .hero,
+.has-booking-bar .hero-content {
+	min-height: calc(100vh - 200px);
+}
+
+@media (min-width: 640px) {
+	.has-booking-bar .hero,
+	.has-booking-bar .hero-content {
+		min-height: calc(100vh - 300px);
+	}
 }
 
 /* ── CTAs ───────────────────────────────────────────────── */
@@ -829,6 +899,15 @@ body.menu-open {
 ──────────────────────────────────────────────────────────── */
 .hero-scroll-indicator {
 	pointer-events: none;
+}
+
+/* En pantallas de poca altura el contenido del hero llega hasta abajo y
+   el indicador "Scroll" chocaría con el microcopy: se oculta y solo se
+   muestra en monitores altos donde hay espacio real. */
+@media (max-height: 920px) {
+	.hero-scroll-indicator {
+		display: none !important;
+	}
 }
 
 .hero-scroll-label {
