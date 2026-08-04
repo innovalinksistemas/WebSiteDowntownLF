@@ -11,11 +11,14 @@ import Restaurants from "../components/Restaurants.astro";
 import Rooms from "../components/Rooms.astro";
 import TopTours from "../components/TopTours.astro";
 import TropicalExperiencesBanner from "../components/TropicalExperiencesBanner.astro";
+import { useTranslations } from "../i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <Layout
-	title="Downtown La Fortuna | Hotel Boutique en el centro de La Fortuna"
-	description="Hotel boutique en el corazón de La Fortuna, Costa Rica. Habitaciones modernas, piscina, restaurantes y fácil acceso al Volcán Arenal y las aguas termales. Reserva directa con el mejor precio garantizado."
+	title={t("meta.home.title")}
+	description={t("meta.home.description")}
 	bookingBar={true}
 >
 	<main class="relative min-h-screen overflow-hidden text-stone-100">

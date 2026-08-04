@@ -5,21 +5,24 @@ import Footer from "../../components/Footer.astro";
 import Layout from "../../layouts/Layout.astro";
 import StoriesFromHeart from "../../components/StoriesFromHeart.astro";
 import Testimonials from "../../components/Testimonials.astro";
+import { useTranslations } from "../../i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <Layout
-  title="Frequently Asked Questions | Downtown La Fortuna Boutique Hotel"
-  description="Answers to the most frequently asked questions about Downtown La Fortuna Boutique Hotel: reservations, check-in, location, services, and experiences in La Fortuna, Costa Rica."
+  title={t("meta.faq.title")}
+  description={t("meta.faq.description")}
   headerSolid={true}
 >
   <main class="relative min-h-screen overflow-hidden text-stone-100">
     <section class="pt-32 pb-12">
       <div class="mx-auto max-w-4xl px-6 text-center">
         <h1 class="mb-4 font-serif text-4xl font-bold text-stone-100 md:text-5xl">
-          Frequently Asked Questions
+          {t("faq.page.h1")}
         </h1>
         <p class="text-lg text-stone-300">
-          Everything you need to know about La Fortuna Downtown
+          {t("faq.page.subtitle")}
         </p>
       </div>
     </section>

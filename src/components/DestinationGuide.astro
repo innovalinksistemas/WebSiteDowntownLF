@@ -1,0 +1,705 @@
+---
+import Footer from "./Footer.astro";
+
+/**
+ * Guía de destino "Arenal Fortuna".
+ * La maqueta y los estilos viven aquí; cada página de idioma
+ * (src/pages/arenal-fortuna.astro y src/pages/en/arenal-fortuna.astro)
+ * aporta únicamente el contenido.
+ */
+
+export interface Attraction {
+  n: string;
+  name: string;
+  kicker: string;
+  text: string;
+  meta: string;
+  href?: string;
+  hrefLabel?: string;
+}
+export interface Route { from: string; time: string; text: string }
+export interface Season { range: string; name: string; text: string }
+export interface Faq { q: string; a: string }
+
+interface Props {
+  hero: {
+    eyebrow: string;
+    titleTop: string;
+    titleBottom: string;
+    lead: string;
+    /** Opcional: sin `img` el hero usa un fondo sólido de marca. */
+    img?: string;
+    imgAlt?: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+  };
+  intro: {
+    eyebrow: string;
+    title: string;
+    /** Párrafos en HTML — el énfasis <strong>/<em> es intencional. */
+    body: string[];
+    facts: { label: string; value: string }[];
+  };
+  attractionsBlock: { eyebrow: string; title: string; items: Attraction[] };
+  routesBlock: {
+    eyebrow: string;
+    title: string;
+    items: Route[];
+    note: string;
+    noteLinkLabel: string;
+  };
+  seasonsBlock: { eyebrow: string; title: string; items: Season[]; note: string };
+  stayBlock: {
+    eyebrow: string;
+    title: string;
+    kicker: string;
+    heading: string;
+    text: string;
+    bullets: string[];
+    ctaRooms: string;
+    ctaPackages: string;
+    roomsHref: string;
+    packagesHref: string;
+    imgAlt: string;
+  };
+  faqBlock: { eyebrow: string; title: string; items: Faq[] };
+}
+
+const { hero, intro, attractionsBlock, routesBlock, seasonsBlock, stayBlock, faqBlock } =
+  Astro.props;
+---
+
+<main>
+  <section class:list={["af-hero", !hero.img && "af-hero--plain"]}>
+    {hero.img && (
+      <>
+        <img
+          src={hero.img}
+          alt={hero.imgAlt}
+          class="af-hero-bg"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <div class="af-hero-overlay" aria-hidden="true"></div>
+      </>
+    )}
+
+    <div class="af-hero-content">
+      <p class="af-hero-eyebrow">{hero.eyebrow}</p>
+      <h1 class="af-hero-title">{hero.titleTop}<br /><em>{hero.titleBottom}</em></h1>
+      <p class="af-hero-lead">{hero.lead}</p>
+      <div class="af-hero-ctas">
+        <a href="#que-hacer" class="af-btn af-btn--primary">{hero.ctaPrimary}</a>
+        <a href="#donde-dormir" class="af-btn af-btn--outline">{hero.ctaSecondary}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="af-section af-section--cream" id="que-es">
+    <div class="af-container af-container--narrow">
+      <p class="af-eyebrow">{intro.eyebrow}</p>
+      <h2 class="af-section-title">{intro.title}</h2>
+      <div class="af-prose">
+        {intro.body.map((p) => <p set:html={p} />)}
+      </div>
+
+      <ul class="af-facts">
+        {intro.facts.map((f) => (
+          <li><span>{f.label}</span><strong>{f.value}</strong></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="af-section af-section--dark" id="que-hacer">
+    <div class="af-container">
+      <p class="af-eyebrow af-eyebrow--light">{attractionsBlock.eyebrow}</p>
+      <h2 class="af-section-title af-section-title--light">{attractionsBlock.title}</h2>
+
+      <div class="af-grid">
+        {attractionsBlock.items.map((a) => (
+          <article class="af-card">
+            <span class="af-card-n" aria-hidden="true">{a.n}</span>
+            <p class="af-card-kicker">{a.kicker}</p>
+            <h3 class="af-card-title">{a.name}</h3>
+            <p class="af-card-text">{a.text}</p>
+            <p class="af-card-meta">{a.meta}</p>
+            {a.href && <a href={a.href} class="af-card-link">{a.hrefLabel} →</a>}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="af-section af-section--cream" id="como-llegar">
+    <div class="af-container af-container--narrow">
+      <p class="af-eyebrow">{routesBlock.eyebrow}</p>
+      <h2 class="af-section-title">{routesBlock.title}</h2>
+
+      <div class="af-routes">
+        {routesBlock.items.map((r) => (
+          <div class="af-route">
+            <div class="af-route-head">
+              <h3 class="af-route-from">{r.from}</h3>
+              <span class="af-route-time">{r.time}</span>
+            </div>
+            <p class="af-route-text">{r.text}</p>
+          </div>
+        ))}
+      </div>
+
+      <p class="af-note">
+        {routesBlock.note}{" "}
+        <a href="https://wa.me/50685274677" target="_blank" rel="noopener noreferrer">
+          {routesBlock.noteLinkLabel}
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <section class="af-section af-section--dark" id="cuando-ir">
+    <div class="af-container af-container--narrow">
+      <p class="af-eyebrow af-eyebrow--light">{seasonsBlock.eyebrow}</p>
+      <h2 class="af-section-title af-section-title--light">{seasonsBlock.title}</h2>
+
+      <div class="af-seasons">
+        {seasonsBlock.items.map((s) => (
+          <div class="af-season">
+            <p class="af-season-range">{s.range}</p>
+            <h3 class="af-season-name">{s.name}</h3>
+            <p class="af-season-text">{s.text}</p>
+          </div>
+        ))}
+      </div>
+
+      <p class="af-note af-note--light">{seasonsBlock.note}</p>
+    </div>
+  </section>
+
+  <section class="af-section af-section--cream" id="donde-dormir">
+    <div class="af-container">
+      <p class="af-eyebrow">{stayBlock.eyebrow}</p>
+      <h2 class="af-section-title">{stayBlock.title}</h2>
+
+      <div class="af-stay">
+        <div class="af-stay-media">
+          <img
+            src="/images/rooms/hotel/1Z6A4971.jpg"
+            alt={stayBlock.imgAlt}
+            loading="lazy"
+            width="1600"
+            height="1067"
+          />
+        </div>
+
+        <div class="af-stay-body">
+          <p class="af-stay-kicker">{stayBlock.kicker}</p>
+          <h3 class="af-stay-title">{stayBlock.heading}</h3>
+          <p class="af-stay-text">{stayBlock.text}</p>
+          <ul class="af-stay-list">
+            {stayBlock.bullets.map((b) => <li>{b}</li>)}
+          </ul>
+          <div class="af-stay-ctas">
+            <a href={stayBlock.roomsHref} class="af-btn af-btn--primary">{stayBlock.ctaRooms}</a>
+            <a href={stayBlock.packagesHref} class="af-btn af-btn--dark">{stayBlock.ctaPackages}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="af-section af-section--cream af-section--tight" id="preguntas">
+    <div class="af-container af-container--narrow">
+      <p class="af-eyebrow">{faqBlock.eyebrow}</p>
+      <h2 class="af-section-title">{faqBlock.title}</h2>
+
+      <div class="af-faq">
+        {faqBlock.items.map((f) => (
+          <details class="af-faq-item">
+            <summary class="af-faq-q">{f.q}</summary>
+            <p class="af-faq-a">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</main>
+
+<style>
+/* ══════════════════════════════════════════════════════
+   ARENAL FORTUNA — LANDING DE DESTINO
+══════════════════════════════════════════════════════ */
+
+/* ── Shared ─────────────────────────────────────────── */
+.af-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+}
+.af-container--narrow { max-width: 56rem; }
+
+.af-section { padding: clamp(3.6rem, 7vw, 5.6rem) 0; }
+.af-section--tight { padding-top: 0; }
+.af-section--cream { background: var(--brand-cream); color: var(--brand-black); }
+.af-section--dark  { background: #0f1418; color: #f4f1ec; }
+
+.af-eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brand-red);
+  text-align: center;
+}
+.af-eyebrow--light { color: var(--brand-tan); }
+
+.af-section-title {
+  margin: 0 0 clamp(1.8rem, 3.5vw, 2.8rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 3.4rem);
+  line-height: 1.04;
+  color: var(--brand-black);
+  text-align: center;
+}
+.af-section-title--light { color: #f7f4ef; }
+
+/* ── Buttons ────────────────────────────────────────── */
+.af-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.9rem 2.2rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 0.15rem;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+}
+.af-btn:hover { transform: translateY(-2px); }
+
+.af-btn--primary {
+  background: var(--brand-red);
+  color: #fff6ee;
+  box-shadow: 0 4px 18px rgba(155, 28, 45, 0.38);
+}
+.af-btn--primary:hover {
+  background: var(--brand-red-dark);
+  box-shadow: 0 8px 28px rgba(155, 28, 45, 0.5);
+}
+
+.af-btn--outline {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: #fff;
+  backdrop-filter: blur(4px);
+}
+.af-btn--outline:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.af-btn--dark {
+  background: var(--brand-black);
+  color: #f4edd8;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
+}
+.af-btn--dark:hover {
+  background: var(--brand-black-90);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.32);
+}
+
+/* ══ HERO ══════════════════════════════════════════════ */
+.af-hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+  overflow: hidden;
+}
+/* Hero sin fotografía: fondo de marca, a la espera de una imagen del volcán. */
+.af-hero--plain {
+  background:
+    radial-gradient(120% 85% at 50% 0%, #17222c 0%, #0d1217 58%, #080c10 100%);
+}
+.af-hero--plain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(70% 50% at 50% 45%, rgba(216, 197, 160, 0.07), transparent 70%);
+}
+.af-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Encuadre hacia el cono del Arenal, que está arriba a la izquierda. */
+  object-position: 42% 30%;
+  z-index: -2;
+}
+.af-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  /* Se aclara en la franja del volcán y se oscurece abajo, donde va el texto. */
+  background: linear-gradient(
+    to bottom,
+    rgba(8, 12, 16, 0.55) 0%,
+    rgba(8, 12, 16, 0.3) 30%,
+    rgba(8, 12, 16, 0.62) 62%,
+    rgba(8, 12, 16, 0.92) 100%
+  );
+}
+.af-hero-content {
+  position: relative;
+  text-align: center;
+  padding: 8rem clamp(1.25rem, 5vw, 3rem) 5rem;
+  max-width: 52rem;
+}
+.af-hero-eyebrow {
+  margin: 0 0 0.9rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--brand-tan);
+}
+.af-hero-title {
+  margin: 0 0 1.4rem;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 11vw, 7rem);
+  line-height: 0.92;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #fff;
+  text-transform: uppercase;
+}
+.af-hero-title em {
+  display: block;
+  font-family: var(--font-script);
+  font-style: normal;
+  text-transform: none;
+  font-size: 0.72em;
+  color: var(--brand-tan);
+  letter-spacing: 0.02em;
+}
+.af-hero-lead {
+  margin: 0 auto 2.2rem;
+  max-width: 34rem;
+  font-size: clamp(0.98rem, 1.4vw, 1.15rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.82);
+}
+.af-hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  justify-content: center;
+}
+
+/* ══ ¿QUÉ ES? ══════════════════════════════════════════ */
+.af-prose p {
+  margin: 0 0 1.15rem;
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  line-height: 1.8;
+  color: rgba(30, 30, 30, 0.82);
+}
+.af-prose strong { color: var(--brand-black); font-weight: 700; }
+.af-prose em { font-style: italic; }
+
+.af-facts {
+  list-style: none;
+  margin: 2.6rem 0 0;
+  padding: 1.6rem 0 0;
+  border-top: 1px solid rgba(30, 30, 30, 0.14);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 1.4rem;
+}
+.af-facts li { display: flex; flex-direction: column; gap: 0.3rem; }
+.af-facts span {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brand-gray);
+}
+.af-facts strong {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--brand-black);
+}
+
+/* ══ ATRACCIONES ═══════════════════════════════════════ */
+.af-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.25rem;
+}
+.af-card {
+  position: relative;
+  padding: 2rem 1.6rem 1.7rem;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(216, 197, 160, 0.18);
+  border-radius: 0.2rem;
+  transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+}
+.af-card:hover {
+  border-color: rgba(216, 197, 160, 0.45);
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-3px);
+}
+.af-card-n {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.3rem;
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  line-height: 1;
+  color: rgba(216, 197, 160, 0.22);
+}
+.af-card-kicker {
+  margin: 0 0 0.45rem;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brand-tan);
+}
+.af-card-title {
+  margin: 0 0 0.8rem;
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 500;
+  color: #f7f4ef;
+}
+.af-card-text {
+  margin: 0 0 1.1rem;
+  font-size: 0.92rem;
+  line-height: 1.72;
+  color: rgba(247, 244, 239, 0.68);
+}
+.af-card-meta {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(216, 197, 160, 0.75);
+}
+.af-card-link {
+  display: inline-block;
+  margin-top: 0.9rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid var(--brand-red);
+  padding-bottom: 0.15rem;
+  transition: color 0.2s ease;
+}
+.af-card-link:hover { color: var(--brand-tan); }
+
+/* ══ CÓMO LLEGAR ═══════════════════════════════════════ */
+.af-routes { display: grid; gap: 0; }
+.af-route {
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(30, 30, 30, 0.12);
+}
+.af-route:last-child { border-bottom: 1px solid rgba(30, 30, 30, 0.12); }
+.af-route-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+.af-route-from {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--brand-black);
+}
+.af-route-time {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand-red);
+  white-space: nowrap;
+}
+.af-route-text {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.7;
+  color: rgba(30, 30, 30, 0.68);
+}
+
+.af-note {
+  margin: 2.2rem 0 0;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: rgba(30, 30, 30, 0.68);
+  text-align: center;
+}
+.af-note a { color: var(--brand-red); font-weight: 600; }
+.af-note--light { color: rgba(247, 244, 239, 0.62); }
+
+/* ══ TEMPORADAS ════════════════════════════════════════ */
+.af-seasons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.25rem;
+}
+.af-season {
+  padding: 2rem 1.7rem;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(216, 197, 160, 0.18);
+  border-radius: 0.2rem;
+}
+.af-season-range {
+  margin: 0 0 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brand-tan);
+}
+.af-season-name {
+  margin: 0 0 0.8rem;
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: #f7f4ef;
+}
+.af-season-text {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.75;
+  color: rgba(247, 244, 239, 0.7);
+}
+
+/* ══ DÓNDE DORMIR ══════════════════════════════════════ */
+.af-stay {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.2rem;
+  align-items: center;
+}
+@media (min-width: 60rem) {
+  .af-stay { grid-template-columns: 1fr 1fr; gap: 3rem; }
+}
+.af-stay-media {
+  overflow: hidden;
+  border-radius: 0.2rem;
+  aspect-ratio: 4 / 3;
+}
+.af-stay-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.af-stay-kicker {
+  margin: 0 0 0.5rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brand-red);
+}
+.af-stay-title {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--brand-black);
+}
+.af-stay-text {
+  margin: 0 0 1.4rem;
+  font-size: 1rem;
+  line-height: 1.78;
+  color: rgba(30, 30, 30, 0.75);
+}
+.af-stay-list {
+  list-style: none;
+  margin: 0 0 1.8rem;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+.af-stay-list li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: rgba(30, 30, 30, 0.75);
+}
+.af-stay-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 9999px;
+  background: var(--brand-red);
+}
+.af-stay-ctas { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+
+/* ══ FAQ ═══════════════════════════════════════════════ */
+.af-faq { border-top: 1px solid rgba(30, 30, 30, 0.12); }
+.af-faq-item { border-bottom: 1px solid rgba(30, 30, 30, 0.12); }
+.af-faq-q {
+  cursor: pointer;
+  list-style: none;
+  padding: 1.25rem 2.5rem 1.25rem 0;
+  position: relative;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  font-weight: 600;
+  color: var(--brand-black);
+}
+.af-faq-q::-webkit-details-marker { display: none; }
+.af-faq-q::after {
+  content: "+";
+  position: absolute;
+  right: 0.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-body);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--brand-red);
+  transition: transform 0.25s ease;
+}
+.af-faq-item[open] .af-faq-q::after { transform: translateY(-50%) rotate(45deg); }
+.af-faq-a {
+  margin: 0;
+  padding: 0 2.5rem 1.4rem 0;
+  font-size: 0.96rem;
+  line-height: 1.8;
+  color: rgba(30, 30, 30, 0.7);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .af-btn, .af-card, .af-faq-q::after { transition: none; }
+  .af-btn:hover, .af-card:hover { transform: none; }
+}
+</style>

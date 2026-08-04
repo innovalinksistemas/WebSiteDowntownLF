@@ -1,0 +1,215 @@
+---
+import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
+import DestinationGuide from "../components/DestinationGuide.astro";
+import { SITE } from "../i18n/seo";
+
+const attractions = [
+  {
+    n: "01",
+    kicker: "Parque Nacional",
+    name: "Volcán Arenal",
+    text: "El cono casi perfecto que le da nombre a la región. Se eleva más de 1.600 metros sobre el bosque tropical y estuvo en erupción continua desde 1968 hasta 2010; hoy está en fase de descanso. El Parque Nacional Volcán Arenal ofrece senderos sobre antiguas coladas de lava con miradores hacia el cráter.",
+    meta: "A 15 min del hotel",
+  },
+  {
+    n: "02",
+    kicker: "Cascada",
+    name: "Catarata Río Fortuna",
+    text: "Una caída de unos 70 metros encajonada en la selva. Se baja por cerca de 500 escalones hasta una poza de agua turquesa donde se puede nadar. Ideal temprano en la mañana, antes de que llegue el grueso de los visitantes.",
+    meta: "A 20 min del hotel",
+  },
+  {
+    n: "03",
+    kicker: "Bienestar",
+    name: "Aguas termales",
+    text: "El agua que calienta el macizo del Arenal alimenta la mayor concentración de aguas termales de Costa Rica. Baldi, Ecotermales, Tabacón y Paradise Hot Springs están todos a pocos minutos del centro.",
+    meta: "Desde 5 min del hotel",
+    href: "/baldi",
+    hrefLabel: "Ver paquetes con termales",
+  },
+  {
+    n: "04",
+    kicker: "Reserva de agua",
+    name: "Lago Arenal",
+    text: "El lago más grande del país, con unos 85 km² de espejo de agua al pie del volcán. Punto de referencia mundial para windsurf y kitesurf por sus vientos constantes, además de pesca y paseos en bote.",
+    meta: "A 40 min del hotel",
+  },
+  {
+    n: "05",
+    kicker: "Aventura",
+    name: "Puentes colgantes",
+    text: "Circuitos de senderos y puentes suspendidos que cruzan el dosel del bosque lluvioso a decenas de metros de altura. La mejor forma de ver tucanes, monos y perezosos a la altura de sus ojos.",
+    meta: "A 25 min del hotel",
+  },
+  {
+    n: "06",
+    kicker: "Adrenalina",
+    name: "Rafting y canopy",
+    text: "Los ríos Balsa, Toro y Sarapiquí ofrecen rafting de clase II a IV según la temporada. A eso se suman canopy, canyoning, cabalgatas y tours de café y chocolate en fincas de la zona.",
+    meta: "Salidas diarias",
+  },
+];
+
+const faqs = [
+  {
+    q: "¿Qué es Arenal Fortuna?",
+    a: "Arenal Fortuna es el nombre con que se identifica el destino turístico del norte de Costa Rica que integra el pueblo de La Fortuna de San Carlos, el Volcán Arenal, el Lago Arenal y las aguas termales de la zona, en la provincia de Alajuela. La Fortuna es el centro urbano donde se concentran hoteles, restaurantes y operadores de tours de toda la región.",
+  },
+  {
+    q: "¿Cuántos días se necesitan para conocer Arenal Fortuna?",
+    a: "Tres noches es lo mínimo cómodo: un día para el volcán y las termales, otro para la catarata y los puentes colgantes, y un tercero para aventura o descanso. Con cuatro o cinco noches se alcanza a incluir el Lago Arenal y tours de café y chocolate sin correr.",
+  },
+  {
+    q: "¿Cuál es la mejor época para visitar Arenal Fortuna?",
+    a: "La estación seca va de diciembre a abril y ofrece las vistas más despejadas del volcán. La estación verde, de mayo a noviembre, trae lluvias por la tarde pero también menos gente, precios más bajos y un bosque mucho más vivo. Las mañanas suelen ser despejadas todo el año.",
+  },
+  {
+    q: "¿Se puede recorrer Arenal Fortuna sin carro?",
+    a: "Sí. La Fortuna es un pueblo caminable y casi todos los tours incluyen transporte desde el hotel. Hospedarse en el centro elimina la necesidad de alquilar vehículo para la mayoría de los itinerarios.",
+  },
+  {
+    q: "¿Dónde conviene hospedarse en Arenal Fortuna?",
+    a: "En el centro de La Fortuna, porque es el punto desde el que salen los tours y donde están los restaurantes, bancos y comercios. El Downtown La Fortuna Boutique Hotel está a 25 metros de la Iglesia Católica, sobre el parque central.",
+  },
+  {
+    q: "¿El Volcán Arenal sigue activo?",
+    a: "El Arenal se mantiene clasificado como volcán activo, pero desde 2010 está en fase de descanso, sin erupciones de lava visibles. El parque nacional y los senderos operan con normalidad.",
+  },
+];
+
+const jsonLd = [
+  {
+    "@type": "FAQPage",
+    "@id": `${SITE}/arenal-fortuna#faq`,
+    inLanguage: "es-CR",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${SITE}/arenal-fortuna#breadcrumb`,
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Inicio", item: `${SITE}/` },
+      { "@type": "ListItem", position: 2, name: "Arenal Fortuna", item: `${SITE}/arenal-fortuna` },
+    ],
+  },
+  {
+    "@type": "ItemList",
+    "@id": `${SITE}/arenal-fortuna#atracciones`,
+    name: "Qué ver y hacer en Arenal Fortuna",
+    itemListElement: attractions.map((a, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: { "@type": "TouristAttraction", name: a.name, description: a.text },
+    })),
+  },
+];
+---
+
+<Layout
+  title="Arenal Fortuna: guía del destino | Volcán, termales y qué hacer"
+  description="Qué es Arenal Fortuna, qué ver y hacer, cómo llegar, cuándo ir y dónde dormir. La guía del destino que reúne el Volcán Arenal, La Fortuna de San Carlos, el Lago Arenal y las aguas termales del norte de Costa Rica."
+  jsonLd={jsonLd}
+>
+  <DestinationGuide
+    hero={{
+      eyebrow: "Guía del destino",
+      titleTop: "Arenal",
+      titleBottom: "Fortuna",
+      lead: "El volcán, el lago, las cataratas y las aguas termales del norte de Costa Rica — y el pueblo desde el que se recorre todo.",
+      ctaPrimary: "Qué ver y hacer",
+      ctaSecondary: "Dónde dormir",
+    }}
+    intro={{
+      eyebrow: "El destino",
+      title: "¿Qué es Arenal Fortuna?",
+      body: [
+        "<strong>Arenal Fortuna</strong> es el nombre con que se identifica el destino turístico del norte de Costa Rica que integra cuatro cosas que en la práctica funcionan como una sola: el <strong>Volcán Arenal</strong>, el pueblo de <strong>La Fortuna de San Carlos</strong>, el <strong>Lago Arenal</strong> y la mayor concentración de <strong>aguas termales</strong> del país.",
+        "Administrativamente está en el cantón de San Carlos, provincia de Alajuela. En la práctica, La Fortuna es el centro urbano del destino: es donde se hospeda el visitante, donde salen los tours y donde están los restaurantes, bancos y comercios. El volcán queda al oeste, el lago detrás de él, y las cataratas al sur.",
+        "Por eso la región se nombra cada vez más como una unidad. Quien busca <em>Arenal</em>, quien busca <em>Fortuna</em> y quien busca <em>Arenal Fortuna</em> está buscando el mismo lugar.",
+      ],
+      facts: [
+        { label: "Provincia", value: "Alajuela, Costa Rica" },
+        { label: "Cantón", value: "San Carlos" },
+        { label: "Altitud del volcán", value: "+1.600 m" },
+        { label: "Desde SJO", value: "≈ 3 horas" },
+      ],
+    }}
+    attractionsBlock={{
+      eyebrow: "Imperdibles",
+      title: "Qué ver y hacer en Arenal Fortuna",
+      items: attractions,
+    }}
+    routesBlock={{
+      eyebrow: "Logística",
+      title: "Cómo llegar a Arenal Fortuna",
+      items: [
+        {
+          from: "Aeropuerto Juan Santamaría (SJO)",
+          time: "≈ 3 horas",
+          text: "Unos 130 km por Naranjo y Ciudad Quesada. Es la ruta más usada por quienes llegan del Valle Central.",
+        },
+        {
+          from: "Aeropuerto Daniel Oduber (LIR)",
+          time: "≈ 3 horas",
+          text: "Unos 150 km bordeando el Lago Arenal desde Guanacaste. El tramo final del lago es de los más escénicos del país.",
+        },
+        {
+          from: "San José centro",
+          time: "≈ 3.5 horas",
+          text: "Por la Ruta 141. Hay servicio de bus directo y traslados compartidos varias veces al día.",
+        },
+        {
+          from: "Monteverde",
+          time: "≈ 3 horas",
+          text: "O bien 3 horas por carretera, o el clásico jeep–boat–jeep cruzando el Lago Arenal en unas 2 horas.",
+        },
+      ],
+      note: "Coordinamos traslados privados y compartidos desde SJO y LIR directamente al hotel. Escribinos por WhatsApp al",
+      noteLinkLabel: "+506 8527-4677",
+    }}
+    seasonsBlock={{
+      eyebrow: "Temporadas",
+      title: "Cuándo visitar Arenal Fortuna",
+      items: [
+        {
+          range: "Diciembre – Abril",
+          name: "Estación seca",
+          text: "Las vistas más despejadas del cono del Arenal y menos probabilidad de lluvia. Es la temporada alta: conviene reservar hospedaje y tours con anticipación, sobre todo entre diciembre y Semana Santa.",
+        },
+        {
+          range: "Mayo – Noviembre",
+          name: "Estación verde",
+          text: "Mañanas generalmente despejadas y lluvia por la tarde. El bosque está en su punto más exuberante, los ríos con más caudal para rafting, hay menos visitantes y mejores tarifas.",
+        },
+      ],
+      note: "En cualquier época del año, la recomendación es la misma: salí temprano. Las mañanas son la ventana más confiable para ver el volcán despejado.",
+    }}
+    stayBlock={{
+      eyebrow: "Hospedaje",
+      title: "Dónde dormir en Arenal Fortuna",
+      kicker: "Downtown La Fortuna Boutique Hotel",
+      heading: "En el centro exacto del destino",
+      text: "Hospedarse en el centro de La Fortuna cambia el viaje: desde aquí salen casi todos los tours, se camina a los restaurantes y no hace falta alquilar carro para la mayoría de los itinerarios. El hotel está a 25 metros de la Iglesia Católica, sobre el parque central.",
+      bullets: [
+        "Piscina tropical y cinco espacios gastronómicos propios",
+        "Parqueo privado gratuito con carga para vehículos eléctricos",
+        "A 15 minutos del Volcán Arenal y a 5 de las primeras termales",
+        "Equipo de expertos locales para armar el itinerario",
+      ],
+      ctaRooms: "Ver habitaciones",
+      ctaPackages: "Paquetes con termales",
+      roomsHref: "/#habitaciones",
+      packagesHref: "/ecotermales",
+    }}
+    faqBlock={{
+      eyebrow: "Preguntas frecuentes",
+      title: "Todo sobre Arenal Fortuna",
+      items: faqs,
+    }}
+  />
+</Layout>

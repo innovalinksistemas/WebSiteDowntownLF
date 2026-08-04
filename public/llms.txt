@@ -1,0 +1,77 @@
+# Downtown La Fortuna Boutique Hotel
+
+> Hotel boutique en el centro de La Fortuna de San Carlos (Arenal Fortuna), Alajuela, Costa Rica. A 25 metros de la Iglesia Católica, sobre el parque central. Es el hotel más céntrico del destino: la mayoría de los tours de la zona salen a pocos metros y se camina a restaurantes, bancos y comercios.
+
+## Datos del hotel
+
+- **Ubicación:** 25 metros al sur de la Iglesia Católica, La Fortuna de San Carlos, Alajuela, Costa Rica
+- **Coordenadas:** 10.4676, -84.6431
+- **Teléfono:** +506 4000-2027
+- **WhatsApp:** +506 8527-4677
+- **Email:** reservaciones@lafortunadowntown.com
+- **Idiomas:** español e inglés
+- **Monedas:** colones (CRC) y dólares (USD)
+- **Calificaciones:** Google 4.3/5 · TripAdvisor 4.4/5 · Booking.com 8.1/10 · Expedia 8.8/10
+
+## Distancias a las atracciones de Arenal Fortuna
+
+- Volcán Arenal y Parque Nacional: ~15 minutos
+- Aguas termales más cercanas (Baldi, Ecotermales, Tabacón, Paradise): desde 5 minutos
+- Catarata Río Fortuna: ~20 minutos
+- Puentes colgantes: ~25 minutos
+- Lago Arenal: ~40 minutos
+- Aeropuerto Juan Santamaría (SJO): ~3 horas
+- Aeropuerto Daniel Oduber (LIR): ~3 horas
+
+## Servicios
+
+- Parqueo privado gratuito 24/7 con estación de carga para vehículos eléctricos
+- Piscina tropical
+- WiFi de alta velocidad en toda la propiedad
+- Desayuno buffet de 7:00 a 11:30 en Pinto e' Gallo
+- Aire acondicionado, baño privado con agua caliente, TV y escritorio en todas las habitaciones
+- Traslados privados y compartidos desde SJO y LIR (se coordinan por WhatsApp)
+- Equipo de expertos locales para armar itinerarios
+- Recepción y asistencia 24/7
+
+## Habitaciones
+
+- **DownTown Standard Doble** — 1 cama matrimonial
+- **DownTown Standard Triple** — 1 matrimonial + 1 individual
+- **DownTown Superior** — 1 cama queen
+- **Tropical Family** — 2 matrimoniales o 1 matrimonial + 2 individuales, vista a la piscina
+- **DownTown Confort** — 1 cama king
+- **DownTown Confort Family** — 1 king + 2 individuales, hasta 5 personas
+
+Nota: los pisos superiores se acceden solo por escaleras.
+
+## Espacios gastronómicos propios
+
+- **María Bonita Steak House** — cortes premium a las brasas, flambé en mesa, música en vivo. Lun–Dom 11:30–22:30
+- **Selva Negra** — coctelería de autor, vinos y catas con sommelier. Lun–Dom 12:00–24:00
+- **Pinto e' Gallo** — desayuno buffet. Lun–Dom 7:00–11:30
+- **La Ventanita de María Bonita** — parrilla rápida para llevar. Lun–Dom 12:00–24:00
+- **Nuwa Art Gallery** — galería de arte con café. Lun–Dom 9:00–18:00
+
+## Políticas
+
+- Cancelaciones con más de 14 días de anticipación: reembolso completo
+- Aplican políticas estacionales especiales en temporada alta
+- Mejor precio garantizado en reserva directa, sin gastos ocultos
+
+## Páginas
+
+- [Inicio](https://lafortunadowntown.com/): habitaciones, servicios, restaurantes y paquetes
+- [Guía de Arenal Fortuna](https://lafortunadowntown.com/arenal-fortuna): qué es el destino, qué ver y hacer, cómo llegar, cuándo ir y dónde dormir
+- [Preguntas frecuentes](https://lafortunadowntown.com/faq): clima del volcán, traslados, agua potable, cancelaciones, desayuno, parqueo, seguridad
+- [Galería](https://lafortunadowntown.com/galeria): fotos del hotel, habitaciones, restaurantes y actividades
+- [Paquete Baldi Hot Springs](https://lafortunadowntown.com/baldi): hospedaje + pase del día a Baldi
+- [Paquete Ecotermales](https://lafortunadowntown.com/ecotermales): hospedaje + entrada a Ecotermales
+
+## English
+
+The English version of every page lives under `/en/` — for example <https://lafortunadowntown.com/en/> and <https://lafortunadowntown.com/en/arenal-fortuna>.
+
+## Sobre el destino
+
+Arenal Fortuna es el nombre con que se identifica el destino turístico del norte de Costa Rica que integra el pueblo de La Fortuna de San Carlos, el Volcán Arenal, el Lago Arenal y la mayor concentración de aguas termales del país, en la provincia de Alajuela, cantón de San Carlos. La Fortuna es el centro urbano del destino. El Volcán Arenal estuvo en erupción continua de 1968 a 2010 y hoy está en fase de descanso; el parque nacional opera con normalidad.

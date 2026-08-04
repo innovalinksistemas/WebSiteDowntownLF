@@ -1,4 +1,87 @@
 User-agent: *
 Allow: /
 
+# ─────────────────────────────────────────────
+# Buscadores tradicionales
+# ─────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# ─────────────────────────────────────────────
+# Motores de respuesta con IA
+# Consultas como "dónde dormir en Arenal Fortuna" o "hoteles con
+# piscina en La Fortuna" cada vez se resuelven en estos asistentes.
+# Permitirlos es lo que habilita que citen y recomienden el hotel.
+# ─────────────────────────────────────────────
+
+# OpenAI · ChatGPT
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Google · Gemini y AI Overviews
+User-agent: Google-Extended
+Allow: /
+
+# Anthropic · Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Apple · Siri y Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# Otros asistentes
+User-agent: Amazonbot
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
 Sitemap: https://lafortunadowntown.com/sitemap-index.xml

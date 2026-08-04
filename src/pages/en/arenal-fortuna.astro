@@ -1,0 +1,221 @@
+---
+import "../../styles/global.css";
+import Layout from "../../layouts/Layout.astro";
+import DestinationGuide from "../../components/DestinationGuide.astro";
+import { SITE } from "../../i18n/seo";
+
+const attractions = [
+  {
+    n: "01",
+    kicker: "National Park",
+    name: "Arenal Volcano",
+    text: "The near-perfect cone that gives the region its name. It rises more than 1,600 meters above the rainforest and erupted continuously from 1968 to 2010; today it is in a resting phase. Arenal Volcano National Park offers trails across old lava flows with lookouts toward the crater.",
+    meta: "15 min from the hotel",
+  },
+  {
+    n: "02",
+    kicker: "Waterfall",
+    name: "La Fortuna Waterfall",
+    text: "A roughly 70-meter drop hemmed in by jungle. About 500 steps take you down to a turquoise pool where you can swim. Best early in the morning, before the bulk of the visitors arrive.",
+    meta: "20 min from the hotel",
+  },
+  {
+    n: "03",
+    kicker: "Wellness",
+    name: "Hot springs",
+    text: "The water heated by the Arenal massif feeds the largest concentration of hot springs in Costa Rica. Baldi, Ecotermales, Tabacón, and Paradise Hot Springs are all minutes from downtown.",
+    meta: "From 5 min from the hotel",
+    href: "/en/baldi",
+    hrefLabel: "See hot springs packages",
+  },
+  {
+    n: "04",
+    kicker: "Reservoir",
+    name: "Lake Arenal",
+    text: "The largest lake in the country, some 85 km² of water at the foot of the volcano. A world reference for windsurfing and kitesurfing thanks to its steady winds, plus fishing and boat trips.",
+    meta: "40 min from the hotel",
+  },
+  {
+    n: "05",
+    kicker: "Adventure",
+    name: "Hanging bridges",
+    text: "Circuits of trails and suspended bridges crossing the rainforest canopy dozens of meters up. The best way to see toucans, monkeys, and sloths at eye level.",
+    meta: "25 min from the hotel",
+  },
+  {
+    n: "06",
+    kicker: "Adrenaline",
+    name: "Rafting & canopy",
+    text: "The Balsa, Toro, and Sarapiquí rivers offer class II to IV rafting depending on the season. Add canopy tours, canyoning, horseback riding, and coffee and chocolate tours on nearby farms.",
+    meta: "Daily departures",
+  },
+];
+
+const faqs = [
+  {
+    q: "What is Arenal Fortuna?",
+    a: "Arenal Fortuna is the name used for the tourism destination in northern Costa Rica that brings together the town of La Fortuna de San Carlos, Arenal Volcano, Lake Arenal, and the area's hot springs, in the province of Alajuela. La Fortuna is the town where the region's hotels, restaurants, and tour operators are concentrated.",
+  },
+  {
+    q: "How many days do you need in Arenal Fortuna?",
+    a: "Three nights is the comfortable minimum: one day for the volcano and hot springs, another for the waterfall and hanging bridges, and a third for adventure or rest. With four or five nights you can add Lake Arenal and coffee and chocolate tours without rushing.",
+  },
+  {
+    q: "When is the best time to visit Arenal Fortuna?",
+    a: "The dry season runs from December to April and offers the clearest views of the volcano. The green season, May to November, brings afternoon rain but also fewer people, lower prices, and a far more vibrant forest. Mornings tend to be clear year-round.",
+  },
+  {
+    q: "Can you visit Arenal Fortuna without a car?",
+    a: "Yes. La Fortuna is a walkable town and almost every tour includes hotel pickup. Staying downtown removes the need to rent a vehicle for most itineraries.",
+  },
+  {
+    q: "Where should you stay in Arenal Fortuna?",
+    a: "In downtown La Fortuna, because that is where tours depart from and where the restaurants, banks, and shops are. Downtown La Fortuna Boutique Hotel sits 25 meters from the Catholic Church, on the central park.",
+  },
+  {
+    q: "Is Arenal Volcano still active?",
+    a: "Arenal is still classified as an active volcano, but it has been in a resting phase since 2010, with no visible lava eruptions. The national park and its trails operate normally.",
+  },
+];
+
+const jsonLd = [
+  {
+    "@type": "FAQPage",
+    "@id": `${SITE}/en/arenal-fortuna#faq`,
+    inLanguage: "en-US",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${SITE}/en/arenal-fortuna#breadcrumb`,
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/en/` },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Arenal Fortuna",
+        item: `${SITE}/en/arenal-fortuna`,
+      },
+    ],
+  },
+  {
+    "@type": "ItemList",
+    "@id": `${SITE}/en/arenal-fortuna#attractions`,
+    name: "What to see and do in Arenal Fortuna",
+    itemListElement: attractions.map((a, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: { "@type": "TouristAttraction", name: a.name, description: a.text },
+    })),
+  },
+];
+---
+
+<Layout
+  title="Arenal Fortuna: destination guide | Volcano, hot springs & things to do"
+  description="What Arenal Fortuna is, what to see and do, how to get there, when to go, and where to stay. The guide to the destination that brings together Arenal Volcano, La Fortuna de San Carlos, Lake Arenal, and northern Costa Rica's hot springs."
+  jsonLd={jsonLd}
+>
+  <DestinationGuide
+    hero={{
+      eyebrow: "Destination guide",
+      titleTop: "Arenal",
+      titleBottom: "Fortuna",
+      lead: "The volcano, the lake, the waterfalls, and the hot springs of northern Costa Rica — and the town you explore it all from.",
+      ctaPrimary: "What to see & do",
+      ctaSecondary: "Where to stay",
+    }}
+    intro={{
+      eyebrow: "The destination",
+      title: "What is Arenal Fortuna?",
+      body: [
+        "<strong>Arenal Fortuna</strong> is the name used for the tourism destination in northern Costa Rica that brings together four things which, in practice, function as one: <strong>Arenal Volcano</strong>, the town of <strong>La Fortuna de San Carlos</strong>, <strong>Lake Arenal</strong>, and the country's largest concentration of <strong>hot springs</strong>.",
+        "Administratively it sits in the canton of San Carlos, province of Alajuela. In practice, La Fortuna is the destination's hub: it's where visitors stay, where tours depart, and where the restaurants, banks, and shops are. The volcano lies to the west, the lake behind it, and the waterfalls to the south.",
+        "That's why the region is increasingly named as a single unit. Someone searching for <em>Arenal</em>, someone searching for <em>Fortuna</em>, and someone searching for <em>Arenal Fortuna</em> is looking for the same place.",
+      ],
+      facts: [
+        { label: "Province", value: "Alajuela, Costa Rica" },
+        { label: "Canton", value: "San Carlos" },
+        { label: "Volcano elevation", value: "1,600 m+" },
+        { label: "From SJO", value: "≈ 3 hours" },
+      ],
+    }}
+    attractionsBlock={{
+      eyebrow: "Highlights",
+      title: "What to see and do in Arenal Fortuna",
+      items: attractions,
+    }}
+    routesBlock={{
+      eyebrow: "Logistics",
+      title: "How to get to Arenal Fortuna",
+      items: [
+        {
+          from: "Juan Santamaría Airport (SJO)",
+          time: "≈ 3 hours",
+          text: "About 130 km via Naranjo and Ciudad Quesada. This is the route most travelers arriving through the Central Valley take.",
+        },
+        {
+          from: "Daniel Oduber Airport (LIR)",
+          time: "≈ 3 hours",
+          text: "About 150 km skirting Lake Arenal from Guanacaste. The final stretch along the lake is among the most scenic drives in the country.",
+        },
+        {
+          from: "Downtown San José",
+          time: "≈ 3.5 hours",
+          text: "Via Route 141. There is direct bus service and shared shuttles several times a day.",
+        },
+        {
+          from: "Monteverde",
+          time: "≈ 3 hours",
+          text: "Either 3 hours by road, or the classic jeep–boat–jeep crossing Lake Arenal in about 2 hours.",
+        },
+      ],
+      note: "We arrange private and shared transfers from SJO and LIR directly to the hotel. Message us on WhatsApp at",
+      noteLinkLabel: "+506 8527-4677",
+    }}
+    seasonsBlock={{
+      eyebrow: "Seasons",
+      title: "When to visit Arenal Fortuna",
+      items: [
+        {
+          range: "December – April",
+          name: "Dry season",
+          text: "The clearest views of the Arenal cone and the lowest chance of rain. This is high season: book accommodation and tours in advance, especially between December and Easter week.",
+        },
+        {
+          range: "May – November",
+          name: "Green season",
+          text: "Generally clear mornings and afternoon rain. The forest is at its most lush, rivers run higher for rafting, there are fewer visitors, and rates are better.",
+        },
+      ],
+      note: "Whatever time of year you come, the advice is the same: head out early. Mornings are the most reliable window for a clear view of the volcano.",
+    }}
+    stayBlock={{
+      eyebrow: "Accommodation",
+      title: "Where to stay in Arenal Fortuna",
+      kicker: "Downtown La Fortuna Boutique Hotel",
+      heading: "In the exact center of the destination",
+      text: "Staying in downtown La Fortuna changes the trip: nearly every tour departs from here, the restaurants are a walk away, and you don't need a rental car for most itineraries. The hotel sits 25 meters from the Catholic Church, on the central park.",
+      bullets: [
+        "Tropical pool and five in-house dining venues",
+        "Free private parking with an EV charging station",
+        "15 minutes from Arenal Volcano, 5 from the nearest hot springs",
+        "A team of local experts to build your itinerary",
+      ],
+      ctaRooms: "View rooms",
+      ctaPackages: "Hot springs packages",
+      roomsHref: "/en/#habitaciones",
+      packagesHref: "/en/ecotermales",
+      imgAlt: "Downtown La Fortuna Boutique Hotel, in the center of Arenal Fortuna, Costa Rica",
+    }}
+    faqBlock={{
+      eyebrow: "Frequently asked questions",
+      title: "Everything about Arenal Fortuna",
+      items: faqs,
+    }}
+  />
+</Layout>

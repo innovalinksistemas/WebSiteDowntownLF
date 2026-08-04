@@ -3,11 +3,14 @@ import "../styles/global.css";
 import Gallery from "../components/Gallery.astro";
 import Footer from "../components/Footer.astro";
 import Layout from "../layouts/Layout.astro";
+import { useTranslations } from "../i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <Layout
-  title="Galería | Downtown La Fortuna Boutique Hotel"
-  description="Galería de fotos del Downtown La Fortuna Boutique Hotel: habitaciones, restaurantes, espacios y experiencias en el corazón de La Fortuna, Costa Rica."
+  title={t("meta.gallery.title")}
+  description={t("meta.gallery.description")}
   headerSolid={true}
 >
   <main class="relative min-h-screen overflow-hidden text-stone-100">
