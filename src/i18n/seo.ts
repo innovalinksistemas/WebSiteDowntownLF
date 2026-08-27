@@ -42,16 +42,21 @@ export const CONTACT = {
 
 /**
  * Espacios gastronómicos propios. Se publican como entidades `Restaurant`
- * enlazadas al hotel: son datos concretos y citables ("hotel con cinco
+ * enlazadas al hotel: son datos concretos y citables ("hotel con seis
  * restaurantes propios, uno abierto hasta medianoche") que los asistentes
  * de IA necesitan para poder recomendarlo con precisión.
  */
 export const VENUES = [
-  { name: "María Bonita Steak House", es: "Brasas & Parrilla", en: "Grill & Steakhouse", hours: "Mo-Su 11:30-22:30", ig: "mariabonita.cr" },
+  { name: "María Bonita Steak House", es: "Fuego, Brasas y Parrilla", en: "Fire, Embers & Grill", hours: "Mo-Su 11:30-22:30", ig: "mariabonita.cr" },
   { name: "Selva Negra", es: "Coctelería & Vinos", en: "Cocktails & Wine", hours: "Mo-Su 12:00-24:00", ig: "selvanegra.bar" },
   { name: "Pinto e' Gallo", es: "Desayunos & Brunch", en: "Breakfast & Brunch", hours: "Mo-Su 07:00-11:30", ig: "pintoegallo.cr" },
-  { name: "La Ventanita de María Bonita", es: "Parrilla Rápida", en: "Quick Grill", hours: "Mo-Su 12:00-24:00", ig: "ventanitamariabonita" },
-  { name: "Nuwa Art Gallery", es: "Arte & Café", en: "Art & Coffee", hours: "Mo-Su 09:00-18:00", ig: "nuwagallery" },
+  // `es`/`en` alimentan `servesCuisine`, así que aquí va el tipo de cocina y no
+  // el eslogan de la web ("A la parrilla es mejor"), que no describe una cocina.
+  { name: "La Ventanita de María Bonita", es: "Parrilla", en: "Grill", hours: "Mo-Su 12:00-24:00", ig: "ventanitamariabonita" },
+  // Mismo criterio que La Ventanita: `servesCuisine` describe lo que se sirve
+  // (café), no la etiqueta de la web ("Arte local y artesanía").
+  { name: "Nuwa Art Gallery", es: "Café", en: "Coffee", hours: "Mo-Su 09:00-18:00", ig: "nuwagallery" },
+  { name: "Lava Drinks", es: "Jugos & Coctelería", en: "Juices & Cocktails", hours: "Mo-Su 12:00-24:00", ig: "lavadrinkscr" },
 ] as const;
 
 const DESCRIBES = {
@@ -183,7 +188,7 @@ export function siteGraph(lang: Lang, canonical: string, title: string, descript
           es ? "WiFi de alta velocidad" : "High-speed WiFi",
           es ? "Piscina tropical" : "Tropical pool",
           es ? "Desayuno buffet (7:00–11:30)" : "Buffet breakfast (7:00–11:30)",
-          es ? "Cinco espacios gastronómicos propios" : "Five in-house dining venues",
+          es ? "Seis espacios propios: gastronomía, coctelería y arte" : "Six in-house venues: dining, cocktails and art",
           es ? "Aire acondicionado" : "Air conditioning",
           es ? "Traslados desde aeropuertos SJO y LIR" : "Transfers from SJO and LIR airports",
           es ? "Concierge y coordinación de tours" : "Concierge and tour desk",

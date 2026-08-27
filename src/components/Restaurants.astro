@@ -20,6 +20,13 @@ import imgMariaBonita from "../assets/restaurants/maria-bonita.jpg";
 import imgSelvaNegra from "../assets/restaurants/selva-negra.jpg";
 import imgLaVentanita from "../assets/restaurants/la-ventanita.jpg";
 import imgPintoeGallo from "../assets/images/desayunoTipico.jpg";
+import imgNuwa from "../assets/images/NuwaGallery.jpg";
+/*
+ * PROVISIONAL: no hay foto del local de Lava Drinks. Se usa la de frutas
+ * tropicales porque encaja con sus jugos y bowls, pero hay que sustituirla en
+ * cuanto llegue la fotografía real del espacio.
+ */
+import imgLavaDrinks from "../assets/images/desayunoFrutas.jpg";
 
 const t = useTranslations(Astro.currentLocale);
 
@@ -61,6 +68,25 @@ const restaurants = [
     hours: t("restaurants.r4.hours"),
     image: imgLaVentanita,
     href: "https://online.flippingbook.com/view/179568887/",
+    cta: t("restaurants.cta"),
+  },
+  {
+    name: t("restaurants.r5.name"),
+    description: t("restaurants.r5.desc"),
+    tag: t("restaurants.r5.tag"),
+    hours: t("restaurants.r5.hours"),
+    image: imgNuwa,
+    // Galería de arte: no hay carta que enseñar, así que el CTA va al Instagram.
+    href: "https://www.instagram.com/nuwagallery",
+    cta: t("restaurants.cta.gallery"),
+  },
+  {
+    name: t("restaurants.r6.name"),
+    description: t("restaurants.r6.desc"),
+    tag: t("restaurants.r6.tag"),
+    hours: t("restaurants.r6.hours"),
+    image: imgLavaDrinks,
+    href: "https://online.flippingbook.com/view/930925824/",
     cta: t("restaurants.cta"),
   },
 ];

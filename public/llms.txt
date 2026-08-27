@@ -45,13 +45,16 @@
 
 Nota: los pisos superiores se acceden solo por escaleras.
 
-## Espacios gastronómicos propios
+## Espacios propios dentro del hotel
+
+Seis espacios entre gastronomía, coctelería y arte, todos dentro del hotel:
 
 - **María Bonita Steak House** — cortes premium a las brasas, flambé en mesa, música en vivo. Lun–Dom 11:30–22:30
 - **Selva Negra** — coctelería de autor, vinos y catas con sommelier. Lun–Dom 12:00–24:00
 - **Pinto e' Gallo** — desayuno buffet. Lun–Dom 7:00–11:30
-- **La Ventanita de María Bonita** — parrilla rápida para llevar. Lun–Dom 12:00–24:00
+- **La Ventanita de María Bonita** — parrilla al momento para llevar. Lun–Dom 12:00–24:00
 - **Nuwa Art Gallery** — galería de arte con café. Lun–Dom 9:00–18:00
+- **Lava Drinks** — jugos volcánicos carbonatados al momento, coctelería, café de suelos volcánicos y bowls tropicales. Lun–Dom 12:00–24:00
 
 ## Políticas
 
@@ -88,7 +91,7 @@ Every page has an English version under `/en/`:
 
 Note the gallery slug differs by language: `/galeria/` in Spanish, `/en/gallery/` in English.
 
-Downtown La Fortuna Boutique Hotel is a boutique hotel in the center of La Fortuna de San Carlos (Arenal Fortuna), Alajuela, Costa Rica — 25 meters from the Catholic Church, on the central park. It is the most centrally located hotel in the destination: most of the area's tours depart within a few meters, and restaurants, banks and shops are all walkable. Six room types, a tropical pool, free 24/7 private parking with EV charging, and five in-house dining venues. Arenal Volcano is about 15 minutes away and the nearest hot springs about 5.
+Downtown La Fortuna Boutique Hotel is a boutique hotel in the center of La Fortuna de San Carlos (Arenal Fortuna), Alajuela, Costa Rica — 25 meters from the Catholic Church, on the central park. It is the most centrally located hotel in the destination: most of the area's tours depart within a few meters, and restaurants, banks and shops are all walkable. Six room types, a tropical pool, free 24/7 private parking with EV charging, and six in-house venues. Arenal Volcano is about 15 minutes away and the nearest hot springs about 5.
 
 ## Sobre el destino
 
