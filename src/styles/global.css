@@ -107,7 +107,8 @@ body.menu-open {
 	transition:
 		background-color 0.3s ease,
 		border-color 0.3s ease,
-		box-shadow 0.3s ease;
+		box-shadow 0.3s ease,
+		backdrop-filter 0.3s ease;
 }
 
 /* ── Nav links ─────────────────────────────────────────── */
@@ -153,10 +154,25 @@ body.menu-open {
   El intercambio es 100% CSS — no requiere cambiar el src con JS.
   Por defecto: logo blanco (--light) visible, logo negro (--dark) oculto.
 */
+/*
+  El tamaño se fija por ALTURA, no por ancho.
+
+  Motivo: los dos PNG no tienen la misma proporción (blanco 2.98:1, negro
+  3.16:1). Atando el ancho, cada uno resolvía una altura distinta y el header
+  daba un salto de varios píxeles al intercambiarlos en el scroll. Atando la
+  altura, el header mide siempre lo mismo y solo varía el ancho del logo.
+
+  En el markup los <Image> llevan `width` pero no `height` a propósito: al
+  declarar ambos, Astro le pedía a sharp esas medidas exactas y el recorte se
+  producía al generar el archivo — todas las variantes salían a 2.5:1, con el
+  logo cortado por los lados en cualquier pantalla.
+*/
 .header-logo {
 	display: block;
-	width: clamp(150px, 15vw, 224px);
-	height: auto;
+	height: clamp(50px, 5vw, 75px);
+	width: auto;
+	/* Red de seguridad: nunca empujar al botón fuera del header. */
+	max-width: 100%;
 }
 
 /* --light siempre visible por defecto */
@@ -199,8 +215,25 @@ body.menu-open {
 	color: #b90024;
 }
 
+/* 0.85 y no el 0.62 de antes: es texto de 9.6px sobre un panel ahora
+   translúcido, y con 0.62 se quedaba en 3.47:1 cuando por debajo pasaba una
+   sección oscura — por debajo del 4.5:1 que pide AA a este tamaño. Con 0.85
+   sube a ~5.8:1 en ese mismo peor caso. */
 .site-header.is-scrolled .header-social-proof {
-	color: rgba(30, 25, 18, 0.62);
+	color: rgba(30, 25, 18, 0.85);
+}
+
+/*
+  El conmutador de idioma hereda un color casi blanco (#f7f4ef) pensado para el
+  header transparente sobre la foto del hero, y nadie lo había adaptado al
+  estado scrolled: sobre el panel claro quedaba en 1.01:1, prácticamente
+  invisible. Afecta también al borde, que es `currentColor`.
+  Se anula además el opacity: 0.7 del componente, que rebajaba aún más el
+  contraste; la atenuación ya la da el propio alfa del color.
+*/
+.site-header.is-scrolled .header-lang-switch {
+	color: rgba(30, 25, 18, 0.92);
+	opacity: 1;
 }
 
 /* ── Botón Reservar ────────────────────────────────────── */
@@ -243,10 +276,20 @@ body.menu-open {
 }
 
 /* ── Estado scrolled: desktop ──────────────────────────── */
+/*
+  Estado scrolled. El fondo casi opaco es la base y vale por sí solo: es lo que
+  ven los navegadores sin backdrop-filter. El efecto glass se añade encima en el
+  bloque @supports de más abajo.
+
+  Se hace en positivo (@supports ...) y no en negativo (@supports not ...) a
+  propósito: con la forma negativa, lightningcss desenvolvía el bloque al
+  minificar y sus reglas terminaban sueltas DESPUÉS de las del glass, pisando el
+  fondo translúcido y anulando el efecto en todos los navegadores.
+*/
 .site-header.is-scrolled .site-header-desktop {
-	background: rgba(241, 238, 232, 0.99);
-	border-color: rgba(29, 27, 24, 0.12);
-	box-shadow: 0 14px 38px rgba(7, 10, 14, 0.28);
+	background: rgba(241, 238, 232, 0.97);
+	border-color: rgba(29, 27, 24, 0.1);
+	box-shadow: 0 8px 30px rgba(7, 10, 14, 0.16);
 }
 
 .site-header.is-scrolled .header-link {
@@ -279,18 +322,51 @@ body.menu-open {
 	transition:
 		background-color 0.3s ease,
 		border-color 0.3s ease,
-		box-shadow 0.3s ease;
+		box-shadow 0.3s ease,
+		backdrop-filter 0.3s ease;
 }
 
+/* En móvil el logo iba a 38vw de ANCHO, que a 390px son ~148px y, con la
+   proporción real, un logo de casi 50px de alto: dominaba la pantalla de
+   inicio. Se pasa a altura y se reduce. */
 .site-header-mobile .header-logo {
-	width: clamp(120px, 38vw, 200px);
+	height: clamp(34px, 9.5vw, 46px);
 }
 
 /* Scrolled: barra mobile sólida */
+/* Base opaca de la barra móvil, misma lógica que la de escritorio. */
 .site-header.is-scrolled .site-header-mobile {
-	background: rgba(244, 241, 236, 0.98);
-	border-color: rgba(24, 22, 18, 0.1);
-	box-shadow: 0 14px 38px rgba(7, 10, 14, 0.24);
+	background: rgba(244, 241, 236, 0.97);
+	border-color: rgba(24, 22, 18, 0.09);
+	box-shadow: 0 8px 30px rgba(7, 10, 14, 0.14);
+}
+
+/*
+  Efecto glass: el panel deja ver la página desenfocada en vez de taparla.
+
+  El alfa (0.72) no es libre. Encima van textos oscuros —enlaces #0d0d0d y
+  .header-social-proof, que ya es semitransparente—, así que el peor caso es que
+  por debajo pase una sección oscura. Con 0.72 sobre negro puro el enlace
+  mantiene ~8:1; bajando a 0.5 caería a ~4.3:1 y dejaría de cumplir AA.
+
+  Sin desenfoque no se aplica: un panel al 72% sin blur sería solo un panel
+  translúcido y sucio, con el contenido de debajo compitiendo con el texto.
+
+  Va sin -webkit- a mano: lightningcss añade el prefijo según los navegadores
+  objetivo. Escribiendo las dos, se quedaba solo con la prefijada y Firefox
+  —que soporta backdrop-filter pero no el alias -webkit-— entraba en este
+  bloque, se llevaba el fondo al 72% y se quedaba sin desenfoque.
+*/
+@supports (backdrop-filter: blur(1px)) {
+	.site-header.is-scrolled .site-header-desktop {
+		background: rgba(241, 238, 232, 0.72);
+		backdrop-filter: blur(18px) saturate(140%);
+	}
+
+	.site-header.is-scrolled .site-header-mobile {
+		background: rgba(244, 241, 236, 0.72);
+		backdrop-filter: blur(18px) saturate(140%);
+	}
 }
 
 /* ── Toggle hamburger ──────────────────────────────────── */
@@ -523,8 +599,10 @@ body.menu-open {
 		letter-spacing: 0.28em;
 	}
 
+	/* Escritorio estrecho: el logo compite con los enlaces y el CTA, así que
+	   cede unos píxeles. Por altura, como la regla base. */
 	.header-logo {
-		width: clamp(145px, 14.1vw, 194px);
+		height: clamp(48px, 4.7vw, 65px);
 	}
 
 	.header-reserve-btn {
@@ -768,21 +846,31 @@ body.menu-open {
 	justify-content: center;
 }
 
-/* Header en flujo (sticky) debajo de la barra: se va con el scroll y
-   se vuelve a fijar arriba al pasarlo. Solo en páginas con barra. */
-.has-booking-bar .site-header {
-	position: sticky;
+/* Por debajo de 768px el buscador no se muestra: ocupaba casi toda la pantalla
+   de inicio en móvil y empujaba el hero fuera de vista. En WidgetSB.astro se
+   impide además que el script de SimpleBooking llegue a descargarse, para no
+   pagar JS de terceros por algo invisible. */
+@media (max-width: 767px) {
+	.booking-bar {
+		display: none;
+	}
 }
 
-/* Con la barra + header por encima ocupando el tope, el hero llena el
-   resto del viewport (no 100vh completo) para que el contenido no quede
-   centrado demasiado abajo dejando imagen vacía arriba. */
-.has-booking-bar .hero,
-.has-booking-bar .hero-content {
-	min-height: calc(100vh - 200px);
-}
+/* La pareja de esta regla — el botón de reserva que solo sale en móvil — está
+   en .hero-btn-book, junto a los demás estilos de botón del hero. No puede
+   vivir aquí: .hero-btn se declara más abajo y pisaría su `display`. */
 
-@media (min-width: 640px) {
+/* De 768px en adelante, donde la barra sí existe:
+   · el header pasa a `sticky` para quedar debajo de ella y volver a fijarse
+     al pasarla con el scroll;
+   · el hero descuenta la altura de barra + header para que su contenido no
+     quede centrado demasiado abajo dejando imagen vacía arriba.
+   En móvil ninguna de las dos aplica y el hero recupera el alto completo. */
+@media (min-width: 768px) {
+	.has-booking-bar .site-header {
+		position: sticky;
+	}
+
 	.has-booking-bar .hero,
 	.has-booking-bar .hero-content {
 		min-height: calc(100vh - 300px);
@@ -837,6 +925,17 @@ body.menu-open {
 	background: rgba(4, 12, 18, 0.22);
 	backdrop-filter: blur(4px);
 	-webkit-backdrop-filter: blur(4px);
+}
+
+/* Botón de reserva exclusivo de móvil, pareja de la regla que oculta
+   .booking-bar por debajo de 768px: donde no hay buscador de SimpleBooking,
+   hay botón. Sin él, el hero en móvil se quedaba sin ninguna vía de reserva a
+   la vista — había que abrir el menú hamburguesa para encontrar una.
+   Va después de .hero-btn para que su `display` gane por orden en la cascada. */
+@media (min-width: 768px) {
+	.hero-btn-book {
+		display: none;
+	}
 }
 
 .hero-btn-outline:hover {
@@ -962,9 +1061,29 @@ body.menu-open {
 		font-size: 0.58rem;
 	}
 
-	/* Mobile: ocultar urgencia para no saturar */
-	.hero-trust-item:last-child,
-	.hero-trust-divider:last-of-type {
+	/* La disponibilidad se ocultaba aquí "para no saturar", cuando el buscador
+	   de SimpleBooking ocupaba media pantalla de inicio en móvil. Sin él hay
+	   sitio de sobra, y el dato ("17 habitaciones disponibles hoy") es el gancho
+	   más fuerte del hero — más aún ahora que en móvil no hay buscador.
+	   En vez de ocultarlo, baja a su propia línea bajo las calificaciones. */
+	.hero-trust-inner {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.hero-trust-item:last-child {
+		flex-basis: 100%;
+		margin-top: 0.15rem;
+		padding-top: 0.55rem;
+		border-top: 1px solid rgba(255, 248, 236, 0.18);
+	}
+
+	/* El separador vertical previo a la disponibilidad ya no separa nada cuando
+	   esta baja de línea: quedaba colgando tras "TripAdvisor".
+	   Se apunta por :has() y no por :last-of-type — los cinco hijos son <div>,
+	   así que el "último de su tipo" es el propio bloque de disponibilidad y el
+	   selector no llegaba a coincidir con ningún separador. */
+	.hero-trust-divider:has(+ #hero-availability-block) {
 		display: none;
 	}
 
@@ -2914,13 +3033,67 @@ body.menu-open {
 	}
 }
 
+/* Puntos indicadores: solo existen con el carrusel, así que fuera de móvil no
+   se pintan. El markup los emite siempre y el CSS decide.
+   Declarados antes del breakpoint para que el `display: flex` de dentro gane. */
+.amenities-dots {
+	display: none;
+	justify-content: center;
+	align-items: center;
+	gap: 0.45rem;
+	margin-top: 1.1rem;
+}
+
+.amenities-dot {
+	width: 0.42rem;
+	height: 0.42rem;
+	border-radius: 50%;
+	background: rgba(79, 67, 52, 0.28);
+	transition:
+		background-color 0.3s ease,
+		width 0.3s ease;
+}
+
+.amenities-dot[data-active] {
+	width: 1.15rem;
+	border-radius: 0.21rem;
+	background: rgba(79, 67, 52, 0.72);
+}
+
+/* En móvil las 8 amenidades apiladas eran una columna larguísima de scroll.
+   Pasan a carrusel horizontal con scroll-snap nativo: sin JS para funcionar,
+   con swipe, rueda y teclado ya resueltos por el navegador. El JS del
+   componente solo pinta los puntos indicadores, y su ausencia no rompe nada. */
 @media (max-width: 700px) {
 	.amenities-grid {
-		grid-template-columns: 1fr;
+		grid-template-columns: none;
+		grid-auto-flow: column;
+		/* La tarjeta siguiente asoma: sin ese recorte no se ve que hay más. */
+		grid-auto-columns: 76%;
+		overflow-x: auto;
+		overscroll-behavior-x: contain;
+		scroll-snap-type: x mandatory;
+		/* Sangrado a los bordes de la pantalla, compensando el padding de
+		   .amenities-section (1.2rem), para que el carrusel no parezca cortado. */
+		margin-inline: -1.2rem;
+		padding-inline: 1.2rem;
+		scroll-padding-inline: 1.2rem;
+		/* Deja aire al box-shadow de las tarjetas, que si no se recorta arriba. */
+		padding-block: 0.75rem;
+		scrollbar-width: none;
+	}
+
+	.amenities-grid::-webkit-scrollbar {
+		display: none;
 	}
 
 	.amenity-card {
 		min-height: auto;
+		scroll-snap-align: start;
+	}
+
+	.amenities-dots {
+		display: flex;
 	}
 }
 

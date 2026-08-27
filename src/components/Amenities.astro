@@ -34,7 +34,13 @@ const amenities = [
 			<p class="amenities-subtitle">{t("amenities.subtitle")}</p>
 		</div>
 
-		<div class="amenities-grid">
+		{/*
+			En móvil esto es un carrusel horizontal con scroll-snap (ver
+			.amenities-grid en global.css); de 700px en adelante sigue siendo la
+			rejilla de siempre. El aria-label solo aplica cuando hay scroll, pero
+			es inocuo en escritorio y evita duplicar el markup por breakpoint.
+		*/}
+		<div class="amenities-grid" aria-label={t("amenities.carousel.aria")}>
 			{
 				amenities.map((amenity, index) => (
 					<article class={`amenity-card ${index % 2 === 1 ? "amenity-card-shift" : ""}`}>
@@ -54,5 +60,73 @@ const amenities = [
 				))
 			}
 		</div>
+
+		{/*
+			Puntos de posición del carrusel. Decorativos: el contenido ya está
+			completo en la lista de arriba y se recorre por scroll, así que para
+			un lector de pantalla esto sería ruido duplicado.
+		*/}
+		<div class="amenities-dots" aria-hidden="true">
+			{amenities.map(() => <span class="amenities-dot" />)}
+		</div>
 	</div>
 </section>
+
+<script>
+	/*
+	 * Sincroniza los puntos con la tarjeta visible del carrusel.
+	 *
+	 * Se calcula desde `scrollLeft` en vez de con IntersectionObserver: con
+	 * scroll-snap las tarjetas son de ancho uniforme, así que el índice es una
+	 * división — sin observers ni umbrales que afinar, y funciona igual aunque
+	 * el navegador esté animando el snap.
+	 *
+	 * Si este script no llega a ejecutarse, el carrusel sigue funcionando: los
+	 * puntos son un adorno, no el mecanismo de navegación.
+	 */
+	const grid = document.querySelector<HTMLElement>(".amenities-grid");
+	const dots = [...document.querySelectorAll<HTMLElement>(".amenities-dot")];
+	const cards = grid ? [...grid.querySelectorAll<HTMLElement>(".amenity-card")] : [];
+
+	if (grid && cards.length > 1 && dots.length === cards.length) {
+		// Distancia entre dos tarjetas = ancho + gap. Se mide una vez y se
+		// cachea: leer offsetLeft fuerza reflow, y hacerlo en cada evento de
+		// scroll sería pagar un recálculo de layout por frame de swipe.
+		let step = 0;
+		let current = -1;
+
+		const measure = () => {
+			step = cards[1].offsetLeft - cards[0].offsetLeft;
+		};
+
+		const sync = () => {
+			if (step <= 0) return;
+			const i = Math.max(
+				0,
+				Math.min(cards.length - 1, Math.round(grid.scrollLeft / step)),
+			);
+			// Durante un swipe la mayoría de eventos caen en la misma tarjeta;
+			// sin esta salida se reescribirían los 8 puntos en cada uno.
+			if (i === current) return;
+			current = i;
+			dots.forEach((d, j) => d.toggleAttribute("data-active", i === j));
+		};
+
+		measure();
+		sync();
+
+		grid.addEventListener("scroll", sync, { passive: true });
+
+		// El ancho de tarjeta es un % del viewport: al rotar el móvil cambia y
+		// el paso cacheado dejaría de valer.
+		window.addEventListener(
+			"resize",
+			() => {
+				measure();
+				current = -1;
+				sync();
+			},
+			{ passive: true },
+		);
+	}
+</script>

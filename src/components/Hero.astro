@@ -78,7 +78,22 @@ const t = useTranslations(Astro.currentLocale);
         <div class="hero-trust-divider" aria-hidden="true"></div>
 
         
-        <div class="hero-trust-item" id="hero-availability-block">
+        <!--
+          El <script> de abajo lo procesa Astro (lleva TypeScript), así que no
+          admite `define:vars` sin volverlo inline y perder el bundling. Los
+          textos viajan por data-* y el script los lee del DOM: así el bloque
+          queda traducido también en /en/, donde antes salía en español.
+        -->
+        <div
+          class="hero-trust-item"
+          id="hero-availability-block"
+          data-rooms={t("hero.avail.rooms")}
+          data-room-one={t("hero.avail.room.one")}
+          data-none={t("hero.avail.none")}
+          data-today={t("hero.avail.today")}
+          data-error={t("hero.avail.error")}
+          data-error-label={t("hero.avail.error.label")}
+        >
           <span class="hero-trust-score hero-trust-urgent">
             <span class="hero-urgency-dot" id="hero-avail-dot" aria-hidden="true"></span>
             <span id="hero-avail-text">{t("hero.avail.checking")}</span>
@@ -92,6 +107,20 @@ const t = useTranslations(Astro.currentLocale);
 
     <div class="hero-actions hero-anim flex flex-col items-center justify-center gap-3 sm:flex-row">
 
+      <!--
+        Solo móvil (ver .hero-btn-book en global.css). Es el espejo exacto de
+        .booking-bar: de 768px en adelante manda el buscador de SimpleBooking y
+        este botón sobra, pero por debajo no hay buscador y el hero se quedaba
+        sin ninguna vía de reserva a la vista.
+        Apunta a #habitaciones, igual que el CTA del header.
+      -->
+      <a
+        href={t("header.cta.book.href")}
+        class="hero-btn hero-btn-primary hero-btn-book"
+        aria-label={t("hero.btn.book.aria")}
+      >
+        {t("hero.btn.book")}
+      </a>
 
       <a
         href="#explorar"
@@ -139,6 +168,10 @@ const t = useTranslations(Astro.currentLocale);
 
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // Idioma de la página, para lo que este script escribe en tiempo de ejecución
+  // (clima y disponibilidad). Layout ya emite lang="es" o lang="en" en <html>.
+  const isEN = document.documentElement.lang.startsWith("en");
+
   /* ─── Animación de entrada ───────────────────────────── */
   if (!reduced) {
     // Estado inicial: todo invisible y desplazado
@@ -172,7 +205,10 @@ const t = useTranslations(Astro.currentLocale);
     const CACHE_KEY = 'dlf_weather_v1';
     const TTL = 6 * 60 * 60 * 1000;
 
-    const WMO: Record<number, string> = {
+    // Códigos WMO de Open Meteo. Viven aquí y no en ui.ts porque son un mapa
+    // código→texto que solo consume este script; llevarlos al diccionario
+    // añadiría 36 claves que ninguna plantilla usa.
+    const WMO_ES: Record<number, string> = {
       0: 'Cielo despejado', 1: 'Mayormente despejado',
       2: 'Parcialmente nublado', 3: 'Nublado',
       45: 'Niebla', 48: 'Niebla con escarcha',
@@ -181,6 +217,18 @@ const t = useTranslations(Astro.currentLocale);
       80: 'Aguacero leve', 81: 'Aguacero', 82: 'Aguacero intenso',
       95: 'Tormenta', 96: 'Tormenta con granizo', 99: 'Tormenta con granizo',
     };
+
+    const WMO_EN: Record<number, string> = {
+      0: 'Clear sky', 1: 'Mostly clear',
+      2: 'Partly cloudy', 3: 'Overcast',
+      45: 'Fog', 48: 'Freezing fog',
+      51: 'Light drizzle', 53: 'Drizzle', 55: 'Heavy drizzle',
+      61: 'Light rain', 63: 'Rain', 65: 'Heavy rain',
+      80: 'Light showers', 81: 'Showers', 82: 'Heavy showers',
+      95: 'Thunderstorm', 96: 'Thunderstorm with hail', 99: 'Thunderstorm with hail',
+    };
+
+    const WMO = isEN ? WMO_EN : WMO_ES;
 
     async function loadWeather() {
       // Intentar caché primero
@@ -220,7 +268,7 @@ const t = useTranslations(Astro.currentLocale);
         if (idx === -1) return;
         const temp = Math.round((hourly.temperature_2m as number[])[idx]);
         const code = (hourly.weathercode as number[])[idx];
-        const desc = WMO[code] ?? 'Condición actual';
+        const desc = WMO[code] ?? (isEN ? 'Current conditions' : 'Condición actual');
         el.textContent = `${desc} · ${temp}°C`;
       } catch {
         // Mantener el texto por defecto si falla
@@ -232,36 +280,45 @@ const t = useTranslations(Astro.currentLocale);
 
   /* ─── Disponibilidad real — CloudBeds ──────────────── */
   (async () => {
+    const block = document.getElementById('hero-availability-block');
     const dot   = document.getElementById('hero-avail-dot');
     const text  = document.getElementById('hero-avail-text');
     const label = document.getElementById('hero-avail-label');
-    if (!dot || !text || !label) return;
+    if (!block || !dot || !text || !label) return;
+
+    // Textos ya traducidos por Astro (ver los data-* en el markup).
+    const T = block.dataset;
 
     try {
       const res  = await fetch('https://cloudbeds-service.onrender.com/availability');
       const data = await res.json();
       const { available, available_rooms } = data;
 
-      const hoy = new Intl.DateTimeFormat('es-CR', {
+      const hoy = new Intl.DateTimeFormat(isEN ? 'en-US' : 'es-CR', {
         weekday: 'long', day: 'numeric', month: 'long',
         timeZone: 'America/Costa_Rica'
       }).format(new Date());
-      const hoyLabel = `Hoy, ${hoy.charAt(0).toUpperCase() + hoy.slice(1)}`;
+      // El español da el día en minúscula ("miércoles"); el inglés ya viene
+      // capitalizado, así que la operación es inocua en ambos.
+      const hoyLabel = (T.today ?? 'Hoy, {fecha}')
+        .replace('{fecha}', hoy.charAt(0).toUpperCase() + hoy.slice(1));
 
       if (available) {
         dot.style.background = '#4ade80';
         dot.style.boxShadow  = '0 0 6px #4ade80';
-        text.textContent  = `${available_rooms} habitaciones disponibles`;
+        text.textContent = available_rooms === 1
+          ? (T.roomOne ?? '')
+          : (T.rooms ?? '').replace('{n}', String(available_rooms));
         label.textContent = hoyLabel;
       } else {
         dot.style.background = '#f87171';
         dot.style.boxShadow  = '0 0 6px #f87171';
-        text.textContent  = 'Sin disponibilidad';
+        text.textContent  = T.none ?? '';
         label.textContent = hoyLabel;
       }
     } catch {
-      text.textContent  = 'Disponibilidad no cargada';
-      label.textContent = 'Intenta más tarde';
+      text.textContent  = T.error ?? '';
+      label.textContent = T.errorLabel ?? '';
     }
   })();
 

@@ -238,51 +238,88 @@ if (!reduced) {
     },
   });
 
-  /* ── 2. Cards: entrada escalonada en cascada ─────────────────────────
-     Cada card entra desde abajo con un delay progresivo.
-     Las imágenes tienen un efecto de reveal con clip-path.
+  /* ── 2. Cards: entrada al aparecer en pantalla ───────────────────────
+     Cada card entra desde abajo y su imagen se revela con clip-path.
+
+     El disparo cambia según el ancho, porque la rejilla cambia de forma
+     (ver .rooms-grid en global.css):
+
+     · Desde 741px las cards van en 2 o 4 columnas y entran juntas en
+       pantalla, así que un solo trigger sobre la rejilla las lanza en
+       cascada — que es donde el escalonado se luce.
+
+     · Por debajo de 741px la rejilla es de una columna. Con el trigger
+       en la rejilla, las cuatro se animaban a la vez al asomar la
+       primera, y las de más abajo terminaban su animación fuera de la
+       pantalla: al llegar a ellas ya estaban puestas. Ahí cada card
+       lleva su propio trigger y se presenta cuando le toca.
   ──────────────────────────────────────────────────────────────────── */
   const cards = gsap.utils.toArray<HTMLElement>(".room-card");
-
-  // Estado inicial: cards invisibles y desplazadas hacia abajo
-  gsap.set(cards, { opacity: 0, y: 40 });
-
-  // Imágenes: clip-path revela de izquierda a derecha
   const images = gsap.utils.toArray<HTMLElement>(".room-image-link img");
-  gsap.set(images, { clipPath: "inset(0 100% 0 0)", scale: 1.08 });
 
-  ScrollTrigger.create({
-    trigger: ".rooms-grid",
-    start: "top 78%",
-    once: true,
-    onEnter: () => {
+  const ocultar = () => {
+    gsap.set(cards, { opacity: 0, y: 40 });
+    gsap.set(images, { clipPath: "inset(0 100% 0 0)", scale: 1.08 });
+  };
 
-      // Cards entran escalonadas
-      gsap.to(cards, {
-        opacity: 1,
-        y: 0,
-        duration: 0.75,
-        ease: "power3.out",
-        stagger: {
-          amount: 0.45,   // tiempo total del stagger entre las 4 cards
-          from: "start",
-        },
+  // Revela una card y la imagen que contiene. Se busca la imagen dentro de
+  // la propia card y no por índice, para no depender de que ambas listas
+  // vayan alineadas.
+  const revelar = (card: HTMLElement, stagger = 0) => {
+    gsap.to(card, {
+      opacity: 1,
+      y: 0,
+      duration: 0.75,
+      ease: "power3.out",
+      delay: stagger,
+    });
+
+    const img = card.querySelector<HTMLElement>(".room-image-link img");
+    if (!img) return;
+
+    gsap.to(img, {
+      clipPath: "inset(0 0% 0 0)",
+      scale: 1,
+      duration: 0.85,
+      ease: "power3.out",
+      delay: stagger + 0.08,
+    });
+  };
+
+  // matchMedia limpia los triggers de la rama anterior al cruzar el
+  // breakpoint y vuelve a evaluar los nuevos, así que rotar el teléfono no
+  // deja cards a medio revelar.
+  const mm = gsap.matchMedia();
+
+  mm.add("(min-width: 741px)", () => {
+    ocultar();
+
+    ScrollTrigger.create({
+      trigger: ".rooms-grid",
+      start: "top 78%",
+      once: true,
+      onEnter: () => {
+        // 0.45s repartidos entre todas, como antes.
+        const paso = cards.length > 1 ? 0.45 / (cards.length - 1) : 0;
+        cards.forEach((card, i) => revelar(card, i * paso));
+      },
+    });
+  });
+
+  mm.add("(max-width: 740px)", () => {
+    ocultar();
+
+    cards.forEach((card) => {
+      ScrollTrigger.create({
+        trigger: card,
+        // Algo más abajo que en escritorio: en una columna la card ya ocupa
+        // casi todo el ancho, y arrancar al 78% la revelaba antes de que el
+        // usuario la tuviera realmente delante.
+        start: "top 85%",
+        once: true,
+        onEnter: () => revelar(card),
       });
-
-      // Imágenes: clip-path se revela + escala vuelve a 1
-      gsap.to(images, {
-        clipPath: "inset(0 0% 0 0)",
-        scale: 1,
-        duration: 0.85,
-        ease: "power3.out",
-        stagger: {
-          amount: 0.45,
-          from: "start",
-        },
-        delay: 0.08,
-      });
-
-    },
+    });
   });
 
   /* ── 3. Hover en imagen: zoom suave gestionado por GSAP ─────────────

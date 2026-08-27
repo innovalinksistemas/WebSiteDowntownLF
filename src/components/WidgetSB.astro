@@ -15,15 +15,33 @@ import { getLang } from "../i18n/utils";
 const lang = getLang(Astro.currentLocale);
 const codLang = lang === "en" ? "EN" : "ES";
 const currency = "USD";
+
+/**
+ * El buscador solo se monta de 768px en adelante. En móvil ocupaba casi toda
+ * la pantalla de inicio, así que se oculta (ver .booking-bar en global.css).
+ *
+ * Aquí no basta con ocultarlo por CSS: el widget descarga y ejecuta un script
+ * de terceros, y esconderlo con `display:none` seguiría pagando ese coste justo
+ * donde más pesa. Con esta guarda, en móvil no se pide nada a la red.
+ */
+const MIN_WIDTH = 768;
 ---
 
-<script is:inline define:vars={{ codLang, currency }}>
-(function (i, s, o, g, r, a, m) {
+<script is:inline define:vars={{ codLang, currency, MIN_WIDTH }}>
+(function () {
+  var mq = window.matchMedia('(min-width: ' + MIN_WIDTH + 'px)');
+  var mounted = false;
+
+  function mount() {
+    if (mounted) return;
+    mounted = true;
+
+    (function (i, s, o, g, r, a, m) {
     i['SBSyncroBoxParam'] = r; i[r] = i[r] || function () {
         (i[r].q = i[r].q || []).push(arguments)
     }, i[r].l = 1 * new Date(); a = s.createElement(o),
     m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-})(window, document, 'script', 'https://cdn.simplebooking.it/search-box-script.axd?IDA=10487','SBSyncroBox');
+})(window, document, 'script', 'https://cdn.simplebooking.it/search-box-script.axd?IDA=9184','SBSyncroBox');
 
 SBSyncroBox({
     CodLang: codLang,
@@ -57,6 +75,13 @@ SBSyncroBox({
       CustomCalendarBackgroundColor: "#fff", // Calendar’s background color
 	},
 });
+  }
+
+  if (mq.matches) mount();
+  // Una tablet que rota de vertical a horizontal cruza el umbral: sin esto
+  // se quedaría con el hueco de la barra y sin buscador dentro.
+  else mq.addEventListener('change', function (e) { if (e.matches) mount(); });
+})();
 </script>
 
 <style is:global>
