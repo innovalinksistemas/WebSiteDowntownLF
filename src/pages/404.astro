@@ -1,0 +1,88 @@
+---
+import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout
+  title="Página no encontrada | Downtown La Fortuna Boutique Hotel"
+  description="La página que buscás no existe o cambió de dirección."
+  headerSolid={true}
+>
+  <!-- noindex: una 404 nunca debe indexarse, aunque devuelva 200 en hosts estáticos. -->
+  <meta slot="head" name="robots" content="noindex, follow" />
+
+  <main id="contenido" class="nf-main">
+    <p class="nf-code">404</p>
+    <h1 class="nf-title">Esta página se nos perdió entre la niebla del Arenal</h1>
+    <p class="nf-text">
+      El enlace que seguiste no existe o cambió de dirección. Desde aquí podés
+      volver al inicio o escribirnos y te ayudamos.
+    </p>
+    <div class="nf-actions">
+      <a class="nf-btn nf-btn--primary" href="/">Ir al inicio</a>
+      <a class="nf-btn nf-btn--outline" href="/arenal-fortuna/">Guía de Arenal Fortuna</a>
+      <a class="nf-btn nf-btn--outline" href="/galeria/">Galería</a>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .nf-main {
+    min-height: 68vh;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    text-align: center;
+    gap: 0.75rem;
+    padding: 8rem 1.5rem 4rem;
+    background: var(--brand-cream, #f5f1eb);
+  }
+  .nf-code {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 12vw, 8rem);
+    line-height: 1;
+    color: var(--brand-red, #b90024);
+  }
+  .nf-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 500;
+    color: var(--brand-black, #1e1e1e);
+    max-width: 22ch;
+  }
+  .nf-text {
+    margin: 0;
+    max-width: 46ch;
+    color: #5a5a5a;
+    line-height: 1.6;
+  }
+  .nf-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .nf-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .nf-btn--primary {
+    background: var(--brand-red, #b90024);
+    color: #fff;
+  }
+  .nf-btn--outline {
+    border: 1px solid rgba(30, 30, 30, 0.25);
+    color: var(--brand-black, #1e1e1e);
+  }
+</style>

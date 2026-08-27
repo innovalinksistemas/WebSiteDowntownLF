@@ -1,13 +1,45 @@
 ---
+import { Image } from "astro:assets";
 import { useTranslations } from "../i18n/utils";
+
+import imgVolcan from "../assets/offers/hike.jpg";
+import imgPuentes from "../assets/offers/puentes.jpg";
+import imgCatarata from "../assets/offers/catarata.jpg";
+import imgTermales from "../assets/ecotermales/piscina.jpg";
+import imgRafting from "../assets/offers/rafting.jpg";
+
 const t = useTranslations(Astro.currentLocale);
+
+/**
+ * Carrusel de tours dentro del tile fotográfico.
+ *
+ * `offers/puentes.jpg` también la usa LatestOffers, la sección inmediatamente
+ * siguiente. Aquí es aceptable porque rota entre cinco: no se ven las dos a la
+ * vez, y en el mismo scroll solo coincide una de cada cinco veces. Lo mismo
+ * aplica a `offers/rafting.jpg`.
+ *
+ * Nota de resolución: `catarata.jpg` y `hike.jpg` miden 1024px de ancho y el
+ * tile llega a pedir ~1177 en pantallas grandes. Sharp no reescala hacia
+ * arriba, así que el navegador las estira ~13%. Se ve bien, pero si aparecen
+ * los originales en mayor tamaño, ganarían nitidez.
+ */
+const tours = [
+  { img: imgVolcan, key: "tour1", pos: "center 22%" },
+  { img: imgPuentes, key: "tour2", pos: "center 45%" },
+  { img: imgCatarata, key: "tour3", pos: "center 50%" },
+  { img: imgTermales, key: "tour4", pos: "center 55%" },
+  { img: imgRafting, key: "tour5", pos: "center 50%" },
+] as const;
 ---
 
 <!--
-  BRAND HIGHLIGHTS — "Ejemplos de uso" del brand book Downtown.
-  4 promo tiles (crema / rojo / negro / tan) que demuestran la paleta
-  de marca aplicada con los patrones de uso oficiales.
-  Estilos: .promo-* y .text-link en global.css.
+  BRAND HIGHLIGHTS — bento con carrusel de tours como pieza principal.
+
+  Antes eran cuatro tiles de color plano heredados de una plantilla de brand
+  book (los comentarios de global.css todavía hablaban de "SS25 nueva colección"
+  y "envío gratis"). Se rediseñó para que la sección tenga función comercial.
+
+  Estilos base de los tiles: .promo-* en global.css.
 -->
 <section class="brand-highlights" aria-label={t("brand.heading")}>
 	<div class="brand-highlights__inner">
@@ -17,35 +49,77 @@ const t = useTranslations(Astro.currentLocale);
 		</header>
 
 		<div class="promo-grid">
-			<!-- Tile crema: texto negro + enlace rojo -->
-			<article class="promo-tile promo-tile--cream">
+			<article
+				class="promo-tile promo-tile--photo"
+				aria-roledescription="carousel"
+				aria-label={t("brand.tours.aria")}
+				data-tours
+			>
+				{
+					tours.map((tour, i) => (
+						<div class="promo-slide" data-slide={i} aria-hidden={i !== 0}>
+							{/*
+								<Image> y no <Picture>: el fondo es position:absolute y un
+								<picture> intermedio añadiría una caja inline sin aportar nada.
+								Mismo criterio que TropicalExperiencesBanner.
+							*/}
+							<Image
+								src={tour.img}
+								alt={t(`brand.${tour.key}.alt`)}
+								class="promo-slide__bg"
+								style={`object-position:${tour.pos}`}
+								layout="none"
+								width={1100}
+								widths={[480, 760, 1100]}
+								sizes="(max-width: 900px) 92vw, 46vw"
+								format="webp"
+								loading="lazy"
+								decoding="async"
+							/>
+							<div class="promo-slide__overlay" aria-hidden="true" />
+							<div class="promo-slide__content">
+								<h3 class="promo-tile__title promo-tile__title--hero">
+									{t(`brand.${tour.key}.name`)}
+								</h3>
+								<p class="promo-tile__sub">{t(`brand.${tour.key}.meta`)}</p>
+							</div>
+						</div>
+					))
+				}
+
+				<a class="text-link promo-tile__link--light promo-tile__cta" href={t("brand.tile2.href")}>
+					{t("brand.tile2.link")}
+				</a>
+
+				<div class="promo-dots" role="tablist" aria-label={t("brand.tours.aria")}>
+					{
+						tours.map((tour, i) => (
+							<button
+								type="button"
+								class:list={["promo-dot", i === 0 && "promo-dot--active"]}
+								role="tab"
+								aria-selected={i === 0}
+								aria-label={`${t("brand.tours.goto")} ${t(`brand.${tour.key}.name`)}`}
+								data-dot={i}
+							/>
+						))
+					}
+				</div>
+			</article>
+
+			<!-- Reserva directa: negro, es el CTA comercial de la sección -->
+			<article class="promo-tile promo-tile--black promo-tile--booking">
 				<div>
 					<h3 class="promo-tile__title">{t("brand.tile1.title")}</h3>
 					<p class="promo-tile__sub">{t("brand.tile1.sub")}</p>
 				</div>
-				<a class="text-link" href={t("brand.tile1.href")}>{t("brand.tile1.link")}</a>
+				<a class="text-link promo-tile__link--light" href={t("brand.tile1.href")}>
+					{t("brand.tile1.link")}
+				</a>
 			</article>
 
-			<!-- Tile rojo sólido: texto blanco + enlace -->
-			<article class="promo-tile promo-tile--red">
-				<div>
-					<h3 class="promo-tile__title">{t("brand.tile2.title")}</h3>
-					<p class="promo-tile__sub">{t("brand.tile2.sub")}</p>
-				</div>
-				<a class="text-link" href={t("brand.tile2.href")}>{t("brand.tile2.link")}</a>
-			</article>
-
-			<!-- Tile negro: statement de marca, mismo estilo del Hero (display + script) -->
-			<article class="promo-tile promo-tile--black promo-tile--brand">
-				<h3 class="promo-tile__brand-title">
-					{t("brand.tile3.line1")}<br />
-					{t("brand.tile3.line2")}
-				</h3>
-				<p class="promo-tile__brand-sub">{t("brand.tile3.sub")}</p>
-			</article>
-
-			<!-- Tile tan: texto negro + regla roja -->
-			<article class="promo-tile promo-tile--tan">
+			<!-- Confort · Diseño · Ubicación -->
+			<article class="promo-tile promo-tile--tan promo-tile--claim">
 				<h3 class="promo-tile__title promo-tile__title--lg">
 					{t("brand.tile4.line1")}<br />
 					{t("brand.tile4.line2")}<br />
@@ -53,14 +127,98 @@ const t = useTranslations(Astro.currentLocale);
 				</h3>
 				<hr class="promo-tile__rule" />
 			</article>
+
+			<!-- Statement de marca, apaisado: le sienta mejor al display + script -->
+			<article class="promo-tile promo-tile--red promo-tile--brand">
+				<h3 class="promo-tile__brand-title">
+					{t("brand.tile3.line1")}<br />
+					{t("brand.tile3.line2")}
+				</h3>
+				<p class="promo-tile__brand-sub">{t("brand.tile3.sub")}</p>
+			</article>
 		</div>
 	</div>
 </section>
 
+<script>
+	(() => {
+		const root = document.querySelector<HTMLElement>("[data-tours]");
+		if (!root) return;
+
+		const slides = [...root.querySelectorAll<HTMLElement>("[data-slide]")];
+		const dots = [...root.querySelectorAll<HTMLButtonElement>("[data-dot]")];
+		if (slides.length < 2) return;
+
+		const INTERVAL = 5000;
+		let index = 0;
+		let timer: number | undefined;
+
+		// Sin autoplay si el usuario pidió menos movimiento: los puntos siguen
+		// permitiendo recorrer los tours a mano.
+		const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+		function show(next: number) {
+			index = (next + slides.length) % slides.length;
+			slides.forEach((s, i) => {
+				const on = i === index;
+				s.classList.toggle("promo-slide--active", on);
+				// aria-hidden y no display:none: el crossfade necesita las dos capas
+				// pintadas, pero el lector solo debe anunciar la visible.
+				s.setAttribute("aria-hidden", String(!on));
+			});
+			dots.forEach((d, i) => {
+				d.classList.toggle("promo-dot--active", i === index);
+				d.setAttribute("aria-selected", String(i === index));
+			});
+		}
+
+		function stop() {
+			if (timer !== undefined) {
+				clearInterval(timer);
+				timer = undefined;
+			}
+		}
+
+		function start() {
+			if (reduced || timer !== undefined) return;
+			timer = window.setInterval(() => show(index + 1), INTERVAL);
+		}
+
+		dots.forEach((d, i) =>
+			d.addEventListener("click", () => {
+				show(i);
+				stop();
+				start();
+			})
+		);
+
+		// Pausar mientras se interactúa: girar bajo el cursor o con el foco dentro
+		// hace perder el hilo de lectura.
+		root.addEventListener("mouseenter", stop);
+		root.addEventListener("mouseleave", start);
+		root.addEventListener("focusin", stop);
+		root.addEventListener("focusout", start);
+
+		// No gastar ciclos con la pestaña en segundo plano.
+		document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
+
+		// Solo animar cuando la sección está a la vista.
+		const io = new IntersectionObserver(
+			(entries) => (entries[0].isIntersecting ? start() : stop()),
+			{ threshold: 0.25 }
+		);
+		io.observe(root);
+
+		show(0);
+	})();
+</script>
+
 <style>
 	.brand-highlights {
 		padding: clamp(3.4rem, 7vw, 5.6rem) 1.2rem;
-		background: var(--brand-cream);
+		/* Un punto más oscuro que --brand-cream: Amenities (la sección de arriba)
+		   también es crema y ambas se fundían sin separación visible. */
+		background: #ece7de;
 	}
 
 	.brand-highlights__inner {
@@ -103,7 +261,129 @@ const t = useTranslations(Astro.currentLocale);
 		line-height: 1.18;
 	}
 
-	/* Tile de marca: mismo lenguaje visual del Hero (h1 display + script italic) */
+	/* ── Tile fotográfico con carrusel ──────────────────────── */
+	.promo-tile--photo {
+		position: relative;
+		overflow: hidden;
+		color: #fff;
+		min-height: clamp(20rem, 30vw, 26rem);
+		/* Color de reserva: si la foto tarda, el texto blanco ya es legible. */
+		background: #12181c;
+	}
+
+	.promo-slide {
+		position: absolute;
+		inset: 0;
+		opacity: 0;
+		transition: opacity 0.9s ease;
+		/* Las inactivas no deben capturar el puntero ni el foco. */
+		pointer-events: none;
+	}
+
+	.promo-slide--active {
+		opacity: 1;
+	}
+
+	.promo-slide__bg {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	/* La base de las fotos es de tono medio, así que no basta con oscurecer:
+	   el gradiente lleva la zona del texto a 0.82 de opacidad para superar
+	   con holgura el 4.5:1 de contraste AA en blanco. */
+	.promo-slide__overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			to top,
+			rgba(12, 16, 20, 0.85) 0%,
+			rgba(12, 16, 20, 0.5) 45%,
+			rgba(12, 16, 20, 0.12) 100%
+		);
+	}
+
+	.promo-slide__content {
+		position: absolute;
+		left: clamp(1.4rem, 2vw, 2rem);
+		right: clamp(1.4rem, 2vw, 2rem);
+		/* Deja sitio al CTA fijo de abajo. */
+		bottom: clamp(3.6rem, 5vw, 4.4rem);
+	}
+
+	.promo-tile__title--hero {
+		font-family: var(--font-display);
+		font-size: clamp(1.9rem, 3vw, 2.9rem);
+		font-weight: 400;
+		line-height: 1;
+		letter-spacing: 0.02em;
+		text-transform: none;
+	}
+
+	.promo-tile--photo .promo-tile__sub {
+		opacity: 0.9;
+	}
+
+	/* El CTA no rota con las slides: es el mismo destino para los cuatro tours. */
+	.promo-tile__cta {
+		position: absolute;
+		left: clamp(1.4rem, 2vw, 2rem);
+		bottom: clamp(1.4rem, 2vw, 2rem);
+		z-index: 2;
+	}
+
+	.promo-tile__link--light {
+		color: #fff;
+	}
+
+	.promo-tile__link--light:hover {
+		color: rgba(255, 255, 255, 0.78);
+	}
+
+	.promo-dots {
+		position: absolute;
+		right: clamp(1.4rem, 2vw, 2rem);
+		bottom: clamp(1.4rem, 2vw, 2rem);
+		z-index: 2;
+		display: flex;
+		gap: 0.4rem;
+	}
+
+	.promo-dot {
+		width: 1.5rem;
+		height: 1.5rem;
+		padding: 0;
+		border: none;
+		background: none;
+		cursor: pointer;
+		display: grid;
+		place-items: center;
+	}
+
+	/* El punto visible es pequeño, pero el botón mantiene 24px de área táctil. */
+	.promo-dot::after {
+		content: "";
+		width: 0.4rem;
+		height: 0.4rem;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.45);
+		transition: background 0.25s ease, transform 0.25s ease;
+	}
+
+	.promo-dot--active::after {
+		background: #fff;
+		transform: scale(1.35);
+	}
+
+	.promo-dot:hover::after,
+	.promo-dot:focus-visible::after {
+		background: #fff;
+	}
+
+	/* ── Statement de marca (apaisado) ──────────────────────── */
 	.promo-tile--brand {
 		justify-content: center;
 		align-items: flex-start;
@@ -125,6 +405,19 @@ const t = useTranslations(Astro.currentLocale);
 		font-family: var(--font-script);
 		font-size: clamp(1.05rem, 1.4vw, 1.4rem);
 		line-height: 1;
-		color: var(--brand-tan);
+		/* Crema y no --brand-tan: sobre el rojo de marca el tan da 4.02:1 y a
+		   22px sin negrita no cuenta como texto grande, así que no llega al 4.5
+		   de AA. Sobre crema sube a 6.8:1. */
+		color: var(--brand-cream);
+		opacity: 0.95;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.promo-slide {
+			transition: none;
+		}
+		.promo-dot::after {
+			transition: none;
+		}
 	}
 </style>

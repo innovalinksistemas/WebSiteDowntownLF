@@ -13,15 +13,15 @@ const t = useTranslations(Astro.currentLocale);
 const homeBase = (Astro.currentLocale ?? "es") === "es" ? "/" : "/en";
 
 const logos = [
-	{ src: logoBlanco,    alt: "La Fortuna Downtown",  href: "https://www.instagram.com/lafortunadowntown" },
-	{ src: logoTierraG,   alt: "Tierra Gastro",        href: "https://www.instagram.com/tierragastrocr" },
-	{ src: logoMB,        alt: "María Bonita",         href: "https://www.instagram.com/mariabonita.cr" },
-	{ src: logoVentanita, alt: "La Ventanita",         href: "https://www.instagram.com/ventanitamariabonita" },
-	{ src: logoPinto,     alt: "Pinto e' Gallo",       href: "https://www.instagram.com/pintoegallo.cr?igsh=MXR1NWUzYzMxN2hoYQ==" },
-	{ src: logoTropical,  alt: "Tropical Experiences", href: "#" },
-	{ src: logoNuwa,      alt: "Nuwa Art Gallery",     href: "https://www.instagram.com/nuwagallery?igsh=ejlqNnVsOWY2Zm1v" },
-	{ src: logoLava,      alt: "Lava Drinks",          href: "https://www.instagram.com/lavadrinkscr?igsh=ZDA3eWVtazVlMTRs&utm_source=qr" },
-	{ src: logoSelva,     alt: "Selva Negra",          href: "https://www.instagram.com/selvanegra.bar" },
+	{ src: logoBlanco,    alt: "La Fortuna Downtown Arenal Fortuna",  href: "https://www.instagram.com/lafortunadowntown" },
+	{ src: logoTierraG,   alt: "Tierra Gastro Arenal Fortuna",        href: "https://www.instagram.com/tierragastrocr" },
+	{ src: logoMB,        alt: "María Bonita Arenal Fortuna",         href: "https://www.instagram.com/mariabonita.cr" },
+	{ src: logoVentanita, alt: "La Ventanita Arenal Fortuna",         href: "https://www.instagram.com/ventanitamariabonita" },
+	{ src: logoPinto,     alt: "Pinto e' Gallo Arenal Fortuna",       href: "https://www.instagram.com/pintoegallo.cr?igsh=MXR1NWUzYzMxN2hoYQ==" },
+	{ src: logoTropical,  alt: "Tropical Experiences Arenal Fortuna", href: "#" },
+	{ src: logoNuwa,      alt: "Nuwa Art Gallery Arenal Fortuna",     href: "https://www.instagram.com/nuwagallery?igsh=ejlqNnVsOWY2Zm1v" },
+	{ src: logoLava,      alt: "Lava Drinks Arenal Fortuna",          href: "https://www.instagram.com/lavadrinkscr?igsh=ZDA3eWVtazVlMTRs&utm_source=qr" },
+	{ src: logoSelva,     alt: "Selva Negra Arenal Fortuna",          href: "https://www.instagram.com/selvanegra.bar" },
 ];
 const repeatedLogos = [...logos, ...logos];
 
@@ -48,7 +48,6 @@ const ratings = [
 	{ platform: "Expedia",     score: "8.8", max: "/10" },
 ];
 ---
-
 <section id="contacto" class="site-footer-section">
 	<div class="site-footer-inner">
 		<footer class="ef-footer" aria-label={t("footer.aria")}>
@@ -98,7 +97,7 @@ const ratings = [
 							<a href="https://wa.me/50685274677" target="_blank" rel="noopener noreferrer">+506 8527-4677</a>
 						</li>
 						<li class="ef-contact-email">
-							<a href="mailto:reservaciones@lafortunadowntown.com">reservaciones@lafortunadowntown.com</a>
+							<a href="mailto:reservations@lafortunadowntown.com">reservations@lafortunadowntown.com</a>
 						</li>
 					</ul>
 

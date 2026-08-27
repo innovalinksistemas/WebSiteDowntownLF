@@ -1,5 +1,7 @@
 ---
+import { baldiJsonLd } from '../../lib/packageContent';
 import '../../styles/global.css';
+import { landingRooms, baldiImages } from '../../lib/landingImages';
 import Layout from '../../layouts/Layout.astro';
 import Footer from '../../components/Footer.astro';
 
@@ -23,10 +25,10 @@ const pricing = [
 ];
 
 const rooms = [
-  { name: 'Standard Double',  img: 'https://i.ibb.co/SwhzWkZR/Estandar-Doble4.png', tag: 'Double' },
-  { name: 'Standard Triple',  img: 'https://i.ibb.co/PGZPHP1N/Estandar-Doble3.png', tag: 'Triple' },
-  { name: 'Superior',         img: 'https://i.ibb.co/kshJL68d/superior3.png',       tag: 'Superior' },
-  { name: 'Tropical Family',  img: 'https://i.ibb.co/gbVPz97Z/tropical3.png',        tag: 'Family' },
+  { name: 'Standard Double',  img: landingRooms.doble, tag: 'Double' },
+  { name: 'Standard Triple',  img: landingRooms.triple, tag: 'Triple' },
+  { name: 'Superior',         img: landingRooms.superior,       tag: 'Superior' },
+  { name: 'Tropical Family',  img: landingRooms.tropical,        tag: 'Family' },
 ];
 
 const policies = [
@@ -39,16 +41,17 @@ const policies = [
 <Layout
   title="Baldi Hot Springs Package in Arenal Fortuna | Downtown La Fortuna"
   description="Package with Baldi Hot Springs admission, accommodation in the center of Arenal Fortuna (La Fortuna), and access to all hotel experiences at the foot of Arenal Volcano."
-  image="https://i.ibb.co/Xr70WzXY/baldi3.png"
+  image={baldiImages.social}
+  jsonLd={baldiJsonLd("en")}
 >
 
-  <main>
+  <main id="contenido">
 
 
     <section class="baldi-hero" id="inicio">
       <div
         class="baldi-hero-bg"
-        style="background-image:url('https://i.ibb.co/Xr70WzXY/baldi3.png')"
+        style={`background-image:url(${baldiImages.hero})`}
         aria-hidden="true"
       ></div>
       <div class="baldi-hero-overlay" aria-hidden="true"></div>
@@ -68,7 +71,7 @@ const policies = [
 
         <div class="baldi-hero-ctas">
           <a
-            href="https://wa.me/50685274677?text=Hello,%20I'm%20interested%20in%20the%20Accommodation%20+%20Baldi%20package%20(%E2%82%A160%2C000)"
+            href="https://wa.me/50685274677?text=Hello,%20I'm%20interested%20in%20the%20Accommodation%20%2B%20Baldi%20package%20(%E2%82%A160%2C000)"
             class="baldi-btn baldi-btn--primary"
             target="_blank"
             rel="noopener noreferrer"
@@ -241,7 +244,7 @@ const policies = [
         <div class="baldi-exp-grid">
           <div class="baldi-exp-img-wrap">
             <img
-              src="https://i.ibb.co/0R16Yc59/baldi1.png"
+              src={baldiImages.exp1}
               alt="Baldi Hot Springs La Fortuna thermal pools"
               loading="lazy"
               decoding="async"
@@ -259,7 +262,7 @@ const policies = [
               thermal garden in the area, dining included and an unmatched atmosphere with volcano views.
             </p>
             <a
-              href="https://wa.me/50685274677?text=Hello,%20I'm%20interested%20in%20the%20Accommodation%20+%20Baldi%20package"
+              href="https://wa.me/50685274677?text=Hello,%20I'm%20interested%20in%20the%20Accommodation%20%2B%20Baldi%20package"
               class="baldi-btn baldi-btn--dark"
               target="_blank"
               rel="noopener noreferrer"
@@ -270,7 +273,7 @@ const policies = [
 
         <div class="baldi-exp-img2-wrap">
           <img
-            src="https://i.ibb.co/KjXW6MkG/baldi2.png"
+            src={baldiImages.exp2}
             alt="Baldi Hot Springs pools"
             loading="lazy"
             decoding="async"
@@ -286,7 +289,7 @@ const policies = [
         <h2 class="baldi-cta-title">Secure your stay</h2>
         <p class="baldi-cta-sub">Check availability and book your package directly on WhatsApp. Offer valid until August 31.</p>
         <a
-          href="https://wa.me/50685274677?text=Hello,%20I'm%20interested%20in%20the%20*Accommodation%20+%20Baldi*%20package%20(%E2%82%A160%2C000%20per%20person).%20I'd%20like%20to%20check%20availability."
+          href="https://wa.me/50685274677?text=Hello,%20I'm%20interested%20in%20the%20*Accommodation%20%2B%20Baldi*%20package%20(%E2%82%A160%2C000%20per%20person).%20I'd%20like%20to%20check%20availability."
           class="baldi-btn baldi-btn--wa"
           target="_blank"
           rel="noopener noreferrer"

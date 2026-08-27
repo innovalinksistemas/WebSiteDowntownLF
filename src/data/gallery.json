@@ -1,234 +1,269 @@
 {
-  "categories": ["Todas", "Hotel", "Habitaciones", "Restaurantes", "Actividades"],
+  "categories": [
+    "Todas",
+    "Hotel",
+    "Habitaciones",
+    "Restaurantes",
+    "Actividades"
+  ],
   "images": [
     {
       "id": 1,
-      "src": "/images/rooms/hotel/1Z6A4971.jpg",
+      "src": "rooms/hotel/1Z6A4971.jpg",
       "alt": "Área exterior del hotel Downtown La Fortuna",
+      "altEn": "Outdoor area of Downtown La Fortuna hotel",
       "category": "Hotel",
       "colSpan": 1,
       "rowSpan": 2
     },
     {
       "id": 2,
-      "src": "/images/rooms/hotel/1Z6A5607.jpg",
+      "src": "rooms/hotel/1Z6A5607.jpg",
       "alt": "Instalaciones del hotel Downtown La Fortuna",
+      "altEn": "Facilities at Downtown La Fortuna hotel",
       "category": "Hotel",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 3,
-      "src": "/images/rooms/hotel/1Z6A5815.jpg",
+      "src": "rooms/hotel/1Z6A5815.jpg",
       "alt": "Espacios del hotel Downtown La Fortuna",
+      "altEn": "Common spaces at Downtown La Fortuna hotel",
       "category": "Hotel",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 4,
-      "src": "/images/rooms/hotel/1Z6A5967.jpg",
+      "src": "rooms/hotel/1Z6A5967.jpg",
       "alt": "Vista del hotel Downtown La Fortuna",
+      "altEn": "View of Downtown La Fortuna hotel",
       "category": "Hotel",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 5,
-      "src": "/images/rooms/superior/superior-1.jpg",
+      "src": "rooms/superior/superior-1.jpg",
       "alt": "Habitación Superior",
+      "altEn": "Superior room",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 6,
-      "src": "/images/rooms/superior/superior-2.jpg",
+      "src": "rooms/superior/superior-2.jpg",
       "alt": "Habitación Superior con vista",
+      "altEn": "Superior room with a view",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 7,
-      "src": "/images/rooms/superior/superior-3.jpg",
+      "src": "rooms/superior/superior-3.jpg",
       "alt": "Interior habitación Superior",
+      "altEn": "Superior room interior",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 2
     },
     {
       "id": 8,
-      "src": "/images/rooms/superior/superior-4.jpg",
+      "src": "rooms/superior/superior-4.jpg",
       "alt": "Detalles habitación Superior",
+      "altEn": "Superior room details",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 9,
-      "src": "/images/rooms/doble/doble-1.jpg",
+      "src": "rooms/doble/doble-1.jpg",
       "alt": "Habitación Estándar Doble",
+      "altEn": "Standard Double room",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 10,
-      "src": "/images/rooms/doble/doble-2.jpg",
+      "src": "rooms/doble/doble-2.jpg",
       "alt": "Habitación Estándar Doble camas",
+      "altEn": "Standard Double room beds",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 11,
-      "src": "/images/rooms/doble/doble-3.jpg",
+      "src": "rooms/doble/doble-3.jpg",
       "alt": "Interior habitación Doble",
+      "altEn": "Double room interior",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 12,
-      "src": "/images/rooms/doble/doble-4.jpg",
+      "src": "rooms/doble/doble-4.jpg",
       "alt": "Habitación Doble vista completa",
+      "altEn": "Double room full view",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 13,
-      "src": "/images/rooms/triple/triple-1.jpg",
+      "src": "rooms/triple/triple-1.jpg",
       "alt": "Habitación Estándar Triple",
+      "altEn": "Standard Triple room",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 14,
-      "src": "/images/rooms/triple/triple-2.jpg",
+      "src": "rooms/triple/triple-2.jpg",
       "alt": "Interior habitación Triple",
+      "altEn": "Triple room interior",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 15,
-      "src": "/images/rooms/triple/triple-3.jpg",
+      "src": "rooms/triple/triple-3.jpg",
       "alt": "Detalles habitación Triple",
+      "altEn": "Triple room details",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 16,
-      "src": "/images/rooms/triple/triple-4.webp",
+      "src": "rooms/triple/triple-4.webp",
       "alt": "Habitación Triple vista amplia",
+      "altEn": "Triple room wide view",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 17,
-      "src": "/images/rooms/confort/confort-1.jpg",
+      "src": "rooms/confort/confort-1.jpg",
       "alt": "Habitación Confort",
+      "altEn": "Confort room",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 18,
-      "src": "/images/rooms/confort/confort-2.jpg",
+      "src": "rooms/confort/confort-2.jpg",
       "alt": "Habitación Confort familiar",
+      "altEn": "Confort family room",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 19,
-      "src": "/images/rooms/confort/confort-family.jpg",
+      "src": "rooms/confort/confort-family.jpg",
       "alt": "Habitación Confort Family",
+      "altEn": "Confort Family room",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 20,
-      "src": "/images/rooms/confort/bano.jpg",
+      "src": "rooms/confort/bano.jpg",
       "alt": "Baño habitación Confort",
+      "altEn": "Confort room bathroom",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 21,
-      "src": "/images/rooms/tropical-family/tf-1.jpg",
+      "src": "rooms/tropical-family/tf-1.jpg",
       "alt": "Suite Tropical Family",
+      "altEn": "Tropical Family suite",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 22,
-      "src": "/images/rooms/tropical-family/tf-2.jpg",
+      "src": "rooms/tropical-family/tf-2.jpg",
       "alt": "Tropical Family dos camas dobles",
+      "altEn": "Tropical Family suite with two double beds",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 23,
-      "src": "/images/rooms/tropical-family/tf-3.jpg",
+      "src": "rooms/tropical-family/tf-3.jpg",
       "alt": "Interior suite Tropical Family",
+      "altEn": "Tropical Family suite interior",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 24,
-      "src": "/images/rooms/tropical-family/tf-4.jpg",
+      "src": "rooms/tropical-family/tf-4.jpg",
       "alt": "Suite Tropical Family vista completa",
+      "altEn": "Tropical Family suite full view",
       "category": "Habitaciones",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 25,
-      "src": "/images/artesanias-tienda.jpg",
+      "src": "artesanias-tienda.jpg",
       "alt": "Tienda de artesanías y souvenirs La Fortuna",
+      "altEn": "Handicraft and souvenir shop in La Fortuna",
       "category": "Actividades",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 26,
-      "src": "/images/artesanias-ceramica.jpg",
+      "src": "artesanias-ceramica.jpg",
       "alt": "Artesanías típicas costarricenses",
+      "altEn": "Traditional Costa Rican handicrafts",
       "category": "Actividades",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 27,
-      "src": "/images/desayunoFrutas.jpg",
+      "src": "desayunoFrutas.jpg",
       "alt": "Desayuno con frutas tropicales",
+      "altEn": "Breakfast with tropical fruit",
       "category": "Restaurantes",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 28,
-      "src": "/images/desayunoTipico.jpg",
+      "src": "desayunoTipico.jpg",
       "alt": "Desayuno típico costarricense",
+      "altEn": "Traditional Costa Rican breakfast",
       "category": "Restaurantes",
       "colSpan": 1,
       "rowSpan": 1
     },
     {
       "id": 29,
-      "src": "/images/Rafting.jpg",
+      "src": "Rafting.jpg",
       "alt": "Rafting en La Fortuna",
+      "altEn": "Whitewater rafting in La Fortuna",
       "category": "Actividades",
       "colSpan": 1,
       "rowSpan": 1

@@ -1,7 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import { useTranslations } from "../i18n/utils";
+import heroImg from "../assets/hero.jpg";
 const t = useTranslations(Astro.currentLocale);
-const VIDEO_READY = false;
 ---
 
 <section
@@ -9,39 +10,28 @@ const VIDEO_READY = false;
   aria-label="La Fortuna Downtown Hotel — Hero"
 >
 
-  
-  <picture>
-    <img
-      src="/images/hero.jpg"
-      alt={t("hero.img.alt")}
-      class="hero-bg absolute inset-0 h-full w-full object-cover"
-      loading="eager"
-      fetchpriority="high"
-      decoding="async"
-      width="2400"
-      height="1600"
-    />
-  </picture>
+  <!--
+    Imagen LCP. `layout="none"` porque Tailwind ya controla la geometría por
+    completo (absolute inset-0 h-full w-full object-cover) y no queremos que los
+    estilos responsive compitan con esas utilidades.
+    `priority` emite loading="eager" + decoding="sync" + fetchpriority="high".
+    No lleva <link rel=preload>: el <img> es el primer elemento del <body>, así
+    que el preload scanner ya lo encuentra en el primer bloque de parseo.
+  -->
+  <Image
+    src={heroImg}
+    alt={t("hero.img.alt")}
+    class="hero-bg absolute inset-0 h-full w-full object-cover"
+    layout="none"
+    width={2560}
+    widths={[640, 960, 1280, 1920, 2560]}
+    sizes="100vw"
+    format="webp"
+    quality={70}
+    priority
+  />
 
-  
-  {VIDEO_READY && (
-    <video
-      class="hero-video absolute inset-0 h-full w-full object-cover"
-      autoplay
-      muted
-      loop
-      playsinline
-      disablepictureinpicture
-      preload="none"
-      aria-hidden="true"
-      poster="https://images.unsplash.com/photo-1589385680218-7e2f8fca0bd3?auto=format&fit=crop&w=2400&q=80"
-    >
-      <source src="/video/hero.webm" type="video/webm" />
-      <source src="/video/hero.mp4"  type="video/mp4" />
-    </video>
-  )}
 
-  
   <div class="hero-overlay absolute inset-0" aria-hidden="true"></div>
   <div class="hero-vignette absolute inset-0" aria-hidden="true"></div>
   <div class="hero-grain absolute inset-0" aria-hidden="true"></div>
@@ -55,7 +45,12 @@ const VIDEO_READY = false;
     </p>
 
 
-    <h1 class="hero-title hero-anim mb-4">
+    <!--
+      Sin `hero-anim` a propósito: es el elemento de texto LCP. Al incluirlo,
+      GSAP lo pintaba, lo ocultaba (opacity:0) y lo revelaba 1.1 s después,
+      retrasando el LCP y produciendo un parpadeo visible.
+    -->
+    <h1 class="hero-title mb-4">
       LA FORTUNA<br />DOWNTOWN
     </h1>
 
@@ -170,24 +165,6 @@ const VIDEO_READY = false;
   } else {
     // Sin animación: mostrar todo inmediatamente
     gsap.set(".hero-anim", { opacity: 1, y: 0 });
-  }
-
-  /* ─── Video: esperar carga antes de mostrar ──────────── */
-  const video = document.querySelector<HTMLVideoElement>(".hero-video");
-  if (video) {
-    // El video arranca con opacidad 0 y se revela suavemente
-    // cuando tiene suficientes datos para reproducir sin interrupciones
-    video.style.opacity = "0";
-    video.addEventListener("canplaythrough", () => {
-      gsap.to(video, { opacity: 1, duration: 1.2, ease: "power2.inOut" });
-    }, { once: true });
-
-    // Fallback: si después de 4s no cargó, mantener la imagen
-    setTimeout(() => {
-      if (video.readyState < 3) {
-        video.remove(); // imagen de fondo queda visible
-      }
-    }, 4000);
   }
 
   /* ─── Clima en tiempo real — Open Meteo, caché 6 h ─── */

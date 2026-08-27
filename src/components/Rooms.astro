@@ -1,8 +1,36 @@
 ---
+import { Picture, getImage } from "astro:assets";
 import { useTranslations } from "../i18n/utils";
 const t = useTranslations(Astro.currentLocale);
 
 const bookingUrl = "https://www.simplebooking.it/ibe2/hotel/9184/?hid=9184&lang=ES&cur=USD";
+
+/**
+ * Fotografía propia del hotel. Antes estas imágenes se enlazaban desde
+ * i.ibb.co; tres de ellas (tropical1/2/4) ya devolvían 404, así que la
+ * Tropical Family mostraba imágenes rotas.
+ */
+const photos = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/rooms/**/*.{jpg,jpeg,png,webp}",
+  { eager: true }
+);
+
+const asset = (key: string): ImageMetadata => {
+  const mod = photos[`/src/assets/images/rooms/${key}`];
+  if (!mod) throw new Error(`Rooms.astro: falta el asset ${key}`);
+  return mod.default;
+};
+
+/** URLs optimizadas para el carousel del modal, que las consume como strings. */
+const modalUrls = (keys: string[]) =>
+  Promise.all(
+    keys.map(async (k) =>
+      (await getImage({ src: asset(k), width: 1400, format: "webp", quality: 78 })).src
+    )
+  );
+
+/** Anchos reales de la card en la grilla de habitaciones. */
+const ROOM_SIZES = "(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 30vw";
 
 const baseTags = [
   t("rooms.tags.base.0"),
@@ -14,7 +42,7 @@ const baseTags = [
   t("rooms.tags.base.6"),
 ];
 
-const rooms = [
+const roomDefs = [
   {
     title: t("rooms.room.doble.title"),
     description: t("rooms.room.doble.desc"),
@@ -24,13 +52,7 @@ const rooms = [
     beds: t("rooms.room.doble.beds"),
     features: ["ac", "balcony", "pool", "wifi"],
     tags: [...baseTags, t("rooms.tags.stairs")],
-    images: [
-      "https://i.ibb.co/SwhzWkZR/Estandar-Doble4.png",
-      "https://i.ibb.co/PGZPHP1N/Estandar-Doble3.png",
-      "https://i.ibb.co/YFLqgW2q/Estandar-Doble2.png",
-      "https://i.ibb.co/rRdWHxfw/Estandar-Doble1.png",
-    ],
-    href: bookingUrl,
+    photos: ["doble/doble-4.jpg", "doble/doble-3.jpg", "doble/doble-2.jpg", "doble/doble-1.jpg"],
   },
   {
     title: t("rooms.room.triple.title"),
@@ -41,13 +63,7 @@ const rooms = [
     beds: t("rooms.room.triple.beds"),
     features: ["ac", "balcony", "pool", "wifi"],
     tags: baseTags,
-    images: [
-      "https://i.ibb.co/SX2LGSHN/Estandar-Triple3.png",
-      "https://i.ibb.co/whNd3XSv/Estandar-Triple2.png",
-      "https://i.ibb.co/j90LrhVJ/Estandar-Triple1.png",
-      "https://i.ibb.co/pvrBmBw4/Estandar-Triple4.webp",
-    ],
-    href: bookingUrl,
+    photos: ["triple/triple-1.jpg", "triple/triple-2.jpg", "triple/triple-3.jpg", "triple/triple-4.webp"],
   },
   {
     title: t("rooms.room.superior.title"),
@@ -58,13 +74,8 @@ const rooms = [
     beds: t("rooms.room.superior.beds"),
     features: ["ac", "balcony", "pool", "wifi"],
     tags: baseTags,
-    images: [
-      "https://i.ibb.co/kshJL68d/superior3.png",
-      "https://i.ibb.co/jPQ5JDvP/superior4.png",
-      "https://i.ibb.co/p6DwHt0w/superior2.png",
-      "https://i.ibb.co/bj0GzzS3/superior1.png",
-    ],
-    href: bookingUrl,
+    // La primera foto es la portada de la card: siempre la habitación, nunca el baño.
+    photos: ["superior/superior-1.jpg", "superior/superior-2.jpg", "superior/superior-4.jpg", "superior/superior-3.jpg"],
   },
   {
     title: t("rooms.room.tropical.title"),
@@ -75,15 +86,20 @@ const rooms = [
     beds: t("rooms.room.tropical.beds"),
     features: ["ac", "balcony", "pool", "wifi"],
     tags: baseTags,
-    images: [
-      "https://i.ibb.co/gbVPz97Z/tropical3.png",
-      "https://i.ibb.co/YB0G8WF8/tropical4.png",
-      "https://i.ibb.co/JF1xgnxG/tropical1.png",
-      "https://i.ibb.co/h1p4Cwgh/tropical2.png",
-    ],
-    href: bookingUrl,
+    photos: ["tropical-family/tf-2.jpg", "tropical-family/tf-3.jpg", "tropical-family/tf-4.jpg", "tropical-family/tf-1.jpg"],
   },
 ];
+
+/** Imagen de la card (ImageMetadata, para <Picture>). */
+const rooms = roomDefs.map((r) => ({ ...r, card: asset(r.photos[0]), href: bookingUrl }));
+
+/**
+ * Payload que consume el modal. Se serializa aparte para no meter los objetos
+ * ImageMetadata en el JSON embebido.
+ */
+const roomsPayload = await Promise.all(
+  roomDefs.map(async ({ photos: keys, ...r }) => ({ ...r, images: await modalUrls(keys) }))
+);
 ---
 
 <section id="habitaciones" class="rooms-section">
@@ -103,7 +119,18 @@ const rooms = [
 						data-room-modal={i}
 						aria-label={`${t("rooms.cta.details")} ${room.title}`}
 					>
-						<img src={room.images[0]} alt={room.title} loading="lazy" decoding="async" />
+						<Picture
+							src={room.card}
+							alt={room.title}
+							formats={["avif", "webp"]}
+							fallbackFormat="jpeg"
+							width={900}
+							widths={[360, 600, 900]}
+							sizes={ROOM_SIZES}
+							layout="none"
+							loading="lazy"
+							decoding="async"
+						/>
 					</button>
 					<h3 class="room-card-title">{room.title}</h3>
 					<p class="room-card-description">{room.description}</p>
@@ -173,7 +200,7 @@ const rooms = [
 	</div>
 </div>
 
-<script type="application/json" id="rooms-data" set:html={JSON.stringify(rooms)}></script>
+<script type="application/json" id="rooms-data" set:html={JSON.stringify(roomsPayload)}></script>
 
 <script>
 import { gsap } from "gsap";

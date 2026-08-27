@@ -1,0 +1,136 @@
+---
+import { getLang } from "../i18n/utils";
+
+/**
+ * Motor de reservas SimpleBooking (SyncroBox).
+ *
+ * Antes era WidgetSB.html, así que `CodLang` estaba fijo en 'EN' y el buscador
+ * salía en inglés también en las páginas en español.
+ *
+ * NOTA para el negocio: `Currency` sigue en USD en ambos idiomas. Las landings
+ * de paquetes cotizan en colones, así que probablemente convenga CRC para el
+ * público nacional — pero eso depende de qué monedas tenga habilitadas la
+ * cuenta de SimpleBooking, así que no se cambia sin confirmarlo.
+ */
+const lang = getLang(Astro.currentLocale);
+const codLang = lang === "en" ? "EN" : "ES";
+const currency = "USD";
+---
+
+<script is:inline define:vars={{ codLang, currency }}>
+(function (i, s, o, g, r, a, m) {
+    i['SBSyncroBoxParam'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+})(window, document, 'script', 'https://cdn.simplebooking.it/search-box-script.axd?IDA=10487','SBSyncroBox');
+
+SBSyncroBox({
+    CodLang: codLang,
+    Currency: currency,
+	Styles: {Theme: "dark",
+    FontFamily: '"Manrope", sans-serif',   // Coincide con la tipografía del sitio
+      CustomColor: "#1e1e1e",  // Primary color (brand black)
+      CustomColorHover: "#1e1e1e",  // Primary hover color
+      CustomBGColor: "#f5f1eb",  // Primary background color (brand cream)
+      CustomFieldBackgroundColor: "#fff",  // Calendar fields background color
+      CustomLabelColor: "#1e1e1e",  // Labels color
+      CustomLabelHoverColor: "#1e1e1e",  // Lobels color on hover
+      CustomButtonColor:"#fff",  // Buttons color
+      CustomButtonBGColor: "#b90024",  // Buttons background color (brand red)
+      CustomButtonHoverBGColor:"#8f001c",  // Bottons background color on hover (brand red-dark)
+      CustomIconColor:"#1e1e1e",  // Icons color
+      CustomLinkColor: "#1e1e1e",  // Links color
+      CustomWidgetColor: "#1e1e1e", // Widgets color
+      CustomWidgetBGColor: "#fff",  // Widgets background color
+      CustomWidgetElementHoverColor: "#1e1e1e",  // Widget elements color on hover
+      CustomWidgetElementHoverBGColor: "#f5f1eb", // Widget elements background color on hover
+      CustomBoxShadowColor:"#1e1e1e",  // Box shadows color
+      CustomBoxShadowColorFocus:"#b90024",  // Box shadows color when have focus (brand red)
+      CustomBoxShadowColorHover: "#aba19a",  // Box shadows color on hover
+      CustomAddRoomBoxShadowColor: "#1e1e1e", // Guests widget add room button border color
+      CustomIntentSelectionColor: "#1e1e1e", // Color of date range currently selected, when hovering on calendar
+      CustomIntentSelectionDaysBGColor: "#eccdd2",  // Background color of intent selection cells (light red tint)
+      CustomSelectedDaysColor: "#fff",  // Color of current selected range
+      CustomAccentColor: "#b90024", // Calendar’s main color (brand red)
+      CustomAccentColorHover: "#8f001c",  // Calendar’s hover color (brand red-dark)
+      CustomCalendarBackgroundColor: "#fff", // Calendar’s background color
+	},
+});
+</script>
+
+<style is:global>
+       @media  (min-width:768px) {
+    input#sb-container_sb__form-field--checkavailability {
+        margin-top: 0;
+    }
+
+    /* Caja flotante sobre el hero: esquinas redondeadas y padding cómodo */
+    #sb-container .sb-custom-bg-color {
+        padding: 14px 22px;
+        border-radius: 16px;
+    }
+
+    #sb-container .sb {
+        display: flex !important;
+        gap: 0px;
+    }
+
+    /* Footer (código promocional + gestionar reserva):
+       centrado verticalmente y apilado, con tipografía proporcional */
+    #sb-container .sb__footer {
+        display: flex !important;
+        align-items: center;
+        padding-left: 36px; /* Separa el bloque promo/gestionar del botón */
+    }
+
+    #sb-container .sb__footer-actions {
+        display: flex !important;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    #sb-container .sb__footer-link--promo {
+        font-size: 14px !important;
+    }
+
+    #sb-container a#sb-container_sb__footer-promo-wrapper {
+        margin: 0;
+    }
+
+    #sb-container a#sb-container_sb__form-field--reservationedit {
+        float: none;
+        margin: 0;
+        font-size: 12.5px !important;
+    }
+
+    .sb__form-field-label {
+        display: none !important;
+    }
+}
+
+    @media  (max-width:767px) {
+
+        input#sb-container_sb__form-field--checkavailability {
+        margin-top: 0;
+    }
+
+    #sb-container .sb-custom-bg-color {
+        padding: 12px 18px;
+        border-radius: 16px;
+    }
+
+
+    .sb__form-field-label {
+        display: none !important;
+    }
+
+
+    }
+
+</style>
+
+<div class="container">
+    <div id="sb-container"></div>
+</div>

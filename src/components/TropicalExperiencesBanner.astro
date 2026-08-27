@@ -10,7 +10,9 @@
  * Tropical Experiences cuando esté disponible.
  * ─────────────────────────────────────────────────────────────
  */
+import { Image } from "astro:assets";
 import { useTranslations } from "../i18n/utils";
+import raftingImg from "../assets/images/Rafting.jpg";
 const t = useTranslations(Astro.currentLocale);
 const [titleLine1, titleLine2] = t("tropic.title").split("\n");
 ---
@@ -21,14 +23,20 @@ const [titleLine1, titleLine2] = t("tropic.title").split("\n");
   aria-label={t("tropic.aria")}
 >
   
-  <img
-    src="/images/Rafting.jpg"
+  <!-- <Image> y no <Picture>: .tropic-bg es position:absolute y un <picture>
+       intermedio añadiría una caja inline innecesaria. -->
+  <Image
+    src={raftingImg}
     alt={t("tropic.img.alt")}
     class="tropic-bg"
+    layout="none"
+    width={2560}
+    widths={[640, 1024, 1600, 2560]}
+    sizes="100vw"
+    format="webp"
+    quality={72}
     loading="lazy"
     decoding="async"
-    width="2400"
-    height="1350"
   />
 
   

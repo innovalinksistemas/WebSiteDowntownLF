@@ -9,7 +9,6 @@ import LatestOffers from "../../components/LatestOffers.astro";
 import Layout from "../../layouts/Layout.astro";
 import Restaurants from "../../components/Restaurants.astro";
 import Rooms from "../../components/Rooms.astro";
-import TopTours from "../../components/TopTours.astro";
 import TropicalExperiencesBanner from "../../components/TropicalExperiencesBanner.astro";
 import { useTranslations } from "../../i18n/utils";
 
@@ -21,7 +20,7 @@ const t = useTranslations(Astro.currentLocale);
   description={t("meta.home.description")}
   bookingBar={true}
 >
-  <main class="relative min-h-screen overflow-hidden text-stone-100">
+  <main id="contenido" class="relative min-h-screen overflow-hidden text-stone-100">
     <Hero />
     <AboutUs />
     <Rooms />
@@ -30,6 +29,6 @@ const t = useTranslations(Astro.currentLocale);
     <LatestOffers />
     <Restaurants />
     <TropicalExperiencesBanner />
-    <Footer />
   </main>
+    <Footer />
 </Layout>

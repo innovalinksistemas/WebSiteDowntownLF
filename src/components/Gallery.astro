@@ -1,8 +1,11 @@
 ---
+import { Picture, getImage } from 'astro:assets';
 import galleryData from '../data/gallery.json';
+import { getLang, useTranslations } from "../i18n/utils";
+
 const { categories, images } = galleryData;
-import { useTranslations } from "../i18n/utils";
 const t = useTranslations(Astro.currentLocale);
+const lang = getLang(Astro.currentLocale);
 
 const filterLabels: Record<string, string> = {
   Todas: t("gallery.filter.all"),
@@ -11,6 +14,39 @@ const filterLabels: Record<string, string> = {
   Restaurantes: t("gallery.filter.restaurants"),
   Actividades: t("gallery.filter.activities"),
 };
+
+/**
+ * gallery.json guarda rutas relativas (p. ej. "rooms/doble/doble-1.jpg").
+ * El glob eager las resuelve a ImageMetadata para que pasen por el pipeline de
+ * Astro y generen AVIF/WebP + srcset.
+ */
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/images/**/*.{jpg,jpeg,png,webp}',
+  { eager: true }
+);
+
+/** Anchos de columna reales de la masonry — ver .gallery-grid en global.css. */
+const GALLERY_SIZES = '(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 24vw';
+
+const items = await Promise.all(
+  images.map(async (img) => {
+    const mod = files[`/src/assets/images/${img.src}`];
+    // Un fallo aquí debe romper el build, no publicar una imagen rota.
+    if (!mod) throw new Error(`gallery.json apunta a un asset inexistente: ${img.src}`);
+
+    // URL grande pregenerada para el lightbox. Antes se concatenaban query
+    // params tipo Imgix a una ruta estática, que el host ignora: abría el
+    // original completo (hasta 22 MB) y además duplicaba la entrada de caché.
+    const full = await getImage({ src: mod.default, width: 1600, format: 'webp', quality: 80 });
+
+    return {
+      ...img,
+      image: mod.default,
+      full: full.src,
+      altText: lang === 'en' ? img.altEn : img.alt,
+    };
+  })
+);
 ---
 
 
@@ -30,6 +66,7 @@ const filterLabels: Record<string, string> = {
           type="button"
           class={`gallery-filter-btn${i === 0 ? ' gallery-filter-btn--active' : ''}`}
           data-filter={cat}
+          aria-pressed={i === 0 ? 'true' : 'false'}
         >
           {filterLabels[cat] ?? cat}
         </button>
@@ -38,18 +75,24 @@ const filterLabels: Record<string, string> = {
 
     
     <div class="gallery-grid" id="gallery-grid">
-      {images.map((img) => (
+      {items.map((img) => (
         <button
           type="button"
           class="gallery-item"
           style={`--col-span:${img.colSpan};--row-span:${img.rowSpan}`}
           data-category={img.category}
-          data-src={img.src}
-          aria-label={`Ver foto: ${img.alt}`}
+          data-full={img.full}
+          aria-label={`${t("gallery.aria.view")}: ${img.altText}`}
         >
-          <img
-            src={img.src}
-            alt={img.alt}
+          <Picture
+            src={img.image}
+            alt={img.altText}
+            formats={["avif", "webp"]}
+            fallbackFormat="jpeg"
+            width={1280}
+            widths={[320, 480, 640, 960, 1280]}
+            sizes={GALLERY_SIZES}
+            layout="none"
             loading="lazy"
             decoding="async"
           />
@@ -120,8 +163,12 @@ filterBtns.forEach(btn => {
     if (lbOpen) closeLb();
 
     const filter = btn.dataset.filter!;
-    filterBtns.forEach(b => b.classList.remove('gallery-filter-btn--active'));
+    filterBtns.forEach(b => {
+      b.classList.remove('gallery-filter-btn--active');
+      b.setAttribute('aria-pressed', 'false');
+    });
     btn.classList.add('gallery-filter-btn--active');
+    btn.setAttribute('aria-pressed', 'true');
 
     const toHide = filter === 'Todas'
       ? []
@@ -161,9 +208,12 @@ filterBtns.forEach(btn => {
 function syncLb() {
   const item = visibleItems[currentIdx];
   if (!item) return;
-  const baseSrc = item.dataset.src!;
   const imgEl = item.querySelector('img')!;
-  lbImg.src = baseSrc + '?w=1600&auto=format&fit=crop&q=85';
+  // URL de 1600px generada en build (data-full). Antes se concatenaban query
+  // params estilo Imgix a una ruta estática, que el host servía tal cual:
+  // descargaba el original completo y como el query string no coincidía con el
+  // de la grilla, lo bajaba una segunda vez.
+  lbImg.src = item.dataset.full!;
   lbImg.alt = imgEl.alt;
   lbCounter.textContent = `${currentIdx + 1} / ${visibleItems.length}`;
 }

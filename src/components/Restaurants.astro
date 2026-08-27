@@ -14,8 +14,17 @@
  * · Hover en imágenes gestionado por GSAP
  * ─────────────────────────────────────────────────────────────
  */
+import { Picture } from "astro:assets";
 import { useTranslations } from "../i18n/utils";
+import imgMariaBonita from "../assets/restaurants/maria-bonita.jpg";
+import imgSelvaNegra from "../assets/restaurants/selva-negra.jpg";
+import imgLaVentanita from "../assets/restaurants/la-ventanita.jpg";
+import imgPintoeGallo from "../assets/images/desayunoTipico.jpg";
+
 const t = useTranslations(Astro.currentLocale);
+
+/** Ancho que ocupa la card en cada breakpoint (ver .rest-track en global.css). */
+const REST_SIZES = "(max-width: 600px) 90vw, (max-width: 980px) 60vw, 34vw";
 
 const restaurants = [
   {
@@ -23,7 +32,7 @@ const restaurants = [
     description: t("restaurants.r1.desc"),
     tag: t("restaurants.r1.tag"),
     hours: t("restaurants.r1.hours"),
-    image: "https://cdn.arenalcloud.com/arenal-a65b6eb9-29d7-4dec-9784-b1b37ff7dfce-downtown/restaurante_6b4c26ad.jpg",
+    image: imgMariaBonita,
     href: "https://qrfy.io/p/iLG_cBukNI",
     cta: t("restaurants.cta"),
   },
@@ -32,7 +41,7 @@ const restaurants = [
     description: t("restaurants.r2.desc"),
     tag: t("restaurants.r2.tag"),
     hours: t("restaurants.r2.hours"),
-    image: "https://cdn.arenalcloud.com/arenal-a65b6eb9-29d7-4dec-9784-b1b37ff7dfce-downtown/bar_d8f0d78e.jpg",
+    image: imgSelvaNegra,
     href: "https://online.flippingbook.com/view/510681266/",
     cta: t("restaurants.cta"),
   },
@@ -41,7 +50,7 @@ const restaurants = [
     description: t("restaurants.r3.desc"),
     tag: t("restaurants.r3.tag"),
     hours: t("restaurants.r3.hours"),
-    image: "/images/desayunoTipico.jpg",
+    image: imgPintoeGallo,
     href: "https://online.flippingbook.com/view/739784065/",
     cta: t("restaurants.cta"),
   },
@@ -50,7 +59,7 @@ const restaurants = [
     description: t("restaurants.r4.desc"),
     tag: t("restaurants.r4.tag"),
     hours: t("restaurants.r4.hours"),
-    image: "https://cdn.arenalcloud.com/arenal-a65b6eb9-29d7-4dec-9784-b1b37ff7dfce-ventanita/6E3A6298_22f79edc.jpg",
+    image: imgLaVentanita,
     href: "https://online.flippingbook.com/view/179568887/",
     cta: t("restaurants.cta"),
   },
@@ -128,13 +137,17 @@ const restaurants = [
           >
             
             <a href={r.href} class="rest-img-link" aria-label={`Ver ${r.name}`} tabindex="-1" target="_blank" rel="noopener noreferrer">
-              <img
+              <Picture
                 src={r.image}
                 alt={r.name}
+                formats={["avif", "webp"]}
+                fallbackFormat="jpeg"
+                width={1200}
+                widths={[480, 768, 1200]}
+                sizes={REST_SIZES}
+                layout="none"
                 loading="lazy"
                 decoding="async"
-                width="2000"
-                height="1333"
               />
               
               <span class="rest-tag">{r.tag}</span>

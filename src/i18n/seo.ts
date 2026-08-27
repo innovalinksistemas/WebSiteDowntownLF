@@ -134,7 +134,8 @@ export function siteGraph(lang: Lang, canonical: string, title: string, descript
         ],
         starRating: { "@type": "Rating", ratingValue: "3" },
         image: `${SITE}/og-image.jpg`,
-        logo: `${SITE}/favicon.svg`,
+        // Google no acepta SVG para `logo` en rich results: debe ser raster.
+        logo: `${SITE}/logo.png`,
         sameAs: SOCIAL,
         address: {
           "@type": "PostalAddress",
@@ -151,16 +152,21 @@ export function siteGraph(lang: Lang, canonical: string, title: string, descript
         areaServed: AREA_SERVED[lang].map((n) => ({ "@type": "Place", name: n })),
         knowsAbout: KNOWS_ABOUT[lang],
         containedInPlace: { "@id": `${SITE}/#arenal-fortuna` },
-        // Promedio de las 4 plataformas mostradas en el sitio, normalizado a /5:
-        // Google 4.3/5 · TripAdvisor 4.4/5 · Booking 8.1/10 · Expedia 8.8/10.
-        // NOTA: falta `ratingCount` real para ser elegible a rich results.
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: "4.3",
-          bestRating: "5",
-          worstRating: "1",
-        },
-        // Desglose por plataforma — lo consumen los motores de respuesta con IA.
+        // `aggregateRating` retirado a propósito.
+        //
+        // Era un promedio auto-declarado (Google 4.3 · TripAdvisor 4.4 ·
+        // Booking 8.1/10 · Expedia 8.8/10) sin `ratingCount` ni `reviewCount`,
+        // así que nunca fue elegible para rich results; y un negocio que publica
+        // su propia calificación agregada sin reseñas verificables en la página
+        // incumple las guidelines de Google y puede acarrear una acción manual.
+        //
+        // Para recuperarlo hacen falta dos cosas: el número real de reseñas por
+        // plataforma y reseñas individuales marcadas como `Review` (ver los
+        // nodos que aporta Testimonials.astro).
+        //
+        // El desglose por plataforma sí se mantiene abajo en `additionalProperty`:
+        // no reclama un rich result, es un dato descriptivo, y es justo lo que
+        // consumen los motores de respuesta con IA.
         additionalProperty: [
           { name: "Google", value: "4.3/5" },
           { name: "TripAdvisor", value: "4.4/5" },
@@ -180,6 +186,7 @@ export function siteGraph(lang: Lang, canonical: string, title: string, descript
           es ? "Cinco espacios gastronómicos propios" : "Five in-house dining venues",
           es ? "Aire acondicionado" : "Air conditioning",
           es ? "Traslados desde aeropuertos SJO y LIR" : "Transfers from SJO and LIR airports",
+          es ? "Concierge y coordinación de tours" : "Concierge and tour desk",
           es ? "Recepción y asistencia 24/7" : "24/7 front desk and assistance",
         ].map((n) => ({ "@type": "LocationFeatureSpecification", name: n, value: true })),
         hasPart: VENUES.map((v) => ({ "@id": `${SITE}/#${v.ig}` })),

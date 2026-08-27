@@ -1,5 +1,7 @@
 ---
+import { Picture } from "astro:assets";
 import Footer from "./Footer.astro";
+import stayImg from "../assets/images/rooms/hotel/1Z6A4971.jpg";
 
 /**
  * Guía de destino "Arenal Fortuna".
@@ -69,7 +71,7 @@ const { hero, intro, attractionsBlock, routesBlock, seasonsBlock, stayBlock, faq
   Astro.props;
 ---
 
-<main>
+<main id="contenido">
   <section class:list={["af-hero", !hero.img && "af-hero--plain"]}>
     {hero.img && (
       <>
@@ -183,12 +185,17 @@ const { hero, intro, attractionsBlock, routesBlock, seasonsBlock, stayBlock, faq
 
       <div class="af-stay">
         <div class="af-stay-media">
-          <img
-            src="/images/rooms/hotel/1Z6A4971.jpg"
+          <Picture
+            src={stayImg}
             alt={stayBlock.imgAlt}
+            formats={["avif", "webp"]}
+            fallbackFormat="jpeg"
+            width={1100}
+            widths={[480, 768, 1100]}
+            sizes="(max-width: 900px) 92vw, 46vw"
+            layout="none"
             loading="lazy"
-            width="1600"
-            height="1067"
+            decoding="async"
           />
         </div>
 
@@ -224,8 +231,9 @@ const { hero, intro, attractionsBlock, routesBlock, seasonsBlock, stayBlock, faq
     </div>
   </section>
 
-  <Footer />
 </main>
+
+<Footer />
 
 <style>
 /* ══════════════════════════════════════════════════════
@@ -608,6 +616,13 @@ const { hero, intro, attractionsBlock, routesBlock, seasonsBlock, stayBlock, faq
   overflow: hidden;
   border-radius: 0.2rem;
   aspect-ratio: 4 / 3;
+}
+/* <Picture> inserta un <picture> inline entre el contenedor y el <img>;
+   sin esto, el height:100% se resuelve contra una caja colapsada. */
+.af-stay-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 .af-stay-media img {
   width: 100%;

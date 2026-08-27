@@ -2,13 +2,31 @@
 import { useTranslations } from "../i18n/utils";
 const t = useTranslations(Astro.currentLocale);
 
+/**
+ * Sección despublicada hasta que exista contenido real.
+ *
+ * Tal como estaba, publicaba: títulos en inglés dentro del diccionario español,
+ * tres fotos de stock de Unsplash en el sitio de un hotel real, y tres enlaces
+ * "leer más" que apuntaban a `#reservas`, un ancla que no existe en ninguna
+ * página. Es decir, prometía contenido editorial que no existe y llevaba a
+ * ningún sitio — peor para la confianza y para SEO que no mostrar nada.
+ *
+ * El camino natural es convertirla en un blog real con content collections:
+ * es el mejor vehículo para el long-tail de "Arenal Fortuna" (qué hacer, cuándo
+ * ir, cómo llegar, termales) y para alimentar a los motores de respuesta con IA.
+ * Cuando haya artículos, poner STORIES_READY en true y sustituir el array por
+ * la colección.
+ */
+const STORIES_READY = false;
+
 const stories = [
-  { id: 1, title: t("stories.s1.title"), description: t("stories.s1.desc"), image: "https://images.unsplash.com/photo-1580738965095-1b5b1d204a23?auto=format&fit=crop&w=800&q=80", href: "#reservas", category: t("stories.s1.cat") },
-  { id: 2, title: t("stories.s2.title"), description: t("stories.s2.desc"), image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80", href: "#reservas", category: t("stories.s2.cat") },
-  { id: 3, title: t("stories.s3.title"), description: t("stories.s3.desc"), image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80", href: "#reservas", category: t("stories.s3.cat") },
+  { id: 1, title: t("stories.s1.title"), description: t("stories.s1.desc"), image: "", href: "#", category: t("stories.s1.cat") },
+  { id: 2, title: t("stories.s2.title"), description: t("stories.s2.desc"), image: "", href: "#", category: t("stories.s2.cat") },
+  { id: 3, title: t("stories.s3.title"), description: t("stories.s3.desc"), image: "", href: "#", category: t("stories.s3.cat") },
 ];
 ---
 
+{STORIES_READY && (
 <section class="stories-section">
 	<div class="stories-inner">
 		<p class="stories-kicker">{t("stories.kicker")}</p>
@@ -49,6 +67,7 @@ const stories = [
 		</div>
 	</div>
 </section>
+)}
 
 <style>
 	.stories-section {

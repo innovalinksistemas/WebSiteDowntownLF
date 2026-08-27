@@ -1,8 +1,11 @@
 ---
+import { Font } from "astro:assets";
 import Header from "../components/Header.astro";
-import Widget from "../components/WidgetSB.html";
-import { getLang } from "../i18n/utils";
+import PromoPopup from "../components/PromoPopup.astro";
+import Widget from "../components/WidgetSB.astro";
+import { altPath, getLang } from "../i18n/utils";
 import { GEO, SITE, siteGraph } from "../i18n/seo";
+import { promoIsActive } from "../lib/promo";
 
 interface Props {
   title?: string;
@@ -14,6 +17,8 @@ interface Props {
   bookingBar?: boolean;
   /** Nodos JSON-LD extra que se añaden al grafo global de la página. */
   jsonLd?: unknown[];
+  /** Escotilla para ocultar el popup promocional en una página concreta. */
+  promoPopup?: boolean;
 }
 
 const lang = getLang(Astro.currentLocale);
@@ -31,26 +36,38 @@ const {
   headerSolid = false,
   bookingBar = false,
   jsonLd = [],
+  promoPopup = true,
 } = Astro.props;
 
 const ogImage = image.startsWith("http") ? image : `${SITE}${image}`;
 const ogLocale = lang === "en" ? "en_US" : "es_CR";
 
+// Los slugs están localizados (/galeria ↔ /en/gallery), así que las alternativas
+// se resuelven con el mapa de rutas y no quitando/poniendo el prefijo /en.
 const path = Astro.url.pathname;
-const esPath = path.startsWith("/en") ? path.replace(/^\/en/, "") || "/" : path;
-const enPath = path.startsWith("/en") ? path : `/en${path === "/" ? "/" : path}`;
+const esPath = altPath(path, "es");
+const enPath = altPath(path, "en");
 
 const graph = siteGraph(lang, canonical, title, description);
 const structuredData = { ...graph, "@graph": [...graph["@graph"], ...jsonLd] };
+
+// `promoIsActive()` se evalúa en build; el apagado cuando la promo vence lo
+// garantiza además el propio popup en el navegador, porque el sitio es estático
+// y no hay rebuild programado.
+const showPromo = promoPopup && promoIsActive();
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#b90024" />
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -102,14 +119,23 @@ const structuredData = { ...graph, "@graph": [...graph["@graph"], ...jsonLd] };
 
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Great+Vibes&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Fuentes auto-hospedadas: sin preconnect ni hoja de estilos remota en el
+         camino crítico. `preload` solo en las dos que se usan above-the-fold. -->
+    <Font cssVariable="--font-manrope" preload />
+    <Font cssVariable="--font-cormorant" />
+    <Font cssVariable="--font-great-vibes" />
+
+    <!-- El widget de reservas se inyecta al inicio del <body> en el home. -->
+    {bookingBar && <link rel="preconnect" href="https://cdn.simplebooking.it" crossorigin />}
+
     <meta name="generator" content={Astro.generator} />
 
     <slot name="head" />
   </head>
   <body class={`${headerSolid ? "header-solid" : ""}${bookingBar ? " has-booking-bar" : ""}`.trim()}>
+    <a class="skip-link" href="#contenido">
+      {lang === "en" ? "Skip to content" : "Saltar al contenido"}
+    </a>
     {bookingBar && (
       <div class="booking-bar">
         <Widget />
@@ -128,6 +154,9 @@ const structuredData = { ...graph, "@graph": [...graph["@graph"], ...jsonLd] };
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
       </svg>
     </a>
+
+    {/* Al final del <body>: es un diálogo, no contenido de la página. */}
+    {showPromo && <PromoPopup />}
   </body>
 </html>
 
@@ -137,6 +166,27 @@ const structuredData = { ...graph, "@graph": [...graph["@graph"], ...jsonLd] };
     margin: 0;
     width: 100%;
     height: 100%;
+  }
+
+  /* Visible solo al recibir foco por teclado. */
+  .skip-link {
+    position: absolute;
+    left: 0.75rem;
+    top: -3rem;
+    z-index: 100;
+    padding: 0.7rem 1.2rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+    background: #b90024;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: top 0.15s ease-in;
+  }
+  .skip-link:focus-visible {
+    top: 0;
+    outline: 2px solid #fff;
+    outline-offset: -4px;
   }
 
   .wa-fab {

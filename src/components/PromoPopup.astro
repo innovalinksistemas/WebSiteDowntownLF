@@ -1,0 +1,403 @@
+---
+import { getLang, useTranslations } from "../i18n/utils";
+import { promoImage } from "../lib/landingImages";
+import { PROMO, PROMO_END_LABEL, PROMO_END_MS } from "../lib/promo";
+
+/**
+ * Popup promocional centrado con salida única a WhatsApp.
+ *
+ * Quien lo ve ya lleva ~12 segundos en el sitio, así que la intención es alta:
+ * el objetivo es que escriba, no que navegue a otra página. Por eso hay un solo
+ * CTA y no un enlace a landing.
+ *
+ * El retardo no es solo de conversión: un intersticial inmediato en móvil es lo
+ * que Google trata como intrusivo. Con retardo, cerrable y sin cubrir toda la
+ * pantalla en móvil, se queda fuera de ese supuesto.
+ *
+ * Accesibilidad: sigue el patrón de Header.astro (focus trap real, Escape con
+ * restauración de foco, bloqueo de scroll por clase), que es el más completo
+ * del repo — los dos modales existentes no tienen focus trap.
+ */
+const t = useTranslations(Astro.currentLocale);
+const lang = getLang(Astro.currentLocale);
+
+// encodeURIComponent y no una URL escrita a mano: un '+' literal en un query
+// string se decodifica como espacio y el mensaje llega mutilado.
+const waMsg = `${t("promo.wa.msg")}`;
+const waHref = `https://wa.me/${PROMO.whatsapp}?text=${encodeURIComponent(waMsg)}`;
+
+const cfg = {
+  key: PROMO.key,
+  end: PROMO_END_MS,
+  delay: PROMO.delaySeconds * 1000,
+  ttl: PROMO.dismissTtlDays * 24 * 60 * 60 * 1000,
+};
+---
+
+{/*
+  Ids con prefijo `dlf-`: el widget de SimpleBooking inyecta en runtime un
+  sprite SVG que incluye un `<symbol id="promo">`. Con `id="promo"` a secas,
+  `getElementById` devolvía el símbolo del widget en vez de este diálogo —
+  una carrera que solo fallaba si el widget cargaba primero.
+*/}
+<div class="promo" id="dlf-promo" hidden data-promo>
+  <div class="promo__backdrop" data-promo-close></div>
+
+  <div
+    class="promo__dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="dlf-promo-title"
+    aria-describedby="dlf-promo-lead"
+  >
+    <button type="button" class="promo__close" aria-label={t("promo.close")} data-promo-close>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"
+        ></path>
+      </svg>
+    </button>
+
+    <img class="promo__img" src={promoImage} alt={t("promo.img.alt")} width="720" height="405" />
+
+    <div class="promo__body">
+      <p class="promo__eyebrow">{t("promo.eyebrow")}</p>
+      <h2 class="promo__title" id="dlf-promo-title">{t("promo.title")}</h2>
+      <p class="promo__lead" id="dlf-promo-lead">{t("promo.lead")}</p>
+
+      <p class="promo__price">
+        <span class="promo__from">{t("promo.from")}</span>
+        <strong>{PROMO.priceLabel}</strong>
+        <span class="promo__unit">{PROMO.priceUnit[lang]}</span>
+      </p>
+
+      <p class="promo__includes">{t("promo.includes")}</p>
+
+      <a class="promo__cta" href={waHref} target="_blank" rel="noopener noreferrer" data-promo-cta>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"
+          ></path>
+        </svg>
+        {t("promo.cta")}
+      </a>
+
+      <button type="button" class="promo__dismiss" data-promo-close>{t("promo.dismiss")}</button>
+
+      <p class="promo__fine">{t("promo.fine")} {PROMO_END_LABEL[lang]}</p>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ CFG: cfg }}>
+  (() => {
+    // querySelector sobre el atributo de datos, no getElementById: inmune a
+    // que un tercero inyecte un elemento con el mismo id (ver nota del markup).
+    const root = document.querySelector("div.promo[data-promo]");
+    if (!root) return;
+
+    // El sitio es estático: si nadie reconstruye, este es el único freno.
+    if (Date.now() > CFG.end) return;
+
+    // ¿Ya lo cerró y sigue vigente el descarte?
+    try {
+      const until = localStorage.getItem(CFG.key);
+      if (until && Date.now() < Number(until)) return;
+    } catch {
+      /* localStorage bloqueado: se muestra igual */
+    }
+
+    const dialog = root.querySelector(".promo__dialog");
+    let lastFocused = null;
+    let openTimer;
+
+    const focusables = () =>
+      [...dialog.querySelectorAll("a[href], button:not([disabled])")].filter(
+        (el) => el.offsetParent !== null
+      );
+
+    function remember() {
+      // Nunca recordar más allá del fin de la promo.
+      const until = Math.min(Date.now() + CFG.ttl, CFG.end);
+      try {
+        localStorage.setItem(CFG.key, String(until));
+      } catch {
+        /* storage lleno o bloqueado: se cierra igual, solo que no se recuerda */
+      }
+    }
+
+    function close() {
+      root.hidden = true;
+      document.body.classList.remove("promo-open");
+      document.removeEventListener("keydown", onKeydown);
+      remember();
+      // Devolver el foco a donde estaba: al ocultar el diálogo, el elemento
+      // enfocado desaparece y el foco se caería al <body>.
+      lastFocused?.focus?.();
+    }
+
+    function onKeydown(e) {
+      if (e.key === "Escape") {
+        close();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      // Focus trap: el diálogo es modal, el tabulador no debe salirse.
+      const items = focusables();
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    function open() {
+      // No interrumpir si ya hay otro modal abierto (galería o habitaciones).
+      const busy =
+        document.querySelector(".room-modal--open") ||
+        document.body.classList.contains("menu-open") ||
+        document.getElementById("gallery-lightbox")?.style.display === "flex";
+      if (busy) {
+        openTimer = window.setTimeout(open, 4000);
+        return;
+      }
+
+      lastFocused = document.activeElement;
+      root.hidden = false;
+      document.body.classList.add("promo-open");
+      document.addEventListener("keydown", onKeydown);
+      focusables()[0]?.focus();
+    }
+
+    root.querySelectorAll("[data-promo-close]").forEach((el) => el.addEventListener("click", close));
+
+    // Al ir a WhatsApp también se recuerda: ya convirtió, no hay que insistir.
+    root.querySelector("[data-promo-cta]")?.addEventListener("click", () => {
+      remember();
+      root.hidden = true;
+      document.body.classList.remove("promo-open");
+      document.removeEventListener("keydown", onKeydown);
+    });
+
+    openTimer = window.setTimeout(open, CFG.delay);
+    // Si se va antes de que salte, no dispararlo al volver de otra pestaña.
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) clearTimeout(openTimer);
+    });
+  })();
+</script>
+
+<style is:global>
+  body.promo-open {
+    overflow: hidden;
+  }
+</style>
+
+<style>
+  .promo {
+    position: fixed;
+    inset: 0;
+    /* Por encima de todo: es una interrupción deliberada.
+       wa-fab 50 < menú 79 < header 80 < booking-bar 81 < modales 200 < promo 210 */
+    z-index: 210;
+    display: grid;
+    place-items: center;
+    padding: 1.25rem;
+  }
+  .promo[hidden] {
+    display: none;
+  }
+
+  .promo__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 12, 16, 0.72);
+    backdrop-filter: blur(3px);
+  }
+
+  .promo__dialog {
+    position: relative;
+    width: min(100%, 25rem);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--brand-cream);
+    color: var(--brand-black);
+    border-radius: 0.9rem;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+    animation: promo-in 0.32s cubic-bezier(0.2, 0.8, 0.3, 1);
+  }
+
+  @keyframes promo-in {
+    from {
+      opacity: 0;
+      transform: translateY(16px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .promo__close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    z-index: 1;
+    width: 2.2rem;
+    height: 2.2rem;
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: 50%;
+    background: rgba(8, 12, 16, 0.5);
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .promo__close:hover,
+  .promo__close:focus-visible {
+    background: rgba(8, 12, 16, 0.78);
+  }
+
+  .promo__img {
+    display: block;
+    width: 100%;
+    height: 9.5rem;
+    object-fit: cover;
+    border-radius: 0.9rem 0.9rem 0 0;
+  }
+
+  .promo__body {
+    padding: 1.4rem 1.5rem 1.6rem;
+    text-align: center;
+  }
+
+  .promo__eyebrow {
+    margin: 0 0 0.5rem;
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--brand-red);
+  }
+  .promo__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 6vw, 2.3rem);
+    line-height: 1.05;
+    font-weight: 400;
+  }
+  .promo__lead {
+    margin: 0.6rem 0 0;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: #5a5148;
+  }
+
+  .promo__price {
+    margin: 1.1rem 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+  }
+  .promo__from {
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #7a7066;
+  }
+  .promo__price strong {
+    font-family: var(--font-display);
+    font-size: clamp(2.1rem, 8vw, 2.8rem);
+    line-height: 1;
+    font-weight: 500;
+    color: var(--brand-red);
+  }
+  .promo__unit {
+    font-size: 0.76rem;
+    color: #7a7066;
+  }
+
+  .promo__includes {
+    margin: 0.9rem 0 0;
+    padding: 0.5rem 0.75rem;
+    border-block: 1px solid rgba(79, 67, 52, 0.18);
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
+    color: #5a5148;
+  }
+
+  .promo__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    margin-top: 1.2rem;
+    padding: 0.95rem 1.2rem;
+    border-radius: 999px;
+    background: #25d366;
+    color: #05331a;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: transform 0.18s ease, filter 0.18s ease;
+  }
+  .promo__cta:hover,
+  .promo__cta:focus-visible {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+  }
+
+  .promo__dismiss {
+    margin-top: 0.7rem;
+    background: none;
+    border: none;
+    padding: 0.4rem;
+    font: inherit;
+    font-size: 0.76rem;
+    color: #7a7066;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+  .promo__dismiss:hover,
+  .promo__dismiss:focus-visible {
+    color: var(--brand-black);
+  }
+
+  .promo__fine {
+    margin: 0.9rem 0 0;
+    font-size: 0.68rem;
+    color: #8a8177;
+  }
+
+  /* En móvil no ocupa toda la pantalla: la imagen se reduce para que el CTA
+     entre en viewport sin scroll dentro del diálogo. */
+  @media (max-height: 700px) {
+    .promo__img {
+      height: 6.5rem;
+    }
+    .promo__body {
+      padding: 1.1rem 1.25rem 1.3rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .promo__dialog {
+      animation: none;
+    }
+    .promo__cta {
+      transition: none;
+    }
+    .promo__cta:hover {
+      transform: none;
+    }
+  }
+</style>

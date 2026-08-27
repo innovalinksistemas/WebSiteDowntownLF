@@ -13,8 +13,8 @@ const t = useTranslations(Astro.currentLocale);
   description={t("meta.gallery.description")}
   headerSolid={true}
 >
-  <main class="relative min-h-screen overflow-hidden text-stone-100">
+  <main id="contenido" class="relative min-h-screen overflow-hidden text-stone-100">
     <Gallery />
-    <Footer />
   </main>
+    <Footer />
 </Layout>

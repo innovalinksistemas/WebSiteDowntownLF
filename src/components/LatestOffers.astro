@@ -1,34 +1,43 @@
 ---
+import { Picture } from "astro:assets";
 import { useTranslations } from "../i18n/utils";
+import imgRomantico1 from "../assets/offers/romantico-1.jpg";
+import imgRomantico2 from "../assets/offers/romantico-2.jpg";
+import imgPuentes from "../assets/offers/puentes.jpg";
+import imgRafting from "../assets/offers/rafting.jpg";
+
 const t = useTranslations(Astro.currentLocale);
+
+/** Anchos reales de la card en .latest-offers-grid. */
+const OFFER_SIZES = "(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 24vw";
 
 const packages = [
   {
     title: t("offers.p1.title"),
     subtitle: t("offers.p1.subtitle"),
     description: t("offers.p1.desc"),
-    image: "https://i.ibb.co/hRtLzbmD/paq-Romantico.png",
+    image: imgRomantico1,
     href: "https://www.simplebooking.it/ibe2/hotel/9184/package/70564?lang=EN&cur=USD",
   },
   {
     title: t("offers.p2.title"),
     subtitle: t("offers.p2.subtitle"),
     description: t("offers.p2.desc"),
-    image: "https://i.ibb.co/PkkhG7q/paq-Romantico2.png",
+    image: imgRomantico2,
     href: "https://www.simplebooking.it/ibe2/hotel/9184/package/70563?lang=EN&cur=USD",
   },
   {
     title: t("offers.p3.title"),
     subtitle: t("offers.p3.subtitle"),
     description: t("offers.p3.desc"),
-    image: "https://i.ibb.co/kgm5ZBqx/puentes1.png",
+    image: imgPuentes,
     href: "https://www.simplebooking.it/ibe2/hotel/9184/package/70571?lang=EN&cur=USD",
   },
   {
     title: t("offers.p4.title"),
     subtitle: t("offers.p4.subtitle"),
     description: t("offers.p4.desc"),
-    image: "https://i.ibb.co/7tGKMNXs/Rafting11.png",
+    image: imgRafting,
     href: "https://www.simplebooking.it/ibe2/hotel/9184/package/70572?lang=EN",
   },
 ];
@@ -51,7 +60,18 @@ const packages = [
 				packages.map((pkg) => (
 					<article class="offer-card">
 						<a href={pkg.href} class="offer-media-link" aria-label={`Ver paquete ${pkg.title}`} target="_blank" rel="noopener noreferrer">
-							<img src={pkg.image} alt={pkg.title} loading="lazy" decoding="async" />
+							<Picture
+									src={pkg.image}
+									alt={pkg.title}
+									formats={["avif", "webp"]}
+									fallbackFormat="jpeg"
+									width={900}
+									widths={[360, 600, 900]}
+									sizes={OFFER_SIZES}
+									layout="none"
+									loading="lazy"
+									decoding="async"
+								/>
 						</a>
 						<div class="offer-card-body">
 							<h3 class="offer-card-title">{pkg.title}</h3>

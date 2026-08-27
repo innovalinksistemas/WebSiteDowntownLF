@@ -1,4 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Manrope:wght@400;500;600;700&display=swap");
+/* Las fuentes se auto-hospedan vía `fonts` en astro.config.mjs y se inyectan
+   desde Layout.astro. Aquí había un @import remoto a Google Fonts que duplicaba
+   el <link> del Layout: un @import de hoja remota bloquea el render hasta que
+   resuelve, y era la primera línea del CSS global. */
 @import "tailwindcss";
 
 /* Responsive YouTube iframe container */
@@ -22,9 +25,11 @@
 
 
 :root {
-	--font-display: "Cormorant Garamond", serif;
-	--font-script: "Great Vibes", cursive;
-	--font-body: "Manrope", sans-serif;
+	/* Las variables --font-* las define astro:fonts e incluyen los fallbacks
+	   declarados en astro.config.mjs. */
+	--font-display: var(--font-cormorant), Georgia, serif;
+	--font-script: var(--font-great-vibes), cursive;
+	--font-body: var(--font-manrope), system-ui, sans-serif;
 	--header-offset: 8rem;
 
 	/* ═══════════════════════════════════════════════════════════
@@ -1355,6 +1360,14 @@ body.menu-open {
 	overflow: hidden;
 }
 
+/* Altura fija en el contenedor: el <picture> intermedio necesita ser block
+   con altura 100% para que el img resuelva su height. */
+.offer-media-link picture {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
 .offer-media-link img {
 	display: block;
 	width: 100%;
@@ -1986,6 +1999,14 @@ body.menu-open {
 	font: inherit;
 }
 
+/* La card tiene altura fija; sin esto el <picture> que inserta <Picture>
+   colapsa y el height:100% del img no resuelve. */
+.room-image-link picture {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
 .room-image-link img {
 	display: block;
 	width: 100%;
@@ -2415,6 +2436,15 @@ body.menu-open {
 	text-decoration: none;
 }
 
+/* <Picture> envuelve el <img> en un <picture>, que es display:inline con altura
+   automática. Sin esta regla, el height:100% del img se resuelve contra una caja
+   colapsada y la card de altura fija se rompe. */
+.rest-img-link picture {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
 .rest-img-link img {
 	display: block;
 	width: 100%;
@@ -2840,8 +2870,8 @@ body.menu-open {
 }
 
 .amenity-icon-wrap {
-	width: 3.15rem;
-	height: 3.15rem;
+	width: 3.4rem;
+	height: 3.4rem;
 	margin-top: 0.8rem;
 	display: grid;
 	place-items: center;
@@ -2852,8 +2882,10 @@ body.menu-open {
 }
 
 .amenity-icon {
-	width: 1.7rem;
-	height: 1.7rem;
+	/* El dibujo ocupa ~75% del lienzo 200×200, así que necesita más caja que los
+	   iconos de trazo anteriores (24×24 a sangre) para pesar lo mismo. */
+	width: 2.2rem;
+	height: 2.2rem;
 }
 
 .amenity-title {
@@ -3006,6 +3038,15 @@ body.menu-open {
 .gallery-item:hover {
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
 	transform: translateY(-2px);
+}
+
+/* <Picture> envuelve el <img> en un <picture> (display:inline, altura auto).
+   La celda de la masonry tiene altura fija (grid-auto-rows × --row-span), así
+   que sin esta regla el height:100% del img colapsa y la grilla se rompe. */
+.gallery-item picture {
+	display: block;
+	width: 100%;
+	height: 100%;
 }
 
 .gallery-item img {
@@ -3612,22 +3653,31 @@ body.menu-open {
 }
 
 /* ══════════════════════════════════════════════════════════
-   PROMO TILES — "EJEMPLOS DE USO" del brand book
-   4 variantes: crema, rojo, negro, tan.
-   Uso: <article class="promo-tile promo-tile--red"> … </article>
+   PROMO TILES — bento de BrandHighlights
+   La pieza fotográfica manda (2 columnas × 2 filas) y los tres
+   tiles de color la acompañan. Estas clases las usa únicamente
+   BrandHighlights.astro.
 ══════════════════════════════════════════════════════════ */
 .promo-grid {
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
+	grid-template-areas:
+		"foto foto reserva claim"
+		"foto foto marca   marca";
 	gap: clamp(0.8rem, 1.6vw, 1.4rem);
 }
+
+.promo-tile--photo   { grid-area: foto; }
+.promo-tile--booking { grid-area: reserva; }
+.promo-tile--claim   { grid-area: claim; }
+.promo-tile--brand   { grid-area: marca; }
 
 .promo-tile {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	gap: 1.4rem;
-	min-height: clamp(12rem, 18vw, 15rem);
+	min-height: clamp(9.5rem, 14vw, 12rem);
 	padding: clamp(1.4rem, 2vw, 2rem);
 }
 
@@ -3649,13 +3699,15 @@ body.menu-open {
 	background: var(--brand-red);
 }
 
-/* Crema: texto negro, link rojo (ENVÍO GRATIS …) */
+/* Crema: sin uso desde el rediseño. Ojo al reutilizarlo — sobre un fondo de
+   sección claro el tile desaparece, que es justo lo que le pasaba a "Reserva
+   directa" antes de pasarlo a negro. */
 .promo-tile--cream {
 	background: var(--brand-cream);
 	color: var(--brand-black);
 }
 
-/* Rojo sólido: texto blanco (SS25 NUEVA COLECCIÓN) */
+/* Rojo sólido: statement de marca */
 .promo-tile--red {
 	background: var(--brand-red);
 	color: #fff;
@@ -3663,22 +3715,39 @@ body.menu-open {
 .promo-tile--red .text-link { color: #fff; }
 .promo-tile--red .text-link:hover { color: rgba(255, 255, 255, 0.78); }
 
-/* Negro: texto blanco (DOWNTOWN DESIGNED IN THE CITY.) */
+/* Negro: reserva directa. El .text-link es rojo por defecto y sobre negro
+   queda por debajo de AA, de ahí .promo-tile__link--light en el componente. */
 .promo-tile--black {
 	background: var(--brand-black);
 	color: var(--brand-cream);
 }
 
-/* Tan: texto negro, regla roja (CALIDAD. DISEÑO. FUNCIONALIDAD.) */
+/* Tan: claim con regla roja */
 .promo-tile--tan {
 	background: var(--brand-tan);
 	color: var(--brand-black);
 }
 
+/* Tablet: la foto ocupa el ancho completo y los tres tiles se reparten debajo
+   (reserva + claim en una fila, marca apaisada en la siguiente). */
 @media (max-width: 900px) {
-	.promo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.promo-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-areas:
+			"foto    foto"
+			"reserva claim"
+			"marca   marca";
+	}
 }
 
+/* Móvil: una columna, con la foto primero. */
 @media (max-width: 480px) {
-	.promo-grid { grid-template-columns: 1fr; }
+	.promo-grid {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"foto"
+			"reserva"
+			"claim"
+			"marca";
+	}
 }

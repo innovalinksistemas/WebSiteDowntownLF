@@ -1,5 +1,7 @@
 ---
+import { baldiJsonLd } from '../lib/packageContent';
 import '../styles/global.css';
+import { landingRooms, baldiImages } from '../lib/landingImages';
 import Layout from '../layouts/Layout.astro';
 import Footer from '../components/Footer.astro';
 
@@ -23,10 +25,10 @@ const pricing = [
 ];
 
 const rooms = [
-  { name: 'Standard Doble',  img: 'https://i.ibb.co/SwhzWkZR/Estandar-Doble4.png', tag: 'Doble' },
-  { name: 'Standard Triple', img: 'https://i.ibb.co/PGZPHP1N/Estandar-Doble3.png', tag: 'Triple' },
-  { name: 'Superior',        img: 'https://i.ibb.co/kshJL68d/superior3.png',       tag: 'Superior' },
-  { name: 'Tropical Family', img: 'https://i.ibb.co/gbVPz97Z/tropical3.png',        tag: 'Familiar' },
+  { name: 'Standard Doble',  img: landingRooms.doble, tag: 'Doble' },
+  { name: 'Standard Triple', img: landingRooms.triple, tag: 'Triple' },
+  { name: 'Superior',        img: landingRooms.superior,       tag: 'Superior' },
+  { name: 'Tropical Family', img: landingRooms.tropical,        tag: 'Familiar' },
 ];
 
 const policies = [
@@ -39,72 +41,17 @@ const policies = [
 <Layout
   title="Paquete Baldi Hot Springs en Arenal Fortuna | ₡60.000 i.i | Downtown La Fortuna"
   description="Paquete para nacionales en Arenal Fortuna: 1 noche en hotel boutique céntrico de La Fortuna + Pase del día en Baldi Hot Springs (10AM–10PM) + Desayuno + Almuerzo y Cena. Desde ₡60.000 i.i por persona. Niños 0–5 GRATIS. Válido del 01 julio al 31 agosto 2026."
-  image="https://i.ibb.co/Xr70WzXY/baldi3.png"
+  image={baldiImages.social}
+  jsonLd={baldiJsonLd("es")}
 >
-  <Fragment slot="head">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Product",
-          "@id": "https://lafortunadowntown.com/baldi#paquete",
-          "name": "Paquete Hospedaje + Pase del Día Baldi Hot Springs en Arenal Fortuna",
-          "description": "1 noche en Downtown La Fortuna Boutique Hotel, en el centro de Arenal Fortuna + Pase del día en Baldi Hot Springs (10AM–10PM, 25 piscinas) + Desayuno + Almuerzo y Cena buffet + Bebida de bienvenida + Cocteles 2×1. Niños 0–5 sin costo.",
-          "image": "https://i.ibb.co/Xr70WzXY/baldi3.png",
-          "brand": { "@id": "https://lafortunadowntown.com/#hotel" },
-          "areaServed": { "@id": "https://lafortunadowntown.com/#arenal-fortuna" },
-          "offers": {
-            "@type": "Offer",
-            "price": "60000",
-            "priceCurrency": "CRC",
-            "priceValidUntil": "2026-08-31",
-            "availability": "https://schema.org/InStock",
-            "validFrom": "2026-07-01",
-            "validThrough": "2026-08-31"
-          }
-        },
-        {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "¿Qué incluye el paquete Hospedaje + Baldi en La Fortuna?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "El paquete incluye: 1 noche de alojamiento, pase del día en Baldi Hot Springs (10AM–10PM, 25 piscinas), desayuno, almuerzo y cena buffet en Baldi, bebida de bienvenida, cocteles 2×1, parqueo y WiFi gratuitos."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "¿Cuánto cuesta el paquete Baldi?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "₡60.000 i.i por persona en ocupación doble. Niños 0–5 GRATIS. Niños 6–10: ₡35.000."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "¿Hasta cuándo es válida la oferta?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Válida del 01 de julio al 31 de agosto de 2026. Sujeta a disponibilidad."
-              }
-            }
-          ]
-        }
-      ]
-    }
-    </script>
-  </Fragment>
 
-  <main>
+  <main id="contenido">
 
     
     <section class="baldi-hero" id="inicio">
       <div
         class="baldi-hero-bg"
-        style="background-image:url('https://i.ibb.co/Xr70WzXY/baldi3.png')"
+        style={`background-image:url(${baldiImages.hero})`}
         aria-hidden="true"
       ></div>
       <div class="baldi-hero-overlay" aria-hidden="true"></div>
@@ -124,7 +71,7 @@ const policies = [
 
         <div class="baldi-hero-ctas">
           <a
-            href="https://wa.me/50685274677?text=Hola,%20me%20interesa%20el%20paquete%20Hospedaje%20+%20Baldi%20(%E2%82%A160.000%20i.i)"
+            href="https://wa.me/50685274677?text=Hola,%20me%20interesa%20el%20paquete%20Hospedaje%20%2B%20Baldi%20(%E2%82%A160.000%20i.i)"
             class="baldi-btn baldi-btn--primary"
             target="_blank"
             rel="noopener noreferrer"
@@ -297,7 +244,7 @@ const policies = [
         <div class="baldi-exp-grid">
           <div class="baldi-exp-img-wrap">
             <img
-              src="https://i.ibb.co/0R16Yc59/baldi1.png"
+              src={baldiImages.exp1}
               alt="Aguas termales Baldi Hot Springs La Fortuna"
               loading="lazy"
               decoding="async"
@@ -315,7 +262,7 @@ const policies = [
               de la zona, gastronomía incluida y un ambiente inigualable con vistas al volcán.
             </p>
             <a
-              href="https://wa.me/50685274677?text=Hola,%20me%20interesa%20el%20paquete%20Hospedaje%20+%20Baldi"
+              href="https://wa.me/50685274677?text=Hola,%20me%20interesa%20el%20paquete%20Hospedaje%20%2B%20Baldi"
               class="baldi-btn baldi-btn--dark"
               target="_blank"
               rel="noopener noreferrer"
@@ -326,7 +273,7 @@ const policies = [
         
         <div class="baldi-exp-img2-wrap">
           <img
-            src="https://i.ibb.co/KjXW6MkG/baldi2.png"
+            src={baldiImages.exp2}
             alt="Piscinas Baldi Hot Springs"
             loading="lazy"
             decoding="async"
@@ -342,7 +289,7 @@ const policies = [
         <h2 class="baldi-cta-title">Asegure su estancia</h2>
         <p class="baldi-cta-sub">Consulte disponibilidad y reserve su paquete directamente por WhatsApp. Oferta válida hasta el 31 de agosto.</p>
         <a
-          href="https://wa.me/50685274677?text=Hola,%20me%20interesa%20el%20paquete%20*Hospedaje%20+%20Baldi*%20(%E2%82%A160.000%20i.i%20por%20persona).%20Quisiera%20consultar%20disponibilidad."
+          href="https://wa.me/50685274677?text=Hola,%20me%20interesa%20el%20paquete%20*Hospedaje%20%2B%20Baldi*%20(%E2%82%A160.000%20i.i%20por%20persona).%20Quisiera%20consultar%20disponibilidad."
           class="baldi-btn baldi-btn--wa"
           target="_blank"
           rel="noopener noreferrer"

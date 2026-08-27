@@ -11,7 +11,7 @@
 - **Email:** reservaciones@lafortunadowntown.com
 - **Idiomas:** español e inglés
 - **Monedas:** colones (CRC) y dólares (USD)
-- **Calificaciones:** Google 4.3/5 · TripAdvisor 4.4/5 · Booking.com 8.1/10 · Expedia 8.8/10
+- **Calificaciones publicadas en el sitio:** Google 4.3/5 · TripAdvisor 4.4/5 · Booking.com 8.1/10 · Expedia 8.8/10 (consultar cada plataforma para el dato vigente y el número de reseñas)
 
 ## Distancias a las atracciones de Arenal Fortuna
 
@@ -59,18 +59,36 @@ Nota: los pisos superiores se acceden solo por escaleras.
 - Aplican políticas estacionales especiales en temporada alta
 - Mejor precio garantizado en reserva directa, sin gastos ocultos
 
+## Paquetes vigentes
+
+- **Hospedaje + Baldi Hot Springs** — ₡60.000 i.i. por persona en ocupación doble. Niños 6–10: ₡35.000. Niños 0–5: gratis. Incluye 1 noche, pase del día a Baldi (10:00–22:00, 25 piscinas), desayuno, almuerzo y cena buffet, bebida de bienvenida y cocteles 2×1. Válido del 1 de julio al 31 de agosto de 2026.
+- **Hospedaje + Ecotermales** — ₡135.000 por pareja en ocupación doble. Tercera o cuarta persona: ₡50.000. Niños 5–11: ₡27.500. Niños 0–4: gratis. Incluye 1 noche, entrada a Ecotermales, desayuno, bebida de bienvenida y cocteles 2×1. Válido del 1 de junio al 30 de agosto de 2026.
+
+Ambos paquetes son ofertas para nacionales y residentes de Costa Rica, se cotizan en colones y se reservan por WhatsApp. Las fechas de validez son las publicadas en el sitio; conviene confirmarlas antes de citarlas.
+
 ## Páginas
 
 - [Inicio](https://lafortunadowntown.com/): habitaciones, servicios, restaurantes y paquetes
-- [Guía de Arenal Fortuna](https://lafortunadowntown.com/arenal-fortuna): qué es el destino, qué ver y hacer, cómo llegar, cuándo ir y dónde dormir
-- [Preguntas frecuentes](https://lafortunadowntown.com/faq): clima del volcán, traslados, agua potable, cancelaciones, desayuno, parqueo, seguridad
-- [Galería](https://lafortunadowntown.com/galeria): fotos del hotel, habitaciones, restaurantes y actividades
-- [Paquete Baldi Hot Springs](https://lafortunadowntown.com/baldi): hospedaje + pase del día a Baldi
-- [Paquete Ecotermales](https://lafortunadowntown.com/ecotermales): hospedaje + entrada a Ecotermales
+- [Guía de Arenal Fortuna](https://lafortunadowntown.com/arenal-fortuna/): qué es el destino, qué ver y hacer, cómo llegar, cuándo ir y dónde dormir
+- [Preguntas frecuentes](https://lafortunadowntown.com/faq/): clima del volcán, traslados, agua potable, cancelaciones, desayuno, parqueo, seguridad
+- [Galería](https://lafortunadowntown.com/galeria/): fotos del hotel, habitaciones, restaurantes y actividades
+- [Paquete Baldi Hot Springs](https://lafortunadowntown.com/baldi/): hospedaje + pase del día a Baldi
+- [Paquete Ecotermales](https://lafortunadowntown.com/ecotermales/): hospedaje + entrada a Ecotermales
 
 ## English
 
-The English version of every page lives under `/en/` — for example <https://lafortunadowntown.com/en/> and <https://lafortunadowntown.com/en/arenal-fortuna>.
+Every page has an English version under `/en/`:
+
+- [Home](https://lafortunadowntown.com/en/) — rooms, services, restaurants and packages
+- [Arenal Fortuna destination guide](https://lafortunadowntown.com/en/arenal-fortuna/) — what the destination is, what to see and do, how to get there, when to go, where to stay
+- [FAQ](https://lafortunadowntown.com/en/faq/) — volcano weather, transfers, drinking water, cancellations, breakfast, parking, safety
+- [Gallery](https://lafortunadowntown.com/en/gallery/) — hotel, rooms, restaurants and activities
+- [Baldi Hot Springs package](https://lafortunadowntown.com/en/baldi/) — stay + Baldi day pass
+- [Ecotermales package](https://lafortunadowntown.com/en/ecotermales/) — stay + Ecotermales admission
+
+Note the gallery slug differs by language: `/galeria/` in Spanish, `/en/gallery/` in English.
+
+Downtown La Fortuna Boutique Hotel is a boutique hotel in the center of La Fortuna de San Carlos (Arenal Fortuna), Alajuela, Costa Rica — 25 meters from the Catholic Church, on the central park. It is the most centrally located hotel in the destination: most of the area's tours depart within a few meters, and restaurants, banks and shops are all walkable. Six room types, a tropical pool, free 24/7 private parking with EV charging, and five in-house dining venues. Arenal Volcano is about 15 minutes away and the nearest hot springs about 5.
 
 ## Sobre el destino
 

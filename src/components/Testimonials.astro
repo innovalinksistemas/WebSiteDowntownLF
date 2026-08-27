@@ -1,13 +1,44 @@
 ---
-import { useTranslations } from "../i18n/utils";
+import { getLang, useTranslations } from "../i18n/utils";
+import { SITE } from "../i18n/seo";
+
 const t = useTranslations(Astro.currentLocale);
+const lang = getLang(Astro.currentLocale);
 
 const testimonials = [
   { id: 1, quote: t("testimonials.t1.quote"), author: "Tim B.", location: "TripAdvisor", rating: 5 },
   { id: 2, quote: t("testimonials.t2.quote"), author: "David M.", location: "Google", rating: 5 },
   { id: 3, quote: t("testimonials.t3.quote"), author: "Ian", location: "Booking.com", rating: 5 },
 ];
+
+/**
+ * Reseñas individuales marcadas como `Review` y enlazadas al hotel.
+ *
+ * Esta es la forma admitida de publicar señal de reseñas: reseñas concretas,
+ * con autor y origen. Es lo que sustituye al `aggregateRating` auto-declarado
+ * que se retiró de seo.ts (ver la nota allí).
+ */
+const reviewGraph = {
+  "@context": "https://schema.org",
+  "@graph": testimonials.map((r) => ({
+    "@type": "Review",
+    "@id": `${SITE}/#review-${r.id}`,
+    itemReviewed: { "@id": `${SITE}/#hotel` },
+    author: { "@type": "Person", name: r.author },
+    publisher: { "@type": "Organization", name: r.location },
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: String(r.rating),
+      bestRating: "5",
+      worstRating: "1",
+    },
+    reviewBody: r.quote,
+    inLanguage: lang === "en" ? "en-US" : "es-CR",
+  })),
+};
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(reviewGraph)} />
 
 <section class="testimonials-section">
 	<div class="testimonials-inner">
@@ -73,7 +104,7 @@ const testimonials = [
 
 <script>
 	let currentSlide = 0;
-	const track = document.querySelector('[data-testimonial-track]');
+	const track = document.querySelector<HTMLElement>('[data-testimonial-track]');
 	const cards = document.querySelectorAll('.testimonial-card');
 	const prevBtn = document.querySelector('[data-testimonial-prev]');
 	const nextBtn = document.querySelector('[data-testimonial-next]');
@@ -81,7 +112,7 @@ const testimonials = [
 
 	const totalSlides = cards.length;
 
-	const updateSlide = (index) => {
+	const updateSlide = (index: number) => {
 		currentSlide = (index + totalSlides) % totalSlides;
 		
 		if (track) {

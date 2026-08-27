@@ -70,17 +70,19 @@ const structuredData = {
 
 <script>
 	// Enhance FAQ interactivity
-	document.querySelectorAll(".faq-item").forEach((item) => {
+	document.querySelectorAll<HTMLDetailsElement>(".faq-item").forEach((item) => {
 		const summary = item.querySelector(".faq-question");
 		if (summary) {
-			summary.addEventListener("click", (e) => {
+			summary.addEventListener("click", () => {
 				// Close other open items for a better mobile experience
 				if (item.open) {
-					document.querySelectorAll(".faq-item[open]").forEach((other) => {
-						if (other !== item) {
-							other.open = false;
-						}
-					});
+					document
+						.querySelectorAll<HTMLDetailsElement>(".faq-item[open]")
+						.forEach((other) => {
+							if (other !== item) {
+								other.open = false;
+							}
+						});
 				}
 			});
 		}

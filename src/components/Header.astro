@@ -1,7 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import logoBlanco from "../assets/logoBlancoDowntown.png";
 import logoNegro from "../assets/logonegro.png";
-import { useTranslations } from "../i18n/utils";
+import { altPath, getLang, useTranslations } from "../i18n/utils";
 
 const t = useTranslations(Astro.currentLocale);
 
@@ -19,8 +20,10 @@ const linksRight = [
 ];
 
 const homeHref = t("header.home.href");
-const currentLang = Astro.currentLocale ?? "es";
-const switchHref = currentLang === "es" ? "/en" : "/";
+const currentLang = getLang(Astro.currentLocale);
+// Conserva la página actual al cambiar de idioma. Antes mandaba siempre al home,
+// perdiendo el contexto en todas las páginas internas.
+const switchHref = altPath(Astro.url.pathname, currentLang === "es" ? "en" : "es");
 const switchLabel = t("lang.switch.label");
 const switchAria = t("lang.switch.aria");
 ---
@@ -36,21 +39,23 @@ const switchAria = t("lang.switch.aria");
     </nav>
 
     <a href={homeHref} class="header-brand" aria-label={t("header.aria.brand")}>
-      <img
-        src={logoBlanco.src}
+      <Image
+        src={logoBlanco}
         alt="La Fortuna Downtown"
         class="header-logo header-logo--light"
+        width={160}
+        height={64}
+        densities={[1, 2]}
         loading="eager"
-        width="160"
-        height="64"
       />
-      <img
-        src={logoNegro.src}
+      <Image
+        src={logoNegro}
         alt="La Fortuna Downtown"
         class="header-logo header-logo--dark"
+        width={160}
+        height={64}
+        densities={[1, 2]}
         loading="eager"
-        width="160"
-        height="64"
         aria-hidden="true"
       />
     </a>
@@ -61,7 +66,11 @@ const switchAria = t("lang.switch.aria");
       ))}
 
       <div class="header-cta-wrap">
-        <p class="header-social-proof" aria-label="Calificación 4.9 en Booking">
+        <!-- Sin aria-label: el texto visible ya es el nombre accesible. El que
+             había ("Calificación 4.9 en Booking") estaba hardcodeado en español,
+             contradecía el 8.1/10 que muestra el resto del sitio, y no describía
+             este badge, que habla del mejor precio directo. -->
+        <p class="header-social-proof">
           <span class="header-star" aria-hidden="true">★</span>
           {t("header.social.proof").replace("★ ", "")}
         </p>
@@ -79,21 +88,23 @@ const switchAria = t("lang.switch.aria");
   <div class="site-header-mobile">
 
     <a href={homeHref} class="header-brand" aria-label={t("header.aria.brand")}>
-      <img
-        src={logoBlanco.src}
+      <Image
+        src={logoBlanco}
         alt="La Fortuna Downtown"
         class="header-logo header-logo--light"
+        width={120}
+        height={48}
+        densities={[1, 2]}
         loading="eager"
-        width="120"
-        height="48"
       />
-      <img
-        src={logoNegro.src}
+      <Image
+        src={logoNegro}
         alt="La Fortuna Downtown"
         class="header-logo header-logo--dark"
+        width={120}
+        height={48}
+        densities={[1, 2]}
         loading="eager"
-        width="120"
-        height="48"
         aria-hidden="true"
       />
     </a>
@@ -296,131 +307,6 @@ const switchAria = t("lang.switch.aria");
 </script>
 
 <style>
-/* ── TEMPORADA VERDE ───────────────────────────────────────── */
-.header-season {
-  position: relative;
-  overflow: visible;
-  padding: 0.3rem 0.7rem;
-  border-radius: 4px;
-  letter-spacing: 0.13em;
-  white-space: nowrap;
-  transition: color 0.3s ease, background 0.3s ease;
-}
-
-.header-season:hover {
-  color: #a8e6b3 !important;
-  background: rgba(42, 90, 50, 0.25);
-}
-
-.season-text {
-  position: relative;
-  z-index: 2;
-}
-
-/* Color de hojas según estado del header */
-.header-season { color: #e8d5a0; } /* crema dorado — visible sobre fondo oscuro */
-.site-header.is-scrolled .header-season { color: rgba(255,255,255,0.95); } /* blanco — visible sobre verde sólido */
-
-/* ── Hojas ── */
-.season-flora {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.season-leaf {
-  position: absolute;
-  bottom: -100%;
-  width: 18px;
-  opacity: 0;
-  transform-origin: bottom center;
-  transition: none;
-}
-
-.season-leaf--1 { left: 15%; width: 16px; }
-.season-leaf--2 { left: 45%; width: 14px; }
-.season-leaf--3 { left: 72%; width: 13px; }
-
-.header-season:hover .season-leaf--1 {
-  animation: leafRise 0.5s ease-out 0.05s forwards, leafSway 2s ease-in-out 0.55s infinite;
-}
-.header-season:hover .season-leaf--2 {
-  animation: leafRise 0.5s ease-out 0.18s forwards, leafSway 2.2s ease-in-out 0.68s infinite alternate;
-}
-.header-season:hover .season-leaf--3 {
-  animation: leafRise 0.5s ease-out 0.1s forwards, leafSway 1.9s ease-in-out 0.6s infinite alternate-reverse;
-}
-
-@keyframes leafRise {
-  from { bottom: -100%; opacity: 0; }
-  to   { bottom: -2px;  opacity: 1; }
-}
-
-@keyframes leafSway {
-  0%   { transform: rotate(-6deg); }
-  50%  { transform: rotate(6deg);  }
-  100% { transform: rotate(-6deg); }
-}
-
-/* ── Lluvia ── */
-.season-rain {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.rain-drop {
-  position: absolute;
-  top: -8px;
-  width: 1.5px;
-  height: 8px;
-  border-radius: 2px;
-  background: rgba(140, 210, 255, 0.7);
-  opacity: 0;
-}
-
-/* Posiciones X de cada gota */
-.rain-drop--1  { left: 8%;  }
-.rain-drop--2  { left: 18%; }
-.rain-drop--3  { left: 29%; }
-.rain-drop--4  { left: 41%; }
-.rain-drop--5  { left: 55%; }
-.rain-drop--6  { left: 67%; }
-.rain-drop--7  { left: 79%; }
-.rain-drop--8  { left: 90%; }
-
-.header-season:hover .rain-drop { animation: rainFall 0.8s linear infinite; }
-.header-season:hover .rain-drop--1  { animation-delay: 0s;    }
-.header-season:hover .rain-drop--2  { animation-delay: 0.15s; }
-.header-season:hover .rain-drop--3  { animation-delay: 0.30s; }
-.header-season:hover .rain-drop--4  { animation-delay: 0.05s; }
-.header-season:hover .rain-drop--5  { animation-delay: 0.22s; }
-.header-season:hover .rain-drop--6  { animation-delay: 0.40s; }
-.header-season:hover .rain-drop--7  { animation-delay: 0.12s; }
-.header-season:hover .rain-drop--8  { animation-delay: 0.35s; }
-
-@keyframes rainFall {
-  0%   { top: -8px;  opacity: 0;   }
-  10%  { opacity: 0.8; }
-  90%  { opacity: 0.6; }
-  100% { top: 110%;  opacity: 0;   }
-}
-
-/* ── Móvil ── */
-.site-mobile-season {
-  color: #6dbf7e !important;
-  font-style: normal;
-}
-
 .header-lang-switch,
 .site-mobile-lang-switch {
   font-size: 0.75rem;

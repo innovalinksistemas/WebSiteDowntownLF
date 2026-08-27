@@ -1,13 +1,29 @@
 ---
 import { useTranslations } from "../i18n/utils";
+import { icon, ICON_VIEWBOX } from "../lib/icons";
+
 const t = useTranslations(Astro.currentLocale);
 
+/**
+ * Amenidades destacadas.
+ *
+ * `key` es la clave del diccionario (semántica, no "01".."08", para poder
+ * reordenar sin renumerar) e `icon` es el archivo de src/assets/icons.
+ *
+ * Nota: carga-electrica.svg existe pero no se usa — la carga para vehículos
+ * eléctricos se menciona dentro del texto de Parqueo Privado, no como amenidad
+ * propia. Si se quisiera destacar aparte, el icono ya está listo.
+ */
 const amenities = [
-  { id: "01", title: t("amenities.01.title"), description: t("amenities.01.desc") },
-  { id: "02", title: t("amenities.02.title"), description: t("amenities.02.desc") },
-  { id: "03", title: t("amenities.03.title"), description: t("amenities.03.desc") },
-  { id: "04", title: t("amenities.04.title"), description: t("amenities.04.desc") },
-];
+  { key: "location", icon: "ubicacion" },
+  { key: "pool", icon: "piscina" },
+  { key: "dining", icon: "restaurante" },
+  { key: "breakfast", icon: "room-service" },
+  { key: "parking", icon: "estacionamiento" },
+  { key: "wifi", icon: "wifi" },
+  { key: "concierge", icon: "concierge" },
+  { key: "frontdesk", icon: "recepcion" },
+] as const;
 ---
 
 <section id="bienestar" class="amenities-section">
@@ -23,53 +39,17 @@ const amenities = [
 				amenities.map((amenity, index) => (
 					<article class={`amenity-card ${index % 2 === 1 ? "amenity-card-shift" : ""}`}>
 						<div class="amenity-icon-wrap" aria-hidden="true">
-							{
-								amenity.id === "01" && (
-									<svg viewBox="0 0 24 24" class="amenity-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-										<rect width="18" height="18" x="3" y="3" rx="2" />
-										<path d="M9 17V7h4a3 3 0 0 1 0 6H9" />
-									</svg>
-								)
-							}
-
-							{
-								amenity.id === "02" && (
-									<svg viewBox="0 0 24 24" class="amenity-icon">
-										<path
-											d="M3.75 9.6a12.6 12.6 0 0 1 16.5 0M6.7 12.55a8.25 8.25 0 0 1 10.6 0M9.55 15.45a4 4 0 0 1 4.9 0M12 18.15h.01"
-											fill="none"
-											stroke="currentColor"
-											stroke-width="1.8"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-										></path>
-									</svg>
-								)
-							}
-
-							{
-								amenity.id === "03" && (
-									<svg viewBox="0 0 24 24" class="amenity-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-										<path d="M8 22h8" />
-										<path d="M12 11v11" />
-										<path d="m19 3-7 8-7-8Z" />
-									</svg>
-								)
-							}
-
-							{
-								amenity.id === "04" && (
-									<svg viewBox="0 0 24 24" class="amenity-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-										<path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.6 2 5 2s2.4-2 5-2" />
-										<path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.6 2 5 2s2.4-2 5-2" />
-										<path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.6 2 5 2s2.4-2 5-2" />
-									</svg>
-								)
-							}
+							{/* Iconos de relleno: el color lo hereda de .amenity-icon-wrap. */}
+							<svg
+								viewBox={ICON_VIEWBOX}
+								class="amenity-icon"
+								fill="currentColor"
+								set:html={icon(amenity.icon)}
+							/>
 						</div>
 
-						<h3 class="amenity-title">{amenity.title}</h3>
-						<p class="amenity-description">{amenity.description}</p>
+						<h3 class="amenity-title">{t(`amenities.${amenity.key}.title`)}</h3>
+						<p class="amenity-description">{t(`amenities.${amenity.key}.desc`)}</p>
 					</article>
 				))
 			}
