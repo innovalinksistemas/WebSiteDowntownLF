@@ -40,7 +40,8 @@
 	cursor: pointer;
 	display: block;
 }
-.yt-facade-thumb {
+/* Especificidad mayor que .about-us-media img, que fija una altura propia. */
+.yt-facade .yt-facade-thumb {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
