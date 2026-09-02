@@ -4,6 +4,17 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
+  /*
+   * Paquetes de temporada retirados (vencieron en agosto de 2026). Las páginas
+   * siguen en src/pages con prefijo "_" para reactivarlas con fechas nuevas.
+   * public/_redirects hace el 301 en Cloudflare; esto es el respaldo estático.
+   */
+  redirects: {
+    "/baldi": "/",
+    "/ecotermales": "/",
+    "/en/baldi": "/en/",
+    "/en/ecotermales": "/en/",
+  },
   site: "https://lafortunadowntown.com",
   i18n: {
     defaultLocale: "es",
@@ -21,7 +32,9 @@ export default defineConfig({
       changefreq: "weekly",
       lastmod: new Date(),
       // Las 404 no deben aparecer en el sitemap.
-      filter: (page) => !/\/404\/?$/.test(new URL(page).pathname),
+      filter: (page) =>
+        !/\/404\/?$/.test(new URL(page).pathname) &&
+        !/\/(baldi|ecotermales)\/?$/.test(new URL(page).pathname),
       serialize(item) {
         const path = new URL(item.url).pathname.replace(/^\/en/, "") || "/";
         // La home y las landings de paquetes son las que compiten por

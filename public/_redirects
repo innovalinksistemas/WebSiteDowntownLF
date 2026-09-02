@@ -1,0 +1,11 @@
+# Paquetes de temporada retirados (vencieron el 30/31 de agosto de 2026).
+# Cuando vuelvan a activarse, eliminar estas líneas y restaurar las páginas
+# src/pages/_baldi.astro, _ecotermales.astro y sus versiones en /en.
+/baldi            /      301
+/baldi/           /      301
+/ecotermales      /      301
+/ecotermales/     /      301
+/en/baldi         /en/   301
+/en/baldi/        /en/   301
+/en/ecotermales   /en/   301
+/en/ecotermales/  /en/   301

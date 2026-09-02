@@ -62,21 +62,16 @@ Seis espacios entre gastronomía, coctelería y arte, todos dentro del hotel:
 - Aplican políticas estacionales especiales en temporada alta
 - Mejor precio garantizado en reserva directa, sin gastos ocultos
 
-## Paquetes vigentes
+## Paquetes y promociones
 
-- **Hospedaje + Baldi Hot Springs** — ₡60.000 i.i. por persona en ocupación doble. Niños 6–10: ₡35.000. Niños 0–5: gratis. Incluye 1 noche, pase del día a Baldi (10:00–22:00, 25 piscinas), desayuno, almuerzo y cena buffet, bebida de bienvenida y cocteles 2×1. Válido del 1 de julio al 31 de agosto de 2026.
-- **Hospedaje + Ecotermales** — ₡135.000 por pareja en ocupación doble. Tercera o cuarta persona: ₡50.000. Niños 5–11: ₡27.500. Niños 0–4: gratis. Incluye 1 noche, entrada a Ecotermales, desayuno, bebida de bienvenida y cocteles 2×1. Válido del 1 de junio al 30 de agosto de 2026.
-
-Ambos paquetes son ofertas para nacionales y residentes de Costa Rica, se cotizan en colones y se reservan por WhatsApp. Las fechas de validez son las publicadas en el sitio; conviene confirmarlas antes de citarlas.
+Las promociones son de temporada y se anuncian en la portada (sección "Ofertas") y por WhatsApp. Los paquetes con Baldi Hot Springs y Ecotermales del verano 2026 finalizaron el 31 de agosto; no citar sus precios ni fechas. En setiembre de 2026 está vigente la "Escapada de Setiembre": una noche, aguas termales y desayuno por ₡60.000 por persona en ocupación doble, hasta el 30 de setiembre de 2026, para nacionales y residentes, reserva por WhatsApp.
 
 ## Páginas
 
-- [Inicio](https://lafortunadowntown.com/): habitaciones, servicios, restaurantes y paquetes
+- [Inicio](https://lafortunadowntown.com/): habitaciones, servicios, restaurantes y ofertas de temporada
 - [Guía de Arenal Fortuna](https://lafortunadowntown.com/arenal-fortuna/): qué es el destino, qué ver y hacer, cómo llegar, cuándo ir y dónde dormir
 - [Preguntas frecuentes](https://lafortunadowntown.com/faq/): clima del volcán, traslados, agua potable, cancelaciones, desayuno, parqueo, seguridad
 - [Galería](https://lafortunadowntown.com/galeria/): fotos del hotel, habitaciones, restaurantes y actividades
-- [Paquete Baldi Hot Springs](https://lafortunadowntown.com/baldi/): hospedaje + pase del día a Baldi
-- [Paquete Ecotermales](https://lafortunadowntown.com/ecotermales/): hospedaje + entrada a Ecotermales
 
 ## English
 
@@ -86,8 +81,6 @@ Every page has an English version under `/en/`:
 - [Arenal Fortuna destination guide](https://lafortunadowntown.com/en/arenal-fortuna/) — what the destination is, what to see and do, how to get there, when to go, where to stay
 - [FAQ](https://lafortunadowntown.com/en/faq/) — volcano weather, transfers, drinking water, cancellations, breakfast, parking, safety
 - [Gallery](https://lafortunadowntown.com/en/gallery/) — hotel, rooms, restaurants and activities
-- [Baldi Hot Springs package](https://lafortunadowntown.com/en/baldi/) — stay + Baldi day pass
-- [Ecotermales package](https://lafortunadowntown.com/en/ecotermales/) — stay + Ecotermales admission
 
 Note the gallery slug differs by language: `/galeria/` in Spanish, `/en/gallery/` in English.
 

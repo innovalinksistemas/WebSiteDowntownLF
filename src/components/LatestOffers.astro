@@ -7,6 +7,7 @@ import imgPuentes from "../assets/offers/puentes.jpg";
 import imgRafting from "../assets/offers/rafting.jpg";
 
 const t = useTranslations(Astro.currentLocale);
+const sbLang = Astro.currentLocale === "en" ? "EN" : "ES";
 
 /** Anchos reales de la card en .latest-offers-grid. */
 const OFFER_SIZES = "(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 24vw";
@@ -17,28 +18,28 @@ const packages = [
     subtitle: t("offers.p1.subtitle"),
     description: t("offers.p1.desc"),
     image: imgRomantico1,
-    href: "https://www.simplebooking.it/ibe2/hotel/9184/package/70564?lang=EN&cur=USD",
+    href: `https://www.simplebooking.it/ibe2/hotel/9184/package/70564?lang=${sbLang}&cur=USD`,
   },
   {
     title: t("offers.p2.title"),
     subtitle: t("offers.p2.subtitle"),
     description: t("offers.p2.desc"),
     image: imgRomantico2,
-    href: "https://www.simplebooking.it/ibe2/hotel/9184/package/70563?lang=EN&cur=USD",
+    href: `https://www.simplebooking.it/ibe2/hotel/9184/package/70563?lang=${sbLang}&cur=USD`,
   },
   {
     title: t("offers.p3.title"),
     subtitle: t("offers.p3.subtitle"),
     description: t("offers.p3.desc"),
     image: imgPuentes,
-    href: "https://www.simplebooking.it/ibe2/hotel/9184/package/70571?lang=EN&cur=USD",
+    href: `https://www.simplebooking.it/ibe2/hotel/9184/package/70571?lang=${sbLang}&cur=USD`,
   },
   {
     title: t("offers.p4.title"),
     subtitle: t("offers.p4.subtitle"),
     description: t("offers.p4.desc"),
     image: imgRafting,
-    href: "https://www.simplebooking.it/ibe2/hotel/9184/package/70572?lang=EN",
+    href: `https://www.simplebooking.it/ibe2/hotel/9184/package/70572?lang=${sbLang}`,
   },
 ];
 ---

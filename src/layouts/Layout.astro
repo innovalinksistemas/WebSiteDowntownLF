@@ -1,4 +1,5 @@
 ---
+import Tracking, { GTM_ID } from "../components/Tracking.astro";
 import { Font } from "astro:assets";
 import Header from "../components/Header.astro";
 import PromoPopup from "../components/PromoPopup.astro";
@@ -69,6 +70,8 @@ const showPromo = promoPopup && promoIsActive();
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#b90024" />
 
+    <Tracking />
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -133,6 +136,15 @@ const showPromo = promoPopup && promoIsActive();
     <slot name="head" />
   </head>
   <body class={`${headerSolid ? "header-solid" : ""}${bookingBar ? " has-booking-bar" : ""}`.trim()}>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <a class="skip-link" href="#contenido">
       {lang === "en" ? "Skip to content" : "Saltar al contenido"}
     </a>

@@ -30,8 +30,7 @@ export const ROUTE_MAP: Record<string, string> = {
   "/arenal-fortuna": "/en/arenal-fortuna",
   "/faq": "/en/faq",
   "/galeria": "/en/gallery",
-  "/baldi": "/en/baldi",
-  "/ecotermales": "/en/ecotermales",
+
 };
 
 const EN_TO_ES: Record<string, string> = Object.fromEntries(
