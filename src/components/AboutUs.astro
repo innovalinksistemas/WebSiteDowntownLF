@@ -1,5 +1,9 @@
 ---
+import { Picture } from "astro:assets";
 import { useTranslations } from "../i18n/utils";
+// Fotograma del video (1280×720) auto-hospedado: nítido en cualquier tamaño y
+// sin pedir nada a YouTube hasta que el visitante pulsa reproducir.
+import videoPoster from "../assets/video/hotel-video-poster.jpg";
 const t = useTranslations(Astro.currentLocale);
 const VIDEO_ID = "c8maA-QJGYc";
 ---
@@ -56,12 +60,16 @@ const VIDEO_ID = "c8maA-QJGYc";
         data-yt-title={t("about.video.title")}
       >
         <button type="button" class="yt-facade-btn" aria-label={t("about.video.play")}>
-          <img
-            class="yt-facade-thumb"
-            src={`https://i.ytimg.com/vi/${VIDEO_ID}/hqdefault.jpg`}
+          <Picture
+            src={videoPoster}
             alt=""
-            width="480"
-            height="360"
+            class="yt-facade-thumb"
+            pictureAttributes={{ class: "yt-facade-picture" }}
+            widths={[640, 960, 1280]}
+            sizes="(max-width: 900px) 92vw, 87rem"
+            formats={["avif", "webp"]}
+            fallbackFormat="jpeg"
+            layout="none"
             loading="lazy"
             decoding="async"
           />
