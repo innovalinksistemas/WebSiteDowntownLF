@@ -4033,9 +4033,11 @@ body.menu-open {
 	}
 }
 
-/* Objetivo táctil ≥ 44px para "Ver más" en las tarjetas de habitación. */
+/* Objetivo táctil ≥ 44px para "Ver más" en las tarjetas de habitación.
+   El padding vertical amplía la zona de toque sin mover el texto; el margen
+   inferior separa el botón Reservar del enlace. */
 .room-read-link {
 	display: inline-block;
 	padding: 0.55rem 0;
-	margin: -0.55rem 0;
+	margin: -0.55rem 0 1.15rem;
 }
