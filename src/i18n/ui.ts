@@ -139,7 +139,7 @@ export const ui = {
     // ── Restaurants
     "restaurants.section.kicker": "Nuestros Espacios",
     "restaurants.section.title": "Espacios que Completan tu Estadía",
-    "restaurants.section.desc": "Gastronomía, coctelería y arte dentro del hotel. Seis espacios con identidad propia, a unos pasos de tu habitación y sin necesidad de salir.",
+    "restaurants.section.desc": "Gastronomía, mixología, arte y experiencias dentro del hotel. Seis espacios con identidad propia, a unos pasos de tu habitación y sin necesidad de salir del hotel.",
     "restaurants.cta": "Ver menú",
     /** Nuwa es galería de arte, no tiene carta: su CTA lleva al Instagram. */
     "restaurants.cta.gallery": "Ver la galería",
@@ -459,7 +459,7 @@ export const ui = {
     // ── Restaurants
     "restaurants.section.kicker": "Our Spaces",
     "restaurants.section.title": "Spaces That Complete Your Stay",
-    "restaurants.section.desc": "Dining, cocktails and art inside the hotel. Six spaces with their own identity, steps from your room and without going out.",
+    "restaurants.section.desc": "Dining, mixology, art and experiences inside the hotel. Six spaces with their own identity, steps from your room and with no need to leave the hotel.",
     "restaurants.cta": "View menu",
     "restaurants.cta.gallery": "See the gallery",
     "restaurants.r1.name": "María Bonita Steak House",
