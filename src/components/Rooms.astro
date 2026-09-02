@@ -204,8 +204,15 @@ const roomsPayload = await Promise.all(
 <script type="application/json" id="rooms-data" set:html={JSON.stringify(roomsPayload)}></script>
 
 <script>
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { whenNear } from "../lib/whenNear";
+
+// GSAP se carga bajo demanda cuando la sección se acerca al viewport (ver
+// src/lib/whenNear.ts); así no entra en la cadena crítica del primer render.
+whenNear("#habitaciones", async () => {
+const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+  import("gsap"),
+  import("gsap/ScrollTrigger"),
+]);
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -500,5 +507,7 @@ mainImg.addEventListener("touchstart", (e) => { touchX = e.touches[0].clientX; }
 mainImg.addEventListener("touchend", (e) => {
   const delta = touchX - e.changedTouches[0].clientX;
   if (Math.abs(delta) > 50) navImg(delta > 0 ? 1 : -1);
+});
+
 });
 </script>

@@ -1,6 +1,7 @@
 ---
 import { useTranslations } from "../i18n/utils";
 const t = useTranslations(Astro.currentLocale);
+const VIDEO_ID = "c8maA-QJGYc";
 ---
 
 <section id="explorar" class="about-us-section">
@@ -45,15 +46,43 @@ const t = useTranslations(Astro.currentLocale);
     </div>
 
     <figure class="about-us-media">
-      <div class="responsive-iframe-container">
-        <iframe
-          src="https://www.youtube.com/embed/c8maA-QJGYc"
-          title={t("about.video.title")}
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen></iframe>
+      <!--
+        Fachada: el iframe de YouTube (~1 MB de JS, cookies y fuentes de
+        terceros) solo se inyecta cuando el visitante pulsa reproducir.
+      -->
+      <div
+        class="responsive-iframe-container yt-facade"
+        data-yt-id={VIDEO_ID}
+        data-yt-title={t("about.video.title")}
+      >
+        <button type="button" class="yt-facade-btn" aria-label={t("about.video.play")}>
+          <img
+            class="yt-facade-thumb"
+            src={`https://i.ytimg.com/vi/${VIDEO_ID}/hqdefault.jpg`}
+            alt=""
+            width="480"
+            height="360"
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="yt-facade-play" aria-hidden="true"></span>
+        </button>
       </div>
     </figure>
   </div>
 </section>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".yt-facade").forEach((box) => {
+    box.querySelector("button")?.addEventListener("click", () => {
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube-nocookie.com/embed/${box.dataset.ytId}?autoplay=1&rel=0`;
+      iframe.title = box.dataset.ytTitle ?? "";
+      iframe.allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.allowFullscreen = true;
+      iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+      box.replaceChildren(iframe);
+    });
+  });
+</script>

@@ -40,7 +40,7 @@ const t = useTranslations(Astro.currentLocale);
   <div class="hero-content relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col justify-center px-6 text-center sm:px-10">
 
 
-    <p class="hero-kicker hero-anim mb-2">
+    <p class="hero-kicker hero-anim mb-2" style={`--hero-i:0`}>
       {t("hero.kicker")}
     </p>
 
@@ -58,7 +58,7 @@ const t = useTranslations(Astro.currentLocale);
   
 
     
-    <div class="hero-trust hero-anim mb-4" aria-label={t("hero.trust.aria")}>
+    <div class="hero-trust hero-anim mb-4" aria-label={t("hero.trust.aria")} style={`--hero-i:1`}>
       <div class="hero-trust-inner">
 
         
@@ -105,7 +105,7 @@ const t = useTranslations(Astro.currentLocale);
     </div>
 
 
-    <div class="hero-actions hero-anim flex flex-col items-center justify-center gap-3 sm:flex-row">
+    <div class="hero-actions hero-anim flex flex-col items-center justify-center gap-3 sm:flex-row" style={`--hero-i:2`}>
 
       <!--
         Solo móvil (ver .hero-btn-book en global.css). Es el espejo exacto de
@@ -133,7 +133,7 @@ const t = useTranslations(Astro.currentLocale);
     </div>
 
     
-    <p class="hero-microcopy hero-anim mt-4">
+    <p class="hero-microcopy hero-anim mt-4" style={`--hero-i:3`}>
       {t("hero.microcopy")}
     </p>
 
@@ -143,7 +143,7 @@ const t = useTranslations(Astro.currentLocale);
   <div
     class="hero-status hero-anim absolute bottom-8 left-6 z-10 flex items-center gap-3"
     aria-label="Condiciones actuales en La Fortuna"
-  >
+   style={`--hero-i:4`}>
     <div class="hero-status-line" aria-hidden="true"></div>
     <div>
       <p class="hero-status-label">{t("hero.weather.label")}</p>
@@ -155,7 +155,7 @@ const t = useTranslations(Astro.currentLocale);
   </div>
 
   
-  <div class="hero-scroll-indicator hero-anim absolute bottom-8 left-1/2 z-10 -translate-x-1/2 hidden flex-col items-center gap-1 sm:flex" aria-hidden="true">
+  <div class="hero-scroll-indicator hero-anim absolute bottom-8 left-1/2 z-10 -translate-x-1/2 hidden flex-col items-center gap-1 sm:flex" aria-hidden="true" style={`--hero-i:5`}>
     <span class="hero-scroll-label">Scroll</span>
     <span class="hero-scroll-arrow"></span>
   </div>
@@ -164,7 +164,6 @@ const t = useTranslations(Astro.currentLocale);
 
 
 <script>
-  import { gsap } from "gsap";
 
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -172,33 +171,12 @@ const t = useTranslations(Astro.currentLocale);
   // (clima y disponibilidad). Layout ya emite lang="es" o lang="en" en <html>.
   const isEN = document.documentElement.lang.startsWith("en");
 
-  /* ─── Animación de entrada ───────────────────────────── */
-  if (!reduced) {
-    // Estado inicial: todo invisible y desplazado
-    gsap.set(".hero-anim", { opacity: 0, y: 28 });
-
-    // Ken Burns mejorado: escala + deriva leve → más cinematográfico
-    gsap.to(".hero-bg", {
-      scale: 1.08,
-      x: "-2%",
-      y: "-1%",
-      duration: 14,
-      ease: "none", // lineal = más cinematográfico para parallax lento
-    });
-
-    // Entrada escalonada del contenido
-    gsap.to(".hero-anim", {
-      opacity: 1,
-      y: 0,
-      duration: 1.1,
-      ease: "power3.out",
-      stagger: 0.14,
-      delay: 0.15,
-    });
-  } else {
-    // Sin animación: mostrar todo inmediatamente
-    gsap.set(".hero-anim", { opacity: 1, y: 0 });
-  }
+  /* ─── Animaciones ─────────────────────────────────────
+     Entrada del contenido, Ken Burns del fondo, parpadeo de los puntos "en
+     vivo" y rebote de la flecha viven en CSS (global.css, buscar hero-anim).
+     Arrancan en el primer pintado sin esperar JavaScript y respetan
+     prefers-reduced-motion. Antes dependían de GSAP (69 KB) en la cadena
+     crítica del LCP. */
 
   /* ─── Clima en tiempo real — Open Meteo, caché 6 h ─── */
   (() => {
@@ -322,26 +300,4 @@ const t = useTranslations(Astro.currentLocale);
     }
   })();
 
-  /* ─── Urgency dot: parpadeo de "en vivo" ────────────── */
-  if (!reduced) {
-    gsap.to(".hero-urgency-dot, .hero-live-dot", {
-      opacity: 0.3,
-      duration: 0.9,
-      ease: "power1.inOut",
-      yoyo: true,
-      repeat: -1,
-    });
-  }
-
-  /* ─── Scroll indicator: bounce suave ────────────────── */
-  if (!reduced) {
-    gsap.to(".hero-scroll-arrow", {
-      y: 5,
-      duration: 0.8,
-      ease: "power1.inOut",
-      yoyo: true,
-      repeat: -1,
-      delay: 2,
-    });
-  }
 </script>

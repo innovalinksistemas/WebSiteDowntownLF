@@ -75,8 +75,15 @@ const [titleLine1, titleLine2] = t("tropic.title").split("\n");
 </section>
 
 <script>
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { whenNear } from "../lib/whenNear";
+
+// GSAP se carga bajo demanda cuando la sección se acerca al viewport (ver
+// src/lib/whenNear.ts); así no entra en la cadena crítica del primer render.
+whenNear("#tours-top", async () => {
+const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+  import("gsap"),
+  import("gsap/ScrollTrigger"),
+]);
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -122,4 +129,6 @@ if (!reduced) {
 } else {
   gsap.set(".tropic-anim", { opacity: 1, x: 0 });
 }
+
+});
 </script>

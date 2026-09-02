@@ -208,8 +208,15 @@ const restaurants = [
 </section>
 
 <script>
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { whenNear } from "../lib/whenNear";
+
+// GSAP se carga bajo demanda cuando la sección se acerca al viewport (ver
+// src/lib/whenNear.ts); así no entra en la cadena crítica del primer render.
+whenNear("#gastronomia", async () => {
+const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+  import("gsap"),
+  import("gsap/ScrollTrigger"),
+]);
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -358,4 +365,6 @@ if (!reduced) {
   gsap.set(".rest-head-anim", { opacity: 1, y: 0, scaleX: 1 });
   gsap.set(cards, { opacity: 1, y: 0 });
 }
+
+});
 </script>

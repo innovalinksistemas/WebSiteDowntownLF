@@ -70,7 +70,6 @@ const showPromo = promoPopup && promoIsActive();
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#b90024" />
 
-    <Tracking />
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -125,13 +124,16 @@ const showPromo = promoPopup && promoIsActive();
     <!-- Fuentes auto-hospedadas: sin preconnect ni hoja de estilos remota en el
          camino crítico. `preload` solo en las dos que se usan above-the-fold. -->
     <Font cssVariable="--font-manrope" preload />
-    <Font cssVariable="--font-cormorant" />
+    <Font cssVariable="--font-cormorant" preload />
+    <Font cssVariable="--font-cormorant-italic" />
     <Font cssVariable="--font-great-vibes" />
 
     <!-- El widget de reservas se inyecta al inicio del <body> en el home. -->
     {bookingBar && <link rel="preconnect" href="https://cdn.simplebooking.it" crossorigin />}
 
     <meta name="generator" content={Astro.generator} />
+
+    <Tracking />
 
     <slot name="head" />
   </head>

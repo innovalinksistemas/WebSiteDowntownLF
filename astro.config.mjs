@@ -65,7 +65,19 @@ export default defineConfig({
       // Solo subset `latin`: ya cubre los acentos del español (á é í ó ú ñ ¿ ¡).
       // `latin-ext` duplicaría los archivos sin aportar nada aquí.
       weights: [400, 500, 600],
-      styles: ["normal", "italic"],
+      // Solo la redonda: es la del H1 (LCP) y se precarga. La cursiva va en
+      // una entrada aparte para no precargar 39 KB que el primer pintado no
+      // necesita (ver --font-cormorant-italic).
+      styles: ["normal"],
+      subsets: ["latin"],
+      fallbacks: ["Georgia", "Times New Roman", "serif"],
+    },
+    {
+      provider: fontProviders.google(),
+      name: "Cormorant Garamond",
+      cssVariable: "--font-cormorant-italic",
+      weights: [400, 500, 600],
+      styles: ["italic"],
       subsets: ["latin"],
       fallbacks: ["Georgia", "Times New Roman", "serif"],
     },
@@ -105,6 +117,15 @@ export default defineConfig({
         jpeg: { quality: 78, progressive: true, mozjpeg: true },
       },
     },
+  },
+  build: {
+    /*
+     * El CSS global es un solo archivo de ~135 KB (≈20 KB con brotli) y era
+     * el único recurso que bloqueaba el render. Inline evita ese viaje de ida
+     * y vuelta antes del primer pintado; se pierde la caché entre páginas,
+     * irrelevante para un sitio con una landing principal.
+     */
+    inlineStylesheets: "always",
   },
   vite: {
     plugins: [tailwindcss()],
