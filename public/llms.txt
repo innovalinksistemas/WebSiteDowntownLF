@@ -36,12 +36,12 @@
 
 ## Habitaciones
 
-- **DownTown Standard Doble** — 1 cama matrimonial
-- **DownTown Standard Triple** — 1 matrimonial + 1 individual
-- **DownTown Superior** — 1 cama queen
+- **Downtown Standard Doble** — 1 cama matrimonial
+- **Downtown Standard Triple** — 1 matrimonial + 1 individual
+- **Downtown Superior** — 1 cama queen, vista a la iglesia y al Parque Central
 - **Tropical Family** — 2 matrimoniales o 1 matrimonial + 2 individuales, vista a la piscina
-- **DownTown Confort** — 1 cama king
-- **DownTown Confort Family** — 1 king + 2 individuales, hasta 5 personas
+- **Downtown Confort** — 1 cama king
+- **Downtown Confort Family** — 1 king + 2 individuales, hasta 5 personas
 
 Nota: los pisos superiores se acceden solo por escaleras.
 

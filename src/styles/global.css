@@ -1172,6 +1172,10 @@ body.menu-open {
 	color: rgba(45, 42, 38, 0.82);
 }
 
+.about-us-copy + .about-us-copy {
+	margin-top: 1rem;
+}
+
 /* ── Ratings bar ─────────────────────────────────────────── */
 .about-us-ratings {
 	margin: clamp(1.8rem, 3.4vw, 3rem) auto 0;
