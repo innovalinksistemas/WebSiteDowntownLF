@@ -1,7 +1,6 @@
 {
   "categories": [
     "Todas",
-    "Hotel",
     "Habitaciones",
     "Restaurantes",
     "Actividades"
@@ -12,7 +11,7 @@
       "src": "rooms/hotel/1Z6A4971.jpg",
       "alt": "Área exterior del hotel Downtown La Fortuna",
       "altEn": "Outdoor area of Downtown La Fortuna hotel",
-      "category": "Hotel",
+      "category": "Restaurantes",
       "colSpan": 1,
       "rowSpan": 2
     },
@@ -21,7 +20,7 @@
       "src": "rooms/hotel/1Z6A5607.jpg",
       "alt": "Instalaciones del hotel Downtown La Fortuna",
       "altEn": "Facilities at Downtown La Fortuna hotel",
-      "category": "Hotel",
+      "category": "Restaurantes",
       "colSpan": 1,
       "rowSpan": 1
     },
@@ -30,7 +29,7 @@
       "src": "rooms/hotel/1Z6A5815.jpg",
       "alt": "Espacios del hotel Downtown La Fortuna",
       "altEn": "Common spaces at Downtown La Fortuna hotel",
-      "category": "Hotel",
+      "category": "Restaurantes",
       "colSpan": 1,
       "rowSpan": 1
     },
@@ -39,7 +38,7 @@
       "src": "rooms/hotel/1Z6A5967.jpg",
       "alt": "Vista del hotel Downtown La Fortuna",
       "altEn": "View of Downtown La Fortuna hotel",
-      "category": "Hotel",
+      "category": "Restaurantes",
       "colSpan": 1,
       "rowSpan": 1
     },
