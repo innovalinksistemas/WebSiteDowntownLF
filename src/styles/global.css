@@ -1735,6 +1735,11 @@ body.menu-open {
 	font-size: 0.82rem;
 	color: rgba(58, 54, 49, 0.78);
 }
+.offer-card-quote {
+	margin-top: 0.9rem;
+	font-size: 0.92rem;
+	color: #3a3631;
+}
 .offer-card-link--wa {
 	align-items: center;
 	gap: 0.5rem;
