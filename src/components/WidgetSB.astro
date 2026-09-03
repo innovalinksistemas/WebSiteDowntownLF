@@ -84,11 +84,14 @@ SBSyncroBox({
   var sheet = document.querySelector('[data-booking-sheet]');
   var backdrop = document.querySelector('[data-booking-backdrop]');
   if (!sheet || !backdrop) return;
-  var closeBtn = sheet.querySelector('[data-booking-close]');
+  // La X se busca al abrir: este script va antes que la cabecera del panel en
+  // el HTML, así que en este punto aún no existe en el DOM.
+  var closeBtn = null;
   var lastTrigger = null;
 
   function openSheet(trigger) {
     mount();
+    closeBtn = closeBtn || sheet.querySelector('[data-booking-close]');
     lastTrigger = trigger || null;
     sheet.classList.add('is-open');
     backdrop.classList.add('is-open');
@@ -114,7 +117,9 @@ SBSyncroBox({
     openSheet(trigger);
   });
   backdrop.addEventListener('click', closeSheet);
-  if (closeBtn) closeBtn.addEventListener('click', closeSheet);
+  document.addEventListener('click', function (e) {
+    if (e.target.closest && e.target.closest('[data-booking-close]')) closeSheet();
+  });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && sheet.classList.contains('is-open')) closeSheet();
   });
