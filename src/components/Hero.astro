@@ -87,6 +87,7 @@ const t = useTranslations(Astro.currentLocale);
         <div
           class="hero-trust-item"
           id="hero-availability-block"
+          hidden
           data-rooms={t("hero.avail.rooms")}
           data-room-one={t("hero.avail.room.one")}
           data-none={t("hero.avail.none")}
@@ -257,8 +258,13 @@ const t = useTranslations(Astro.currentLocale);
     updateWeather();
   })();
 
-  /* ─── Disponibilidad real — CloudBeds ──────────────── */
+  /* ─── Disponibilidad real — CloudBeds ──────────────────
+     Solo se muestra como aviso de escasez: cuando quedan pocas habitaciones
+     (1 a SCARCITY_MAX). Con muchas libres, sin disponibilidad o si el
+     servicio falla, el bloque no aparece: anunciar "14 habitaciones
+     disponibles" transmite hotel vacío, y "sin disponibilidad" espanta. */
   (async () => {
+    const SCARCITY_MAX = 3;
     const block = document.getElementById('hero-availability-block');
     const dot   = document.getElementById('hero-avail-dot');
     const text  = document.getElementById('hero-avail-text');
@@ -272,6 +278,9 @@ const t = useTranslations(Astro.currentLocale);
       const res  = await fetch('https://cloudbeds-service.onrender.com/availability');
       const data = await res.json();
       const { available, available_rooms } = data;
+      const n = Number(available_rooms);
+
+      if (!available || !Number.isFinite(n) || n < 1 || n > SCARCITY_MAX) return;
 
       const hoy = new Intl.DateTimeFormat(isEN ? 'en-US' : 'es-CR', {
         weekday: 'long', day: 'numeric', month: 'long',
@@ -282,22 +291,15 @@ const t = useTranslations(Astro.currentLocale);
       const hoyLabel = (T.today ?? 'Hoy, {fecha}')
         .replace('{fecha}', hoy.charAt(0).toUpperCase() + hoy.slice(1));
 
-      if (available) {
-        dot.style.background = '#4ade80';
-        dot.style.boxShadow  = '0 0 6px #4ade80';
-        text.textContent = available_rooms === 1
-          ? (T.roomOne ?? '')
-          : (T.rooms ?? '').replace('{n}', String(available_rooms));
-        label.textContent = hoyLabel;
-      } else {
-        dot.style.background = '#f87171';
-        dot.style.boxShadow  = '0 0 6px #f87171';
-        text.textContent  = T.none ?? '';
-        label.textContent = hoyLabel;
-      }
+      dot.style.background = '#f87171';
+      dot.style.boxShadow  = '0 0 6px #f87171';
+      text.textContent = n === 1
+        ? (T.roomOne ?? '')
+        : (T.rooms ?? '').replace('{n}', String(n));
+      label.textContent = hoyLabel;
+      block.hidden = false;
     } catch {
-      text.textContent  = T.error ?? '';
-      label.textContent = T.errorLabel ?? '';
+      /* Sin datos, sin bloque. */
     }
   })();
 

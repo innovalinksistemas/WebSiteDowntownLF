@@ -59,8 +59,8 @@ export const ui = {
     "hero.avail.label": "Verificando disponibilidad",
     // El script del hero rellena estas cadenas con el dato de CloudBeds.
     // {n} se sustituye por el número de habitaciones libres.
-    "hero.avail.rooms": "{n} habitaciones disponibles",
-    "hero.avail.room.one": "1 habitación disponible",
+    "hero.avail.rooms": "Solo quedan {n} habitaciones",
+    "hero.avail.room.one": "Solo queda 1 habitación",
     "hero.avail.none": "Sin disponibilidad",
     "hero.avail.today": "Hoy, {fecha}",
     "hero.avail.error": "Disponibilidad no cargada",
@@ -396,8 +396,8 @@ export const ui = {
     "hero.trust.aria": "Ratings and availability",
     "hero.avail.checking": "· · ·",
     "hero.avail.label": "Checking availability",
-    "hero.avail.rooms": "{n} rooms available",
-    "hero.avail.room.one": "1 room available",
+    "hero.avail.rooms": "Only {n} rooms left",
+    "hero.avail.room.one": "Only 1 room left",
     "hero.avail.none": "No availability",
     "hero.avail.today": "Today, {fecha}",
     "hero.avail.error": "Availability unavailable",

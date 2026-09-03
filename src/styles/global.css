@@ -887,6 +887,14 @@ body.menu-open {
 	color: rgba(244, 237, 216, 0.58);
 }
 
+/* El bloque de disponibilidad solo existe como aviso de escasez; mientras
+   está oculto, su separador tampoco se pinta. */
+#hero-availability-block[hidden] {
+	display: none !important;
+}
+.hero-trust-divider:has(+ #hero-availability-block[hidden]) {
+	display: none;
+}
 .hero-trust-divider {
 	width: 1px;
 	height: 2rem;
