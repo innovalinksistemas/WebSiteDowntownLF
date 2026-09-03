@@ -308,7 +308,6 @@ export const ui = {
     "brand.tile1.title": "Reserva directa",
     "brand.tile1.sub": "Mejor precio garantizado",
     "brand.tile1.link": "Reservar",
-    "brand.tile1.href": "#habitaciones",
     "brand.tile2.link": "Ver tours",
     "brand.tile2.href": "#tours-top",
     // ── Carrusel de tours del tile fotográfico
@@ -643,7 +642,6 @@ export const ui = {
     "brand.tile1.title": "Direct booking",
     "brand.tile1.sub": "Best price guaranteed",
     "brand.tile1.link": "Book now",
-    "brand.tile1.href": "#habitaciones",
     "brand.tile2.link": "See tours",
     "brand.tile2.href": "#tours-top",
     // ── Tour carousel inside the photo tile

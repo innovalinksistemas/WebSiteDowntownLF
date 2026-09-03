@@ -9,6 +9,8 @@ import imgTermales from "../assets/ecotermales/piscina.jpg";
 import imgRafting from "../assets/offers/rafting.jpg";
 
 const t = useTranslations(Astro.currentLocale);
+const sbLang = Astro.currentLocale === "en" ? "EN" : "ES";
+const bookingUrl = `https://www.simplebooking.it/ibe2/hotel/9184/?hid=9184&lang=${sbLang}&cur=USD`;
 
 /**
  * Carrusel de tours dentro del tile fotográfico.
@@ -113,7 +115,17 @@ const tours = [
 					<h3 class="promo-tile__title">{t("brand.tile1.title")}</h3>
 					<p class="promo-tile__sub">{t("brand.tile1.sub")}</p>
 				</div>
-				<a class="text-link promo-tile__link--light" href={t("brand.tile1.href")}>
+				<!--
+					Al motor de SimpleBooking en el idioma de la página. En móvil,
+					data-open-booking abre el panel de reserva (mismo motor) sin salir.
+				-->
+				<a
+					class="text-link promo-tile__link--light"
+					href={bookingUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					data-open-booking
+				>
 					{t("brand.tile1.link")}
 				</a>
 			</article>
