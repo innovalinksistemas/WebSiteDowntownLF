@@ -1,5 +1,5 @@
 ---
-import { getLang } from "../i18n/utils";
+import { getLang, useTranslations } from "../i18n/utils";
 
 /**
  * Motor de reservas SimpleBooking (SyncroBox).
@@ -13,16 +13,16 @@ import { getLang } from "../i18n/utils";
  * cuenta de SimpleBooking, así que no se cambia sin confirmarlo.
  */
 const lang = getLang(Astro.currentLocale);
+const t = useTranslations(Astro.currentLocale);
 const codLang = lang === "en" ? "EN" : "ES";
 const currency = "USD";
 
 /**
- * El buscador solo se monta de 768px en adelante. En móvil ocupaba casi toda
- * la pantalla de inicio, así que se oculta (ver .booking-bar en global.css).
- *
- * Aquí no basta con ocultarlo por CSS: el widget descarga y ejecuta un script
- * de terceros, y esconderlo con `display:none` seguiría pagando ese coste justo
- * donde más pesa. Con esta guarda, en móvil no se pide nada a la red.
+ * De 768px en adelante el buscador se monta al cargar, en la barra superior.
+ * En móvil no se pide nada a la red hasta que el visitante toca un botón de
+ * reserva ([data-open-booking]): entonces se abre .booking-bar como panel
+ * inferior y se monta el widget en ese momento. Así el buscador existe en
+ * móvil sin ocupar la primera pantalla ni pagar JS de terceros de entrada.
  */
 const MIN_WIDTH = 768;
 ---
@@ -78,9 +78,49 @@ SBSyncroBox({
   }
 
   if (mq.matches) mount();
-  // Una tablet que rota de vertical a horizontal cruza el umbral: sin esto
-  // se quedaría con el hueco de la barra y sin buscador dentro.
   else mq.addEventListener('change', function (e) { if (e.matches) mount(); });
+
+  /* ── Panel de reserva en móvil ─────────────────────────── */
+  var sheet = document.querySelector('[data-booking-sheet]');
+  var backdrop = document.querySelector('[data-booking-backdrop]');
+  if (!sheet || !backdrop) return;
+  var closeBtn = sheet.querySelector('[data-booking-close]');
+  var lastTrigger = null;
+
+  function openSheet(trigger) {
+    mount();
+    lastTrigger = trigger || null;
+    sheet.classList.add('is-open');
+    backdrop.classList.add('is-open');
+    document.body.classList.add('booking-open');
+    sheet.setAttribute('aria-hidden', 'false');
+    // El foco espera a que termine la transición: antes, el panel aún es visibility:hidden.
+    if (closeBtn) window.setTimeout(function () { closeBtn.focus({ preventScroll: true }); }, 350);
+    if (window.dataLayer) window.dataLayer.push({ event: 'booking_sheet_open' });
+  }
+
+  function closeSheet() {
+    sheet.classList.remove('is-open');
+    backdrop.classList.remove('is-open');
+    document.body.classList.remove('booking-open');
+    sheet.setAttribute('aria-hidden', 'true');
+    if (lastTrigger && lastTrigger.focus) lastTrigger.focus({ preventScroll: true });
+  }
+
+  document.addEventListener('click', function (e) {
+    var trigger = e.target.closest && e.target.closest('[data-open-booking]');
+    if (!trigger || mq.matches) return; // en escritorio el enlace sigue su curso
+    e.preventDefault();
+    openSheet(trigger);
+  });
+  backdrop.addEventListener('click', closeSheet);
+  if (closeBtn) closeBtn.addEventListener('click', closeSheet);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && sheet.classList.contains('is-open')) closeSheet();
+  });
+  // Si el visitante gira el teléfono a un ancho de escritorio, el panel sobra.
+  mq.addEventListener('change', function (e) { if (e.matches) closeSheet(); });
+  sheet.setAttribute('aria-hidden', String(!mq.matches));
 })();
 </script>
 
@@ -157,5 +197,14 @@ SBSyncroBox({
 </style>
 
 <div class="container">
+    <div class="sb-sheet-head">
+        <div>
+            <p class="sb-sheet-title">{t("booking.sheet.title")}</p>
+            <p class="sb-sheet-sub">{t("booking.sheet.sub")}</p>
+        </div>
+        <button type="button" class="sb-sheet-close" data-booking-close aria-label={t("booking.sheet.close")}>
+            <svg viewBox="0 0 18 18" width="16" height="16" fill="none" aria-hidden="true"><path d="M1 1L17 17M17 1L1 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+    </div>
     <div id="sb-container"></div>
 </div>

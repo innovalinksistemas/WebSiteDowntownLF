@@ -151,9 +151,13 @@ const showPromo = promoPopup && promoIsActive();
       {lang === "en" ? "Skip to content" : "Saltar al contenido"}
     </a>
     {bookingBar && (
-      <div class="booking-bar">
-        <Widget />
-      </div>
+      <>
+        {/* Solo móvil: fondo oscuro tras el panel de reserva (ver WidgetSB). */}
+        <div class="booking-backdrop" data-booking-backdrop aria-hidden="true"></div>
+        <div class="booking-bar" data-booking-sheet>
+          <Widget />
+        </div>
+      </>
     )}
     <Header />
     <slot />

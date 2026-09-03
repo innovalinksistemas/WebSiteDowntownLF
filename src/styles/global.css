@@ -954,13 +954,93 @@ body.menu-open {
 	justify-content: center;
 }
 
-/* Por debajo de 768px el buscador no se muestra: ocupaba casi toda la pantalla
-   de inicio en móvil y empujaba el hero fuera de vista. En WidgetSB.astro se
-   impide además que el script de SimpleBooking llegue a descargarse, para no
-   pagar JS de terceros por algo invisible. */
+/* Por debajo de 768px la barra no ocupa la primera pantalla: se convierte en un
+   panel inferior que se abre desde los botones de reserva (ver WidgetSB.astro,
+   que además solo descarga el script de SimpleBooking al abrirlo). */
+.booking-backdrop {
+	display: none;
+}
+.sb-sheet-head {
+	display: none;
+}
 @media (max-width: 767px) {
 	.booking-bar {
-		display: none;
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 95;
+		/* Alto suficiente para que el calendario de SimpleBooking (~300px) se
+		   despliegue hacia abajo dentro del panel en vez de hacia arriba, donde
+		   quedaba recortado. Sin overflow oculto por si aun así sobresale. */
+		min-height: 78dvh;
+		max-height: 94dvh;
+		overflow: visible;
+		border-radius: 18px 18px 0 0;
+		box-shadow: 0 -12px 40px rgba(5, 10, 16, 0.35);
+		padding-bottom: max(1rem, env(safe-area-inset-bottom));
+		transform: translateY(110%);
+		visibility: hidden;
+		transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.32s;
+	}
+	.booking-bar.is-open {
+		transform: translateY(0);
+		visibility: visible;
+		transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s;
+	}
+	.booking-backdrop {
+		display: block;
+		position: fixed;
+		inset: 0;
+		z-index: 94;
+		background: rgba(5, 10, 16, 0.55);
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.3s ease;
+	}
+	.booking-backdrop.is-open {
+		opacity: 1;
+		pointer-events: auto;
+	}
+	body.booking-open {
+		overflow: hidden;
+	}
+	.sb-sheet-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1.1rem 1.2rem 0.4rem;
+	}
+	.sb-sheet-title {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: 1.5rem;
+		line-height: 1;
+		color: #1e1e1e;
+	}
+	.sb-sheet-sub {
+		margin: 0.3rem 0 0;
+		font-size: 0.7rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: rgba(30, 30, 30, 0.7);
+	}
+	.sb-sheet-close {
+		flex-shrink: 0;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.6rem;
+		height: 2.6rem;
+		border: 1px solid rgba(30, 30, 30, 0.2);
+		border-radius: 50%;
+		background: #fff;
+		color: #1e1e1e;
+		cursor: pointer;
+	}
+	.has-booking-bar #sb-container .sb-custom-bg-color {
+		padding: 8px 12px 4px !important;
 	}
 }
 
