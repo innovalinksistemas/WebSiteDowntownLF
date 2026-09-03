@@ -66,6 +66,7 @@ const reviewGraph = {
 				</svg>
 			</button>
 
+			<div class="testimonials-viewport">
 			<div class="testimonials-track" data-testimonial-track>
 				{testimonials.map((testimonial) => (
 					<div class="testimonial-card">
@@ -78,6 +79,7 @@ const reviewGraph = {
 						</div>
 					</div>
 				))}
+			</div>
 			</div>
 
 			<button 
@@ -203,10 +205,18 @@ const reviewGraph = {
 		max-width: 64rem;
 	}
 
-	.testimonials-track {
+	/* La ventana recorta; la pista se desplaza. Antes ambas cosas estaban en el
+	   mismo elemento y, al aplicarle transform, la ventana viajaba con las
+	   tarjetas: la anterior asomaba por la izquierda en vez de ocultarse. */
+	.testimonials-viewport {
 		flex: 1;
+		min-width: 0;
 		overflow: hidden;
+	}
+
+	.testimonials-track {
 		display: flex;
+		width: 100%;
 		transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
