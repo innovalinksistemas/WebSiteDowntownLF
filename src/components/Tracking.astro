@@ -3,6 +3,7 @@
  * Seguimiento de marketing. IDs tomados de la web en producción (sept. 2026):
  * - Google Tag Manager  GTM-WPQ8CTD4
  * - Google Ads (gtag)   AW-740176607
+ * - Google Analytics 4  G-4S6PWSDGNR (mismo gtag.js; config adicional)
  * - Meta Pixel          2140720136664838
  *
  * Todo va con `is:inline` para que Astro no lo convierta en módulos diferidos
@@ -11,6 +12,7 @@
  */
 export const GTM_ID = "GTM-WPQ8CTD4";
 export const ADS_ID = "AW-740176607";
+export const GA4_ID = "G-4S6PWSDGNR";
 export const META_PIXEL_ID = "2140720136664838";
 ---
 
@@ -20,7 +22,7 @@ export const META_PIXEL_ID = "2140720136664838";
   del título y retrasaban el LCP en móvil; el pageview se sigue registrando en
   cada visita que termina de cargar.
 -->
-<script is:inline define:vars={{ GTM_ID, ADS_ID, META_PIXEL_ID }}>
+<script is:inline define:vars={{ GTM_ID, ADS_ID, GA4_ID, META_PIXEL_ID }}>
   (function () {
     var started = false;
     function start() {
@@ -39,7 +41,7 @@ export const META_PIXEL_ID = "2140720136664838";
         f.parentNode.insertBefore(j, f);
       })(window, document, "script", "dataLayer", GTM_ID);
 
-      /* Google Ads (gtag.js) */
+      /* Google Ads + Google Analytics 4 (gtag.js) */
       var g = document.createElement("script");
       g.async = true;
       g.src = "https://www.googletagmanager.com/gtag/js?id=" + ADS_ID;
@@ -48,6 +50,7 @@ export const META_PIXEL_ID = "2140720136664838";
       function gtag() { window.dataLayer.push(arguments); }
       gtag("js", new Date());
       gtag("config", ADS_ID);
+      gtag("config", GA4_ID);
 
       /* Meta Pixel */
       !(function (f, b, e, v, n, t, s) {
