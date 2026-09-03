@@ -5,12 +5,14 @@ import { SITE } from "../i18n/seo";
 const t = useTranslations(Astro.currentLocale);
 const lang = getLang(Astro.currentLocale);
 
-/* Reseñas reales publicadas en las plataformas (fecha de publicación en `date`). */
+/* Reseñas reales, en el idioma en que se publicaron y sin retocar, para que
+   cualquiera pueda encontrarlas en la plataforma. `lang` marca el idioma del
+   texto (JSON-LD y atributo lang de la cita). */
 const testimonials = [
-  { id: 1, quote: t("testimonials.t1.quote"), author: "Priscilla", location: "Google", rating: 5, date: "2026-08-23" },
-  { id: 2, quote: t("testimonials.t2.quote"), author: "Jessie White", location: "Booking.com", rating: 5, date: "2026-06-19" },
-  { id: 3, quote: t("testimonials.t3.quote"), author: "Wilson Briceño", location: "Google", rating: 5, date: "2026-05-11" },
-  { id: 4, quote: t("testimonials.t4.quote"), author: "Elaina Broers", location: "Expedia", rating: 5, date: "2026-05-04" },
+  { id: 1, quote: t("testimonials.t1.quote"), author: "Priscilla", location: "Google", rating: 5, date: "2026-08-23", lang: "en" },
+  { id: 2, quote: t("testimonials.t2.quote"), author: "Jessie White", location: "Booking.com", rating: 5, date: "2026-06-19", lang: "en" },
+  { id: 3, quote: t("testimonials.t3.quote"), author: "Wilson Briceño", location: "Google", rating: 5, date: "2026-05-11", lang: "es" },
+  { id: 4, quote: t("testimonials.t4.quote"), author: "Elaina Broers", location: "Expedia", rating: 5, date: "2026-05-04", lang: "en" },
 ];
 
 /**
@@ -36,7 +38,7 @@ const reviewGraph = {
     },
     reviewBody: r.quote,
     datePublished: r.date,
-    inLanguage: lang === "en" ? "en-US" : "es-CR",
+    inLanguage: r.lang === "en" ? "en-US" : "es-CR",
   })),
 };
 ---
@@ -71,7 +73,7 @@ const reviewGraph = {
 				{testimonials.map((testimonial) => (
 					<div class="testimonial-card">
 						<div class="testimonial-quote">
-							<p>"{testimonial.quote}"</p>
+							<p lang={testimonial.lang}>"{testimonial.quote}"</p>
 						</div>
 						<div class="testimonial-meta">
 							<p class="testimonial-author">{testimonial.author}</p>
