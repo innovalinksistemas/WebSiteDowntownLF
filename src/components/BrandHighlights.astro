@@ -192,6 +192,61 @@ const tours = [
 			})
 		);
 
+		/* ── Deslizar con el dedo (o arrastrar con el ratón) ─────────────
+		   Un gesto horizontal de al menos 40px cambia de tour; el scroll
+		   vertical no se toca (touch-action: pan-y en el contenedor). Si hubo
+		   deslizamiento, se anula el clic que el navegador dispararía al
+		   soltar sobre el enlace "Ver tours". */
+		const SWIPE_MIN = 40;
+		let startX = 0;
+		let startY = 0;
+		let tracking = false;
+		let swiped = false;
+
+		root.addEventListener("pointerdown", (e) => {
+			if (e.pointerType === "mouse" && e.button !== 0) return;
+			startX = e.clientX;
+			startY = e.clientY;
+			tracking = true;
+			swiped = false;
+		});
+
+		root.addEventListener("pointerup", (e) => {
+			if (!tracking) return;
+			tracking = false;
+			const dx = e.clientX - startX;
+			const dy = e.clientY - startY;
+			if (Math.abs(dx) >= SWIPE_MIN && Math.abs(dx) > Math.abs(dy) * 1.5) {
+				swiped = true;
+				show(index + (dx < 0 ? 1 : -1));
+				stop();
+				start();
+			}
+		});
+
+		root.addEventListener("pointercancel", () => (tracking = false));
+
+		root.addEventListener(
+			"click",
+			(e) => {
+				if (!swiped) return;
+				e.preventDefault();
+				e.stopPropagation();
+				swiped = false;
+			},
+			true
+		);
+
+		// Flechas del teclado cuando el foco está en los puntos.
+		root.querySelector(".promo-dots")?.addEventListener("keydown", (e: KeyboardEvent) => {
+			if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+			e.preventDefault();
+			show(index + (e.key === "ArrowRight" ? 1 : -1));
+			dots[index]?.focus();
+			stop();
+			start();
+		});
+
 		// Pausar mientras se interactúa: girar bajo el cursor o con el foco dentro
 		// hace perder el hilo de lectura.
 		root.addEventListener("mouseenter", stop);
@@ -214,6 +269,14 @@ const tours = [
 </script>
 
 <style>
+	/* Carrusel de tours: deslizar horizontal cambia de tour, el vertical sigue
+	   siendo scroll de página. Sin selección de texto al arrastrar. */
+	[data-tours] {
+		touch-action: pan-y;
+		user-select: none;
+		-webkit-user-select: none;
+	}
+
 	.brand-highlights {
 		padding: clamp(3.4rem, 7vw, 5.6rem) 1.2rem;
 		/* Un punto más oscuro que --brand-cream: Amenities (la sección de arriba)
