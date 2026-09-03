@@ -322,8 +322,26 @@ const switchAria = t("lang.switch.aria");
 .site-mobile-lang-switch:hover {
   opacity: 1;
 }
+/* En el menú móvil el fondo es crema: color explícito (no `inherit`, que
+   arrastraba el blanco del header) y forma de botón secundario, del mismo
+   ancho que "Reservar ahora". */
 .site-mobile-lang-switch {
-  margin-top: 0.5rem;
-  display: inline-block;
+  margin-top: 0.6rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 24rem;
+  padding: 0.95rem 1.5rem;
+  color: #181512;
+  opacity: 1;
+  border: 1px solid rgba(24, 21, 18, 0.45);
+  border-radius: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+}
+.site-mobile-lang-switch:hover {
+  color: #b90024;
+  border-color: #b90024;
 }
 </style>
