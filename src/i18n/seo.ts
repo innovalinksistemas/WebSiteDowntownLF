@@ -187,7 +187,7 @@ export function siteGraph(lang: Lang, canonical: string, title: string, descript
           es ? "Estación de carga para vehículos eléctricos" : "EV charging station",
           es ? "WiFi de alta velocidad" : "High-speed WiFi",
           es ? "Piscina tropical" : "Tropical pool",
-          es ? "Desayuno buffet (7:00–11:30)" : "Buffet breakfast (7:00–11:30)",
+          es ? "Desayuno buffet o a la carta (7:00–11:30)" : "Buffet or à la carte breakfast (7:00–11:30)",
           es ? "Seis espacios propios: gastronomía, coctelería y arte" : "Six in-house venues: dining, cocktails and art",
           es ? "Aire acondicionado" : "Air conditioning",
           es ? "Traslados desde aeropuertos SJO y LIR" : "Transfers from SJO and LIR airports",
