@@ -64,6 +64,8 @@ const restaurants = [
     hours: t("restaurants.r3.hours"),
     image: imgPintoeGallo,
     logo: logoPintoeGallo,
+    // Logo vertical: con el alto común quedaba diminuto frente a los demás.
+    logoTall: true,
     href: "https://online.flippingbook.com/view/739784065/",
     cta: t("restaurants.cta"),
   },
@@ -217,7 +219,7 @@ const restaurants = [
                   layout="none"
                   loading="lazy"
                   decoding="async"
-                  class="rest-logo"
+                  class:list={["rest-logo", { "rest-logo--tall": r.logoTall }]}
                 />
               </div>
             </div>
