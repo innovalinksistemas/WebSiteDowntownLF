@@ -1658,6 +1658,124 @@ body.menu-open {
 	border-color: rgba(140, 104, 40, 0.58);
 }
 
+/* ── Paquete destacado (Green Season) ────────────────────── */
+.offer-card--featured {
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+	align-items: stretch;
+}
+.offer-card--featured .offer-media-link {
+	position: relative;
+	height: 100%;
+	min-height: clamp(14rem, 30vw, 26rem);
+}
+.offer-card--featured .offer-card-body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: clamp(1.3rem, 2.2vw, 2.4rem) clamp(1.2rem, 2.4vw, 2.6rem);
+}
+.offer-card--featured .offer-card-title {
+	font-size: clamp(1.9rem, 2.8vw, 3.1rem);
+}
+.offer-ribbon {
+	position: absolute;
+	top: clamp(0.9rem, 1.6vw, 1.4rem);
+	left: 0;
+	z-index: 2;
+	padding: 0.5rem 1.1rem 0.5rem 1rem;
+	background: #b90024;
+	color: #fff6ee;
+	font-size: clamp(0.66rem, 0.85vw, 0.8rem);
+	font-weight: 700;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	line-height: 1.2;
+	box-shadow: 0 6px 18px rgba(20, 0, 5, 0.35);
+	pointer-events: none;
+}
+/* Pliegue de la cinta: triángulo bajo el borde izquierdo. */
+.offer-ribbon::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: -0.45rem;
+	border-style: solid;
+	border-width: 0.45rem 0.45rem 0 0;
+	border-color: #6f0016 transparent transparent transparent;
+}
+.offer-card-price {
+	display: flex;
+	align-items: baseline;
+	flex-wrap: wrap;
+	gap: 0.35rem 0.5rem;
+	margin: 0.9rem 0 0;
+	color: #3a3631;
+}
+.offer-card-price-from {
+	font-size: 0.78rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: rgba(58, 54, 49, 0.78);
+}
+.offer-card-price-value {
+	font-family: var(--font-display);
+	font-size: clamp(2.2rem, 3.2vw, 3.2rem);
+	font-weight: 600;
+	line-height: 1;
+	color: #b90024;
+}
+.offer-card-price-unit {
+	font-size: 0.92rem;
+	color: rgba(58, 54, 49, 0.85);
+}
+.offer-card-tiers {
+	margin: 0.35rem 0 0;
+	font-size: 0.82rem;
+	color: rgba(58, 54, 49, 0.78);
+}
+.offer-card-link--wa {
+	align-items: center;
+	gap: 0.5rem;
+	margin-top: 1.1rem;
+	padding: 0.9rem 1.4rem;
+	border: 0;
+	background: #1e1e1e;
+	color: #f4edd8;
+	font-size: 0.78rem;
+	letter-spacing: 0.18em;
+	transition: background-color 0.25s ease, transform 0.25s ease;
+}
+.offer-card-link--wa:hover {
+	background: #b90024;
+	color: #fff6ee;
+	transform: translateY(-1px);
+}
+.offer-card-fine {
+	margin: 0.9rem 0 0;
+	font-size: 0.72rem;
+	line-height: 1.45;
+	color: rgba(58, 54, 49, 0.7);
+}
+@media (max-width: 760px) {
+	.offer-card--featured {
+		grid-template-columns: 1fr;
+	}
+	/* La destacada muestra la descripción completa; el recorte con puntos
+	   suspensivos es solo para las tarjetas normales. */
+	.offer-card--featured .offer-card-desc {
+		display: block;
+		-webkit-line-clamp: unset;
+		line-clamp: unset;
+		overflow: visible;
+	}
+	.offer-card--featured .offer-media-link {
+		height: clamp(12rem, 56vw, 18rem);
+		min-height: 0;
+	}
+}
+
 .sr-only {
 	position: absolute;
 	width: 1px;
