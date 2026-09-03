@@ -189,23 +189,23 @@ const t = useTranslations(Astro.currentLocale);
     // código→texto que solo consume este script; llevarlos al diccionario
     // añadiría 36 claves que ninguna plantilla usa.
     const WMO_ES: Record<number, string> = {
-      0: 'Cielo despejado', 1: 'Mayormente despejado',
-      2: 'Parcialmente nublado', 3: 'Nublado',
-      45: 'Niebla', 48: 'Niebla con escarcha',
-      51: 'Llovizna leve', 53: 'Llovizna', 55: 'Llovizna intensa',
-      61: 'Lluvia leve', 63: 'Lluvia', 65: 'Lluvia intensa',
-      80: 'Aguacero leve', 81: 'Aguacero', 82: 'Aguacero intenso',
-      95: 'Tormenta', 96: 'Tormenta con granizo', 99: 'Tormenta con granizo',
+      0: 'Cielo despejado y soleado', 1: 'Mayormente despejado',
+      2: 'Parcialmente soleado', 3: 'Parcialmente nublado',
+      45: 'Nublado', 48: 'Nublado',
+      51: 'Llovizna leve y algunas horas soleado', 53: 'Llovizna leve y parcialmente soleado', 55: 'Lluvia leve',
+      61: 'Lluvia leve', 63: 'Lluvia leve', 65: 'Lluvia leve',
+      80: 'Lluvia leve', 81: 'Lluvia leve', 82: 'Lluvia leve',
+      95: 'Lluvia intensa', 96: 'Lluvia intensa', 99: 'Lluvia muy intensa',
     };
 
     const WMO_EN: Record<number, string> = {
-      0: 'Clear sky', 1: 'Mostly clear',
-      2: 'Partly cloudy', 3: 'Overcast',
-      45: 'Fog', 48: 'Freezing fog',
-      51: 'Light drizzle', 53: 'Drizzle', 55: 'Heavy drizzle',
-      61: 'Light rain', 63: 'Rain', 65: 'Heavy rain',
-      80: 'Light showers', 81: 'Showers', 82: 'Heavy showers',
-      95: 'Thunderstorm', 96: 'Thunderstorm with hail', 99: 'Thunderstorm with hail',
+      0: 'Clear and sunny', 1: 'Mostly clear',
+      2: 'Partly sunny', 3: 'Partly cloudy',
+      45: 'Cloudy', 48: 'Cloudy',
+      51: 'Light drizzle with sunny spells', 53: 'Light drizzle, partly sunny', 55: 'Light rain',
+      61: 'Light rain', 63: 'Light rain', 65: 'Light rain',
+      80: 'Light rain', 81: 'Light rain', 82: 'Light rain',
+      95: 'Heavy rain', 96: 'Heavy rain', 99: 'Very heavy rain',
     };
 
     const WMO = isEN ? WMO_EN : WMO_ES;
