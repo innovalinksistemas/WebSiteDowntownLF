@@ -35,10 +35,14 @@ const quickLinks = [
 	{ label: t("footer.nav.destination"), href: t("footer.nav.destination.href") },
 ];
 
+const isEN = (Astro.currentLocale ?? "es") === "en";
+const waText = isEN
+	? "Hi, I'm coming from the website. I'd like some information."
+	: "Hola, vengo de la página web. Quisiera información.";
 const legalLinks = [
-	{ label: t("footer.links.privacy"), href: "#contacto" },
-	{ label: t("footer.links.terms"),   href: "#contacto" },
-	{ label: t("footer.links.contact"), href: "#contacto" },
+	{ label: t("footer.links.privacy"), href: isEN ? "/en/privacy" : "/privacidad", external: false },
+	// Contacto va a WhatsApp, el canal por el que el hotel atiende de verdad.
+	{ label: t("footer.links.contact"), href: `https://wa.me/50685274677?text=${encodeURIComponent(waText)}`, external: true },
 ];
 
 const ratings = [
@@ -140,8 +144,8 @@ const ratings = [
 				</div>
 
 				<ul>
-					{legalLinks.map(({ label, href }) => (
-						<li><a href={href}>{label}</a></li>
+					{legalLinks.map(({ label, href, external }) => (
+						<li><a href={href} target={external ? "_blank" : undefined} rel={external ? "noopener noreferrer" : undefined}>{label}</a></li>
 					))}
 				</ul>
 				</div>

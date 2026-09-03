@@ -43,6 +43,7 @@ export default defineConfig({
         if (path === "/") item.priority = 1.0;
         else if (path === "/arenal-fortuna/") item.priority = 0.9;
         else if (path === "/baldi/" || path === "/ecotermales/") item.priority = 0.8;
+        else if (path === "/privacidad/" || path === "/privacy/") item.priority = 0.3;
         else item.priority = 0.7;
         return item;
       },

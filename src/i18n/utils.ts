@@ -30,6 +30,7 @@ export const ROUTE_MAP: Record<string, string> = {
   "/arenal-fortuna": "/en/arenal-fortuna",
   "/faq": "/en/faq",
   "/galeria": "/en/gallery",
+  "/privacidad": "/en/privacy",
 
 };
 

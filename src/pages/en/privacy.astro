@@ -1,0 +1,16 @@
+---
+import "../../styles/global.css";
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/Footer.astro";
+import PrivacyPolicy from "../../components/PrivacyPolicy.astro";
+import { useTranslations } from "../../i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
+---
+
+<Layout title={t("meta.privacy.title")} description={t("meta.privacy.description")} headerSolid={true}>
+  <main id="contenido" class="relative min-h-screen overflow-hidden">
+    <PrivacyPolicy />
+  </main>
+  <Footer />
+</Layout>

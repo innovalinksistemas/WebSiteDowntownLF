@@ -1,0 +1,227 @@
+---
+/**
+ * Política de privacidad. Texto en ES y EN dentro del componente: es contenido
+ * largo y estructurado que no encaja en el diccionario de ui.ts.
+ *
+ * REVISIÓN PENDIENTE DEL HOTEL: redactada a partir de lo que la web hace hoy
+ * (reservas vía SimpleBooking, WhatsApp, Google Tag Manager, Google Ads y
+ * Meta Pixel). Si cambian las herramientas, hay que actualizarla.
+ */
+import { getLang } from "../i18n/utils";
+
+const lang = getLang(Astro.currentLocale);
+const EMAIL = "reservations@lafortunadowntown.com";
+const UPDATED = lang === "en" ? "September 3, 2026" : "3 de septiembre de 2026";
+
+const es = {
+  h1: "Política de privacidad",
+  intro:
+    "En Downtown La Fortuna Boutique Hotel respetamos tu privacidad. Esta política explica qué datos personales recogemos cuando visitas lafortunadowntown.com o reservas con nosotros, para qué los usamos, con quién los compartimos y cómo puedes ejercer tus derechos, conforme a la Ley 8968 de Protección de la Persona frente al Tratamiento de sus Datos Personales de Costa Rica.",
+  sections: [
+    {
+      h: "Responsable del tratamiento",
+      p: [
+        "Downtown La Fortuna Boutique Hotel, ubicado 25 metros al sur de la Iglesia Católica, La Fortuna de San Carlos, Alajuela, Costa Rica. Para cualquier asunto relacionado con tus datos puedes escribirnos a " + EMAIL + ".",
+      ],
+    },
+    {
+      h: "Qué datos recogemos",
+      list: [
+        "Datos de reserva: nombre, correo electrónico, teléfono, fechas de estadía, número de huéspedes y preferencias que nos indiques. Los pagos se procesan en el motor de reservas SimpleBooking; nosotros no almacenamos los datos completos de tu tarjeta.",
+        "Mensajes: lo que nos escribas por WhatsApp, correo electrónico o teléfono, incluido tu número o dirección de contacto.",
+        "Datos de navegación: dirección IP, tipo de dispositivo y navegador, páginas visitadas y acciones en la web, recogidos mediante cookies y tecnologías similares (ver más abajo).",
+      ],
+    },
+    {
+      h: "Para qué los usamos",
+      list: [
+        "Gestionar tu reserva, tu estadía y las solicitudes que nos hagas.",
+        "Responder tus consultas y enviarte información que nos pidas sobre tarifas, paquetes o servicios.",
+        "Cumplir obligaciones legales, contables y de registro de huéspedes.",
+        "Medir el uso de la web y mejorarla.",
+        "Mostrarte publicidad relevante en Google y Meta (Facebook e Instagram) y medir los resultados de esas campañas, siempre que tu navegador lo permita.",
+      ],
+    },
+    {
+      h: "Cookies y herramientas de terceros",
+      p: [
+        "Esta web utiliza Google Tag Manager para administrar etiquetas de medición y publicidad, Google Ads para medir conversiones y el píxel de Meta para medir campañas y crear audiencias publicitarias. Estas herramientas pueden instalar cookies y recopilar datos de navegación según sus propias políticas de privacidad.",
+        "Puedes limitar o bloquear las cookies desde la configuración de tu navegador, ajustar la personalización de anuncios en tu cuenta de Google (Configuración de anuncios) y en tu cuenta de Meta (Preferencias de anuncios). El motor de reservas SimpleBooking y nuestro sistema de gestión hotelera tratan los datos de la reserva conforme a sus propias políticas.",
+      ],
+    },
+    {
+      h: "Con quién compartimos tus datos",
+      p: [
+        "Solo con los proveedores necesarios para prestar el servicio: el motor de reservas y pasarela de pago (SimpleBooking), el sistema de gestión hotelera, WhatsApp y las herramientas de medición y publicidad de Google y Meta mencionadas arriba. También cuando una autoridad lo exija por ley. No vendemos tus datos.",
+      ],
+    },
+    {
+      h: "Cuánto tiempo los conservamos",
+      p: [
+        "Los datos de reserva se conservan el tiempo necesario para gestionar tu estadía y cumplir las obligaciones legales aplicables. Los datos de navegación se conservan según los plazos de cada herramienta, que puedes consultar en sus políticas.",
+      ],
+    },
+    {
+      h: "Tus derechos",
+      p: [
+        "Puedes solicitar el acceso, la rectificación o la eliminación de tus datos personales, así como oponerte a que los usemos con fines publicitarios, escribiendo a " + EMAIL + ". Atenderemos tu solicitud en los plazos que establece la ley.",
+      ],
+    },
+    {
+      h: "Menores de edad",
+      p: ["Nuestros servicios en línea están dirigidos a personas adultas. No recogemos a sabiendas datos de menores sin el consentimiento de sus padres o tutores."],
+    },
+    {
+      h: "Cambios en esta política",
+      p: ["Podemos actualizar esta política cuando cambien nuestras herramientas o la normativa. Publicaremos aquí la versión vigente con su fecha."],
+    },
+  ],
+  updated: "Última actualización: " + UPDATED,
+};
+
+const en = {
+  h1: "Privacy policy",
+  intro:
+    "At Downtown La Fortuna Boutique Hotel we respect your privacy. This policy explains what personal data we collect when you visit lafortunadowntown.com or book with us, why we use it, who we share it with, and how you can exercise your rights, in line with Costa Rica's Law 8968 on the Protection of Individuals regarding the Processing of their Personal Data.",
+  sections: [
+    {
+      h: "Who is responsible",
+      p: [
+        "Downtown La Fortuna Boutique Hotel, located 25 meters south of the Catholic Church, La Fortuna de San Carlos, Alajuela, Costa Rica. For anything related to your data, write to " + EMAIL + ".",
+      ],
+    },
+    {
+      h: "What data we collect",
+      list: [
+        "Booking data: name, email, phone, dates of stay, number of guests and any preferences you share. Payments are processed by the SimpleBooking booking engine; we do not store your full card details.",
+        "Messages: whatever you send us by WhatsApp, email or phone, including your contact number or address.",
+        "Browsing data: IP address, device and browser type, pages visited and actions on the site, collected through cookies and similar technologies (see below).",
+      ],
+    },
+    {
+      h: "Why we use it",
+      list: [
+        "To manage your booking, your stay and any requests you make.",
+        "To answer your questions and send you information you ask for about rates, packages or services.",
+        "To meet legal, accounting and guest-registration obligations.",
+        "To measure how the website is used and improve it.",
+        "To show you relevant ads on Google and Meta (Facebook and Instagram) and measure those campaigns, whenever your browser allows it.",
+      ],
+    },
+    {
+      h: "Cookies and third-party tools",
+      p: [
+        "This website uses Google Tag Manager to manage measurement and advertising tags, Google Ads to measure conversions, and the Meta Pixel to measure campaigns and build advertising audiences. These tools may set cookies and collect browsing data under their own privacy policies.",
+        "You can limit or block cookies in your browser settings, and adjust ad personalization in your Google account (Ad Settings) and your Meta account (Ad Preferences). The SimpleBooking engine and our hotel management system process booking data under their own policies.",
+      ],
+    },
+    {
+      h: "Who we share it with",
+      p: [
+        "Only with the providers needed to deliver the service: the booking engine and payment gateway (SimpleBooking), the hotel management system, WhatsApp, and the Google and Meta measurement and advertising tools mentioned above. Also when required by law. We do not sell your data.",
+      ],
+    },
+    {
+      h: "How long we keep it",
+      p: [
+        "Booking data is kept for as long as needed to manage your stay and meet applicable legal obligations. Browsing data is kept according to each tool's retention periods, described in their policies.",
+      ],
+    },
+    {
+      h: "Your rights",
+      p: [
+        "You can request access to, correction or deletion of your personal data, and object to its use for advertising, by writing to " + EMAIL + ". We will respond within the timeframes set by law.",
+      ],
+    },
+    {
+      h: "Minors",
+      p: ["Our online services are intended for adults. We do not knowingly collect data from minors without parental or guardian consent."],
+    },
+    {
+      h: "Changes to this policy",
+      p: ["We may update this policy when our tools or the regulations change. The current version and its date will always be published here."],
+    },
+  ],
+  updated: "Last updated: " + UPDATED,
+};
+
+const c = lang === "en" ? en : es;
+---
+
+<section class="privacy">
+  <div class="privacy-inner">
+    <h1 class="privacy-title">{c.h1}</h1>
+    <p class="privacy-intro">{c.intro}</p>
+    {c.sections.map((s) => (
+      <section class="privacy-section">
+        <h2>{s.h}</h2>
+        {s.p?.map((p) => <p>{p}</p>)}
+        {s.list && (
+          <ul>
+            {s.list.map((li) => <li>{li}</li>)}
+          </ul>
+        )}
+      </section>
+    ))}
+    <p class="privacy-updated">{c.updated}</p>
+    <p class="privacy-contact">
+      <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .privacy {
+    background: linear-gradient(180deg, #f0ece6 0%, #ece7de 100%);
+    color: #1e1e1e;
+    padding: clamp(7rem, 12vw, 10rem) 1.2rem clamp(4rem, 8vw, 6rem);
+  }
+  .privacy-inner {
+    max-width: 46rem;
+    margin: 0 auto;
+  }
+  .privacy-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    line-height: 1;
+    margin: 0 0 1.2rem;
+  }
+  .privacy-intro {
+    font-size: clamp(1rem, 1.2vw, 1.15rem);
+    line-height: 1.65;
+    color: rgba(30, 30, 30, 0.85);
+    margin: 0 0 2rem;
+  }
+  .privacy-section {
+    margin: 0 0 1.8rem;
+  }
+  .privacy-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+    line-height: 1.1;
+    margin: 0 0 0.6rem;
+  }
+  .privacy-section p,
+  .privacy-section li {
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: rgba(30, 30, 30, 0.85);
+    margin: 0 0 0.7rem;
+  }
+  .privacy-section ul {
+    padding-left: 1.2rem;
+    margin: 0;
+  }
+  .privacy-updated {
+    margin: 2.4rem 0 0.3rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(30, 30, 30, 0.6);
+  }
+  .privacy-contact a {
+    color: #b90024;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(185, 0, 36, 0.4);
+  }
+</style>
