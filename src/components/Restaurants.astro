@@ -14,7 +14,7 @@
  * · Hover en imágenes gestionado por GSAP
  * ─────────────────────────────────────────────────────────────
  */
-import { Picture } from "astro:assets";
+import { Image, Picture } from "astro:assets";
 import { useTranslations } from "../i18n/utils";
 import imgMariaBonita from "../assets/restaurants/maria-bonita.jpg";
 import imgSelvaNegra from "../assets/restaurants/selva-negra.jpg";
@@ -22,6 +22,14 @@ import imgLaVentanita from "../assets/restaurants/la-ventanita.jpg";
 import imgPintoeGallo from "../assets/images/desayunoTipico.jpg";
 import imgNuwa from "../assets/images/NuwaGallery.jpg";
 import imgLavaDrinks from "../assets/restaurants/lava-drinks.jpg";
+// Logos blancos recortados al contenido (sin el aire transparente de los
+// originales de src/assets), para que todos midan parejo al pie de la card.
+import logoMariaBonita from "../assets/restaurants/logos/maria-bonita.png";
+import logoSelvaNegra from "../assets/restaurants/logos/selva-negra.png";
+import logoPintoeGallo from "../assets/restaurants/logos/pinto-e-gallo.png";
+import logoLaVentanita from "../assets/restaurants/logos/la-ventanita.png";
+import logoNuwa from "../assets/restaurants/logos/nuwa.png";
+import logoLavaDrinks from "../assets/restaurants/logos/lava-drinks.png";
 
 const t = useTranslations(Astro.currentLocale);
 
@@ -35,6 +43,7 @@ const restaurants = [
     tag: t("restaurants.r1.tag"),
     hours: t("restaurants.r1.hours"),
     image: imgMariaBonita,
+    logo: logoMariaBonita,
     href: "https://qrfy.io/p/iLG_cBukNI",
     cta: t("restaurants.cta"),
   },
@@ -44,6 +53,7 @@ const restaurants = [
     tag: t("restaurants.r2.tag"),
     hours: t("restaurants.r2.hours"),
     image: imgSelvaNegra,
+    logo: logoSelvaNegra,
     href: "https://online.flippingbook.com/view/510681266/",
     cta: t("restaurants.cta"),
   },
@@ -53,6 +63,7 @@ const restaurants = [
     tag: t("restaurants.r3.tag"),
     hours: t("restaurants.r3.hours"),
     image: imgPintoeGallo,
+    logo: logoPintoeGallo,
     href: "https://online.flippingbook.com/view/739784065/",
     cta: t("restaurants.cta"),
   },
@@ -62,6 +73,7 @@ const restaurants = [
     tag: t("restaurants.r4.tag"),
     hours: t("restaurants.r4.hours"),
     image: imgLaVentanita,
+    logo: logoLaVentanita,
     href: "https://online.flippingbook.com/view/179568887/",
     cta: t("restaurants.cta"),
   },
@@ -71,6 +83,7 @@ const restaurants = [
     tag: t("restaurants.r5.tag"),
     hours: t("restaurants.r5.hours"),
     image: imgNuwa,
+    logo: logoNuwa,
     // Galería de arte: no hay carta que enseñar, así que el CTA va al Instagram.
     href: "https://www.instagram.com/nuwagallery",
     cta: t("restaurants.cta.gallery"),
@@ -81,6 +94,7 @@ const restaurants = [
     tag: t("restaurants.r6.tag"),
     hours: t("restaurants.r6.hours"),
     image: imgLavaDrinks,
+    logo: logoLavaDrinks,
     href: "https://online.flippingbook.com/view/930925824/",
     cta: t("restaurants.cta"),
   },
@@ -187,12 +201,25 @@ const restaurants = [
                   {r.hours}
                 </p>
               )}
-              <a href={r.href} class="rest-link" target="_blank" rel="noopener noreferrer">
-                {r.cta}
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
+              <div class="rest-card-foot">
+                <a href={r.href} class="rest-link" target="_blank" rel="noopener noreferrer">
+                  {r.cta}
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+                {/* Decorativo: el nombre ya va en el h3. */}
+                <Image
+                  src={r.logo}
+                  alt=""
+                  height={96}
+                  format="webp"
+                  layout="none"
+                  loading="lazy"
+                  decoding="async"
+                  class="rest-logo"
+                />
+              </div>
             </div>
           </article>
         ))}

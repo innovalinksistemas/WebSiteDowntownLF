@@ -2938,6 +2938,7 @@ body.menu-open {
 	display: flex;
 	flex-direction: column;
 	gap: 0;
+	flex: 1;                          /* el pie baja al fondo de la card */
 }
 
 .rest-name {
@@ -2983,6 +2984,34 @@ body.menu-open {
 .rest-link:hover {
 	gap: 0.65rem;
 	color: #d8c5a0;
+}
+
+/* ── Pie de la card: CTA a la izquierda, logo del local a la derecha ── */
+.rest-card-foot {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-top: auto;                 /* misma altura en todas las cards */
+	padding-top: 0.25rem;
+}
+
+/* Los logos tienen proporciones muy distintas (de 4:1 a vertical): caja de
+   alto fijo y ancho máximo, contenido a la derecha, para que ninguno domine. */
+.rest-logo {
+	display: block;
+	flex-shrink: 0;
+	height: clamp(2.5rem, 3vw, 3.4rem);
+	width: auto;
+	max-width: clamp(7rem, 9.5vw, 9.5rem);
+	object-fit: contain;
+	object-position: right center;
+	opacity: 0.82;
+	transition: opacity 0.3s ease;
+}
+
+.rest-card:hover .rest-logo {
+	opacity: 1;
 }
 
 /* ── Separador entre imagen y body (línea dorada sutil) ──── */
