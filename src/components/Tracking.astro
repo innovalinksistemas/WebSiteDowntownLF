@@ -1,35 +1,61 @@
 ---
 /**
- * Seguimiento de marketing. IDs tomados de la web en producción (sept. 2026):
- * - Google Tag Manager  GTM-WPQ8CTD4
- * - Google Ads (gtag)   AW-740176607
- * - Google Analytics 4  G-4S6PWSDGNR (mismo gtag.js; config adicional)
- * - Meta Pixel          2140720136664838
+ * Seguimiento de marketing — un solo cargador.
  *
- * Todo va con `is:inline` para que Astro no lo convierta en módulos diferidos
- * y los snippets se ejecuten exactamente como los entregan las plataformas.
- * El <noscript> de GTM se coloca aparte, al inicio del <body> (ver Layout).
+ * Antes esta página cargaba DOS gestores de etiquetas a la vez: el contenedor
+ * de GTM y, en paralelo, `gtag.js` con dos IDs de configuración. Eso son cuatro
+ * descargas de googletagmanager.com por visita:
+ *
+ *   gtm.js                                  114.9 KB
+ *   gtag/js?id=AW-740176607                 147.4 KB
+ *   gtag/js?id=AW-740176607&cx=c            147.5 KB
+ *   gtag/js?id=G-4S6PWSDGNR&cx=c            170.1 KB
+ *   ────────────────────────────────────────────────
+ *                                           579.9 KB
+ *
+ * Medido con Lighthouse contra producción (Moto G Power emulado, 4G lento):
+ * bloqueando solo googletagmanager.com el LCP pasaba de 11.5 s a 1.4 s y la
+ * puntuación de 63 a 99. Meta, en comparación, costaba 1.7 s.
+ *
+ * Ahora el sitio carga únicamente el contenedor de GTM. Google Ads, GA4 y el
+ * píxel de Meta se configuran DENTRO del contenedor, que es lo que GTM existe
+ * para hacer. GTM sigue trayendo gtag para las etiquetas de Ads y GA4, pero una
+ * sola vez y bajo su propio control de disparo.
+ *
+ * ─── ANTES DE PUBLICAR ESTO ────────────────────────────────────────────────
+ * El contenedor GTM-WPQ8CTD4 está VACÍO ("tags":[], "rules":[]). Mientras siga
+ * así, este archivo no mide nada. Hay que crear primero, en la interfaz de GTM:
+ *
+ *   1. Etiqueta «Google Ads: configuración»  → AW-740176607, disparo All Pages
+ *   2. Etiqueta «Google Analytics: GA4»      → G-4S6PWSDGNR, disparo All Pages
+ *   3. Etiqueta «Meta Pixel» (plantilla de la comunidad o HTML personalizado)
+ *      → 2140720136664838, disparo All Pages
+ *   4. Publicar la versión del contenedor.
+ *
+ * Publicar este archivo con el contenedor vacío deja el sitio SIN medición.
+ * ───────────────────────────────────────────────────────────────────────────
+ *
+ * IDs de referencia, para quien configure el contenedor:
+ *   Google Ads    AW-740176607
+ *   Google GA4    G-4S6PWSDGNR
+ *   Meta Pixel    2140720136664838
  */
 export const GTM_ID = "GTM-WPQ8CTD4";
-export const ADS_ID = "AW-740176607";
-export const GA4_ID = "G-4S6PWSDGNR";
-export const META_PIXEL_ID = "2140720136664838";
 ---
 
 <!--
-  GTM, Google Ads y Meta Pixel se inicializan en `load` (o a los 3,5 s como
-  máximo). Cargados de inmediato competían por ancho de banda con las fuentes
-  del título y retrasaban el LCP en móvil; el pageview se sigue registrando en
-  cada visita que termina de cargar.
+  GTM se inicializa en `load` (o a los 3,5 s como máximo). Cargado de inmediato
+  competía por ancho de banda con las fuentes del título y retrasaba el LCP en
+  móvil; el pageview se sigue registrando en cada visita que termina de cargar.
+  El <noscript> va aparte, al inicio del <body> (ver Layout).
 -->
-<script is:inline define:vars={{ GTM_ID, ADS_ID, GA4_ID, META_PIXEL_ID }}>
+<script is:inline define:vars={{ GTM_ID }}>
   (function () {
     var started = false;
     function start() {
       if (started) return;
       started = true;
 
-      /* Google Tag Manager */
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
         w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
@@ -40,37 +66,6 @@ export const META_PIXEL_ID = "2140720136664838";
         j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
         f.parentNode.insertBefore(j, f);
       })(window, document, "script", "dataLayer", GTM_ID);
-
-      /* Google Ads + Google Analytics 4 (gtag.js) */
-      var g = document.createElement("script");
-      g.async = true;
-      g.src = "https://www.googletagmanager.com/gtag/js?id=" + ADS_ID;
-      document.head.appendChild(g);
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { window.dataLayer.push(arguments); }
-      gtag("js", new Date());
-      gtag("config", ADS_ID);
-      gtag("config", GA4_ID);
-
-      /* Meta Pixel */
-      !(function (f, b, e, v, n, t, s) {
-        if (f.fbq) return;
-        n = f.fbq = function () {
-          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-        };
-        if (!f._fbq) f._fbq = n;
-        n.push = n;
-        n.loaded = !0;
-        n.version = "2.0";
-        n.queue = [];
-        t = b.createElement(e);
-        t.async = !0;
-        t.src = v;
-        s = b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t, s);
-      })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
-      window.fbq("init", META_PIXEL_ID);
-      window.fbq("track", "PageView");
     }
 
     if (document.readyState === "complete") start();
@@ -78,11 +73,3 @@ export const META_PIXEL_ID = "2140720136664838";
     window.setTimeout(start, 3500);
   })();
 </script>
-<noscript
-  ><img
-    height="1"
-    width="1"
-    style="display:none"
-    src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
-    alt=""
-  /></noscript>
