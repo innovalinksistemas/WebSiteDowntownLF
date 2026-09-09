@@ -1,8 +1,44 @@
 ---
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 import { useTranslations } from "../i18n/utils";
 import heroImg from "../assets/hero.jpg";
+import heroImgVertical from "../assets/hero-vertical.jpg";
 const t = useTranslations(Astro.currentLocale);
+
+/*
+ * Art direction del hero en movil.
+ *
+ * La foto original es 3:2 y el hero es `object-cover` a pantalla completa. En
+ * un telefono vertical (412x823) el recorte lo manda la ALTURA: para cubrir
+ * 1440 px de dispositivo hacen falta 960 px de ancho de imagen, pero
+ * `sizes="100vw"` solo pedia 721 y el navegador servia la variante de 960x640.
+ * Resultado: la foto se ampliaba 2.25x y se veia blanda. En iPhone llegaba a 3x.
+ *
+ * `hero-vertical.jpg` es el mismo encuadre centrado que ya aplica
+ * `object-position: center`, recortado a 2:3 desde el original sin ampliar
+ * nada: no es una decision de diseno nueva, es la misma imagen a su resolucion.
+ *
+ * `sizes="67vh"` es la traduccion literal de esa regla: con un recorte 2:3
+ * cubierto por altura, el ancho que hace falta es alto x 2/3.
+ *
+ * El srcset se corta en 960w a proposito: la fuente mide 1600 px de ancho, asi
+ * que por encima de 960 apenas hay reduccion y el peso se dispara (1280w pesa
+ * 84 KB y 1600w, 417 KB). Un telefono de DPR 3 se queda con una ampliacion de
+ * 1.78x, bastante mejor que los 3x de hoy y con un tercio de los bytes.
+ */
+const HERO_PORTRAIT_WIDTHS = [640, 800, 960];
+const heroPortraitAvif = await getImage({
+  src: heroImgVertical,
+  widths: HERO_PORTRAIT_WIDTHS,
+  format: "avif",
+  quality: 40,
+});
+const heroPortraitWebp = await getImage({
+  src: heroImgVertical,
+  widths: HERO_PORTRAIT_WIDTHS,
+  format: "webp",
+  quality: 60,
+});
 ---
 
 <section
@@ -11,26 +47,42 @@ const t = useTranslations(Astro.currentLocale);
 >
 
   <!--
-    Imagen LCP. `layout="none"` porque Tailwind ya controla la geometría por
-    completo (absolute inset-0 h-full w-full object-cover) y no queremos que los
-    estilos responsive compitan con esas utilidades.
+    Imagen de fondo del hero. `layout="none"` porque Tailwind ya controla la
+    geometria por completo (absolute inset-0 h-full w-full object-cover) y no
+    queremos que los estilos responsive compitan con esas utilidades.
     `priority` emite loading="eager" + decoding="sync" + fetchpriority="high".
-    No lleva <link rel=preload>: el <img> es el primer elemento del <body>, así
-    que el preload scanner ya lo encuentra en el primer bloque de parseo.
-  -->
-  <Image
-    src={heroImg}
-    alt={t("hero.img.alt")}
-    class="hero-bg absolute inset-0 h-full w-full object-cover"
-    layout="none"
-    width={2560}
-    widths={[640, 960, 1280, 1920, 2560]}
-    sizes="100vw"
-    format="webp"
-    quality={70}
-    priority
-  />
+    No lleva <link rel=preload>: es el primer elemento del <body>, asi que el
+    preload scanner ya lo encuentra en el primer bloque de parseo.
 
+    Las <source> de arriba solo entran por debajo de 768px (ver el frontmatter);
+    de ahi para arriba manda el <img> apaisado de siempre.
+  -->
+  <picture>
+    <source
+      media="(max-width: 767px)"
+      type="image/avif"
+      srcset={heroPortraitAvif.srcSet.attribute}
+      sizes="67vh"
+    />
+    <source
+      media="(max-width: 767px)"
+      type="image/webp"
+      srcset={heroPortraitWebp.srcSet.attribute}
+      sizes="67vh"
+    />
+    <Image
+      src={heroImg}
+      alt={t("hero.img.alt")}
+      class="hero-bg absolute inset-0 h-full w-full object-cover"
+      layout="none"
+      width={2560}
+      widths={[640, 960, 1280, 1920, 2560]}
+      sizes="100vw"
+      format="webp"
+      quality={70}
+      priority
+    />
+  </picture>
 
   <div class="hero-overlay absolute inset-0" aria-hidden="true"></div>
   <div class="hero-vignette absolute inset-0" aria-hidden="true"></div>
