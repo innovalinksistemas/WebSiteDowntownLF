@@ -736,16 +736,31 @@ body.menu-open {
 	);
 }
 
+/*
+ * `mix-blend-mode` obliga al compositor a releer el fondo y re-mezclarlo, y
+ * debajo hay una imagen con `filter` y un `transform` animado 14 s: el fondo
+ * cambia en cada fotograma, así que la mezcla se rehace en cada fotograma
+ * sobre el viewport entero. Medido en un Moto G Power emulado, quitarlo baja
+ * ~150 ms del hilo principal. A 412 px el grano casi no se aprecia, así que
+ * solo se pinta de 768 px en adelante, donde sí aporta y hay GPU de sobra.
+ */
 .hero-grain {
-	z-index: 4;
-	opacity: 0.18;
-	mix-blend-mode: soft-light;
-	background-image: radial-gradient(
-		circle,
-		rgba(255, 255, 255, 0.17) 0.5px,
-		transparent 0.5px
-	);
-	background-size: 3px 3px;
+	display: none;
+}
+
+@media (min-width: 768px) {
+	.hero-grain {
+		display: block;
+		z-index: 4;
+		opacity: 0.18;
+		mix-blend-mode: soft-light;
+		background-image: radial-gradient(
+			circle,
+			rgba(255, 255, 255, 0.17) 0.5px,
+			transparent 0.5px
+		);
+		background-size: 3px 3px;
+	}
 }
 
 /* ── Kicker ─────────────────────────────────────────────── */

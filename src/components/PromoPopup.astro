@@ -57,7 +57,21 @@ const cfg = {
       </svg>
     </button>
 
-    <img class="promo__img" src={promoImage} alt={t("promo.img.alt")} width="720" height="405" />
+    {/*
+      `loading="lazy"` es lo que evita descargar los 66 KB de esta foto en la
+      ventana crítica: el popup abre a los 12 s (y no abre del todo si ya se
+      cerró), pero el <img> se bajaba siempre. Con el ancestro en `hidden`
+      (display:none) el navegador no la pide hasta que el diálogo se muestra.
+    */}
+    <img
+      class="promo__img"
+      src={promoImage}
+      alt={t("promo.img.alt")}
+      width="720"
+      height="405"
+      loading="lazy"
+      decoding="async"
+    />
 
     <div class="promo__body">
       <p class="promo__eyebrow">{t("promo.eyebrow")}</p>
