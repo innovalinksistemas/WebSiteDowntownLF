@@ -6,7 +6,7 @@ import { PROMO, PROMO_END_LABEL, PROMO_END_MS } from "../lib/promo";
 /**
  * Popup promocional centrado con salida única a WhatsApp.
  *
- * Quien lo ve ya lleva ~12 segundos en el sitio, así que la intención es alta:
+ * Quien lo ve ya lleva ~10 s interactuando con el sitio, así que la intención es alta:
  * el objetivo es que escriba, no que navegue a otra página. Por eso hay un solo
  * CTA y no un enlace a landing.
  *
@@ -59,7 +59,7 @@ const cfg = {
 
     {/*
       `loading="lazy"` es lo que evita descargar los 66 KB de esta foto en la
-      ventana crítica: el popup abre a los 12 s (y no abre del todo si ya se
+      ventana crítica: el popup abre 10 s después de la primera interacción (y no abre si ya se
       cerró), pero el <img> se bajaba siempre. Con el ancestro en `hidden`
       (display:none) el navegador no la pide hasta que el diálogo se muestra.
     */}
@@ -123,6 +123,7 @@ const cfg = {
     const dialog = root.querySelector(".promo__dialog");
     let lastFocused = null;
     let openTimer;
+    let shown = false;
 
     const focusables = () =>
       [...dialog.querySelectorAll("a[href], button:not([disabled])")].filter(
@@ -180,6 +181,7 @@ const cfg = {
         return;
       }
 
+      shown = true;
       lastFocused = document.activeElement;
       root.hidden = false;
       document.body.classList.add("promo-open");
@@ -198,10 +200,26 @@ const cfg = {
       document.removeEventListener("keydown", onKeydown);
     });
 
-    openTimer = window.setTimeout(open, CFG.delay);
-    // Si se va antes de que salte, no dispararlo al volver de otra pestaña.
+    // La cuenta atrás arranca con la primera interacción, no con la carga: a
+    // quien aún está leyendo el hero no se le interrumpe, y quien no toca la
+    // página (o PageSpeed, que no interactúa) no lo ve nunca.
+    const EVENTS = ["pointerdown", "keydown", "touchstart", "scroll", "wheel"];
+    function arm() {
+      EVENTS.forEach((e) => window.addEventListener(e, onFirstInput, { passive: true }));
+    }
+    function onFirstInput() {
+      EVENTS.forEach((e) => window.removeEventListener(e, onFirstInput, { passive: true }));
+      openTimer = window.setTimeout(open, CFG.delay);
+    }
+    arm();
+
+    // Si cambia de pestaña antes de que salte, se cancela y la cuenta vuelve a
+    // empezar con su siguiente interacción al regresar.
     document.addEventListener("visibilitychange", () => {
-      if (document.hidden) clearTimeout(openTimer);
+      if (!document.hidden || shown) return;
+      clearTimeout(openTimer);
+      EVENTS.forEach((e) => window.removeEventListener(e, onFirstInput, { passive: true }));
+      arm();
     });
   })();
 </script>

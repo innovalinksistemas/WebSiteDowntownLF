@@ -30,8 +30,12 @@ export const PROMO = {
   start: "2026-08-26T00:00:00-06:00",
   end: "2026-09-30T23:59:59-06:00",
 
-  /** Segundos antes de mostrar el popup. */
-  delaySeconds: 12,
+  /**
+   * Segundos antes de mostrar el popup, contados desde la PRIMERA interacción
+   * (toque, clic, scroll o tecla), no desde la carga. Quien no interactúa
+   * (incluido PageSpeed) nunca lo ve.
+   */
+  delaySeconds: 10,
 
   /** Días que se recuerda el cierre antes de volver a mostrarlo. */
   dismissTtlDays: 14,
