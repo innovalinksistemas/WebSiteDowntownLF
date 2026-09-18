@@ -191,6 +191,7 @@ const cfg = {
 
     // Al ir a WhatsApp también se recuerda: ya convirtió, no hay que insistir.
     root.querySelector("[data-promo-cta]")?.addEventListener("click", () => {
+      window.posthog?.capture("promotion_whatsapp_started", { placement: "promo_popup" });
       remember();
       root.hidden = true;
       document.body.classList.remove("promo-open");

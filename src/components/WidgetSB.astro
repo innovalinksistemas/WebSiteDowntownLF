@@ -100,6 +100,7 @@ SBSyncroBox({
     // El foco espera a que termine la transición: antes, el panel aún es visibility:hidden.
     if (closeBtn) window.setTimeout(function () { closeBtn.focus({ preventScroll: true }); }, 350);
     if (window.dataLayer) window.dataLayer.push({ event: 'booking_sheet_open' });
+    window.posthog?.capture('booking_widget_opened', { platform: 'mobile' });
   }
 
   function closeSheet() {

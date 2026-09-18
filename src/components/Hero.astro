@@ -219,6 +219,10 @@ const heroPortraitWebp = await getImage({
 
 <script>
 
+  document.querySelector<HTMLAnchorElement>(".hero-btn-book")?.addEventListener("click", () => {
+    window.posthog?.capture("booking_cta_clicked", { placement: "hero" });
+  });
+
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // Idioma de la página, para lo que este script escribe en tiempo de ejecución

@@ -275,6 +275,14 @@ const switchAria = t("lang.switch.aria");
 
   closeEls.forEach((el) => el.addEventListener("click", () => setOpen(false)));
 
+  header.querySelectorAll<HTMLAnchorElement>(".header-reserve-btn, .site-mobile-reserve").forEach((cta) => {
+    cta.addEventListener("click", () => {
+      window.posthog?.capture("booking_cta_clicked", {
+        placement: cta.classList.contains("site-mobile-reserve") ? "header_mobile" : "header_desktop",
+      });
+    });
+  });
+
   header.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
     a.addEventListener("click", (e) => {
       const href = a.getAttribute("href");

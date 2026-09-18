@@ -427,6 +427,11 @@ function openModal(idx: number) {
   if (!currentRoom) return;
   imgIdx = 0;
 
+  window.posthog?.capture("room_details_viewed", {
+    room_type: currentRoom.title,
+    guest_capacity: currentRoom.guests,
+  });
+
   titleEl.textContent  = currentRoom.title;
   sizeEl.textContent   = currentRoom.size;
   bedsEl.textContent   = currentRoom.beds;
@@ -484,6 +489,28 @@ function navImg(dir: number) {
 // Abrir desde cualquier botón con data-room-modal
 document.querySelectorAll<HTMLElement>("[data-room-modal]").forEach((el) => {
   el.addEventListener("click", () => openModal(Number(el.dataset.roomModal)));
+});
+
+document.querySelectorAll<HTMLAnchorElement>(".room-book-btn").forEach((cta) => {
+  cta.addEventListener("click", () => {
+    const roomIndex = Number(cta.closest<HTMLElement>("[data-room-index]")?.dataset.roomIndex);
+    const room = rooms[roomIndex];
+    if (!room) return;
+    window.posthog?.capture("booking_cta_clicked", {
+      placement: "room_card",
+      room_type: room.title,
+      guest_capacity: room.guests,
+    });
+  });
+});
+
+document.querySelector<HTMLAnchorElement>("#room-modal-cta")?.addEventListener("click", () => {
+  if (!currentRoom) return;
+  window.posthog?.capture("booking_cta_clicked", {
+    placement: "room_modal",
+    room_type: currentRoom.title,
+    guest_capacity: currentRoom.guests,
+  });
 });
 
 // Cerrar
