@@ -37,7 +37,7 @@ export const SOCIAL = [
 export const CONTACT = {
   phone: "+50640002027",
   whatsapp: "+50685274677",
-  email: "reservaciones@lafortunadowntown.com",
+  email: "reservations@lafortunadowntown.com",
 } as const;
 
 /**
