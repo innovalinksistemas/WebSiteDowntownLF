@@ -45,7 +45,7 @@ const switchAria = t("lang.switch.aria");
         class="header-logo header-logo--light"
         width={224}
         densities={[1, 2]}
-        loading="eager"
+        loading="lazy"
       />
       <Image
         src={logoNegro}
@@ -53,7 +53,7 @@ const switchAria = t("lang.switch.aria");
         class="header-logo header-logo--dark"
         width={224}
         densities={[1, 2]}
-        loading="eager"
+        loading="lazy"
         aria-hidden="true"
       />
     </a>
@@ -100,7 +100,7 @@ const switchAria = t("lang.switch.aria");
         class="header-logo header-logo--dark"
         width={160}
         densities={[1, 2]}
-        loading="eager"
+        loading="lazy"
         aria-hidden="true"
       />
     </a>
@@ -192,6 +192,22 @@ const switchAria = t("lang.switch.aria");
         : header.querySelector<HTMLElement>(".site-header-mobile");
     headerOffsetCache = (bar?.offsetHeight ?? 64) + 18;
   };
+
+  /*
+   * Logos en `lazy`: en móvil la barra de escritorio está en display:none y
+   * el logo oscuro solo aparece con scroll, así que con `eager` se bajaban 3
+   * imágenes invisibles antes de pintar el H1 (y PageSpeed las contaba en el
+   * LCP). Con `lazy` el navegador las pide cuando se muestran; el oscuro se
+   * precalienta tras `load` para que no parpadee al hacer scroll.
+   */
+  const warmDarkLogos = () =>
+    window.setTimeout(() => {
+      const bar = window.innerWidth >= 1024 ? ".site-header-desktop" : ".site-header-mobile";
+      const img = header.querySelector<HTMLImageElement>(`${bar} .header-logo--dark`);
+      if (img) img.loading = "eager";
+    }, 2000);
+  if (document.readyState === "complete") warmDarkLogos();
+  else window.addEventListener("load", warmDarkLogos, { once: true });
 
   /* ─── Estado visual: transparente ↔ sólido ─────────────────── */
   const forceSolid = document.body.classList.contains("header-solid");

@@ -101,7 +101,12 @@ const ratings = [
 							<a href="https://wa.me/50685274677" target="_blank" rel="noopener noreferrer">+506 8527-4677</a>
 						</li>
 						<li class="ef-contact-email">
-							<a href="mailto:reservations@lafortunadowntown.com">reservations@lafortunadowntown.com</a>
+							<!--
+								email_off: sin esto, Cloudflare (Scrape Shield) reescribe el
+								enlace y añade email-decode.min.js, un script que bloquea el
+								render en todas las páginas por un solo email de contacto.
+							-->
+							<!--email_off--><a href="mailto:reservations@lafortunadowntown.com">reservations@lafortunadowntown.com</a><!--/email_off-->
 						</li>
 					</ul>
 

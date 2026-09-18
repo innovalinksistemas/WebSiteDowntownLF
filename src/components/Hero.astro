@@ -219,6 +219,18 @@ const heroPortraitWebp = await getImage({
 
 <script>
 
+  /*
+   * Clima y disponibilidad se piden 1,5 s después de `load`, no al parsear.
+   * Son dos dominios nuevos (DNS + TLS) y se pedían antes de que se pintara
+   * el H1, así que PageSpeed los metía en la cadena del LCP. El texto por
+   * defecto del clima y el bloque oculto de disponibilidad cubren la espera.
+   */
+  function afterLcp(fn: () => void) {
+    const run = () => window.setTimeout(fn, 1500);
+    if (document.readyState === "complete") run();
+    else window.addEventListener("load", run, { once: true });
+  }
+
   document.querySelector<HTMLAnchorElement>(".hero-btn-book")?.addEventListener("click", () => {
     window.posthog?.capture("booking_cta_clicked", { placement: "hero" });
   });
@@ -311,7 +323,7 @@ const heroPortraitWebp = await getImage({
       }
     }
 
-    updateWeather();
+    afterLcp(updateWeather);
   })();
 
   /* ─── Disponibilidad real — CloudBeds ──────────────────
@@ -319,7 +331,7 @@ const heroPortraitWebp = await getImage({
      (1 a SCARCITY_MAX). Con muchas libres, sin disponibilidad o si el
      servicio falla, el bloque no aparece: anunciar "14 habitaciones
      disponibles" transmite hotel vacío, y "sin disponibilidad" espanta. */
-  (async () => {
+  afterLcp(async () => {
     const SCARCITY_MAX = 3;
     const block = document.getElementById('hero-availability-block');
     const dot   = document.getElementById('hero-avail-dot');
@@ -357,6 +369,6 @@ const heroPortraitWebp = await getImage({
     } catch {
       /* Sin datos, sin bloque. */
     }
-  })();
+  });
 
 </script>

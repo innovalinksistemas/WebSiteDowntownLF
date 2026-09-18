@@ -165,7 +165,8 @@ const c = lang === "en" ? en : es;
     ))}
     <p class="privacy-updated">{c.updated}</p>
     <p class="privacy-contact">
-      <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+      <!-- email_off: ver Footer.astro -->
+      <!--email_off--><a href={`mailto:${EMAIL}`}>{EMAIL}</a><!--/email_off-->
     </p>
   </div>
 </section>
