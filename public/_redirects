@@ -9,3 +9,7 @@
 /en/baldi/        /en/   301
 /en/ecotermales   /en/   301
 /en/ecotermales/  /en/   301
+
+# Muchas herramientas (y agencias) buscan /sitemap.xml por defecto; el de
+# Astro se llama sitemap-index.xml.
+/sitemap.xml      /sitemap-index.xml   301

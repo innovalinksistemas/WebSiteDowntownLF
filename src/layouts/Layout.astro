@@ -20,6 +20,12 @@ interface Props {
   jsonLd?: unknown[];
   /** Escotilla para ocultar el popup promocional en una página concreta. */
   promoPopup?: boolean;
+  /**
+   * Páginas que no deben indexarse (404). Sin canonical ni hreflang: una
+   * canónica o un par de idioma apuntando a una página noindex son señales
+   * contradictorias para Google.
+   */
+  noindex?: boolean;
 }
 
 const lang = getLang(Astro.currentLocale);
@@ -38,6 +44,7 @@ const {
   bookingBar = false,
   jsonLd = [],
   promoPopup = true,
+  noindex = false,
 } = Astro.props;
 
 const ogImage = image.startsWith("http") ? image : `${SITE}${image}`;
@@ -73,11 +80,13 @@ const showPromo = promoPopup && promoIsActive();
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {!noindex && <link rel="canonical" href={canonical} />}
 
     <meta
       name="robots"
-      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+      content={noindex
+        ? "noindex, follow"
+        : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
     />
     <meta name="author" content="Downtown La Fortuna Boutique Hotel" />
 
@@ -88,11 +97,15 @@ const showPromo = promoPopup && promoIsActive();
     <meta name="ICBM" content={`${GEO.lat}, ${GEO.lng}`} />
 
     <!-- hreflang alternates -->
-    <link rel="alternate" hreflang="es" href={`${SITE}${esPath}`} />
-    <link rel="alternate" hreflang="es-CR" href={`${SITE}${esPath}`} />
-    <link rel="alternate" hreflang="en" href={`${SITE}${enPath}`} />
-    <link rel="alternate" hreflang="en-US" href={`${SITE}${enPath}`} />
-    <link rel="alternate" hreflang="x-default" href={`${SITE}${esPath}`} />
+    {!noindex && (
+      <>
+        <link rel="alternate" hreflang="es" href={`${SITE}${esPath}`} />
+        <link rel="alternate" hreflang="es-CR" href={`${SITE}${esPath}`} />
+        <link rel="alternate" hreflang="en" href={`${SITE}${enPath}`} />
+        <link rel="alternate" hreflang="en-US" href={`${SITE}${enPath}`} />
+        <link rel="alternate" hreflang="x-default" href={`${SITE}${esPath}`} />
+      </>
+    )}
 
     <!-- Open Graph -->
     <meta property="og:type" content={ogType} />

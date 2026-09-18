@@ -2,20 +2,22 @@
 import { defineConfig, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
+import { ROUTE_MAP } from "./src/i18n/utils.ts";
+
+const SITE = "https://lafortunadowntown.com";
+const slash = (p) => (p.endsWith("/") ? p : `${p}/`);
+// Pares ES ↔ EN con barra final, igual que las URLs reales del build.
+const PAIRS = Object.entries(ROUTE_MAP).map(([es, en]) => [slash(es), slash(en)]);
 
 export default defineConfig({
   /*
-   * Paquetes de temporada retirados (vencieron en agosto de 2026). Las páginas
-   * siguen en src/pages con prefijo "_" para reactivarlas con fechas nuevas.
-   * public/_redirects hace el 301 en Cloudflare; esto es el respaldo estático.
+   * Paquetes de temporada retirados (vencieron en agosto de 2026): el 301 lo
+   * hace public/_redirects en Cloudflare. No se declaran aquí como `redirects`
+   * de Astro: generaban /baldi/index.html (meta refresh) y en Cloudflare Pages
+   * un archivo estático gana a la regla de _redirects, así que /baldi/
+   * respondía 200 en lugar de 301.
    */
-  redirects: {
-    "/baldi": "/",
-    "/ecotermales": "/",
-    "/en/baldi": "/en/",
-    "/en/ecotermales": "/en/",
-  },
-  site: "https://lafortunadowntown.com",
+  site: SITE,
   i18n: {
     defaultLocale: "es",
     locales: ["es", "en"],
@@ -30,12 +32,25 @@ export default defineConfig({
         locales: { es: "es-CR", en: "en-US" },
       },
       changefreq: "weekly",
-      lastmod: new Date(),
+      // Sin `lastmod`: con `new Date()` todas las URLs cambiaban en cada build,
+      // y Google deja de fiarse de un lastmod que no refleja cambios reales.
       // Las 404 no deben aparecer en el sitemap.
       filter: (page) =>
         !/\/404\/?$/.test(new URL(page).pathname) &&
         !/\/(baldi|ecotermales)\/?$/.test(new URL(page).pathname),
       serialize(item) {
+        // La integración solo empareja idiomas por prefijo (/faq ↔ /en/faq), así
+        // que /galeria ↔ /en/gallery y /privacidad ↔ /en/privacy quedaban sin
+        // alternativas. Se toman del mismo mapa que usa el hreflang del <head>.
+        const pair = PAIRS.find(([es, en]) => item.url === SITE + es || item.url === SITE + en);
+        if (pair) {
+          item.links = [
+            { lang: "es-CR", url: SITE + pair[0] },
+            { lang: "en-US", url: SITE + pair[1] },
+            { lang: "x-default", url: SITE + pair[0] },
+          ];
+        }
+
         const path = new URL(item.url).pathname.replace(/^\/en/, "") || "/";
         // La home y las landings de paquetes son las que compiten por
         // "Arenal Fortuna"; el resto queda por debajo.
