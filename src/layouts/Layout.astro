@@ -141,8 +141,12 @@ const showPromo = promoPopup && promoIsActive();
     <Font cssVariable="--font-cormorant-italic" />
     <Font cssVariable="--font-great-vibes" />
 
-    <!-- El widget de reservas se inyecta al inicio del <body> en el home. -->
-    {bookingBar && <link rel="preconnect" href="https://cdn.simplebooking.it" crossorigin />}
+    {/*
+      Sin preconnect a cdn.simplebooking.it: en escritorio el widget se monta
+      desde un script inline al inicio del <body> (la conexión sale casi a la
+      vez), y en móvil no se monta al cargar, así que el preconnect abría una
+      conexión que nadie usaba (PageSpeed: "preconnect sin usar").
+    */}
 
     <meta name="generator" content={Astro.generator} />
 

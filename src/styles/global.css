@@ -956,6 +956,15 @@ body.menu-open {
 	z-index: 81; /* por encima del header sticky */
 }
 
+/* Alto reservado en escritorio: la barra nace vacía y SimpleBooking inyecta
+   el formulario después, empujando todo el <main> (CLS 0,067 en PageSpeed
+   escritorio). Medido el 2026-09-18: 112,5px constante de 768 a 1920px, ES y EN. */
+@media (min-width: 768px) {
+	.booking-bar {
+		min-height: 112.5px;
+	}
+}
+
 .booking-bar .container {
 	width: 100%;
 	max-width: none;

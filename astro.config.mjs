@@ -74,43 +74,57 @@ export default defineConfig({
    * terceros del camino crítico. `fallbacks` reduce el salto de layout.
    */
   fonts: [
+    /*
+     * Fuentes locales recortadas (scripts/subset-fonts.py): mismas familias de
+     * Google, pero solo con los pesos que usa el CSS y los glifos de español e
+     * inglés. 128 KB -> 84 KB. Con el H1 como LCP (texto), las 4 entran en la
+     * cadena crítica de PageSpeed móvil: sin fuentes el LCP simulado bajaba
+     * de 2,5 s a 2,1 s. Originales en src/assets/fonts/originales/.
+     */
     {
-      provider: fontProviders.google(),
+      provider: fontProviders.local(),
       name: "Cormorant Garamond",
       cssVariable: "--font-cormorant",
-      // Solo subset `latin`: ya cubre los acentos del español (á é í ó ú ñ ¿ ¡).
-      // `latin-ext` duplicaría los archivos sin aportar nada aquí.
-      weights: [400, 500, 600],
       // Solo la redonda: es la del H1 (LCP) y se precarga. La cursiva va en
-      // una entrada aparte para no precargar 39 KB que el primer pintado no
-      // necesita (ver --font-cormorant-italic).
-      styles: ["normal"],
-      subsets: ["latin"],
+      // una entrada aparte para no precargarla (ver --font-cormorant-italic).
+      options: {
+        variants: [
+          { src: ["./src/assets/fonts/cormorant-latin-es.woff2"], weight: "400 600", style: "normal" },
+        ],
+      },
       fallbacks: ["Georgia", "Times New Roman", "serif"],
     },
     {
-      provider: fontProviders.google(),
+      provider: fontProviders.local(),
       name: "Cormorant Garamond",
       cssVariable: "--font-cormorant-italic",
-      weights: [400, 500, 600],
-      styles: ["italic"],
-      subsets: ["latin"],
+      options: {
+        variants: [
+          { src: ["./src/assets/fonts/cormorant-italic-latin-es.woff2"], weight: "400 600", style: "italic" },
+        ],
+      },
       fallbacks: ["Georgia", "Times New Roman", "serif"],
     },
     {
-      provider: fontProviders.google(),
+      provider: fontProviders.local(),
       name: "Great Vibes",
       cssVariable: "--font-great-vibes",
-      weights: [400],
-      subsets: ["latin"],
+      options: {
+        variants: [
+          { src: ["./src/assets/fonts/great-vibes-latin-es.woff2"], weight: "400", style: "normal" },
+        ],
+      },
       fallbacks: ["cursive"],
     },
     {
-      provider: fontProviders.google(),
+      provider: fontProviders.local(),
       name: "Manrope",
       cssVariable: "--font-manrope",
-      weights: [400, 500, 600, 700],
-      subsets: ["latin"],
+      options: {
+        variants: [
+          { src: ["./src/assets/fonts/manrope-latin-es.woff2"], weight: "400 700", style: "normal" },
+        ],
+      },
       fallbacks: ["system-ui", "Segoe UI", "sans-serif"],
     },
   ],
