@@ -138,6 +138,8 @@ export function siteGraph(lang: Lang, canonical: string, title: string, descript
           },
         ],
         starRating: { "@type": "Rating", ratingValue: "3" },
+        checkinTime: "15:00",
+        checkoutTime: "12:00",
         image: `${SITE}/og-image.jpg`,
         // Google no acepta SVG para `logo` en rich results: debe ser raster.
         logo: `${SITE}/logo.png`,

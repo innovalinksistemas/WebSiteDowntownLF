@@ -2,7 +2,8 @@
 /**
  * Seguimiento de marketing. IDs tomados de la web en producción (sept. 2026):
  * - Google Ads (gtag)   AW-740176607
- * - Google Analytics 4  G-4S6PWSDGNR (mismo gtag.js; config adicional)
+ * - Google Analytics 4  G-JT4LXZ6YQH (mismo gtag.js; config adicional). Sustituye
+ *   a G-4S6PWSDGNR desde el 2026-09-18: propiedad nueva entregada por la agencia.
  * - Meta Pixel          2140720136664838
  *
  * Todo va con `is:inline` para que Astro no lo convierta en módulos diferidos
@@ -13,31 +14,41 @@
  * ("tags":[], "predicates":[], "rules":[]) — comprobado descargando gtm.js —
  * así que costaba 114.9 KB por visita y no disparaba absolutamente nada.
  *
- * Quien mide de verdad hoy es gtag: Ads y GA4. Por eso se queda.
+ * GTM-MNZ5SFXQ es el contenedor nuevo de la agencia (Xpider), añadido el
+ * 2026-09-18. Ese día estaba publicado pero VACÍO, así que convive con gtag
+ * y Meta sin duplicar nada.
  *
- * PARA VOLVER A USAR GTM: no basta con pegar el snippet aquí. La rama
- * `perf/consolidar-medicion` ya tiene la versión buena, que carga SOLO el
- * contenedor y mete Ads, GA4 y Meta dentro como etiquetas. Publicarla exige
- * configurar antes el contenedor; los pasos están en esa rama.
+ * ¡OJO! En cuanto el contenedor publique etiquetas de Google Ads, GA4 o Meta
+ * hay que quitar de aquí el gtag y el píxel directos, o cada pageview y cada
+ * conversión se contarán dos veces. La rama `perf/consolidar-medicion` ya
+ * tiene la versión "solo GTM".
  */
+export const GTM_ID = "GTM-MNZ5SFXQ";
 export const ADS_ID = "AW-740176607";
-export const GA4_ID = "G-4S6PWSDGNR";
+export const GA4_ID = "G-JT4LXZ6YQH";
 export const META_PIXEL_ID = "2140720136664838";
 ---
 
 <!--
-  Google Ads, GA4 y Meta Pixel se inicializan en `load` (o a los 3,5 s como
-  máximo). Cargados de inmediato competían por ancho de banda con las fuentes
-  del título y retrasaban el LCP en móvil; el pageview se sigue registrando en
-  cada visita que termina de cargar.
+  GTM, Google Ads, GA4 y Meta Pixel se inicializan con la primera interacción del
+  usuario o 4 s después de `load`, lo que ocurra antes. Cargados antes
+  competían con el hero y hundían el LCP móvil. Solo se pierde el pageview de
+  quien se va sin tocar la página en sus primeros ~5 s.
 -->
-<script is:inline define:vars={{ ADS_ID, GA4_ID, META_PIXEL_ID }}>
+<script is:inline define:vars={{ GTM_ID, ADS_ID, GA4_ID, META_PIXEL_ID }}>
   (function () {
     var started = false;
     function start() {
       if (started) return;
       started = true;
 
+      /* Google Tag Manager (snippet oficial, solo que diferido) */
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+      var t = document.createElement("script");
+      t.async = true;
+      t.src = "https://www.googletagmanager.com/gtm.js?id=" + GTM_ID;
+      document.head.appendChild(t);
 
       /* Google Ads + Google Analytics 4 (gtag.js) */
       var g = document.createElement("script");
@@ -71,9 +82,39 @@ export const META_PIXEL_ID = "2140720136664838";
       window.fbq("track", "PageView");
     }
 
-    if (document.readyState === "complete") start();
-    else window.addEventListener("load", start, { once: true });
-    window.setTimeout(start, 3500);
+    /*
+     * Primera interacción, o 4 s después de `load`. Arrancar justo en `load`
+     * no bastaba: en móvil `load` llega antes que el LCP, y PageSpeed (que
+     * simula 4G a partir de la traza real) metía los ~600 KB de gtag + Meta en
+     * la cadena del LCP. Según la corrida, el LCP salía en 1,7 s o en 10 s.
+     */
+    var EVENTS = ["pointerdown", "keydown", "touchstart", "scroll", "wheel"];
+    function onFirstInput() {
+      EVENTS.forEach(function (e) {
+        window.removeEventListener(e, onFirstInput, { passive: true });
+      });
+      start();
+    }
+    EVENTS.forEach(function (e) {
+      window.addEventListener(e, onFirstInput, { passive: true });
+    });
+
+    /*
+     * Tráfico pagado (o etiquetado): se mide en `load`, sin esperar. Si el
+     * primer clic es "Reservar", el enlace a simplebooking.it tiene que salir
+     * ya decorado por gtag (_gl) para no romper la atribución entre dominios,
+     * y el gclid tiene que quedar guardado aunque navegue enseguida.
+     * PageSpeed entra sin estos parámetros, así que no le afecta.
+     */
+    var PAID = /[?&](gclid|gbraid|wbraid|gad_source|fbclid|utm_[a-z]+)=/i.test(
+      window.location.search
+    );
+    function afterLoad() {
+      if (PAID) start();
+      else window.setTimeout(start, 4000);
+    }
+    if (document.readyState === "complete") afterLoad();
+    else window.addEventListener("load", afterLoad, { once: true });
   })();
 </script>
 <noscript

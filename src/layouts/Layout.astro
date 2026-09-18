@@ -138,6 +138,10 @@ const showPromo = promoPopup && promoIsActive();
     <slot name="head" />
   </head>
   <body class={`${headerSolid ? "header-solid" : ""}${bookingBar ? " has-booking-bar" : ""}`.trim()}>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MNZ5SFXQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <a class="skip-link" href="#contenido">
       {lang === "en" ? "Skip to content" : "Saltar al contenido"}
     </a>
