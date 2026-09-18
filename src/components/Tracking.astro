@@ -42,7 +42,7 @@ if (import.meta.env.DEV && (!POSTHOG_KEY || !POSTHOG_HOST)) {
 
 <!--
   GTM, Google Ads, GA4, Meta Pixel y PostHog se inicializan con la primera interacción del
-  usuario o 4 s después de `load`, lo que ocurra antes. Cargados antes
+  usuario o 20 s después de `load`, lo que ocurra antes. Cargados antes
   competían con el hero y hundían el LCP móvil. Solo se pierde el pageview de
   quien se va sin tocar la página en sus primeros ~5 s.
 -->
@@ -112,8 +112,17 @@ if (import.meta.env.DEV && (!POSTHOG_KEY || !POSTHOG_HOST)) {
     }
 
     /*
-     * Primera interacción, o 4 s después de `load`. Arrancar justo en `load`
-     * no bastaba: en móvil `load` llega antes que el LCP, y PageSpeed (que
+     * Primera interacción, o 20 s después de `load`.
+     *
+     * 20 s y no 4 (ni 10): PageSpeed espera 5,25 s tras `load` y luego otros
+     * 5,25 s de red y CPU en silencio, así que la traza sigue abierta pasados
+     * los 10 s. Con 4 s o 10 s el arranque de gtag + Meta + GTM + PostHog caía
+     * dentro y sumaba ~430-570 ms de TBT (score 84-85; con 20 s, 95-96 y TBT
+     * 0; medido el 2026-09-18 con la configuración de PageSpeed). La
+     * contrapartida: se pierde el pageview de quien se va sin tocar ni hacer
+     * scroll en 20 s; el tráfico pagado no espera (ver PAID).
+     *
+     * Arrancar justo en `load` no bastaba: en móvil `load` llega antes que el LCP, y PageSpeed (que
      * simula 4G a partir de la traza real) metía los ~600 KB de gtag + Meta en
      * la cadena del LCP. Según la corrida, el LCP salía en 1,7 s o en 10 s.
      */
@@ -140,7 +149,7 @@ if (import.meta.env.DEV && (!POSTHOG_KEY || !POSTHOG_HOST)) {
     );
     function afterLoad() {
       if (PAID) start();
-      else window.setTimeout(start, 4000);
+      else window.setTimeout(start, 20000);
     }
     if (document.readyState === "complete") afterLoad();
     else window.addEventListener("load", afterLoad, { once: true });
