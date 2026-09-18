@@ -27,15 +27,26 @@ export const GTM_ID = "GTM-MNZ5SFXQ";
 export const ADS_ID = "AW-740176607";
 export const GA4_ID = "G-JT4LXZ6YQH";
 export const META_PIXEL_ID = "2140720136664838";
+
+/*
+ * PostHog (analítica de producto). Token y host salen del entorno; sin ellos
+ * no se carga. Va en el mismo arranque diferido que el resto: cargado en el
+ * <head> bajaba ~214 KB y 365 ms de hilo principal dentro de la ventana del
+ * LCP (PageSpeed móvil: 86 → 72, LCP 3,5 s → 6 s; medido el 2026-09-18).
+ */
+const { PUBLIC_POSTHOG_PROJECT_TOKEN: POSTHOG_KEY, PUBLIC_POSTHOG_HOST: POSTHOG_HOST } = import.meta.env;
+if (import.meta.env.DEV && (!POSTHOG_KEY || !POSTHOG_HOST)) {
+  console.warn("PostHog desactivado: faltan PUBLIC_POSTHOG_PROJECT_TOKEN o PUBLIC_POSTHOG_HOST.");
+}
 ---
 
 <!--
-  GTM, Google Ads, GA4 y Meta Pixel se inicializan con la primera interacción del
+  GTM, Google Ads, GA4, Meta Pixel y PostHog se inicializan con la primera interacción del
   usuario o 4 s después de `load`, lo que ocurra antes. Cargados antes
   competían con el hero y hundían el LCP móvil. Solo se pierde el pageview de
   quien se va sin tocar la página en sus primeros ~5 s.
 -->
-<script is:inline define:vars={{ GTM_ID, ADS_ID, GA4_ID, META_PIXEL_ID }}>
+<script is:inline define:vars={{ GTM_ID, ADS_ID, GA4_ID, META_PIXEL_ID, POSTHOG_KEY, POSTHOG_HOST }}>
   (function () {
     var started = false;
     function start() {
@@ -80,6 +91,24 @@ export const META_PIXEL_ID = "2140720136664838";
       })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
       window.fbq("init", META_PIXEL_ID);
       window.fbq("track", "PageView");
+
+      /*
+       * PostHog (snippet oficial). Los `window.posthog?.capture` de los CTAs
+       * llegan con el arranque ya hecho: `pointerdown` precede al `click`, y
+       * el stub encola los eventos hasta que baja array.js.
+       */
+      if (POSTHOG_KEY && POSTHOG_HOST) {
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        window.posthog.init(POSTHOG_KEY, {
+          api_host: POSTHOG_HOST,
+          defaults: "2026-01-30",
+          capture_exceptions: {
+            capture_unhandled_errors: true,
+            capture_unhandled_rejections: true,
+            capture_console_errors: false,
+          },
+        });
+      }
     }
 
     /*

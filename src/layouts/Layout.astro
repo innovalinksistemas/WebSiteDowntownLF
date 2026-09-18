@@ -1,5 +1,4 @@
 ---
-import PostHog from "../components/posthog.astro";
 import Tracking from "../components/Tracking.astro";
 import { Font } from "astro:assets";
 import Header from "../components/Header.astro";
@@ -134,7 +133,6 @@ const showPromo = promoPopup && promoIsActive();
 
     <meta name="generator" content={Astro.generator} />
 
-    <PostHog />
     <Tracking />
 
     <slot name="head" />
