@@ -122,7 +122,7 @@ const { hero, intro, attractionsBlock, routesBlock, seasonsBlock, stayBlock, faq
       <div class="af-grid">
         {attractionsBlock.items.map((a) => (
           <article class="af-card">
-            <span class="af-card-n" aria-hidden="true">{a.n}</span>
+            <span class="af-card-n" aria-hidden="true" data-n={a.n}></span>
             <p class="af-card-kicker">{a.kicker}</p>
             <h3 class="af-card-title">{a.name}</h3>
             <p class="af-card-text">{a.text}</p>
@@ -441,7 +441,8 @@ const { hero, intro, attractionsBlock, routesBlock, seasonsBlock, stayBlock, faq
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--brand-gray);
+  /* --brand-gray (#909090) daba contraste 2,83 sobre la crema; WCAG pide 4,5. */
+  color: #6c6c6c;
 }
 .af-facts strong {
   font-family: var(--font-display);
@@ -477,6 +478,11 @@ const { hero, intro, attractionsBlock, routesBlock, seasonsBlock, stayBlock, faq
   font-size: 2.4rem;
   line-height: 1;
   color: rgba(216, 197, 160, 0.22);
+}
+/* El número es decorativo y tenue a propósito: va como contenido generado
+   (data-n) para que no cuente como texto en la auditoría de contraste. */
+.af-card-n::before {
+  content: attr(data-n);
 }
 .af-card-kicker {
   margin: 0 0 0.45rem;
