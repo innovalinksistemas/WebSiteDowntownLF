@@ -182,15 +182,19 @@ const switchAria = t("lang.switch.aria");
   const panel     = header.querySelector<HTMLElement>("[data-menu-panel]");
   const closeEls  = header.querySelectorAll<HTMLElement>("[data-menu-close]");
 
-  /* ─── Scroll offset — recalculado solo en resize ───────────── */
-  let headerOffsetCache = 0;
-
-  const recalcOffset = () => {
+  /*
+   * ─── Scroll offset — se mide al hacer clic ────────────────────
+   * Antes se medía al cargar (offsetHeight en el init) y eso forzaba un
+   * reflow de toda la página antes del primer pintado (PageSpeed: "Forced
+   * reflow", ~53 ms). Solo hace falta al pulsar un enlace interno, cuando la
+   * página ya está maquetada y leerlo es gratis.
+   */
+  const headerOffset = () => {
     const bar =
       window.innerWidth >= 1024
         ? header.querySelector<HTMLElement>(".site-header-desktop")
         : header.querySelector<HTMLElement>(".site-header-mobile");
-    headerOffsetCache = (bar?.offsetHeight ?? 64) + 18;
+    return (bar?.offsetHeight ?? 64) + 18;
   };
 
   /*
@@ -276,7 +280,7 @@ const switchAria = t("lang.switch.aria");
     const target = document.querySelector<HTMLElement>(id);
     if (!target) return false;
 
-    const top     = target.getBoundingClientRect().top + window.scrollY - headerOffsetCache;
+    const top     = target.getBoundingClientRect().top + window.scrollY - headerOffset();
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     window.scrollTo({ top: Math.max(top, 0), behavior: reduced ? "auto" : "smooth" });
@@ -315,15 +319,16 @@ const switchAria = t("lang.switch.aria");
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      recalcOffset();
       if (window.innerWidth >= 1024) setOpen(false);
     }, 100);
   });
 
   /* ─── Init ──────────────────────────────────────────────────── */
   window.addEventListener("scroll", updateState, { passive: true });
-  recalcOffset();
-  updateState();
+  // Sin leer scrollY al cargar (también fuerza layout): en una carga nueva el
+  // scroll está arriba, y si el navegador restaura la posición dispara
+  // `scroll`, que ya llama a updateState.
+  if (forceSolid) header.classList.add("is-scrolled");
 })();
 </script>
 

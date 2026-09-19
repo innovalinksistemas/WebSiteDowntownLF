@@ -60,6 +60,9 @@ const VIDEO_ID = "c8maA-QJGYc";
         data-yt-title={t("about.video.title")}
       >
         <button type="button" class="yt-facade-btn" aria-label={t("about.video.play")}>
+          {/* quality 40: foto con mucho grano; con la 55 global el AVIF de
+              720px pesaba 77 KB (más que el JPEG) y a 40 queda en 44 KB sin
+              diferencia visible (PageSpeed: "Mejorar la entrega de imágenes"). */}
           <Picture
             src={videoPoster}
             alt=""
@@ -68,6 +71,7 @@ const VIDEO_ID = "c8maA-QJGYc";
             widths={[640, 720, 960, 1280]}
             sizes="(max-width: 900px) 92vw, 87rem"
             formats={["avif", "webp"]}
+            quality={40}
             fallbackFormat="jpeg"
             layout="none"
             loading="lazy"
