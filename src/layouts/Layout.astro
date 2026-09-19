@@ -134,10 +134,18 @@ const showPromo = promoPopup && promoIsActive();
 
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
-    <!-- Fuentes auto-hospedadas: sin preconnect ni hoja de estilos remota en el
-         camino crítico. `preload` solo en las dos que se usan above-the-fold. -->
-    <Font cssVariable="--font-manrope" preload />
-    <Font cssVariable="--font-cormorant" preload />
+    {/*
+      Fuentes auto-hospedadas y SIN `preload`. Chrome convierte las fuentes
+      precargadas en recursos que bloquean el render: con la latencia real de
+      producción el primer pintado se iba a ~2,4 s aunque las fuentes llegaban
+      a los 0,45 s (PageSpeed móvil: 88-91, LCP 3,0 s, Speed Index 4,5 s).
+      Sin preload las fuentes se piden igual al leer este CSS inline y el texto
+      pinta con el fallback de métricas ajustadas (sin salto de layout).
+      Medido el 2026-09-19 con 200 ms de latencia: con preload 5/5 corridas
+      retrasadas (score 90); sin preload 10/10 a 0,27 s (score 100).
+    */}
+    <Font cssVariable="--font-manrope" />
+    <Font cssVariable="--font-cormorant" />
     <Font cssVariable="--font-cormorant-italic" />
     <Font cssVariable="--font-great-vibes" />
 

@@ -70,7 +70,7 @@ export default defineConfig({
    * Antes se cargaban dos veces desde Google: un <link rel="stylesheet"> en el
    * Layout y además una regla CSS de importación remota al inicio de global.css
    * — el patrón más bloqueante posible. Ahora se descargan en build, se sirven
-   * desde el propio dominio y se precargan, eliminando dos conexiones a
+   * desde el propio dominio (sin preload: ver Layout.astro), eliminando dos conexiones a
    * terceros del camino crítico. `fallbacks` reduce el salto de layout.
    */
   fonts: [
@@ -85,8 +85,8 @@ export default defineConfig({
       provider: fontProviders.local(),
       name: "Cormorant Garamond",
       cssVariable: "--font-cormorant",
-      // Solo la redonda: es la del H1 (LCP) y se precarga. La cursiva va en
-      // una entrada aparte para no precargarla (ver --font-cormorant-italic).
+      // La redonda (H1) y la cursiva van en entradas separadas: cada una es
+      // un archivo propio y solo se descarga si la página la usa.
       options: {
         variants: [
           { src: ["./src/assets/fonts/cormorant-latin-es.woff2"], weight: "400 600", style: "normal" },
